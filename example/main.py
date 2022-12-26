@@ -1,0 +1,60 @@
+""" Simple test for Akima Spline Interpolation """
+
+import numpy as np
+import mlpyqtgraph as mpg
+import cubic_spline as cbs  # akima_spline is a pybind11 module
+
+
+def get_test_data(case='akima', start=1.0, end=5.0, size=8):
+    """ Generates test input data for Akima Spline tests """
+    if case == 'akima':
+        return np.array([1, 2, 3, 4,   5,   5.5, 7,   8,   9, 9.5, 10]), \
+               np.array([0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0, 0.3,  0.6])
+
+    if case == 'random':
+        return np.linspace(start, end, num=size), \
+               np.round(10.0*np.random.rand(size))
+
+    if case == 'monotonic1':
+        return np.array([1,   2,  3,  5,  6,  8,    9, 11, 12, 14, 15]), \
+               np.array([10, 10, 10, 10, 10, 10, 10.5, 15, 50, 60, 95])
+
+    if case == 'monotonic2':
+        return np.array([7.99,      8.09,       8.19,       8.7,       9.2,      10,       12,       15,       20]), \
+               np.array([ 0.0, 2.7629e-5, 4.37498e-3,  0.169183,  0.469428, 0.94374, 0.998636, 0.999919, 0.999994])
+
+    return (start, end), (0, 1)
+
+
+def refine_grid(x_coord, size_fine=1000, extension=0):
+    """ Refines x grid and provide placeholder data for y """
+    return np.linspace(x_coord[0]-extension, x_coord[-1]+extension,
+                       num=size_fine)
+
+
+def main():
+    """ Tets Cubic spline interpolation """
+
+    x, y = get_test_data(case='monotonic2')
+    x_fine = refine_grid(x)
+
+    spline = cbs.NaturalSpline1D(x, y)
+    y_fine_natural = spline.evaln(x_fine)
+
+    spline = cbs.AkimaSpline1D(x, y)
+    y_fine_akima = spline.evaln(x_fine)
+
+    spline = cbs.MonotonicSpline1D(x, y)
+    y_fine_monotonic = spline.evaln(x_fine, )
+
+    mpg.figure(title='Test figure')
+    mpg.plot(x_fine, y_fine_natural)
+    mpg.plot(x_fine, y_fine_akima)
+    mpg.plot(x_fine, y_fine_monotonic)
+    mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
+    mpg.gca().grid = True
+    mpg.legend('Natural spline', 'Akima spline', 'Monotonic Spline', 'data points')
+
+
+if __name__ == '__main__':
+    mpg.GUIController(worker=main)
