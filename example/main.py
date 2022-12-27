@@ -35,7 +35,7 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
 def main():
     """ Tets Cubic spline interpolation """
 
-    x, y = get_test_data(case='monotonic2')
+    x, y = get_test_data(case='akima')
     x_fine = refine_grid(x)
 
     spline = cbs.NaturalSpline1D(x, y)
