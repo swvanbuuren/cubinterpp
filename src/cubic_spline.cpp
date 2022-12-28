@@ -3,15 +3,15 @@
 #include <pybind11/pybind11.h>
 namespace py = pybind11;
 
-//* with STL vector
+/* with STL vector
 #include <pybind11/stl.h>
 #include <vector>
 using DoubleVector = std::vector<double>;
 //*/
 
-/* with Eigen vector
-#include <pybind11/eigen.h>
+//* with Eigen vector
 #include <Eigen/Core>
+#include <pybind11/eigen.h>
 using namespace Eigen;
 using DoubleVector = Eigen::VectorXd;
 //*/
