@@ -2,6 +2,8 @@
 
 Cubic interpolation with C++
 
+![image](https://user-images.githubusercontent.com/5203275/211158357-3686465b-8363-4066-8535-1e2a648f5406.png)
+
 ## Introduction
 
 This C++ header library features tools for piecewise cubic interpolation.
@@ -17,9 +19,7 @@ The library features three kinds of different interpolation types
 All classes are templatized and support the STL's vector as well as Eigen
 vector types.
 
-The following [example](#example) compares the three interpolation types.
-
-![image](https://user-images.githubusercontent.com/5203275/211158056-08ae2f59-2a00-4e01-b336-0dd763da936b.png)
+The [included example](#example) compares the three interpolation types.
 
 ## Prerequisites
 
@@ -37,6 +37,4 @@ preparation and visualization is done in python with
 
 The easiest way to test out `cubinterpp`, is to use cmake to compile and test the example.
 An appropriate cmake configuration is provided. Prior to compilation, the required external
-libraries need to placed into the [extern](extern/) directory:
-- Eigen: the directory and its contents [Eigen](https://gitlab.com/libeigen/eigen/-/tree/master/Eigen)
-- pybind11: the contents of the [complete repository](https://github.com/pybind/pybind11)
+libraries are downloaded automatically using cmake FetchContent module.
