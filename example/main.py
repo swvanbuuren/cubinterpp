@@ -15,14 +15,6 @@ def get_test_data(case='akima', start=1.0, end=5.0, size=8):
         return np.linspace(start, end, num=size), \
                np.round(10.0*np.random.rand(size))
 
-    if case == 'monotonic1':
-        return np.array([1,   2,  3,  5,  6,  8,    9, 11, 12, 14, 15]), \
-               np.array([10, 10, 10, 10, 10, 10, 10.5, 15, 50, 60, 95])
-
-    if case == 'monotonic2':
-        return np.array([7.99,      8.09,       8.19,       8.7,       9.2,      10,       12,       15,       20]), \
-               np.array([ 0.0, 2.7629e-5, 4.37498e-3,  0.169183,  0.469428, 0.94374, 0.998636, 0.999919, 0.999994])
-
     return (start, end), (0, 1)
 
 
@@ -53,7 +45,7 @@ def main():
     mpg.plot(x_fine, y_fine_monotonic)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.gca().grid = True
-    mpg.legend('Natural spline', 'Akima spline', 'Monotonic Spline', 'data points')
+    mpg.legend('Natural cubic spline', 'Akima spline', 'Monotonic cubic interpolation', 'data points')
 
 
 if __name__ == '__main__':
