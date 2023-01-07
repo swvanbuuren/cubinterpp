@@ -17,6 +17,10 @@ The library features three kinds of different interpolation types
 All classes are templatized and support the STL's vector as well as Eigen
 vector types.
 
+The following [example](#example) compares the three interpolation types.
+
+![image](https://user-images.githubusercontent.com/5203275/211158056-08ae2f59-2a00-4e01-b336-0dd763da936b.png)
+
 ## Prerequisites
 
 - C++ compiler
