@@ -2,28 +2,29 @@
 
 import numpy as np
 import mlpyqtgraph as mpg
-import cubic_spline as cbs  # akima_spline is a pybind11 module
+import cubic_spline as cbs  # cubic_spline is a pybind11 module
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
     """ Generates test input data for Akima Spline tests """
     if case == 'akima':
-        return np.array([1, 2, 3, 4,   5,   5.5, 7,   8,   9, 9.5, 10]), \
-               np.array([0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0, 0.3,  0.6])
+        return np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10]), \
+               np.array([0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6])
 
     if case == 'random':
         return np.linspace(start, end, num=size), \
-               np.round(10.0*np.random.rand(size))
+               np.round(10.0 * np.random.rand(size))
 
     return (start, end), (0, 1)
 
 
 def refine_grid(x_coord, size_fine=1000, extension=0):
     """ Refines x grid and provide placeholder data for y """
-    return np.linspace(x_coord[0]-extension, x_coord[-1]+extension,
+    return np.linspace(x_coord[0] - extension, x_coord[-1] + extension,
                        num=size_fine)
 
 
+@mpg.plotter
 def main():
     """ Tets Cubic spline interpolation """
 
@@ -45,8 +46,13 @@ def main():
     mpg.plot(x_fine, y_fine_monotonic)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.gca().grid = True
-    mpg.legend('Natural cubic spline', 'Akima spline', 'Monotonic cubic interpolation', 'data points')
+    mpg.legend(
+        'Natural cubic spline',
+        'Akima spline',
+        'Monotonic cubic interpolation',
+        'data points'
+    )
 
 
 if __name__ == '__main__':
-    mpg.GUIController(worker=main)
+    main()
