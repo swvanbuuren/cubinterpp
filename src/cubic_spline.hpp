@@ -357,13 +357,6 @@ public:
         T c(N); // last value of c is not used
         // right hand side
         T d(N);
-        /*
-        VectorXd a = VectorXd::Zero(N); // first value of a is not used
-        VectorXd b = VectorXd::Zero(N);
-        VectorXd c = VectorXd::Zero(N); // last value of c is not used
-        // right hand side
-        VectorXd d = VectorXd::Zero(N);
-        */
 
         // first row, 0
         double dx1 = x[1] - x[0];
