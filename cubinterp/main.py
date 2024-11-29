@@ -2,7 +2,7 @@
 
 import numpy as np
 import mlpyqtgraph as mpg
-import cubic_spline as cbs  # cubic_spline is a pybind11 module
+from cubinterp import cubic_spline  # cubic_spline is a pybind11 module
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
@@ -31,13 +31,13 @@ def main():
     x, y = get_test_data(case='akima')
     x_fine = refine_grid(x)
 
-    spline = cbs.NaturalSpline1D(x, y)
+    spline = cubic_spline.NaturalSpline1D(x, y)
     y_fine_natural = spline.evaln(x_fine)
 
-    spline = cbs.AkimaSpline1D(x, y)
+    spline = cubic_spline.AkimaSpline1D(x, y)
     y_fine_akima = spline.evaln(x_fine)
 
-    spline = cbs.MonotonicSpline1D(x, y)
+    spline = cubic_spline.MonotonicSpline1D(x, y)
     y_fine_monotonic = spline.evaln(x_fine, )
 
     mpg.figure(title='Test figure')

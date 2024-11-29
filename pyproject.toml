@@ -33,7 +33,7 @@ dev = [
 ]
 
 [project.scripts]
-simple-cdd-yaml = "cubinterp.main:main"
+cubinterp = "cubinterp.main:main"
 
 [tool.setuptools.packages.find]
 include = ["cubinterp", "cubinterp.*"]

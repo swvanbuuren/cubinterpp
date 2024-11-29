@@ -27,15 +27,11 @@ set(BUILD_TESTING OFF)
 set(EIGEN_BUILD_PKGCONFIG OFF)
 FetchContent_MakeAvailable(pybind11 Eigen)
 
-
-set(PYTHON_EXECUTABLE "/mnt/storage/work/python/00__venvs/py38/bin/python")
-set(PYBIND11_PYTHON_VERSION 3.8)
-
 pybind11_add_module(${CMAKE_PROJECT_NAME} "")
 # sources will be added in the following subdirectories
 add_subdirectory(src)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen)
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubic_spline> ${PROJECT_SOURCE_DIR}/example/$<TARGET_FILE_NAME:cubic_spline>
+  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubic_spline> ${PROJECT_SOURCE_DIR}/cubinterp/$<TARGET_FILE_NAME:cubic_spline>
 )
