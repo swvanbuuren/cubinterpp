@@ -31,5 +31,9 @@
 *.out
 *.app
 
-build/
 .cache/
+build/**
+.cache/
+*.egg-info/
+
+uv.lock
