@@ -19,12 +19,12 @@ The library features three kinds of different interpolation types:
 All classes are templatized and support the STL's vector as well as Eigen
 vector types.
 
-The accompanying python script in [cubinterp](cubinterp) compares the three
+The accompanying python script in [cubinterpp ](cubinterpp ) compares the three
 interpolation types.
 
 ## Usage
 
-The following instructions show how to build and test the cubinterp header
+The following instructions show how to build and test the cubinterpp header
 library in a python environment.
 
 ### Prerequisites
@@ -52,11 +52,11 @@ Then build using:
 cmake build
 ```
 
-This should build the library in the build directory and automatically copy the library file `cubic_spline.*.so` into the `cubinterp` directoy.
+This should build the library in the build directory and automatically copy the library file `cubic_spline.*.so` into the `cubinterpp ` directoy.
 
 ### Interpolating and plotting the results
 
-A [python program](cubinterp/main.py) is provided to compare the three
+A [python program](cubinterpp /main.py) is provided to compare the three
 interpolation types. Data preparation and visualization is done in python with
 [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph).
 
@@ -65,7 +65,7 @@ uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer
 and issue:
 
 ```bash
-uv run cubinterp
+uv run cubinterpp 
 ```
 
 This should install all required python dependencies automatically and run the
@@ -74,5 +74,5 @@ comparison plot shown at the top of this document.
 
 ## License
 
-An MIT style license applies for cubinterp, see the [LICENSE](LICENSE) file for
+An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file for
 more details.

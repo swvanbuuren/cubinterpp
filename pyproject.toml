@@ -3,8 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cubinterp"
-version = "0.1.2"
+name = "cubinterpp"
+version = "0.1.0"
 description = "Cubic interpolation with C++ in python"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -21,7 +21,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-urls = { Homepage = "https://github.com/swvanbuuren/cubinterp" }
+urls = { Homepage = "https://github.com/swvanbuuren/cubinterpp" }
 dependencies = [
     "mlpyqtgraph",
 ]
@@ -33,13 +33,13 @@ dev = [
 ]
 
 [project.scripts]
-cubinterp = "cubinterp.main:main"
+cubinterpp = "cubinterpp.main:main"
 
 [tool.setuptools.packages.find]
-include = ["cubinterp", "cubinterp.*"]
+include = ["cubinterpp", "cubinterpp.*"]
 
 [tool.semantic_release]
-version_variables = ["cubinterp/__init__.py:__version__"]
+version_variables = ["cubinterpp/__init__.py:__version__"]
 version_toml = ["pyproject.toml:project.version"]
 
 [tool.semantic_release.changelog]

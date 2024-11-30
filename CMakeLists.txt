@@ -33,5 +33,5 @@ add_subdirectory(src)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen)
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubic_spline> ${PROJECT_SOURCE_DIR}/cubinterp/$<TARGET_FILE_NAME:cubic_spline>
+  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubic_spline> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubic_spline>
 )

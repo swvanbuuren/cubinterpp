@@ -2,7 +2,7 @@
 
 import numpy as np
 import mlpyqtgraph as mpg
-from cubinterp import cubic_spline  # cubic_spline is a pybind11 module
+from cubinterpp import cubic_spline  # cubic_spline is a pybind11 module
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
