@@ -52,11 +52,12 @@ Then build using:
 cmake build
 ```
 
-This should build the library in the build directory and automatically copy the library file `cubic_spline.*.so` into the `cubinterpp ` directoy.
+This should build the library in the build directory and automatically copy the
+library file `cubic_spline.*.so` into the `cubinterpp` directoy.
 
 ### Interpolating and plotting the results
 
-A [python program](cubinterpp /main.py) is provided to compare the three
+A [python program](cubinterpp/main.py) is provided to compare the three
 interpolation types. Data preparation and visualization is done in python with
 [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph).
 
