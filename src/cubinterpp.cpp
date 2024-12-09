@@ -1,23 +1,30 @@
 #include "cubic_spline.hpp"
+#include "linear_interp.hpp"
 
 #include <pybind11/pybind11.h>
 namespace py = pybind11;
 
-/* with STL vector
+//* with STL vector
 #include <pybind11/stl.h>
 #include <vector>
 using DoubleVector = std::vector<double>;
 //*/
 
-//* with Eigen vector
+/* with Eigen vector
 #include <Eigen/Core>
 #include <pybind11/eigen.h>
 using namespace Eigen;
 using DoubleVector = Eigen::VectorXd;
 //*/
 
-PYBIND11_MODULE(cubic_spline, m) {
-    m.doc() = "pybind11 1D cubic splines"; // optional module docstring
+PYBIND11_MODULE(cubinterpp, m) {
+    m.doc() = "pybind11 1D cubic and linear interpolation"; // optional module docstring
+
+    py::class_<lns::LinearInterp1D<double>>(m, "LinearInterp1D")
+        .def(py::init<DoubleVector, DoubleVector>())
+        .def("eval", &lns::LinearInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &lns::LinearInterp1D<double>::evaln, py::return_value_policy::reference_internal);
+
     py::class_<cbs::MonotonicSpline1D<DoubleVector>>(m, "MonotonicSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
         .def("eval", &cbs::MonotonicSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)

@@ -28,17 +28,18 @@ constexpr inline size_t binomial(size_t n, size_t k) noexcept
 }
 
 
+template<typename T>
 class CubicCell1D
 {
-    using Array = std::array<double, 4>;
+    using Array = std::array<T, 4>;
 public:
-    explicit CubicCell1D(double x0, double x1, double f0, double f1, double df0, double df1)
+    explicit CubicCell1D(T x0, T x1, T f0, T f1, T df0, T df1)
       : a(calculate_coefficients(x0, x1-x0, f0, f1, df0, df1))
     {
     }
     ~CubicCell1D() = default;
 
-    const double eval(const double x) const
+    const T eval(const T x) const
     {
         return a[0] + (a[1] + (a[2] + a[3]*x)*x)*x;
     }
@@ -51,18 +52,18 @@ private:
     const size_t alpha_size {4};
     const Array a;
 
-    double binomial_power_coefficient(const double y, const int n, const int k) const
+    T binomial_power_coefficient(const T y, const int n, const int k) const
     {
         return binomial(n, k)*std::pow(y, n-k);
     }
 
-    void scale_coefficients(std::array<double, 4> &a, const double x0, const double h) const
+    void scale_coefficients(std::array<T, 4> &a, const T x0, const T h) const
     {
-        using Array = std::array<double, 4>;
+        using Array = std::array<T, 4>;
         Array dummy {0.0, 0.0, 0.0, 0.0};
 
         auto i = 0;
-        double h_power_i {1.0};
+        T h_power_i {1.0};
         for (auto &a_i : a)
         {
             auto j = 0;
@@ -85,7 +86,7 @@ private:
         \param df0 derivative at node 0 (left)
         \param df1 derivative at node 1 (right
     */
-    const Array calculate_coefficients(const double x0, const double h, const double f0, const double f1, const double df0, const double df1) const
+    const Array calculate_coefficients(const T x0, const T h, const T f0, const T f1, const T df0, const T df1) const
     {
         Array coefficients {0.0, 0.0, 0.0, 0.0};
         for (size_t i = 0; i < alpha_size; ++i)
@@ -110,7 +111,7 @@ private:
     const double x_front;
     const double x_back;
     const double x_delta;
-    std::vector<CubicCell1D> splines;
+    std::vector<CubicCell1D<double>> splines;
     const size_t cell_index(const double xi) const
     {
         return
@@ -155,7 +156,7 @@ public:
         splines.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            splines.push_back(CubicCell1D(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
+            splines.push_back(CubicCell1D<double>(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
         }
     }
     double eval(const double xi) const

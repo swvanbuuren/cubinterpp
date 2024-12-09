@@ -1,4 +1,5 @@
-target_sources(cubic_spline PRIVATE
-    cubic_spline.cpp
+target_sources(cubinterpp PRIVATE
+    cubinterpp.cpp
     cubic_spline.hpp
+    linear_interp.hpp
 )

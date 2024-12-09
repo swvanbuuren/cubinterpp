@@ -2,7 +2,7 @@
 
 import numpy as np
 import mlpyqtgraph as mpg
-from cubinterpp import cubic_spline  # cubic_spline is a pybind11 module
+import cubinterpp  # cubinterpp is a pybind11 module
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
@@ -31,22 +31,27 @@ def main():
     x, y = get_test_data(case='akima')
     x_fine = refine_grid(x)
 
-    spline = cubic_spline.NaturalSpline1D(x, y)
+    spline = cubinterpp.LinearInterp1D(x, y)
+    y_fine_linear = spline.evaln(x_fine)
+
+    spline = cubinterpp.NaturalSpline1D(x, y)
     y_fine_natural = spline.evaln(x_fine)
 
-    spline = cubic_spline.AkimaSpline1D(x, y)
+    spline = cubinterpp.AkimaSpline1D(x, y)
     y_fine_akima = spline.evaln(x_fine)
 
-    spline = cubic_spline.MonotonicSpline1D(x, y)
+    spline = cubinterpp.MonotonicSpline1D(x, y)
     y_fine_monotonic = spline.evaln(x_fine, )
 
     mpg.figure(title='Test figure')
+    mpg.plot(x_fine, y_fine_linear)
     mpg.plot(x_fine, y_fine_natural)
     mpg.plot(x_fine, y_fine_akima)
     mpg.plot(x_fine, y_fine_monotonic)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.gca().grid = True
     mpg.legend(
+        'Linear interpolation',
         'Natural cubic spline',
         'Akima spline',
         'Monotonic cubic interpolation',
