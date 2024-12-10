@@ -1,14 +1,13 @@
 #pragma once
 
 #include <algorithm>
-#include <array>
 #include <cassert>
 #include <cmath>
+#include <cstddef>
 #include <vector>
 
 
 namespace lns {
-
 
 template <typename T>
 class LinearCell1D {
@@ -31,16 +30,59 @@ private:
 
 
 template <typename T>
+class Indexer {
+    using Vector = std::vector<T>;
+public:
+    Indexer(const Vector &_x)
+    : x(_x),
+      index_back(x.size()-2),
+      x_front(x[index_front]),
+      x_back(x[x.size()-1]),
+      x_delta((x_back-x_front)/(x.size()-1))
+    {
+    }
+    ~Indexer() { }
+
+    const size_t cell_index(const T xi) const
+    {
+        return
+        (xi < x_back) ?
+            ((xi < x_front) ?
+                index_front :
+                (size_t)((xi-x_front)/x_delta)) :
+            index_back;
+    }
+
+    const size_t sort_index(const T xi) const
+    {
+        if (xi < x_front)
+        {
+            return index_front;
+        }
+        if (xi >= x_back)
+        {
+            return index_back;
+        }
+        return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
+    }
+
+private:
+    const Vector x;
+    const size_t index_front = 0;
+    const size_t index_back;
+    const double x_front;
+    const double x_back;
+    const double x_delta;
+};
+
+
+template <typename T>
 class LinearInterp1D {
     using Cell = LinearCell1D<T>;
     using Vector = std::vector<T>;
 public:
     LinearInterp1D(const Vector &_x, const Vector &_y)
-      : x(_x),
-        index_back(x.size()-2),
-        x_front(x[index_front]),
-        x_back(x[x.size()-1]),
-        x_delta((x_back-x_front)/(x.size()-1))
+      : indexer(_x)
     {
         assert(_x.size() == _y.size());
         build(_x, _y);
@@ -55,11 +97,11 @@ public:
             cells.push_back(Cell(x[i], x[i+1], y[i], y[i+1]));
         }
     }
+
     T eval(const T xi) const
     {
-        return cells[get_index(xi)].eval(xi);
+        return cells[indexer.sort_index(xi)].eval(xi);
     }
-
 
     Vector evaln(const Vector &xi) const
     {
@@ -73,43 +115,8 @@ public:
     }
 
 private:
-    const Vector x;
-    const size_t index_front = 0;
-    const size_t index_back;
-    const double x_front;
-    const double x_back;
-    const double x_delta;
+    const Indexer<T> indexer;
     std::vector<Cell> cells;
-
-    const size_t cell_index(const double xi) const
-    {
-        return
-        (xi < x_back) ?
-            ((xi < x_front) ?
-                index_front :
-                (size_t)((xi-x_front)/x_delta)) :
-            index_back;
-    }
-
-    const size_t sort_index(const double xi) const
-    {
-        if (xi < x_front)
-        {
-            return index_front;
-        }
-        if (xi >= x_back)
-        {
-            return index_back;
-        }
-        return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
-    }
-
-    const size_t get_index(const double xi) const
-    {
-        return sort_index(xi);
-    }
-
 }; // class LinearInterp1D
-
 
 } // namespace lns
