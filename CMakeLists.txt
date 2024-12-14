@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11...3.18)
 project(cubinterpp LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ version selection")
+set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ version selection")
 
 include(FetchContent)
 FetchContent_Declare(
@@ -11,6 +11,7 @@ FetchContent_Declare(
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
 )
+
 FetchContent_Declare(
   Eigen
   GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
@@ -25,12 +26,24 @@ set(EIGEN_BUILD_DOC OFF)
 # scoped
 set(BUILD_TESTING OFF)
 set(EIGEN_BUILD_PKGCONFIG OFF)
-FetchContent_MakeAvailable(pybind11 Eigen)
+
+FetchContent_Declare(
+  mdspan
+  GIT_REPOSITORY https://github.com/kokkos/mdspan.git
+  GIT_TAG        cb3bd4284dc3bcdfd8b7779a62ada1504fefd6a4 # Version 0.6.0
+  GIT_SHALLOW TRUE
+  GIT_PROGRESS TRUE
+)
+set(MDSPAN_INSTALL_STDMODE_HEADERS ON)
+set(MDSPAN_CXX_STANDARD 20)
+
+FetchContent_MakeAvailable(pybind11 Eigen mdspan)
 
 pybind11_add_module(${CMAKE_PROJECT_NAME} "")
 # sources will be added in the following subdirectories
 add_subdirectory(src)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE std::mdspan)
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubinterpp> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubinterpp>
