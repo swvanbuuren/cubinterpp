@@ -129,10 +129,10 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Mdspan = Kokkos::mdspan<T, Kokkos::extents<std::size_t, 2>>;
+    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2>>;
 public:
     explicit LinearCell2D(Span _x1, Span &_x2, Mdspan _f)
-    : x1(_x1), x2(_x2), f(_f), H(assign_H(x1, x2))
+    : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
     {
     }
 
@@ -154,11 +154,6 @@ private:
     const Mdspan f;
     const T H;
 
-    T assign_H(Span x1, Span x2)
-    {
-        return 1.0/((x1[1] - x1[0])*(x2[1] - x2[0]));
-    }
-
 }; // class LinearCell2D
 
 
@@ -167,7 +162,7 @@ class LinearInterp2D {
     using Vector = std::vector<T>;
     using Vector2 = std::vector<std::vector<T>>;
     using Cell = LinearCell2D<T>;
-    using Mdspan = Kokkos::mdspan<const T, Kokkos::extents<std::size_t, 2>>;
+    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2>>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
     : x_indexer(_x), y_indexer(_y)
