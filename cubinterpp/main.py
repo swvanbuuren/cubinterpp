@@ -45,16 +45,16 @@ def main():
 
     mpg.figure(title='Test figure')
     mpg.plot(x_fine, y_fine_linear)
-    mpg.plot(x_fine, y_fine_natural)
-    mpg.plot(x_fine, y_fine_akima)
     mpg.plot(x_fine, y_fine_monotonic)
+    mpg.plot(x_fine, y_fine_akima)
+    mpg.plot(x_fine, y_fine_natural)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.gca().grid = True
     mpg.legend(
         'Linear interpolation',
-        'Natural cubic spline',
-        'Akima spline',
         'Monotonic cubic interpolation',
+        'Akima spline',
+        'Natural cubic spline',
         'data points'
     )
 
