@@ -1,90 +1,116 @@
-#pragma once
-
+#include <array>
 #include <vector>
-#include <cstddef>
-#include <stdexcept>
-#include <initializer_list>
+#include <mdspan/mdspan.hpp>
 
 
 namespace vec {
 
 
-// Forward declaration of VectorN
-template <typename T, std::size_t N>
-class VectorN;
+// Utility to calculate total size of the N-dimensional array.
+template <std::size_t N>
+constexpr std::size_t calculate_total_size(const std::array<std::size_t, N>& dimensions) {
+    std::size_t total_size = 1;
+    for (std::size_t dim : dimensions) {
+        total_size *= dim;
+    }
+    return total_size;
+}
 
-// Specialization for 0 dimensions (scalar value)
-template <typename T>
-class VectorN<T, 0> {
-private:
-    T value; // Holds the scalar value
 
-public:
-    // Constructor to initialize scalar value
-    explicit VectorN(const T& val) : value(val) {}
-
-    // Accessor for the scalar value
-    T& get() { return value; }
-    const T& get() const { return value; }
-
-    // Allow direct access and modification
-    operator T&() { return value; }
-    
-    operator const T&() const { return value; }
+// Recursive template to handle nested std::vector flattening
+template <typename NestedVector, typename T, std::size_t N>
+struct Flatten {
+    static void apply(const NestedVector& nested, std::vector<T>& flat) {
+        for (const auto& inner : nested) {
+            Flatten<typename NestedVector::value_type, T, N - 1>::apply(inner, flat);
+        }
+    }
 };
 
-// General case for N-dimensional vector
+template <typename NestedVector, typename T>
+struct Flatten<NestedVector, T, 1> {
+    static void apply(const NestedVector& nested, std::vector<T>& flat) {
+        flat.insert(flat.end(), nested.begin(), nested.end());
+    }
+};
+
+// General template to determine dimensions of a nested vector
+template <typename NestedVector, std::size_t N>
+std::array<std::size_t, N> determine_dimensions(const NestedVector& vec) {
+    static_assert(N > 0, "N must be greater than 0");
+    std::array<std::size_t, N> dimensions{};
+    dimensions[0] = vec.size();
+    if constexpr (N > 1) {
+        if (!vec.empty()) {
+            // Recursively call determine_dimensions on the first element of the vector
+            auto sub_dimensions = determine_dimensions<typename NestedVector::value_type, N - 1>(vec[0]);
+            std::copy(sub_dimensions.begin(), sub_dimensions.end(), dimensions.begin() + 1);
+        }
+    }
+    return dimensions;
+}
+
+// VectorN definition template
 template <typename T, std::size_t N>
 class VectorN {
-private:
-    std::vector<VectorN<T, N - 1>> data; // Contains (N-1)-dimensional vectors
-
 public:
-    // Constructor to initialize the vector with a given size and value
-    explicit VectorN(std::size_t size, const T& value)
-        : data(size, VectorN<T, N - 1>(size, value)) {}
+    // Constructor from dimensions and initial value
+    VectorN(const T& initial_value, const std::array<std::size_t, N>& dimensions)
+        : dimensions_(dimensions), data_(calculate_total_size(dimensions), initial_value) {}
 
-    // Constructor to initialize from an existing std::vector
-    explicit VectorN(const std::vector<VectorN<T, N - 1>>& vec) : data(vec) {}
+    // Copy constructor
+    VectorN(const VectorN& other) = default;
 
-    // Constructor to initialize from a nested initializer list
-    explicit VectorN(const std::initializer_list<typename VectorN<T, N - 1>::data_type>& init_list) {
-        for (const auto& element : init_list) {
-            data.emplace_back(element);
-        }
+    // Constructor from nested vectors
+    template <typename NestedVector>
+    VectorN(const NestedVector& nested)
+        : dimensions_(determine_dimensions<NestedVector, N>(nested)) {
+        data_.reserve(calculate_total_size(dimensions_));
+        Flatten<NestedVector, T, N>::apply(nested, data_);
     }
 
-    // Templated constructor to allow initialization from nested std::vector structures
-    template <typename NestedVector,
-              typename = std::enable_if_t<std::is_same_v<NestedVector, std::vector<typename VectorN<T, N - 1>::data_type>>>>
-    explicit VectorN(const NestedVector& vec) {
-        for (const auto& element : vec) {
-            data.emplace_back(element);
-        }
+    // Access elements using variadic indices
+    template <typename... Indices>
+    T& operator()(Indices... indices) {
+        static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
+        return data_[calculate_index({static_cast<std::size_t>(indices)...})];
     }
 
-    // Accessor to retrieve elements by index
-    VectorN<T, N - 1>& operator[](std::size_t index) {
-        if (index >= data.size()) {
-            throw std::out_of_range("Index out of range");
-        }
-        return data[index];
+    template <typename... Indices>
+    const T& operator()(Indices... indices) const {
+        static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
+        return data_[calculate_index({static_cast<std::size_t>(indices)...})];
     }
 
-    const VectorN<T, N - 1>& operator[](std::size_t index) const {
-        if (index >= data.size()) {
-            throw std::out_of_range("Index out of range");
-        }
-        return data[index];
+    auto mdspan() const {
+        return std::mdspan<const T, std::dextents<size_t, N>>(data_.data(), dimensions_);
     }
 
-    // Getter for the size of the current dimension
-    std::size_t size() const { return data.size(); }
+        // Extended method to return an mdspan with offset
+    template <typename... Pairs>
+    auto submdspan(Pairs... pairs) const {
+        auto full_mdspan = mdspan();
+        return std::submdspan(full_mdspan, pairs...);
+    }
 
-    // Getter for underlying std::vector
-    const std::vector<VectorN<T, N - 1>>& getData() const { return data; }
+    // Accessors
+    const std::array<std::size_t, N>& dimensions() const { return dimensions_; }
+    const std::vector<T>& data() const { return data_; }
 
-    using data_type = std::vector<VectorN<T, N - 1>>;
+private:
+    std::array<std::size_t, N> dimensions_;
+    std::vector<T> data_;
+
+    std::size_t calculate_index(const std::array<std::size_t, N>& indices) const {
+        std::size_t index = 0;
+        std::size_t stride = 1;
+        for (std::size_t i = N; i-- > 0;) {
+            index += indices[i] * stride;
+            stride *= dimensions_[i];
+        }
+        return index;
+    }
+
 };
 
 
