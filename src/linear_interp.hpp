@@ -5,8 +5,8 @@
 #include <cmath>
 #include <cstddef>
 #include <vector>
-#include <array>
 #include <mdspan/mdspan.hpp>
+#include <utility>
 #include "vectorn.hpp"
 
 
@@ -14,10 +14,10 @@ namespace lns {
 
 template <typename T>
 class LinearCell1D {
-    using Vector = std::vector<T>;
+    using Span = std::span<const T>;
 public:
-    explicit LinearCell1D(const double _x0, const double _x1, const double _f0, const double _f1)
-     : x0(_x0), b0(_f0), a0((_f1-_f0)/(_x1-_x0))
+    explicit LinearCell1D(Span x, Span f)
+    : x0(x[0]), b0(f[0]), a0((f[1]-f[0])/(x[1]-x[0]))
     {
     }
     ~LinearCell1D() { }
@@ -85,6 +85,7 @@ template <typename T>
 class LinearInterp1D {
     using Cell = LinearCell1D<T>;
     using Vector = std::vector<T>;
+    using Span = std::span<const T>;
 public:
     LinearInterp1D(const Vector &_x, const Vector &_f)
       : indexer(_x)
@@ -99,7 +100,7 @@ public:
         cells.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            cells.push_back(Cell(x[i], x[i+1], f[i], f[i+1]));
+            cells.push_back(Cell(Span(&x[i], 2), Span(&f[i], 2)));
         }
     }
 
@@ -129,9 +130,9 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2>>;
+    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2, 2>>;
 public:
-    explicit LinearCell2D(Span _x1, Span &_x2, Mdspan _f)
+    explicit LinearCell2D(Span _x1, Span _x2, Mdspan _f)
     : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
     {
     }
@@ -160,9 +161,10 @@ private:
 template <typename T>
 class LinearInterp2D {
     using Vector = std::vector<T>;
-    using Vector2 = std::vector<std::vector<T>>;
+    using Vector2 = vec::VectorN<T, 2>;
     using Cell = LinearCell2D<T>;
-    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2>>;
+    using Span = std::span<const T>;
+    using Pr = std::pair<size_t, size_t>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
     : x_indexer(_x), y_indexer(_y)
@@ -179,9 +181,7 @@ public:
             cells[i].reserve(y.size()-1);
             for (int j = 0; j < y.size()-1; ++j)
             {
-                cells[i].push_back(Cell(std::span<const T>(&x[i], 2),
-                                        std::span<const T>(&y[j], 2),
-                                        Mdspan{{2, 2}}(&f[i][j])));
+                cells[i].push_back(Cell(Span(&x[i], 2),Span(&y[j], 2),f.submdspan(Pr{i, i+1}, Pr{j, j+1})));
             }
         }
     }
@@ -214,22 +214,22 @@ private:
 };
 
 
-template <typename T, std::size_t N, typename... Vars>
-class LinearCellND {
-    using VectorN = vec::VectorN<T, N>;
-    using Vector2 = std::array<std::vector<T>, N>;
-public:
-    explicit LinearCellND(const Vars&... vars, const VectorN &_f)
-    : f(_f)
-    {
-        (x_i.push_back(vars), ...);
-    }
+// template <typename T, std::size_t N, typename... Vars>
+// class LinearCellND {
+//     using VectorN = vec::VectorN<T, N>;
+//     using Vector2 = std::array<std::vector<T>, N>;
+// public:
+//     explicit LinearCellND(const Vars&... vars, const VectorN &_f)
+//     : f(_f)
+//     {
+//         (x_i.push_back(vars), ...);
+//     }
 
-private:
-    const VectorN f;
-    Vector2 x_i;
+// private:
+//     const VectorN f;
+//     Vector2 x_i;
 
-}; // class LinearInterpND
+// }; // class LinearInterpND
 
 
 } // namespace lns
