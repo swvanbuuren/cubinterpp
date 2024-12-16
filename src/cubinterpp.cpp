@@ -8,6 +8,7 @@ namespace py = pybind11;
 #include <pybind11/stl.h>
 #include <vector>
 using DoubleVector = std::vector<double>;
+using DoubleVector2 = std::vector<std::vector<double>>;
 //*/
 
 /* with Eigen vector
@@ -39,4 +40,10 @@ PYBIND11_MODULE(cubinterpp, m) {
         .def(py::init<DoubleVector, DoubleVector>())
         .def("eval", &cbs::NaturalSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
         .def("evaln", &cbs::NaturalSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
+
+    py::class_<lns::LinearInterp2D<double>>(m, "LinearInterp2D")
+        .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
+        .def("eval", &lns::LinearInterp2D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &lns::LinearInterp2D<double>::evaln, py::return_value_policy::reference_internal);
+
 }
