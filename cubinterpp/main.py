@@ -18,6 +18,16 @@ def get_test_data(case='akima', start=1.0, end=5.0, size=8):
     return (start, end), (0, 1)
 
 
+def get_test_data_2d(start=1.0, end=5.0, size=8):
+    """ Generate 2D test data """
+    x = np.array([0, 1, 2])
+    y = np.array([0, 1, 2])
+    f = np.array([[1, 2, 2],
+                  [2, 3, 3],
+                  [3, 3, 4]])
+    return x, y, f
+
+
 def refine_grid(x_coord, size_fine=1000, extension=0):
     """ Refines x grid and provide placeholder data for y """
     return np.linspace(x_coord[0] - extension, x_coord[-1] + extension,
@@ -57,6 +67,13 @@ def main():
         'Natural cubic spline',
         'data points'
     )
+
+    x, y, f = get_test_data_2d()
+    interp2 = cubinterpp.LinearInterp2D(x, y, f)
+    xf = 1.1
+    yf = 1.5
+    zf = interp2.eval(1.1, 1.5)
+    print(f'f({xf}, {yf}) = {zf}')
 
 
 if __name__ == '__main__':
