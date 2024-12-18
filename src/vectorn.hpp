@@ -86,9 +86,19 @@ public:
         return std::mdspan<const T, std::dextents<size_t, N>>(data_.data(), dimensions_);
     }
 
-        // Extended method to return an mdspan with offset
+    auto mdspan() {
+        return std::mdspan<const T, std::dextents<size_t, N>>(data_.data(), dimensions_);
+    }
+
+    // Extended method to return an mdspan with offset
     template <typename... Pairs>
     auto submdspan(Pairs... pairs) const {
+        auto full_mdspan = mdspan();
+        return std::submdspan(full_mdspan, pairs...);
+    }
+
+    template <typename... Pairs>
+    auto submdspan(Pairs... pairs) {
         auto full_mdspan = mdspan();
         return std::submdspan(full_mdspan, pairs...);
     }
