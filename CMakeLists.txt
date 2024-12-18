@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.11...3.18)
-project(cubinterpp LANGUAGES CXX)
+
+project(cubinterpp 
+    VERSION 0.1.0 
+    LANGUAGES CXX
+)
+
+option(CUBINTERPP_ENABLE_TESTS "Enable tests." TRUE)
 
 set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ version selection")
 
@@ -30,7 +36,8 @@ set(EIGEN_BUILD_PKGCONFIG OFF)
 FetchContent_Declare(
   mdspan
   GIT_REPOSITORY https://github.com/kokkos/mdspan.git
-  GIT_TAG        cb3bd4284dc3bcdfd8b7779a62ada1504fefd6a4 # Version 0.6.0
+  GIT_TAG stable
+  #GIT_TAG 00448b8b594c40e5c5e576ade28820b2b26fd27c
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
 )
@@ -40,11 +47,20 @@ set(MDSPAN_CXX_STANDARD ${CMAKE_CXX_STANDARD})
 FetchContent_MakeAvailable(pybind11 Eigen mdspan)
 
 pybind11_add_module(${CMAKE_PROJECT_NAME} "")
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen std::mdspan)
+
+add_library(cubinterpp_core INTERFACE)
+target_link_libraries(cubinterpp_core INTERFACE std::mdspan)
+target_include_directories(cubinterpp_core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 # sources will be added in the following subdirectories
 add_subdirectory(src)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE std::mdspan)
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubinterpp> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubinterpp>
 )
+
+if(CUBINTERPP_ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()

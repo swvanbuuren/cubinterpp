@@ -32,6 +32,7 @@
 *.app
 
 .cache/
+bin/
 build/
 .cache/
 *.egg-info/
