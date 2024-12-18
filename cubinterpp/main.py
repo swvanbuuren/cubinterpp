@@ -70,9 +70,9 @@ def main():
 
     x, y, f = get_test_data_2d()
     interp2 = cubinterpp.LinearInterp2D(x, y, f)
-    xf = 1.1
-    yf = 1.5
-    zf = interp2.eval(1.1, 1.5)
+    xf = 0.5
+    yf = 0.5
+    zf = interp2.eval(xf, yf)
     print(f'f({xf}, {yf}) = {zf}')
 
 

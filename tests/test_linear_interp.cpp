@@ -48,5 +48,7 @@ TEST(TestInterp2D, test_linear_interp_2d) {
                  {3, 3, 4}};
 
     VectorN2 fvec(f);
-    lns::LinearInterp2D<double> interp(x, y, f);    
+    lns::LinearInterp2D<double> interp2(x, y, f);
+    std::cout << "interp2(0.5, 0.5) = " << interp2.eval(0.5, 0.5) << std::endl;
+
 }
