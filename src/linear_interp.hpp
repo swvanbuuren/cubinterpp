@@ -130,7 +130,7 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Mdspan = std::mdspan<const T, std::extents<std::size_t, 2, 2>>;
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>>;
 public:
     explicit LinearCell2D(Span _x1, Span _x2, Mdspan _f)
     : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
@@ -161,27 +161,31 @@ private:
 template <typename T>
 class LinearInterp2D {
     using Vector = std::vector<T>;
-    using Vector2 = vec::VectorN<T, 2>;
+    using Vector2 = std::vector<std::vector<T>>;
+    using VectorN2 = vec::VectorN<T, 2>;
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
-    : x_indexer(_x), y_indexer(_y)
+    : x_indexer(_x), y_indexer(_y), f(_f)
     {
-        build(_x, _y, _f);
+        build(_x, _y);
     }
     ~LinearInterp2D() { }
 
-    void build(const Vector &x, const Vector &y, const Vector2 &f)
+    void build(const Vector &x, const Vector &y)
     {
         cells.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
+            cells.emplace_back();
             cells[i].reserve(y.size()-1);
             for (int j = 0; j < y.size()-1; ++j)
             {
-                cells[i].push_back(Cell(Span(&x[i], 2),Span(&y[j], 2),f.submdspan(Pr{i, i+1}, Pr{j, j+1})));
+                cells[i].push_back(Cell(Span(&x[i], 2),
+                                        Span(&y[j], 2),
+                                        f.submdspan(Pr{i, i+1}, Pr{j, j+1})));
             }
         }
     }
@@ -210,6 +214,7 @@ public:
 private:
     const Indexer<T> x_indexer;
     const Indexer<T> y_indexer;
+    const VectorN2 f;
     std::vector<std::vector<Cell>> cells;
 };
 
