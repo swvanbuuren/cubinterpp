@@ -132,12 +132,12 @@ class LinearCell2D {
     using Span = std::span<const T>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>>;
 public:
-    explicit LinearCell2D(Span _x1, Span _x2, Mdspan _f)
+    explicit LinearCell2D(const Span &_x1, const Span &_x2, const Mdspan &_f)
     : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
     {
     }
 
-    T eval(const T &x1i, const T &x2i) const
+    T eval(const T x1i, const T x2i) const
     {
         const T x1i_x10 = x1i - x1[0];
         const T x11_x1i = x1[1] - x1i;
@@ -168,28 +168,26 @@ class LinearInterp2D {
     using Pr = std::pair<size_t, size_t>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
-    : x_indexer(_x), y_indexer(_y), f(_f)
+    : x(_x), y(_y), x_indexer(_x), y_indexer(_y), f(_f)
     {
-        build(_x, _y);
+        build();
     }
     ~LinearInterp2D() { }
 
-    void build(const Vector &x, const Vector &y)
-    {
-        cells.reserve(x.size()-1);
-        for (int i = 0; i < x.size()-1; ++i)
-        {
-            cells.emplace_back();
-            cells[i].reserve(y.size()-1);
-            for (int j = 0; j < y.size()-1; ++j)
-            {
-                cells[i].push_back(Cell(Span(&x[i], 2),
-                                        Span(&y[j], 2),
-                                        f.submdspan(Pr{i, i+1}, Pr{j, j+1})));
+    void build() {
+        cells.reserve(x.size() - 1);
+        for (size_t i = 0, x_max = x.size() - 1; i < x_max; ++i) {
+            std::vector<Cell> row;
+            row.reserve(y.size() - 1);
+            for (size_t j = 0, y_max = y.size() - 1; j < y_max; ++j) {
+                row.emplace_back(Span(&x[i], 2),
+                                 Span(&y[j], 2),
+                                 f.submdspan(Pr{i, i + 1}, Pr{j, j + 1})
+                );
             }
+            cells.emplace_back(std::move(row));
         }
     }
-
 
     T eval(const T xi, const T yi) const
     {
@@ -214,6 +212,8 @@ public:
 private:
     const Indexer<T> x_indexer;
     const Indexer<T> y_indexer;
+    const Vector x;
+    const Vector y;
     const VectorN2 f;
     std::vector<std::vector<Cell>> cells;
 };
