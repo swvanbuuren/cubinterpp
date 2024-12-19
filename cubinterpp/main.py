@@ -20,11 +20,11 @@ def get_test_data(case='akima', start=1.0, end=5.0, size=8):
 
 def get_test_data_2d(start=1.0, end=5.0, size=8):
     """ Generate 2D test data """
-    x = np.array([0, 1, 2])
-    y = np.array([0, 1, 2])
-    f = np.array([[1, 2, 2],
-                  [2, 3, 3],
-                  [3, 3, 4]])
+    x = np.array([0.0, 1.0, 2.0])
+    y = np.array([0.0, 1.0, 2.0])
+    f = np.array([[1.0, 2.0, 2.0],
+                  [2.0, 3.0, 3.0],
+                  [3.0, 3.0, 4.0]])
     return x, y, f
 
 
@@ -70,10 +70,13 @@ def main():
 
     x, y, f = get_test_data_2d()
     interp2 = cubinterpp.LinearInterp2D(x, y, f)
-    xf = 0.5
-    yf = 0.5
-    zf = interp2.eval(xf, yf)
-    print(f'f({xf}, {yf}) = {zf}')
+    test_points = ((0.5, 0.5), (1.5, 0.5), (0.5, 1.0), (1.0, 2.0))
+    for xf, yf in test_points:
+        print(f'interp2({xf}, {yf}) = {interp2.eval(xf, yf)}')
+    print(interp2.evaln(
+        [x for x, _ in test_points],
+        [y for _, y in test_points])
+    )
 
 
 if __name__ == '__main__':
