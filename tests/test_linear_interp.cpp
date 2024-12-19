@@ -41,14 +41,16 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
 
 
 TEST(TestInterp2D, test_linear_interp_2d) {
-    Vector x = {0, 1, 2};
-    Vector y = {0, 1, 2};
-    Vector2 f = {{1, 2, 2},
-                 {2, 3, 3},
-                 {3, 3, 4}};
+    Vector x = {0.0, 1.0, 2.0};
+    Vector y = {0.0, 1.0, 2.0};
+    Vector2 f = {{1.0, 2.0, 2.0},
+                 {2.0, 3.0, 3.0},
+                 {3.0, 3.0, 4.0}};
 
-    VectorN2 fvec(f);
     lns::LinearInterp2D<double> interp2(x, y, f);
     std::cout << "interp2(0.5, 0.5) = " << interp2.eval(0.5, 0.5) << std::endl;
+    std::cout << "interp2(1.5, 0.5) = " << interp2.eval(1.5, 0.5) << std::endl;
+    std::cout << "interp2(0.5, 1.0) = " << interp2.eval(0.5, 1.0) << std::endl;
+    std::cout << "interp2(1.0, 2.0) = " << interp2.eval(1.0, 2.0) << std::endl;
 
 }
