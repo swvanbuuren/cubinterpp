@@ -29,14 +29,18 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
                  {3, 3, 4}};
 
     VectorN2 fvec(f);
-    size_t i = 2;
-    size_t j = 2;
+    size_t i = 1;
+    size_t j = 1;
     lns::LinearCell2D<double> cell(
         Span(&x[i], 2), 
         Span(&y[j], 2), 
         fvec.submdspan(Pr{i, i+1}, Pr{j, j+1})
     );
-    std::cout << "cell(0.5, 0.5) = " << cell.eval(0.5, 0.5) << std::endl;
+    ASSERT_EQ(cell.eval(1, 1), 3.0);
+    ASSERT_EQ(cell.eval(1, 2), 3.0);
+    ASSERT_EQ(cell.eval(2, 1), 3.0);
+    ASSERT_EQ(cell.eval(2, 2), 4.0);
+    ASSERT_EQ(cell.eval(1.5, 1.5), 3.25);
 }
 
 
@@ -48,9 +52,10 @@ TEST(TestInterp2D, test_linear_interp_2d) {
                  {3.0, 3.0, 4.0}};
 
     lns::LinearInterp2D<double> interp2(x, y, f);
-    std::cout << "interp2(0.5, 0.5) = " << interp2.eval(0.5, 0.5) << std::endl;
-    std::cout << "interp2(1.5, 0.5) = " << interp2.eval(1.5, 0.5) << std::endl;
-    std::cout << "interp2(0.5, 1.0) = " << interp2.eval(0.5, 1.0) << std::endl;
-    std::cout << "interp2(1.0, 2.0) = " << interp2.eval(1.0, 2.0) << std::endl;
+    ASSERT_EQ(interp2.eval(0.5, 0.5), 2.0);
+    ASSERT_EQ(interp2.eval(1.5, 0.5), 2.75);
+    ASSERT_EQ(interp2.eval(0.5, 1.0), 2.5);
+    ASSERT_EQ(interp2.eval(1.0, 2.0), 3.0);
+
 
 }
