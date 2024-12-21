@@ -53,11 +53,14 @@ std::array<std::size_t, N> determine_dimensions(const NestedVector& vec) {
 // VectorN definition template
 template <typename T, std::size_t N>
 class VectorN {
-    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
+    using Mdspan = std::mdspan<T, std::dextents<std::size_t, N>, std::layout_stride>;
 public:
     // Constructor from dimensions and initial value
     VectorN(const T& initial_value, const std::array<std::size_t, N>& dimensions)
-        : dimensions_(dimensions), data_(calculate_total_size(dimensions), initial_value) {}
+        : dimensions_(dimensions), data_(calculate_total_size(dimensions), initial_value),
+          mdspan(std::mdspan(data_.data(), dimensions_))
+    {
+    }
 
     // Copy constructor
     VectorN(const VectorN& other) = default;
@@ -68,40 +71,41 @@ public:
         : dimensions_(determine_dimensions<NestedVector, N>(nested)) {
         data_.reserve(calculate_total_size(dimensions_));
         Flatten<NestedVector, T, N>::apply(nested, data_);
+        mdspan = std::mdspan(data_.data(), dimensions_);
     }
 
     // Access elements using variadic indices
     template <typename... Indices>
     T& operator()(Indices... indices) {
         static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
-        return data_[calculate_index({static_cast<std::size_t>(indices)...})];
+        //return data_[calculate_index({static_cast<std::size_t>(indices)...})];
+        return mdspan(std::forward<Indices>(indices)...);
     }
 
     template <typename... Indices>
     const T& operator()(Indices... indices) const {
         static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
-        return data_[calculate_index({static_cast<std::size_t>(indices)...})];
+        //return data_[calculate_index({static_cast<std::size_t>(indices)...})];
+        return mdspan(std::forward<Indices>(indices)...);
     }
 
-    Mdspan mdspan() const {
-        return std::mdspan(data_.data(), dimensions_);
+    Mdspan get_mdspan() {
+        return mdspan;
     }
 
-    Mdspan mdspan() {
-        return std::mdspan(data_.data(), dimensions_);
+    const Mdspan get_mdspan() const {
+        return mdspan;
     }
 
     // Extended method to return an mdspan with offset
     template <typename... Pairs>
     Mdspan submdspan(Pairs... pairs) const {
-        Mdspan full_mdspan = mdspan();
-        return std::submdspan(full_mdspan, pairs...);
+        return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
     template <typename... Pairs>
     Mdspan submdspan(Pairs... pairs) {
-        Mdspan full_mdspan = mdspan();
-        return std::submdspan(full_mdspan, pairs...);
+        return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
     // Accessors
@@ -111,6 +115,7 @@ public:
 private:
     std::array<std::size_t, N> dimensions_;
     std::vector<T> data_;
+    Mdspan mdspan;
 
     std::size_t calculate_index(const std::array<std::size_t, N>& indices) const {
         std::size_t index = 0;

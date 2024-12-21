@@ -77,7 +77,7 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
 
     vec::VectorN<double, 2> nvec2(vec2);
 
-    auto view2 = nvec2.mdspan();
+    auto view2 = nvec2.get_mdspan();
     ASSERT_EQ(view2(0, 0), 1);
     ASSERT_EQ(view2(1, 1), 3);
 
@@ -99,7 +99,7 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
                     };
     vec::VectorN<double, 3> nvec3(vec3);
 
-    auto view3 = nvec3.mdspan();
+    auto view3 = nvec3.get_mdspan();
     ASSERT_EQ(view3(0, 0, 0), 1);
     ASSERT_EQ(view3(1, 1, 2), 12);
 
