@@ -78,14 +78,12 @@ public:
     template <typename... Indices>
     T& operator()(Indices... indices) {
         static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
-        //return data_[calculate_index({static_cast<std::size_t>(indices)...})];
         return mdspan(std::forward<Indices>(indices)...);
     }
 
     template <typename... Indices>
     const T& operator()(Indices... indices) const {
         static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
-        //return data_[calculate_index({static_cast<std::size_t>(indices)...})];
         return mdspan(std::forward<Indices>(indices)...);
     }
 
