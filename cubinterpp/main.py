@@ -35,6 +35,12 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
                        num=size_fine)
 
 
+def scipy_linear_interp(x, y, f, x_fine, y_fine):
+    interp2 = RegularGridInterpolator((x, y), f)
+    x_grid, y_grid = np.meshgrid(x_fine, y_fine, indexing='ij')
+    return interp2((x_grid, y_grid))
+
+
 @mpg.plotter(projection='orthographic')
 def main():
     """ Tets Cubic spline interpolation """
@@ -82,11 +88,9 @@ def main():
     ax = mpg.gca()
     ax.azimuth = 225
 
-    interp2_sp = RegularGridInterpolator((x, y), f)
-    X, Y = np.meshgrid(x_fine, y_fine, indexing='ij')
-    Z = interp2_sp((X, Y))
+    z_fine_scipy = scipy_linear_interp(x, y, f, x_fine, y_fine)
     mpg.figure(title='Test figure compare', layout_type='Qt')
-    mpg.surf(x_fine, y_fine, Z)
+    mpg.surf(x_fine, y_fine, z_fine_scipy)
     ax = mpg.gca()
     ax.azimuth = 225
 
