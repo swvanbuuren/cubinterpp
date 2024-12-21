@@ -16,8 +16,7 @@ The library features three kinds of different interpolation types:
 - Akima spline interpolation 
 - Natural cubic spline interpolation
 
-All classes are templatized and support the STL's vector as well as Eigen
-vector types.
+All classes are templatized and support the STL's vector types.
 
 The accompanying python script in [cubinterpp ](cubinterpp ) compares the three
 interpolation types.
@@ -30,7 +29,6 @@ library in a python environment.
 ### Prerequisites
 
 - C++ compiler, e.g. [gcc](https://gcc.gnu.org/)
-- [Eigen](https://eigen.tuxfamily.org): to be able to use Eigen vector
 - [cmake](https://cmake.org/): to use the provided cmake configuration
 - [pybind11](https://github.com/pybind/pybind11): to compile the library header
   into a python module

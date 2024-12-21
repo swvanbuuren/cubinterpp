@@ -19,21 +19,6 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
-  Eigen
-  GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
-  GIT_TAG        3147391d946bb4b6c68edd901f2add6ac1f31f8c # Version 3.4.0
-  GIT_SHALLOW TRUE
-  GIT_PROGRESS TRUE
-)
-set(EIGEN_BUILD_DOC OFF)
-# note: To disable eigen tests,
-# you should put this code in a add_subdirectory to avoid to change
-# BUILD_TESTING for your own project too since variables are directory
-# scoped
-set(BUILD_TESTING OFF)
-set(EIGEN_BUILD_PKGCONFIG OFF)
-
-FetchContent_Declare(
   mdspan
   GIT_REPOSITORY https://github.com/kokkos/mdspan.git
   GIT_TAG stable
@@ -44,10 +29,10 @@ FetchContent_Declare(
 add_definitions(-DMDSPAN_IMPL_STANDARD_NAMESPACE=std)
 set(MDSPAN_CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
-FetchContent_MakeAvailable(pybind11 Eigen mdspan)
+FetchContent_MakeAvailable(pybind11 mdspan)
 
 pybind11_add_module(${CMAKE_PROJECT_NAME} "")
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Eigen3::Eigen std::mdspan)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE std::mdspan)
 
 add_library(cubinterpp_core INTERFACE)
 target_link_libraries(cubinterpp_core INTERFACE std::mdspan)

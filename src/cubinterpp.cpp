@@ -9,14 +9,7 @@ namespace py = pybind11;
 #include <vector>
 using DoubleVector = std::vector<double>;
 using DoubleVector2 = std::vector<std::vector<double>>;
-//*/
 
-/* with Eigen vector
-#include <Eigen/Core>
-#include <pybind11/eigen.h>
-using namespace Eigen;
-using DoubleVector = Eigen::VectorXd;
-//*/
 
 PYBIND11_MODULE(cubinterpp, m) {
     m.doc() = "pybind11 1D cubic and linear interpolation"; // optional module docstring
