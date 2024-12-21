@@ -8,9 +8,11 @@
 #include <mdspan/mdspan.hpp>
 #include <utility>
 #include "vectorn.hpp"
+#include "utils.hpp"
 
 
 namespace lns {
+
 
 template <typename T>
 class LinearCell1D {
@@ -31,53 +33,6 @@ private:
     const T x0;
     const T a0;
     const T b0;
-};
-
-
-template <typename T>
-class Indexer {
-    using Vector = std::vector<T>;
-public:
-    Indexer(const Vector &_x)
-    : x(_x),
-      index_back(x.size()-2),
-      x_front(x[index_front]),
-      x_back(x[x.size()-1]),
-      x_delta((x_back-x_front)/(x.size()-1))
-    {
-    }
-    ~Indexer() { }
-
-    const size_t cell_index(const T xi) const
-    {
-        return
-        (xi < x_back) ?
-            ((xi < x_front) ?
-                index_front :
-                (size_t)((xi-x_front)/x_delta)) :
-            index_back;
-    }
-
-    const size_t sort_index(const T xi) const
-    {
-        if (xi < x_front)
-        {
-            return index_front;
-        }
-        if (xi >= x_back)
-        {
-            return index_back;
-        }
-        return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
-    }
-
-private:
-    const Vector x;
-    const size_t index_front = 0;
-    const size_t index_back;
-    const double x_front;
-    const double x_back;
-    const double x_delta;
 };
 
 
@@ -121,7 +76,7 @@ public:
     }
 
 private:
-    const Indexer<T> indexer;
+    const utils::Indexer<T> indexer;
     std::vector<Cell> cells;
 }; // class LinearInterp1D
 
@@ -166,7 +121,7 @@ class LinearInterp2D {
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
-    using Indexers = std::vector<Indexer<T>>;
+    using Indexers = std::vector<utils::Indexer<T>>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
     : x(_x), y(_y), f(_f)

@@ -3,10 +3,12 @@ target_sources(cubinterpp PRIVATE
     cubic_spline.hpp
     linear_interp.hpp
     vectorn.hpp
+    utils.hpp
  )
 
 target_sources(cubinterpp_core INTERFACE
     cubic_spline.hpp
     linear_interp.hpp
     vectorn.hpp
+    utils.hpp
 )
