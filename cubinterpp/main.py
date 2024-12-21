@@ -1,6 +1,7 @@
 """ Simple test for Akima Spline Interpolation """
 
 import numpy as np
+from scipy.interpolate import RegularGridInterpolator
 import mlpyqtgraph as mpg
 import cubinterpp  # cubinterpp is a pybind11 module
 
@@ -34,7 +35,7 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
                        num=size_fine)
 
 
-@mpg.plotter
+@mpg.plotter(projection='orthographic')
 def main():
     """ Tets Cubic spline interpolation """
 
@@ -70,13 +71,24 @@ def main():
 
     x, y, f = get_test_data_2d()
     interp2 = cubinterpp.LinearInterp2D(x, y, f)
-    test_points = ((0.5, 0.5), (1.5, 0.5), (0.5, 1.0), (1.0, 2.0))
-    for xf, yf in test_points:
-        print(f'interp2({xf}, {yf}) = {interp2.eval(xf, yf)}')
-    print(interp2.evaln(
-        [x for x, _ in test_points],
-        [y for _, y in test_points])
-    )
+    x_fine, y_fine = refine_grid(x, 20), refine_grid(y, 20)
+    z_fine = np.zeros((len(x_fine), len(y_fine)))
+    for xi, xf in enumerate(x_fine):
+        for yi, yf in enumerate(y_fine):
+            z_fine[xi, yi] = interp2.eval(xf, yf)
+
+    mpg.figure(title='Test figure', layout_type='Qt')
+    mpg.surf(x_fine, y_fine, z_fine)
+    ax = mpg.gca()
+    ax.azimuth = 225
+
+    interp2_sp = RegularGridInterpolator((x, y), f)
+    X, Y = np.meshgrid(x_fine, y_fine, indexing='ij')
+    Z = interp2_sp((X, Y))
+    mpg.figure(title='Test figure compare', layout_type='Qt')
+    mpg.surf(x_fine, y_fine, Z)
+    ax = mpg.gca()
+    ax.azimuth = 225
 
 
 if __name__ == '__main__':
