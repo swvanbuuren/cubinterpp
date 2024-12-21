@@ -53,6 +53,7 @@ std::array<std::size_t, N> determine_dimensions(const NestedVector& vec) {
 // VectorN definition template
 template <typename T, std::size_t N>
 class VectorN {
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
 public:
     // Constructor from dimensions and initial value
     VectorN(const T& initial_value, const std::array<std::size_t, N>& dimensions)
@@ -82,24 +83,24 @@ public:
         return data_[calculate_index({static_cast<std::size_t>(indices)...})];
     }
 
-    auto mdspan() const {
-        return std::mdspan<const T, std::dextents<size_t, N>>(data_.data(), dimensions_);
+    Mdspan mdspan() const {
+        return std::mdspan(data_.data(), dimensions_);
     }
 
-    auto mdspan() {
-        return std::mdspan<const T, std::dextents<size_t, N>>(data_.data(), dimensions_);
+    Mdspan mdspan() {
+        return std::mdspan(data_.data(), dimensions_);
     }
 
     // Extended method to return an mdspan with offset
     template <typename... Pairs>
-    auto submdspan(Pairs... pairs) const {
-        auto full_mdspan = mdspan();
+    Mdspan submdspan(Pairs... pairs) const {
+        Mdspan full_mdspan = mdspan();
         return std::submdspan(full_mdspan, pairs...);
     }
 
     template <typename... Pairs>
-    auto submdspan(Pairs... pairs) {
-        auto full_mdspan = mdspan();
+    Mdspan submdspan(Pairs... pairs) {
+        Mdspan full_mdspan = mdspan();
         return std::submdspan(full_mdspan, pairs...);
     }
 

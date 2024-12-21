@@ -130,7 +130,7 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>>;
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
 public:
     explicit LinearCell2D(const Span &_x1, const Span &_x2, const Mdspan &_f)
     : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
@@ -166,20 +166,22 @@ class LinearInterp2D {
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
+    using Indexers = std::vector<Indexer<T>>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
-    : x(_x), y(_y), x_indexer(_x), y_indexer(_y), f(_f)
+    : x(_x), y(_y), f(_f)
     {
+        create_indexers(x, y);
         build();
     }
     ~LinearInterp2D() { }
 
     void build() {
         cells.reserve(x.size() - 1);
-        for (size_t i = 0, x_max = x.size() - 1; i < x_max; ++i) {
+        for (size_t i = 0; i < x.size()-1; ++i) {
             std::vector<Cell> row;
             row.reserve(y.size() - 1);
-            for (size_t j = 0, y_max = y.size() - 1; j < y_max; ++j) {
+            for (size_t j = 0; j < y.size()-1; ++j) {
                 row.emplace_back(Span(&x[i], 2),
                                  Span(&y[j], 2),
                                  f.submdspan(Pr{i, i + 1}, Pr{j, j + 1})
@@ -191,8 +193,8 @@ public:
 
     T eval(const T xi, const T yi) const
     {
-        size_t x_index = x_indexer.sort_index(xi);
-        size_t y_index = y_indexer.sort_index(yi);
+        size_t x_index = indexers[0].sort_index(xi);
+        size_t y_index = indexers[1].sort_index(yi);
         return cells[x_index][y_index].eval(xi, yi);
     }
 
@@ -210,12 +212,19 @@ public:
 
 
 private:
-    const Indexer<T> x_indexer;
-    const Indexer<T> y_indexer;
     const Vector x;
     const Vector y;
     const VectorN2 f;
+    Indexers indexers;
     std::vector<std::vector<Cell>> cells;
+
+    template<typename... Args>
+    void create_indexers(const Args & ... args) {
+        // loop through args and indexers simultaneously and pupulate indexers with args
+        for (const auto &arg : {args...}) {
+            indexers.emplace_back(arg);
+        }
+    }
 };
 
 
