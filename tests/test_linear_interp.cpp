@@ -32,9 +32,9 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
     size_t i = 1;
     size_t j = 1;
     lns::LinearCell2D<double> cell(
-        Span(&x[i], 2), 
-        Span(&y[j], 2), 
-        fvec.submdspan(Pr{i, i+1}, Pr{j, j+1})
+        fvec.submdspan(Pr{i, i+1}, Pr{j, j+1}),
+        Span(&x[i], 2),
+        Span(&y[j], 2)
     );
     ASSERT_EQ(cell.eval(1, 1), 3.0);
     ASSERT_EQ(cell.eval(1, 2), 3.0);

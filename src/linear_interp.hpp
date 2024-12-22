@@ -85,19 +85,21 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
+    using Spans = std::array<std::span<const T>, 2>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
 public:
-    explicit LinearCell2D(const Span &_x1, const Span &_x2, const Mdspan &_f)
-    : x1(_x1), x2(_x2), f(_f), H(1.0 / ((x1[1] - x1[0]) * (x2[1] - x2[0])))
+    template <typename... Args>
+    explicit LinearCell2D(const Mdspan &_f, Args && ... args)
+    : x{std::forward<Args>(args) ...}, f(_f), H(1.0 / ((x[0][1] - x[0][0]) * (x[1][1] - x[1][0])))
     {
     }
 
     T eval(const T x1i, const T x2i) const
     {
-        const T x1i_x10 = x1i - x1[0];
-        const T x11_x1i = x1[1] - x1i;
-        const T x2i_x20 = x2i - x2[0];
-        const T x21_x2i = x2[1] - x2i;
+        const T x1i_x10 = x1i - x[0][0];
+        const T x11_x1i = x[0][1] - x1i;
+        const T x2i_x20 = x2i - x[1][0];
+        const T x21_x2i = x[1][1] - x2i;
         return H*(f(0, 0)*x11_x1i*x21_x2i
                 + f(0, 1)*x11_x1i*x2i_x20
                 + f(1, 0)*x1i_x10*x21_x2i
@@ -105,8 +107,7 @@ public:
     }
 
 private:
-    const Span x1;
-    const Span x2;
+    const Spans x;
     const Mdspan f;
     const T H;
 
@@ -137,9 +138,9 @@ public:
             std::vector<Cell> row;
             row.reserve(y.size() - 1);
             for (size_t j = 0; j < y.size()-1; ++j) {
-                row.emplace_back(Span(&x[i], 2),
-                                 Span(&y[j], 2),
-                                 f.submdspan(Pr{i, i + 1}, Pr{j, j + 1})
+                row.emplace_back(f.submdspan(Pr{i, i + 1}, Pr{j, j + 1}),
+                                 Span(&x[i], 2),
+                                 Span(&y[j], 2)
                 );
             }
             cells.emplace_back(std::move(row));
