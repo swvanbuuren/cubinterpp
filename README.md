@@ -8,7 +8,7 @@ Cubic interpolation with C++ in Python.
 
 This C++ header library features tools for piecewise cubic interpolation.
 
-Currently, ony 1D interpolation is supported, however, future released are planned to extend the library to higher dimensions.
+Currently, only 1D interpolation is supported, however, future released are planned to extend the library to higher dimensions.
 
 The library features three kinds of different interpolation types:
 
@@ -51,7 +51,7 @@ cmake build
 ```
 
 This should build the library in the build directory and automatically copy the
-library file `cubic_spline.*.so` into the `cubinterpp` directoy.
+library file `cubic_spline.*.so` into the `cubinterpp` directory.
 
 ### Interpolating and plotting the results
 
@@ -59,7 +59,7 @@ A [python program](cubinterpp/main.py) is provided to compare the three
 interpolation types. Data preparation and visualization is done in python with
 [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph).
 
-In order to run the python program, it's recommeded to [install
+In order to run the python program, it's recommended to [install
 uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
 and issue:
 
