@@ -5,7 +5,7 @@
 
 using Vector = std::vector<double>;
 using Vector2 = std::vector<std::vector<double>>;
-using VectorN2 = vec::VectorN<double, 2>;
+using VectorN2 = cip::VectorN<double, 2>;
 using Span = std::span<const double>;
 using Pr = std::pair<size_t, size_t>;
 
@@ -31,7 +31,7 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
     VectorN2 fvec(f);
     size_t i = 1;
     size_t j = 1;
-    lns::LinearCell2D<double> cell(
+    cip::LinearCell2D<double> cell(
         fvec.submdspan(Pr{i, i+1}, Pr{j, j+1}),
         Span(&x[i], 2),
         Span(&y[j], 2)
@@ -51,7 +51,7 @@ TEST(TestInterp2D, test_linear_interp_2d) {
                  {2.0, 3.0, 3.0},
                  {3.0, 3.0, 4.0}};
 
-    lns::LinearInterp2D<double> interp2(x, y, f);
+    cip::LinearInterp2D<double> interp2(x, y, f);
     ASSERT_EQ(interp2.eval(0.5, 0.5), 2.0);
     ASSERT_EQ(interp2.eval(1.5, 0.5), 2.75);
     ASSERT_EQ(interp2.eval(0.5, 1.0), 2.5);

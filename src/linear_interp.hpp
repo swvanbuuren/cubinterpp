@@ -11,7 +11,7 @@
 #include "utils.hpp"
 
 
-namespace lns {
+namespace cip {
 
 
 template <typename T>
@@ -76,7 +76,7 @@ public:
     }
 
 private:
-    const utils::Indexer<T> indexer;
+    const cip::Indexer<T> indexer;
     std::vector<Cell> cells;
 }; // class LinearInterp1D
 
@@ -118,11 +118,11 @@ template <typename T>
 class LinearInterp2D {
     using Vector = std::vector<T>;
     using Vector2 = std::vector<std::vector<T>>;
-    using VectorN2 = vec::VectorN<T, 2>;
+    using VectorN2 = cip::VectorN<T, 2>;
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
-    using Indexers = std::vector<utils::Indexer<T>>;
+    using Indexers = std::vector<cip::Indexer<T>>;
 public:
     LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
     : x(_x), y(_y), f(_f)
@@ -202,4 +202,4 @@ private:
 // }; // class LinearInterpND
 
 
-} // namespace lns
+} // namespace cip

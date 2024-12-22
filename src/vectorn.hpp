@@ -3,7 +3,7 @@
 #include <mdspan/mdspan.hpp>
 
 
-namespace vec {
+namespace cip {
 
 
 // Utility to calculate total size of the N-dimensional array.
@@ -128,4 +128,4 @@ private:
 };
 
 
-} // namespace vec
+} // namespace cip

@@ -7,7 +7,7 @@
 #include <vector>
 
 
-namespace cbs {
+namespace cip {
 
 
 constexpr inline int factorial(int n)
@@ -389,4 +389,4 @@ public:
 };
 
 
-} // namespace cbs
+} // namespace cip

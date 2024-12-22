@@ -1,7 +1,6 @@
 #include <vector>
 #include <gtest/gtest.h>
 #include <utility>
-#include "experimental/__p0009_bits/layout_stride.hpp"
 #include "vectorn.hpp"
 
 using Vector = std::vector<double>;
@@ -23,18 +22,18 @@ TEST(TestVectorN, test_vectorn)
                         {10, 11, 12}
                         }
                     };
-    vec::VectorN<double, 3> vec1(nvec1);
+    cip::VectorN<double, 3> vec1(nvec1);
     ASSERT_EQ(vec1(0, 0, 0), 1);
     ASSERT_EQ(vec1(1, 1, 2), 12);
 
     Vector2 nvec2 = {{1, 2, 3}, {4, 5, 6}};
-    vec::VectorN<double, 2> vec2(nvec2);
+    cip::VectorN<double, 2> vec2(nvec2);
     ASSERT_EQ(vec2(0, 1), 2);
     vec2(0, 1) = 10;
     ASSERT_EQ(vec2(0, 1), 10);
     
     Vector nvec3 = {1, 2, 3, 4, 5};
-    vec::VectorN<double, 1> vec3(nvec3);
+    cip::VectorN<double, 1> vec3(nvec3);
     ASSERT_EQ(vec3(0), 1);
     ASSERT_EQ(vec3(1), 2);
     ASSERT_EQ(vec3(2), 3);
@@ -75,7 +74,7 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
                    {3, 3, 4}
                    };
 
-    vec::VectorN<double, 2> nvec2(vec2);
+    cip::VectorN<double, 2> nvec2(vec2);
 
     auto view2 = nvec2.get_mdspan();
     ASSERT_EQ(view2(0, 0), 1);
@@ -97,7 +96,7 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
                         {10, 11, 12}
                         }
                     };
-    vec::VectorN<double, 3> nvec3(vec3);
+    cip::VectorN<double, 3> nvec3(vec3);
 
     auto view3 = nvec3.get_mdspan();
     ASSERT_EQ(view3(0, 0, 0), 1);

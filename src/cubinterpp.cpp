@@ -14,29 +14,29 @@ using DoubleVector2 = std::vector<std::vector<double>>;
 PYBIND11_MODULE(cubinterpp, m) {
     m.doc() = "pybind11 1D cubic and linear interpolation"; // optional module docstring
 
-    py::class_<lns::LinearInterp1D<double>>(m, "LinearInterp1D")
+    py::class_<cip::LinearInterp1D<double>>(m, "LinearInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &lns::LinearInterp1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &lns::LinearInterp1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::LinearInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::LinearInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cbs::MonotonicSpline1D<DoubleVector>>(m, "MonotonicSpline1D")
+    py::class_<cip::MonotonicSpline1D<DoubleVector>>(m, "MonotonicSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cbs::MonotonicSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cbs::MonotonicSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MonotonicSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MonotonicSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cbs::AkimaSpline1D<DoubleVector>>(m, "AkimaSpline1D")
+    py::class_<cip::AkimaSpline1D<DoubleVector>>(m, "AkimaSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cbs::AkimaSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cbs::AkimaSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::AkimaSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::AkimaSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cbs::NaturalSpline1D<DoubleVector>>(m, "NaturalSpline1D")
+    py::class_<cip::NaturalSpline1D<DoubleVector>>(m, "NaturalSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cbs::NaturalSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cbs::NaturalSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalSpline1D<DoubleVector>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalSpline1D<DoubleVector>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<lns::LinearInterp2D<double>>(m, "LinearInterp2D")
+    py::class_<cip::LinearInterp2D<double>>(m, "LinearInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &lns::LinearInterp2D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &lns::LinearInterp2D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::LinearInterp2D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::LinearInterp2D<double>::evaln, py::return_value_policy::reference_internal);
 
 }

@@ -2,7 +2,7 @@
 #include <algorithm>
 
 
-namespace utils {
+namespace cip {
 
 
 template <typename T>
