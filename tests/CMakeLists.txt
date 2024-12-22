@@ -3,7 +3,7 @@ function(cubinterpp_add_test name)
         set(ARGUMENT_SOURCE ${name}.cpp)
     endif()
     add_executable(${name} ${ARGUMENT_SOURCE})
-    target_link_libraries(${name} cubinterpp_core gtest_main)
+    target_link_libraries(${name} cubinterpp gtest_main)
     add_test(NAME ${name} COMMAND ${name})
     add_custom_command(TARGET ${name} POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:${name}> ${PROJECT_SOURCE_DIR}/bin/$<TARGET_FILE_NAME:${name}>

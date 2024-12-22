@@ -31,18 +31,18 @@ set(MDSPAN_CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
 FetchContent_MakeAvailable(pybind11 mdspan)
 
-pybind11_add_module(${CMAKE_PROJECT_NAME} "")
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE std::mdspan)
+pybind11_add_module(cubinterpp_py "")
+target_link_libraries(cubinterpp_py PRIVATE std::mdspan)
 
-add_library(cubinterpp_core INTERFACE)
-target_link_libraries(cubinterpp_core INTERFACE std::mdspan)
-target_include_directories(cubinterpp_core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+add_library(${CMAKE_PROJECT_NAME} INTERFACE)
+target_link_libraries(${CMAKE_PROJECT_NAME} INTERFACE std::mdspan)
+target_include_directories(${CMAKE_PROJECT_NAME} INTERFACE src)
 
 # sources will be added in the following subdirectories
 add_subdirectory(src)
 
-add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubinterpp> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubinterpp>
+add_custom_command(TARGET cubinterpp_py POST_BUILD
+  COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubinterpp_py> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubinterpp_py>
 )
 
 if(CUBINTERPP_ENABLE_TESTS)

@@ -1,4 +1,4 @@
-target_sources(cubinterpp PRIVATE
+target_sources(cubinterpp_py PRIVATE
     cubinterpp.cpp
     cubic_spline.hpp
     linear_interp.hpp
@@ -6,7 +6,7 @@ target_sources(cubinterpp PRIVATE
     utils.hpp
  )
 
-target_sources(cubinterpp_core INTERFACE
+target_sources(${CMAKE_PROJECT_NAME} INTERFACE
     cubic_spline.hpp
     linear_interp.hpp
     vectorn.hpp

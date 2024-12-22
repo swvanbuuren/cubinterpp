@@ -11,7 +11,7 @@ using DoubleVector = std::vector<double>;
 using DoubleVector2 = std::vector<std::vector<double>>;
 
 
-PYBIND11_MODULE(cubinterpp, m) {
+PYBIND11_MODULE(cubinterpp_py, m) {
     m.doc() = "pybind11 1D cubic and linear interpolation"; // optional module docstring
 
     py::class_<cip::LinearInterp1D<double>>(m, "LinearInterp1D")
