@@ -1,6 +1,6 @@
 # cubinterpp
 
-Cubic interpolation with C++ in Python.
+Cubic and linear interpolation with C++ in Python.
 
 ![image](https://user-images.githubusercontent.com/5203275/211158357-3686465b-8363-4066-8535-1e2a648f5406.png)
 
@@ -8,17 +8,19 @@ Cubic interpolation with C++ in Python.
 
 This C++ header library features tools for piecewise cubic interpolation.
 
-Currently, only 1D interpolation is supported, however, future released are planned to extend the library to higher dimensions.
+Currently, only 1D interpolation is supported, however, future released are
+planned to extend the library to higher dimensions.
 
 The library features three kinds of different interpolation types:
 
+- Linear interpolation
 - Monotone cubic interpolation
 - Akima spline interpolation 
 - Natural cubic spline interpolation
 
 All classes are templatized and support the STL's vector types.
 
-The accompanying python script in [cubinterpp ](cubinterpp ) compares the three
+The accompanying python script in [cubinterpp ](cubinterpp ) compares the
 interpolation types.
 
 ## Usage
@@ -35,23 +37,50 @@ library in a python environment.
 - [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph): to plot the
   example's results
 
-## Building
+### Building
 
 To build the header library for usage in Python, it's recommended to use
 [cmake](https://cmake.org/). An appropriate cmake configuration is provided in
 the main [`CMakeLists.txt`](CMakeLists.txt). Prior to compilation, the required
 external libraries are downloaded automatically using the cmake FetchContent
-module. Prior to building, make sure cmake is installed and configured with a
-C++ compiler like e.g. [gcc](https://gcc.gnu.org/).
+module. Prior to building, make sure `cmake` is installed and configured with a
+C++ compiler like e.g. [gcc](https://gcc.gnu.org/). In order to create the
+python module, the development python library is also required.
 
-Then build using:
+In order to do so on a Debian based system, install `cmake`, `gcc`, `g++` and
+`python3.11-dev` (change the python version depending on your configuration):
 
 ```bash
-cmake build
+sudo apt install cmake gcc g++ python3.11-dev
 ```
 
-This should build the library in the build directory and automatically copy the
-library file `cubic_spline.*.so` into the `cubinterpp` directory.
+Set the appropriate environment variables (it's recommended to add these lines
+to e.g. your `.bashrc`):
+
+```bash
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+```
+
+Then create the build directory, configure and build using:
+
+```bash
+mkdir build
+cmake ..
+make
+```
+
+This should build and automatically copy the library file `cubic_spline.*.so`
+into the `cubinterpp` directory.
+
+### Testing
+
+This library comes with severals [tests](tests). To run all tests, first build
+and then run (while remaining in the `build` directory):
+
+```bash
+ctest -V
+```
 
 ### Interpolating and plotting the results
 
@@ -75,3 +104,4 @@ comparison plot shown at the top of this document.
 
 An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file for
 more details.
+
