@@ -7,6 +7,7 @@
 #include <vector>
 #include <mdspan/mdspan.hpp>
 #include <utility>
+#include <numeric>
 #include "vectorn.hpp"
 #include "utils.hpp"
 
@@ -85,12 +86,14 @@ private:
 template <typename T>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Spans = std::array<std::span<const T>, 2>;
+    using Spans = std::array<Span, 2>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
 public:
     template <typename... Args>
     explicit LinearCell2D(const Mdspan &_f, Args && ... args)
-    : x{std::forward<Args>(args) ...}, f(_f), H(1.0 / ((x[0][1] - x[0][0]) * (x[1][1] - x[1][0])))
+    : x{std::forward<Args>(args) ...},
+      f(_f),
+      H(std::transform_reduce(x.begin(), x.end(), 1.0, std::multiplies<>(), [](const Span& xi){return xi[1] - xi[0];}))
     {
     }
 
@@ -100,10 +103,10 @@ public:
         const T x11_x1i = x[0][1] - x1i;
         const T x2i_x20 = x2i - x[1][0];
         const T x21_x2i = x[1][1] - x2i;
-        return H*(f(0, 0)*x11_x1i*x21_x2i
-                + f(0, 1)*x11_x1i*x2i_x20
-                + f(1, 0)*x1i_x10*x21_x2i
-                + f(1, 1)*x1i_x10*x2i_x20);
+        return (f(0, 0)*x11_x1i*x21_x2i
+              + f(0, 1)*x11_x1i*x2i_x20
+              + f(1, 0)*x1i_x10*x21_x2i
+              + f(1, 1)*x1i_x10*x2i_x20)/H;
     }
 
 private:
