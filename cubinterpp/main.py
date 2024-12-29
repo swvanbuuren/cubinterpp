@@ -19,13 +19,27 @@ def get_test_data(case='akima', start=1.0, end=5.0, size=8):
     return (start, end), (0, 1)
 
 
-def get_test_data_2d(start=1.0, end=5.0, size=8):
+def get_test_data_2d(case='standard'):
     """ Generate 2D test data """
-    x = np.array([0.0, 1.0, 2.0])
-    y = np.array([0.0, 1.0, 2.0])
-    f = np.array([[1.0, 2.0, 2.0],
-                  [2.0, 3.0, 3.0],
-                  [3.0, 3.0, 4.0]])
+    match case:
+        case 'normalized':
+            x = np.array([0.0, 1.0, 2.0])
+            y = np.array([0.0, 1.0, 2.0])
+            f = np.array([[1.0, 2.0, 2.0],
+                        [2.0, 3.0, 3.0],
+                        [3.0, 3.0, 4.0]])
+        case 'standard':
+            x = np.array([0.0, 1.5, 3.0])
+            y = np.array([0.0, 2.0, 4.0])
+            f = np.array([[1.0, 2.0, 2.0],
+                        [2.0, 3.0, 3.0],
+                        [3.0, 3.0, 4.0]])
+        case 'non-monotonic':
+            x = np.array([0.0, 1, 1.5])
+            y = np.array([0.0, 0.5, 3.0])
+            f = np.array([[1.0, 2.0, 2.0],
+                        [2.0, 3.0, 3.0],
+                        [3.0, 3.0, 4.0]])
     return x, y, f
 
 
@@ -75,7 +89,7 @@ def main():
         'data points'
     )
 
-    x, y, f = get_test_data_2d()
+    x, y, f = get_test_data_2d(case='non-monotonic')
     interp2 = cubinterpp.LinearInterp2D(x, y, f)
     x_fine, y_fine = refine_grid(x, 20), refine_grid(y, 20)
     z_fine = np.zeros((len(x_fine), len(y_fine)))
