@@ -47,7 +47,12 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
                        num=size_fine)
 
 
-def scipy_linear_interp(x, y, f, x_fine, y_fine):
+def scipy_linear_interp_1d(x, f, x_fine):
+    interp2 = RegularGridInterpolator((x, ), f)
+    return interp2((x_fine, ))
+
+
+def scipy_linear_interp_2d(x, y, f, x_fine, y_fine):
     interp2 = RegularGridInterpolator((x, y), f)
     x_grid, y_grid = np.meshgrid(x_fine, y_fine, indexing='ij')
     return interp2((x_grid, y_grid))
@@ -88,12 +93,22 @@ def print_cpp_vector(vector_type, name, array):
     print(f'{lhs} = {rhs}')
 
 
-def main():
+def generate_1d_example(case='akima', size_fine=15):
+    x, f = get_test_data(case=case)
+    x_fine = refine_grid(x, size_fine=size_fine)
+    f_fine = scipy_linear_interp_1d(x, f, x_fine)
 
-    x, y, f = get_test_data_2d(case='non-monotonic')
-    x_fine = refine_grid(x, size_fine=5)
-    y_fine = refine_grid(y, size_fine=5)
-    f_fine = scipy_linear_interp(x, y, f, x_fine, y_fine)
+    print_cpp_vector('Vector', 'x', x)
+    print_cpp_vector('Vector', 'f', f)
+    print_cpp_vector('Vector', 'x_fine', x_fine)
+    print_cpp_vector('Vector', 'f_fine', f_fine)
+
+
+def generate_2d_example(case='normalized', size_fine=5):
+    x, y, f = get_test_data_2d(case=case)
+    x_fine = refine_grid(x, size_fine=size_fine)
+    y_fine = refine_grid(y, size_fine=size_fine)
+    f_fine = scipy_linear_interp_2d(x, y, f, x_fine, y_fine)
 
     print_cpp_vector('Vector', 'x', x)
     print_cpp_vector('Vector', 'y', y)
@@ -101,6 +116,11 @@ def main():
     print_cpp_vector('Vector', 'x_fine', x_fine)
     print_cpp_vector('Vector', 'y_fine', y_fine)
     print_cpp_vector('Vector2', 'f_fine', f_fine)
+
+
+def main():
+    generate_1d_example(case='random', size_fine=10)
+    # generate_2d_example(case='normalized', size_fine=5)
 
 
 if __name__ == '__main__':
