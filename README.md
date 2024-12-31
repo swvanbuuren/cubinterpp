@@ -2,7 +2,8 @@
 
 Cubic and linear interpolation with C++ in Python.
 
-![image](https://user-images.githubusercontent.com/5203275/211158357-3686465b-8363-4066-8535-1e2a648f5406.png)
+<img src="comparison.svg" alt="Comparison of 1D interpolation types"
+width="600px" style="background-color:white;" >
 
 ## Introduction
 
@@ -104,4 +105,3 @@ comparison plot shown at the top of this document.
 
 An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file for
 more details.
-
