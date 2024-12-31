@@ -83,36 +83,47 @@ private:
 
 
 
-template <typename T>
+template <typename T, std::size_t N=2>
 class LinearCell2D {
     using Span = std::span<const T>;
-    using Spans = std::array<Span, 2>;
-    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
+    using Spans = std::array<Span, N>;
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
 public:
     template <typename... Args>
-    explicit LinearCell2D(const Mdspan &_f, Args && ... args)
-    : x{std::forward<Args>(args) ...},
+    explicit LinearCell2D(const Mdspan &_f, Args && ... _x)
+    : x{std::forward<Args>(_x) ...},
       f(_f),
-      H(std::transform_reduce(x.begin(), x.end(), 1.0, std::multiplies<>(), [](const Span& xi){return xi[1] - xi[0];}))
+      H(std::transform_reduce(x.begin(), x.end(), T{1}, std::multiplies<>{},
+        [](const Span& xi) { return xi[1] - xi[0]; }))
     {
     }
 
-    T eval(const T x1i, const T x2i) const
-    {
-        const T x1i_x10 = x1i - x[0][0];
-        const T x11_x1i = x[0][1] - x1i;
-        const T x2i_x20 = x2i - x[1][0];
-        const T x21_x2i = x[1][1] - x2i;
-        return (f(0, 0)*x11_x1i*x21_x2i
-              + f(0, 1)*x11_x1i*x2i_x20
-              + f(1, 0)*x1i_x10*x21_x2i
-              + f(1, 1)*x1i_x10*x2i_x20)/H;
+    template <typename... Args>
+    T eval(Args && ... xi) const {
+        std::array<T, N> xi_array{std::forward<Args>(xi) ...};
+        T result = 0.0;
+        for (std::size_t corner = 0; corner < (1 << N); ++corner) {
+            result += eval_corner(corner, xi_array);
+        }
+        return result/H;
     }
 
 private:
     const Spans x;
     const Mdspan f;
     const T H;
+
+
+    const T eval_corner(const std::size_t corner, const std::array<T, N> &xi) const {
+        T weight = 1.0;
+        std::array<std::size_t, N> indices;
+        for (std::size_t dim = 0; dim < N; ++dim) {
+            const bool is_upper = corner & (1 << dim);
+            weight *= is_upper ? xi[dim] - x[dim][0] : x[dim][1] - xi[dim];
+            indices[dim] = is_upper ? 1 : 0;
+        }
+        return weight*f(indices);
+    }
 
 }; // class LinearCell2D
 
