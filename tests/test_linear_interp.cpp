@@ -75,10 +75,10 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
         Span(&x[i], 2),
         Span(&y[j], 2)
     );
-    ASSERT_EQ(cell.eval(1, 1), 3.0);
-    ASSERT_EQ(cell.eval(1, 2), 3.0);
-    ASSERT_EQ(cell.eval(2, 1), 3.0);
-    ASSERT_EQ(cell.eval(2, 2), 4.0);
+    ASSERT_EQ(cell.eval(1.0, 1.0), 3.0);
+    ASSERT_EQ(cell.eval(1.0, 2.0), 3.0);
+    ASSERT_EQ(cell.eval(2.0, 1.0), 3.0);
+    ASSERT_EQ(cell.eval(2.0, 2.0), 4.0);
     ASSERT_EQ(cell.eval(1.5, 1.5), 3.25);
 }
 
