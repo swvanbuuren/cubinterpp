@@ -2,8 +2,7 @@
 
 Cubic and linear interpolation with C++ in Python.
 
-<img src="comparison.svg" alt="Comparison of 1D interpolation types"
-width="600px" style="background-color:white;" >
+<img src="comparison.svg" alt="Comparison of 1D interpolation types" />
 
 ## Introduction
 
