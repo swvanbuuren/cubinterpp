@@ -74,6 +74,16 @@ public:
         mdspan = std::mdspan(data_.data(), dimensions_);
     }
 
+    // Constructor from just dimensions
+    VectorN(const std::array<std::size_t, N>& dimensions)
+        : dimensions_(dimensions),
+        data_(calculate_total_size(dimensions)),
+        mdspan(std::mdspan(data_.data(), dimensions_)),
+        current_index(0)
+    {
+    }
+
+
     // Access elements using variadic indices
     template <typename... Indices>
     T& operator()(Indices... indices) {
@@ -85,6 +95,30 @@ public:
     const T& operator()(Indices... indices) const {
         static_assert(sizeof...(Indices) == N, "Incorrect number of indices");
         return mdspan(std::forward<Indices>(indices)...);
+    }
+
+    void push_back(const T& value) {
+        if (current_index >= data_.size()) {
+            throw std::out_of_range("Exceeded allocated size for VectorN");
+        }
+        data_[current_index++] = value;
+    }
+
+    void push_back(T&& value) {
+        if (current_index >= data_.size()) {
+            throw std::out_of_range("Exceeded allocated size for VectorN");
+        }
+        data_[current_index++] = std::move(value);
+    }
+
+    void reset_fill() {
+        current_index = 0;
+    }
+
+    void validate_fill_complete() const {
+        if (current_index != data_.size()) {
+            throw std::runtime_error("VectorN has not been completely filled");
+        }
     }
 
     Mdspan get_mdspan() {
@@ -114,16 +148,7 @@ private:
     std::array<std::size_t, N> dimensions_;
     std::vector<T> data_;
     Mdspan mdspan;
-
-    std::size_t calculate_index(const std::array<std::size_t, N>& indices) const {
-        std::size_t index = 0;
-        std::size_t stride = 1;
-        for (std::size_t i = N; i-- > 0;) {
-            index += indices[i] * stride;
-            stride *= dimensions_[i];
-        }
-        return index;
-    }
+    std::size_t current_index = 0;
 
 };
 
