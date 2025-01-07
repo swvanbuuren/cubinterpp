@@ -39,6 +39,14 @@ TEST(TestVectorN, test_vectorn)
     ASSERT_EQ(vec3(2), 3);
     ASSERT_EQ(vec3(3), 4);
     ASSERT_EQ(vec3(4), 5);
+
+    cip::VectorN<double, 1> vec4(vec3);
+    ASSERT_EQ(vec3(0), 1);
+    ASSERT_EQ(vec3(1), 2);
+    ASSERT_EQ(vec3(2), 3);
+    ASSERT_EQ(vec3(3), 4);
+    ASSERT_EQ(vec3(4), 5);
+
 }
 
 using Pair = std::pair<std::size_t, std::size_t>;
@@ -63,6 +71,7 @@ TEST(TestSubmdspan, test_submdspan)
     ASSERT_EQ(subview(2, 0), 3);
     ASSERT_EQ(subview(2, 1), 3);
     ASSERT_EQ(subview(2, 2), 4);
+   
 }
 
 
@@ -86,6 +95,18 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
     ASSERT_EQ(subview2(1, 0), 2);
     ASSERT_EQ(subview2(1, 1), 3);
 
+    cip::VectorN<double, 2> nvec2a(nvec2);
+
+    auto view2a = nvec2a.get_mdspan();
+    ASSERT_EQ(view2a(0, 0), 1);
+    ASSERT_EQ(view2a(1, 1), 3);
+
+    auto subview2a = nvec2a.submdspan(Pair{0, 1}, Pair{0, 1});
+    ASSERT_EQ(subview2a(0, 0), 1);
+    ASSERT_EQ(subview2a(0, 1), 2);
+    ASSERT_EQ(subview2a(1, 0), 2);
+    ASSERT_EQ(subview2a(1, 1), 3);
+
     Vector3 vec3 = {
                     {
                         {1, 2, 3},
@@ -107,6 +128,18 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
     ASSERT_EQ(subview3(0, 0, 1), 9);
     ASSERT_EQ(subview3(0, 1, 0), 11);
     ASSERT_EQ(subview3(0, 1, 1), 12);
+
+    cip::VectorN<double, 3> nvec3a(nvec3);
+
+    auto view3a = nvec3a.get_mdspan();
+    ASSERT_EQ(view3a(0, 0, 0), 1);
+    ASSERT_EQ(view3a(1, 1, 2), 12);
+
+    auto subview3a = nvec3a.submdspan(Pair{1, 2}, Pair{0, 1}, Pair{1, 2});
+    ASSERT_EQ(subview3a(0, 0, 0), 8);
+    ASSERT_EQ(subview3a(0, 0, 1), 9);
+    ASSERT_EQ(subview3a(0, 1, 0), 11);
+    ASSERT_EQ(subview3a(0, 1, 1), 12);
 }
 
 

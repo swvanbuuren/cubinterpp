@@ -83,14 +83,14 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
 }
 
 
-testing::AssertionResult Interp2DAssertions(Vector x, Vector y, Vector2 f, Vector x_fine, Vector y_fine, Vector2 f_fine) {
-    cip::LinearInterp2D<double> interp2(x, y, f);
-    for ( auto i = 0; i < x_fine.size(); i++ ) {
-        for ( auto j = 0; j < y_fine.size(); j++ ) {
+testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine) {
+    cip::LinearInterp2D<double> interp2({x, y}, f);
+    for ( auto i = 0; i < x_fine.size(); ++i ) {
+        for ( auto j = 0; j < y_fine.size(); ++j ) {
             auto val = interp2.eval(x_fine[i], y_fine[j]);
             if (!testing::internal::CmpHelperFloatingPointEQ<double>("expected", "actual", val, f_fine[i][j])  ) {
                 return testing::AssertionFailure()
-                    << "for x = " << x_fine[i] << ", y = " << y_fine[j] << "expected " << f_fine[i][j] << " but got " << val;
+                    << "for x = " << x_fine[i] << ", y = " << y_fine[j] << " expected " << f_fine[i][j] << " but got " << val;
             }
         }
     }

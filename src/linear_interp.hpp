@@ -128,33 +128,33 @@ private:
 }; // class LinearCell2D
 
 
-template <typename T>
+template <typename T, std::size_t N=2>
 class LinearInterp2D {
+    using Array = std::array<std::vector<T>, N>;
     using Vector = std::vector<T>;
-    using Vector2 = std::vector<std::vector<T>>;
-    using VectorN2 = cip::VectorN<T, 2>;
+    using VectorN2 = cip::VectorN<T, N>;
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
     using Indexers = std::vector<cip::Indexer<T>>;
 public:
-    LinearInterp2D(const Vector &_x, const Vector &_y, const Vector2 &_f)
-    : x(_x), y(_y), f(_f)
+    LinearInterp2D(const Array &_xi, const VectorN2 &_f)
+    : xi(_xi), f(_f)
     {
-        create_indexers(x, y);
+        create_indexers();
         build();
     }
     ~LinearInterp2D() { }
 
     void build() {
-        cells.reserve(x.size() - 1);
-        for (size_t i = 0; i < x.size()-1; ++i) {
+        cells.reserve(xi[0].size() - 1);
+        for (size_t i = 0; i < xi[0].size()-1; ++i) {
             std::vector<Cell> row;
-            row.reserve(y.size() - 1);
-            for (size_t j = 0; j < y.size()-1; ++j) {
+            row.reserve(xi[1].size() - 1);
+            for (size_t j = 0; j < xi[1].size()-1; ++j) {
                 row.emplace_back(f.submdspan(Pr{i, i + 1}, Pr{j, j + 1}),
-                                 Span(&x[i], 2),
-                                 Span(&y[j], 2)
+                                 Span(&xi[0][i], 2),
+                                 Span(&xi[1][j], 2)
                 );
             }
             cells.emplace_back(std::move(row));
@@ -182,17 +182,15 @@ public:
 
 
 private:
-    const Vector x;
-    const Vector y;
+    const Array xi;
     const VectorN2 f;
     Indexers indexers;
     std::vector<std::vector<Cell>> cells;
 
-    template<typename... Args>
-    void create_indexers(const Args & ... args) {
+    void create_indexers() {
         // loop through args and indexers simultaneously and pupulate indexers with args
-        for (const auto &arg : {args...}) {
-            indexers.emplace_back(arg);
+        for (const auto &x : xi) {
+            indexers.emplace_back(x);
         }
     }
 };

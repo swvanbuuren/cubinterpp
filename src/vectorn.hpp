@@ -63,7 +63,13 @@ public:
     }
 
     // Copy constructor
-    VectorN(const VectorN& other) = default;
+    VectorN(const VectorN &other)
+    : data_(other.data_), 
+      dimensions_(other.dimensions_), 
+      mdspan(std::mdspan(data_.data(), dimensions_)),
+      current_index(0)
+    {
+    }
 
     // Constructor from nested vectors
     template <typename NestedVector>
