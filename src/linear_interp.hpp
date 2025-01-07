@@ -8,6 +8,7 @@
 #include <mdspan/mdspan.hpp>
 #include <utility>
 #include <numeric>
+#include <tuple>
 #include "vectorn.hpp"
 #include "utils.hpp"
 
@@ -136,12 +137,14 @@ class LinearInterp2D {
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
-    using Indexers = std::vector<cip::Indexer<T>>;
+    using IndexerT = cip::Indexer<T>;
+    using Indexers = std::array<cip::Indexer<T>, N>;
 public:
     LinearInterp2D(const Array &_xi, const VectorN2 &_f)
-    : xi(_xi), f(_f)
+    : xi(_xi),
+      f(_f),
+      indexers(std::apply([](const auto &...x) {return Indexers{IndexerT(x)...};},xi))
     {
-        create_indexers();
         build();
     }
     ~LinearInterp2D() { }
@@ -184,15 +187,9 @@ public:
 private:
     const Array xi;
     const VectorN2 f;
-    Indexers indexers;
+    const Indexers indexers;
     std::vector<std::vector<Cell>> cells;
 
-    void create_indexers() {
-        // loop through args and indexers simultaneously and pupulate indexers with args
-        for (const auto &x : xi) {
-            indexers.emplace_back(x);
-        }
-    }
 };
 
 
