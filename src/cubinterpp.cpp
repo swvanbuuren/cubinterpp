@@ -37,7 +37,7 @@ PYBIND11_MODULE(cubinterpp_py, m) {
 
     py::class_<cip::LinearInterp2D<double>>(m, "LinearInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::LinearInterp2D<double>::eval, py::return_value_policy::reference_internal)
+        .def("eval", &cip::LinearInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
         .def("evaln", &cip::LinearInterp2D<double>::evaln, py::return_value_policy::reference_internal);
 
 }

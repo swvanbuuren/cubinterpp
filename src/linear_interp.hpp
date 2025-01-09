@@ -146,11 +146,12 @@ public:
     }
     ~LinearInterpN2D() { }
 
-    T eval(const T xi, const T yi) const
+    template <typename... Args>
+    T eval(const Args&... args) const
     {
-        size_t x_index = indexers[0].sort_index(xi);
-        size_t y_index = indexers[1].sort_index(yi);
-        return cells[x_index][y_index].eval(xi, yi);
+        size_t dim = 0;
+        std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
+        return cells[indices[0]][indices[1]].eval(args...);
     }
 
     Vector evaln(const Vector &x, const Vector &y) const
