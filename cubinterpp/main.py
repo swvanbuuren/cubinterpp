@@ -90,7 +90,7 @@ def main():
     )
 
     x, y, f = get_test_data_2d(case='non-monotonic')
-    interp2 = cubinterpp.LinearInterp2D((x, y), f)
+    interp2 = cubinterpp.LinearInterp2D(x, y, f)
     x_fine, y_fine = refine_grid(x, 20), refine_grid(y, 20)
     z_fine = np.zeros((len(x_fine), len(y_fine)))
     for xi, xf in enumerate(x_fine):

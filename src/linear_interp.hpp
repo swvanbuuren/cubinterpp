@@ -130,39 +130,22 @@ private:
 
 
 template <typename T, std::size_t N=2>
-class LinearInterp2D {
+class LinearInterpN2D {
     using Array = std::array<std::vector<T>, N>;
     using Vector = std::vector<T>;
     using VectorN2 = cip::VectorN<T, N>;
     using Cell = LinearCell2D<T>;
     using Span = std::span<const T>;
     using Pr = std::pair<size_t, size_t>;
-    using IndexerT = cip::Indexer<T>;
     using Indexers = std::array<cip::Indexer<T>, N>;
 public:
-    LinearInterp2D(const Array &_xi, const VectorN2 &_f)
-    : xi(_xi),
-      f(_f),
-      indexers(std::apply([](const auto &...x) {return Indexers{IndexerT(x)...};},xi))
+    template <typename... Args>
+    LinearInterpN2D(const VectorN2 &_f, const Args & ... _xi)
+    : xi{_xi...}, f(_f), indexers{cip::Indexer<T>(_xi)...}
     {
         build();
     }
-    ~LinearInterp2D() { }
-
-    void build() {
-        cells.reserve(xi[0].size() - 1);
-        for (size_t i = 0; i < xi[0].size()-1; ++i) {
-            std::vector<Cell> row;
-            row.reserve(xi[1].size() - 1);
-            for (size_t j = 0; j < xi[1].size()-1; ++j) {
-                row.emplace_back(f.submdspan(Pr{i, i + 1}, Pr{j, j + 1}),
-                                 Span(&xi[0][i], 2),
-                                 Span(&xi[1][j], 2)
-                );
-            }
-            cells.emplace_back(std::move(row));
-        }
-    }
+    ~LinearInterpN2D() { }
 
     T eval(const T xi, const T yi) const
     {
@@ -190,25 +173,35 @@ private:
     const Indexers indexers;
     std::vector<std::vector<Cell>> cells;
 
+    void build() {
+        cells.reserve(xi[0].size() - 1);
+        for (size_t i = 0; i < xi[0].size()-1; ++i) {
+            std::vector<Cell> row;
+            row.reserve(xi[1].size() - 1);
+            for (size_t j = 0; j < xi[1].size()-1; ++j) {
+                row.emplace_back(f.submdspan(Pr{i, i + 1}, Pr{j, j + 1}),
+                                 Span(&xi[0][i], 2),
+                                 Span(&xi[1][j], 2)
+                );
+            }
+            cells.emplace_back(std::move(row));
+        }
+    }
+
 };
 
 
-// template <typename T, std::size_t N, typename... Vars>
-// class LinearCellND {
-//     using VectorN = vec::VectorN<T, N>;
-//     using Vector2 = std::array<std::vector<T>, N>;
-// public:
-//     explicit LinearCellND(const Vars&... vars, const VectorN &_f)
-//     : f(_f)
-//     {
-//         (x_i.push_back(vars), ...);
-//     }
+template <typename T>
+class LinearInterp2D : public LinearInterpN2D<T, 2> {
+    using Vector = std::vector<T>;
+    using Vector2 = cip::VectorN<T, 2>;
+public:
+    LinearInterp2D(const Vector &x, const Vector &y, const Vector2 &f)
+    : LinearInterpN2D<T, 2>(f, x, y)
+    {}
 
-// private:
-//     const VectorN f;
-//     Vector2 x_i;
-
-// }; // class LinearInterpND
+    ~LinearInterp2D() { }
+};
 
 
 } // namespace cip

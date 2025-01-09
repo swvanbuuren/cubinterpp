@@ -84,7 +84,7 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
 
 
 testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine) {
-    cip::LinearInterp2D<double> interp2({x, y}, f);
+    cip::LinearInterp2D<double> interp2(x, y, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
             auto val = interp2.eval(x_fine[i], y_fine[j]);
