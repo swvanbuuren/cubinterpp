@@ -8,7 +8,6 @@
 #include <mdspan/mdspan.hpp>
 #include <utility>
 #include <numeric>
-#include <tuple>
 #include "vectorn.hpp"
 #include "utils.hpp"
 
