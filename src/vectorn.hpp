@@ -1,5 +1,6 @@
 #include <array>
 #include <vector>
+#include <utility>
 #include <mdspan/mdspan.hpp>
 
 
@@ -54,9 +55,10 @@ std::array<std::size_t, N> determine_dimensions(const NestedVector& vec) {
 template <typename T, std::size_t N>
 class VectorN {
     using Mdspan = std::mdspan<T, std::dextents<std::size_t, N>, std::layout_stride>;
+    using IndexArray = std::array<std::size_t, N>;
 public:
     // Constructor from dimensions and initial value
-    VectorN(const T& initial_value, const std::array<std::size_t, N>& dimensions)
+    VectorN(const T& initial_value, const IndexArray& dimensions)
         : dimensions_(dimensions), data_(calculate_total_size(dimensions), initial_value),
           mdspan(std::mdspan(data_.data(), dimensions_))
     {
@@ -81,12 +83,12 @@ public:
     }
 
     // Constructor from just dimensions
-    VectorN(const std::array<std::size_t, N>& dimensions)
-        : dimensions_(dimensions),
-        data_(calculate_total_size(dimensions)),
-        mdspan(std::mdspan(data_.data(), dimensions_)),
-        current_index(0)
+    VectorN(const IndexArray& dimensions)
+        : dimensions_(dimensions)
     {
+        data_.reserve(calculate_total_size(dimensions));
+        mdspan = std::mdspan(data_.data(), dimensions_);
+        current_index = 0;
     }
 
 
@@ -103,18 +105,37 @@ public:
         return mdspan(std::forward<Indices>(indices)...);
     }
 
+    // access elements using std::array indices
+    T& operator()(const IndexArray& indices) {
+        return mdspan(std::forward<IndexArray>(indices));
+    }
+
+    template <typename... Indices>
+    const T& operator()(IndexArray& indices) const {
+        return mdspan(std::forward<IndexArray>(indices));
+    }
+
     void push_back(const T& value) {
-        if (current_index >= data_.size()) {
+        if (current_index >= data_.capacity()) {
             throw std::out_of_range("Exceeded allocated size for VectorN");
         }
         data_[current_index++] = value;
     }
 
     void push_back(T&& value) {
-        if (current_index >= data_.size()) {
+        if (current_index >= data_.capacity()) {
             throw std::out_of_range("Exceeded allocated size for VectorN");
         }
         data_[current_index++] = std::move(value);
+    }
+
+    template <typename... Args>
+    void emplace_back(Args... args) {
+        if (current_index >= data_.capacity()) {
+            throw std::out_of_range("Exceeded allocated size for VectorN");
+        }
+        data_.emplace_back(std::forward<Args>(args)...);
+        current_index++;
     }
 
     void reset_fill() {
@@ -147,11 +168,11 @@ public:
     }
 
     // Accessors
-    const std::array<std::size_t, N>& dimensions() const { return dimensions_; }
+    const IndexArray& dimensions() const { return dimensions_; }
     const std::vector<T>& data() const { return data_; }
 
 private:
-    std::array<std::size_t, N> dimensions_;
+    IndexArray dimensions_;
     std::vector<T> data_;
     Mdspan mdspan;
     std::size_t current_index = 0;

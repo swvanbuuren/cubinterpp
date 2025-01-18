@@ -70,10 +70,10 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
     VectorN2 fvec(f);
     size_t i = 1;
     size_t j = 1;
-    cip::LinearCell2D<double> cell(
+    cip::LinearCellND<double, 2> cell(
         fvec.submdspan(Pr{i, i+1}, Pr{j, j+1}),
-        Span(&x[i], 2),
-        Span(&y[j], 2)
+        {Span(&x[i], 2),
+        Span(&y[j], 2)}
     );
     ASSERT_EQ(cell.eval(1.0, 1.0), 3.0);
     ASSERT_EQ(cell.eval(1.0, 2.0), 3.0);
@@ -83,7 +83,7 @@ TEST(TestLinearCell2D, test_linear_cell_2d) {
 }
 
 
-testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine) {
+testing::AssertionResult Interp2DEvalAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine) {
     cip::LinearInterp2D<double> interp2(x, y, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
@@ -115,7 +115,7 @@ TEST(TestInterp2D, test_linear_interp_2d_normalized) {
                     { 2.5, 2.75, 3.0, 3.25, 3.5 }, 
                     { 3.0, 3.0, 3.0, 3.5, 4.0 }
                     };
-    ASSERT_TRUE(Interp2DAssertions(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(Interp2DEvalAssertions(x, y, f, x_fine, y_fine, f_fine));    
 }
 
 
@@ -136,7 +136,7 @@ TEST(TestInterp2D, test_linear_interp_2d_standard) {
                     { 2.5, 2.75, 3.0, 3.25, 3.5 }, 
                     { 3.0, 3.0, 3.0, 3.5, 4.0 }
                     };
-    ASSERT_TRUE(Interp2DAssertions(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(Interp2DEvalAssertions(x, y, f, x_fine, y_fine, f_fine));    
 }
 
 
@@ -157,5 +157,5 @@ TEST(TestInterp2D, test_linear_interp_2d_non_monotonic) {
                     { 2.25, 3.025, 3.1, 3.175, 3.25 }, 
                     { 3.0, 3.1, 3.4, 3.7, 4.0 }
                     };
-    ASSERT_TRUE(Interp2DAssertions(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(Interp2DEvalAssertions(x, y, f, x_fine, y_fine, f_fine));    
 }

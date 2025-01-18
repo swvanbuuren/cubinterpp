@@ -9,7 +9,6 @@ namespace py = pybind11;
 #include <vector>
 using DoubleVector = std::vector<double>;
 using DoubleVector2 = std::vector<std::vector<double>>;
-using Array2 = std::array<std::vector<double>, 2>;
 
 
 PYBIND11_MODULE(cubinterpp_py, m) {
@@ -38,6 +37,6 @@ PYBIND11_MODULE(cubinterpp_py, m) {
     py::class_<cip::LinearInterp2D<double>>(m, "LinearInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
         .def("eval", &cip::LinearInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::LinearInterp2D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("evaln", &cip::LinearInterp2D<double>::evaln<DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
 }

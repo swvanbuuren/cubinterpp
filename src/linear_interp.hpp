@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>
 #include <cassert>
 #include <cmath>
 #include <cstddef>
@@ -8,6 +7,7 @@
 #include <mdspan/mdspan.hpp>
 #include <utility>
 #include <numeric>
+#include <tuple>
 #include "vectorn.hpp"
 #include "utils.hpp"
 
@@ -15,7 +15,7 @@
 namespace cip {
 
 
-template <typename T>
+template <typename T, std::size_t N=1>
 class LinearCell1D {
     using Span = std::span<const T>;
 public:
@@ -83,15 +83,15 @@ private:
 
 
 
-template <typename T, std::size_t N=2>
-class LinearCell2D {
+template <typename T, std::size_t N>
+class LinearCellND {
     using Span = std::span<const T>;
     using Spans = std::array<Span, N>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
 public:
     template <typename... Args>
-    explicit LinearCell2D(const Mdspan &_f, Args && ... _x)
-    : x{std::forward<Args>(_x) ...},
+    explicit LinearCellND(const Mdspan &_f, const Spans &_x)
+    : x(_x),
       f(_f),
       H(std::transform_reduce(x.begin(), x.end(), T{1}, std::multiplies<>{},
         [](const Span& xi) { return xi[1] - xi[0]; }))
@@ -125,43 +125,52 @@ private:
         return weight*f(indices);
     }
 
-}; // class LinearCell2D
+}; // class LinearCellND
 
 
-template <typename T, std::size_t N=2>
-class LinearInterpN2D {
-    using Array = std::array<std::vector<T>, N>;
+template <typename T, std::size_t N>
+class LinearInterpND {
     using Vector = std::vector<T>;
-    using VectorN2 = cip::VectorN<T, N>;
-    using Cell = LinearCell2D<T>;
+    using Array = std::array<Vector, N>;
+    using VectorN = cip::VectorN<T, N>;
+    using Cell = LinearCellND<T, N>;
+    using Cells = cip::VectorN<Cell, N>;
     using Span = std::span<const T>;
-    using Pr = std::pair<size_t, size_t>;
+    using Pr = std::pair<std::size_t, std::size_t>;
     using Indexers = std::array<cip::Indexer<T>, N>;
 public:
     template <typename... Args>
-    LinearInterpN2D(const VectorN2 &_f, const Args & ... _xi)
-    : xi{_xi...}, f(_f), indexers{cip::Indexer<T>(_xi)...}
+    LinearInterpND(const VectorN &_f, const Args & ... _xi)
+    : xi{_xi...}, 
+      f(_f), 
+      indexers{cip::Indexer<T>(_xi)...}, 
+      cells(build(_xi...))
     {
-        build();
     }
-    ~LinearInterpN2D() { }
+
+    ~LinearInterpND() { }
 
     template <typename... Args>
     T eval(const Args&... args) const
     {
-        size_t dim = 0;
+        std::size_t dim = 0;
         std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
-        return cells[indices[0]][indices[1]].eval(args...);
+        return cells(indices).eval(args...);
     }
 
-    Vector evaln(const Vector &x, const Vector &y) const
+    template <typename... Vectors>
+    Vector evaln(const Vectors & ... inputs) const
     {
-        auto xi_iter = x.begin();
-        auto yi_iter = y.begin();
-        Vector z(x.size());
-        for (auto &zi : z)
-        {
-            zi = eval(*xi_iter++, *yi_iter++);
+        static_assert(sizeof...(inputs) > 0, "At least one input vector is required");
+
+        const std::size_t size = std::get<0>(std::tuple<const Vectors&...>(inputs...)).size();
+        if (!((inputs.size() == size) && ...)) {
+            throw std::invalid_argument("All input vectors must have the same size");
+        }
+
+        Vector z(size); // Output vector
+        for (std::size_t i = 0; i < size; ++i) {
+            z[i] = eval(inputs[i]...);
         }
         return z;
     }
@@ -169,35 +178,51 @@ public:
 
 private:
     const Array xi;
-    const VectorN2 f;
+    const VectorN f;
     const Indexers indexers;
-    std::vector<std::vector<Cell>> cells;
+    const Cells cells;
 
-    void build() {
-        cells.reserve(xi[0].size() - 1);
-        for (size_t i = 0; i < xi[0].size()-1; ++i) {
-            std::vector<Cell> row;
-            row.reserve(xi[1].size() - 1);
-            for (size_t j = 0; j < xi[1].size()-1; ++j) {
-                row.emplace_back(f.submdspan(Pr{i, i + 1}, Pr{j, j + 1}),
-                                 Span(&xi[0][i], 2),
-                                 Span(&xi[1][j], 2)
-                );
-            }
-            cells.emplace_back(std::move(row));
+    template <typename... Args>
+    const Cells build(const Args & ... _xi) const
+    {
+        Cells _cells({(_xi.size()-1)...});
+        build_cell(_cells);
+        return _cells;
+    }
+
+
+    template <typename... Indices>
+    typename std::enable_if<(sizeof...(Indices) == N), void>::type
+    build_cell(Cells & _cells, Indices... indices) const
+    {
+        std::size_t index = 0;
+        std::array<Span, N> spans = {Span(&xi[index++][indices], 2)...};
+        _cells.emplace_back(
+            f.submdspan(Pr{indices, indices+1}...),
+            spans
+        );
+    }
+
+    template <typename... Indices>
+    typename std::enable_if<(sizeof...(Indices) < N), void>::type
+    build_cell(Cells &_cells, Indices... indices) const
+    {
+        for (std::size_t i = 0; i < xi[sizeof...(indices)].size()-1; ++i)
+        {
+            build_cell(_cells, indices..., i);
         }
     }
 
-};
+}; // class LinearInterpND
 
 
 template <typename T>
-class LinearInterp2D : public LinearInterpN2D<T, 2> {
+class LinearInterp2D : public LinearInterpND<T, 2> {
     using Vector = std::vector<T>;
     using Vector2 = cip::VectorN<T, 2>;
 public:
     LinearInterp2D(const Vector &x, const Vector &y, const Vector2 &f)
-    : LinearInterpN2D<T, 2>(f, x, y)
+    : LinearInterpND<T, 2>(f, x, y)
     {}
 
     ~LinearInterp2D() { }
