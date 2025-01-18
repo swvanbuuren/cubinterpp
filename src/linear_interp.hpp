@@ -243,4 +243,18 @@ public:
 };
 
 
+template <typename T>
+class LinearInterp3D : public LinearInterpND<T, 3> {
+    using Vector = std::vector<T>;
+    using Vector3 = cip::VectorN<T, 3>;
+public:
+    LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
+    : LinearInterpND<T, 3>(f, x, y, z)
+    {}
+
+    ~LinearInterp3D() { }
+};
+
+
+
 } // namespace cip

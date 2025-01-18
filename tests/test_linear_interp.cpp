@@ -4,9 +4,11 @@
 #include "linear_interp.hpp"
 
 using Vector = std::vector<double>;
-using Vector2 = std::vector<std::vector<double>>;
+using Vector2 = std::vector<Vector>;
+using Vector3 = std::vector<Vector2>;
 using VectorN1 = cip::VectorN<double, 1>;
 using VectorN2 = cip::VectorN<double, 2>;
+using VectorN3 = cip::VectorN<double, 3>;
 using Span = std::span<const double>;
 using Pr = std::pair<size_t, size_t>;
 
@@ -158,4 +160,87 @@ TEST(TestInterp2D, test_linear_interp_2d_non_monotonic) {
                     { 3.0, 3.1, 3.4, 3.7, 4.0 }
                     };
     ASSERT_TRUE(Interp2DEvalAssertions(x, y, f, x_fine, y_fine, f_fine));    
+}
+
+
+testing::AssertionResult Interp3DEvalAssertions(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f, const Vector &x_fine, const Vector &y_fine, const Vector &z_fine, const Vector3 &f_fine) {
+    cip::LinearInterp3D<double> interp3(x, y, z, f);
+    for ( auto i = 0; i < x_fine.size(); ++i ) {
+        for ( auto j = 0; j < y_fine.size(); ++j ) {
+            for ( auto k = 0; k < y_fine.size(); ++k ) {
+                auto val = interp3.eval(x_fine[i], y_fine[j], z_fine[k]);
+                if (!testing::internal::CmpHelperFloatingPointEQ<double>("expected", "actual", val, f_fine[i][j][k])  ) {
+                    return testing::AssertionFailure()
+                        << "for x = " << x_fine[i] << ", y = " << y_fine[j] << ", z = " << z_fine[j] << " expected " << f_fine[i][j][k] << " but got " << val;
+                }
+            }
+        }
+    }
+    return testing::AssertionSuccess();
+}
+
+TEST(TestInterp3D, test_linear_interp_3d) {
+    Vector x = { 0.0, 1.0, 2.0 };
+    Vector y = { 0.0, 1.0, 2.0 };
+    Vector z = { 0.0, 1.0, 2.0 };
+    Vector3 f = { 
+              { 
+                { 1.0, 2.0, 2.0 }, 
+                { 2.0, 3.0, 3.0 }, 
+                { 3.0, 3.0, 4.0 }
+            }, 
+              { 
+                { 3.0, 4.0, 4.0 }, 
+                { 4.0, 5.0, 5.0 }, 
+                { 5.0, 5.0, 6.0 }
+            }, 
+              { 
+                { 2.0, 3.0, 3.0 }, 
+                { 3.0, 4.0, 4.0 }, 
+                { 4.0, 4.0, 5.0 }
+            }
+            };
+    Vector x_fine = { 0.0, 0.5, 1.0, 1.5, 2.0 };
+    Vector y_fine = { 0.0, 0.5, 1.0, 1.5, 2.0 };
+    Vector z_fine = { 0.0, 0.5, 1.0, 1.5, 2.0 };
+    Vector3 f_fine = { 
+                   { 
+                     { 1.0, 1.5, 2.0, 2.0, 2.0 }, 
+                     { 1.5, 2.0, 2.5, 2.5, 2.5 }, 
+                     { 2.0, 2.5, 3.0, 3.0, 3.0 }, 
+                     { 2.5, 2.75, 3.0, 3.25, 3.5 }, 
+                     { 3.0, 3.0, 3.0, 3.5, 4.0 }
+                    }, 
+                    { 
+                     { 2.0, 2.5, 3.0, 3.0, 3.0 }, 
+                     { 2.5, 3.0, 3.5, 3.5, 3.5 }, 
+                     { 3.0, 3.5, 4.0, 4.0, 4.0 }, 
+                     { 3.5, 3.75, 4.0, 4.25, 4.5 }, 
+                     { 4.0, 4.0, 4.0, 4.5, 5.0 }
+                 }, 
+                   { 
+                     { 3.0, 3.5, 4.0, 4.0, 4.0 }, 
+                     { 3.5, 4.0, 4.5, 4.5, 4.5 }, 
+                     { 4.0, 4.5, 5.0, 5.0, 5.0 }, 
+                     { 4.5, 4.75, 5.0, 5.25, 5.5 }, 
+                     { 5.0, 5.0, 5.0, 5.5, 6.0 }
+                 }, 
+                   { 
+                     { 2.5, 3.0, 3.5, 3.5, 3.5 }, 
+                     { 3.0, 3.5, 4.0, 4.0, 4.0 }, 
+                     { 3.5, 4.0, 4.5, 4.5, 4.5 }, 
+                     { 4.0, 4.25, 4.5, 4.75, 5.0 }, 
+                     { 4.5, 4.5, 4.5, 5.0, 5.5 }
+                 }, 
+                   { 
+                     { 2.0, 2.5, 3.0, 3.0, 3.0 }, 
+                     { 2.5, 3.0, 3.5, 3.5, 3.5 }, 
+                     { 3.0, 3.5, 4.0, 4.0, 4.0 }, 
+                     { 3.5, 3.75, 4.0, 4.25, 4.5 }, 
+                     { 4.0, 4.0, 4.0, 4.5, 5.0 }
+                 }
+                };
+
+ASSERT_TRUE(Interp3DEvalAssertions(x, y, z, f, x_fine, y_fine, z_fine, f_fine));    
+
 }

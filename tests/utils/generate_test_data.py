@@ -41,6 +41,34 @@ def get_test_data_2d(case='standard'):
     return x, y, f
 
 
+def get_test_data_3d(case='standard'):
+    """ Generate 2D test data """
+    match case:
+        case 'normalized':
+            x = np.array([0.0, 1.0, 2.0])
+            y = np.array([0.0, 1.0, 2.0])
+            z = np.array([0.0, 1.0, 2.0])
+            # generate some similar 3d data for f as for 2d data
+            f = np.array([
+                          [
+                           [1.0, 2.0, 2.0],
+                           [2.0, 3.0, 3.0],
+                           [3.0, 3.0, 4.0]
+                          ],
+                          [
+                           [3.0, 4.0, 4.0],
+                           [4.0, 5.0, 5.0],
+                           [5.0, 5.0, 6.0]
+                          ],
+                          [
+                           [2.0, 3.0, 3.0],
+                           [3.0, 4.0, 4.0],
+                           [4.0, 4.0, 5.0]
+                          ]
+                         ])
+    return x, y, z, f
+
+
 def refine_grid(x_coord, size_fine=1000, extension=0):
     """ Refines x grid and provide placeholder data for y """
     return np.linspace(x_coord[0] - extension, x_coord[-1] + extension,
@@ -56,6 +84,12 @@ def scipy_linear_interp_2d(x, y, f, x_fine, y_fine):
     interp2 = RegularGridInterpolator((x, y), f)
     x_grid, y_grid = np.meshgrid(x_fine, y_fine, indexing='ij')
     return interp2((x_grid, y_grid))
+
+
+def scipy_linear_interp_3d(x, y, z, f, x_fine, y_fine, z_fine):  # noqa: PLR0913, PLR0917
+    interp2 = RegularGridInterpolator((x, y, z), f)
+    x_grid, y_grid, z_grid = np.meshgrid(x_fine, y_fine, z_fine, indexing='ij')
+    return interp2((x_grid, y_grid, z_grid))
 
 
 def cpp_array(array, indent=0):
@@ -118,9 +152,27 @@ def generate_2d_example(case='normalized', size_fine=5):
     print_cpp_vector('Vector2', 'f_fine', f_fine)
 
 
+def generate_3d_example(case='normalized', size_fine=5):
+    x, y, z, f = get_test_data_3d(case=case)
+    x_fine = refine_grid(x, size_fine=size_fine)
+    y_fine = refine_grid(y, size_fine=size_fine)
+    z_fine = refine_grid(z, size_fine=size_fine)
+    f_fine = scipy_linear_interp_3d(x, y, z, f, x_fine, y_fine, z_fine)
+
+    print_cpp_vector('Vector', 'x', x)
+    print_cpp_vector('Vector', 'y', y)
+    print_cpp_vector('Vector', 'z', z)
+    print_cpp_vector('Vector3', 'f', f)
+    print_cpp_vector('Vector', 'x_fine', x_fine)
+    print_cpp_vector('Vector', 'y_fine', y_fine)
+    print_cpp_vector('Vector', 'z_fine', z_fine)
+    print_cpp_vector('Vector3', 'f_fine', f_fine)
+
+
 def main():
-    generate_1d_example(case='random', size_fine=10)
+    # generate_1d_example(case='random', size_fine=10)
     # generate_2d_example(case='normalized', size_fine=5)
+    generate_3d_example(case='normalized', size_fine=5)
 
 
 if __name__ == '__main__':
