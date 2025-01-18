@@ -31,7 +31,7 @@ TEST(TestLinearCell1D, test_linear_cell_1d) {
 
     VectorN1 fvec(f);
     size_t i = 1;
-    cip::LinearCell1D<double> cell(
+    cip::LinearCellND<double, 1> cell(
         Span(&x[i], 2),
         Span(&f[i], 2)
     );
