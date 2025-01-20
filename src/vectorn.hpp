@@ -68,8 +68,7 @@ public:
     VectorN(const VectorN &other)
     : data_(other.data_), 
       dimensions_(other.dimensions_), 
-      mdspan(std::mdspan(data_.data(), dimensions_)),
-      current_index(0)
+      mdspan(std::mdspan(data_.data(), dimensions_))
     {
     }
 
@@ -88,9 +87,7 @@ public:
     {
         data_.reserve(calculate_total_size(dimensions));
         mdspan = std::mdspan(data_.data(), dimensions_);
-        current_index = 0;
     }
-
 
     // Access elements using variadic indices
     template <typename... Indices>
@@ -117,21 +114,7 @@ public:
 
     template <typename... Args>
     void emplace_back(Args... args) {
-        if (current_index >= data_.capacity()) {
-            throw std::out_of_range("Exceeded allocated size for VectorN");
-        }
         data_.emplace_back(std::forward<Args>(args)...);
-        current_index++;
-    }
-
-    void reset_fill() {
-        current_index = 0;
-    }
-
-    void validate_fill_complete() const {
-        if (current_index != data_.size()) {
-            throw std::runtime_error("VectorN has not been completely filled");
-        }
     }
 
     Mdspan get_mdspan() {
@@ -142,7 +125,6 @@ public:
         return mdspan;
     }
 
-    // Extended method to return an mdspan with offset
     template <typename... Pairs>
     Mdspan submdspan(Pairs... pairs) const {
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
@@ -153,7 +135,6 @@ public:
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
-    // Accessors
     const IndexArray& dimensions() const { return dimensions_; }
     const std::vector<T>& data() const { return data_; }
 
@@ -161,7 +142,6 @@ private:
     IndexArray dimensions_;
     std::vector<T> data_;
     Mdspan mdspan;
-    std::size_t current_index = 0;
 
 };
 
