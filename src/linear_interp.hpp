@@ -221,7 +221,7 @@ class LinearInterp1D : public LinearInterpND<T, 1> {
     using Vector = std::vector<T>;
     using Vector2 = cip::VectorN<T, 1>;
 public:
-    LinearInterp1D(const Vector &x, const Vector &f)
+    explicit LinearInterp1D(const Vector &x, const Vector &f)
     : LinearInterpND<T, 1>(f, x)
     {}
 
@@ -235,7 +235,7 @@ class LinearInterp2D : public LinearInterpND<T, 2> {
     using Vector = std::vector<T>;
     using Vector2 = cip::VectorN<T, 2>;
 public:
-    LinearInterp2D(const Vector &x, const Vector &y, const Vector2 &f)
+    explicit LinearInterp2D(const Vector &x, const Vector &y, const Vector2 &f)
     : LinearInterpND<T, 2>(f, x, y)
     {}
 
@@ -248,7 +248,7 @@ class LinearInterp3D : public LinearInterpND<T, 3> {
     using Vector = std::vector<T>;
     using Vector3 = cip::VectorN<T, 3>;
 public:
-    LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
+    explicit LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
     : LinearInterpND<T, 3>(f, x, y, z)
     {}
 
