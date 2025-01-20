@@ -6,17 +6,18 @@ Cubic and linear interpolation with C++ in Python.
 
 ## Introduction
 
-This C++ header library features tools for piecewise cubic interpolation.
+This C++ header library features tools for piecewise linear and cubic
+interpolation.
 
-Currently, only 1D interpolation is supported, however, future released are
-planned to extend the library to higher dimensions.
+For cubic piecewise interpolation, the library features three types:
 
-The library features three kinds of different interpolation types:
-
-- Linear interpolation
 - Monotone cubic interpolation
 - Akima spline interpolation 
 - Natural cubic spline interpolation
+
+Linear interpolation is supported for `N`-dimensional data, whereas cubic
+interpolation currently only supports for `1`-dimensional data. Cubic piecewise
+interpolation for `N`-dimensional data is planned.
 
 All classes are templatized and support the STL's vector types.
 
@@ -100,7 +101,36 @@ This should install all required python dependencies automatically and run the
 python program that does the interpolation and plotting, resulting in the
 comparison plot shown at the top of this document.
 
+### Higher interpolation dimensions
+
+By default, the library offers linear interpolation classes up to three
+dimensions with `std::vector` input types. If you'd like to implement higher
+dimensions, it's recommended to inherit from the `N-dimensional` interpolation
+class for a given dimension. For example, for three dimensional linear
+interpolation this could look like:
+
+```cpp
+#include "linear_interp.hpp"
+
+template <typename T>
+class LinearInterp3D : public LinearInterpND<T, 3> {
+    using Vector = std::vector<T>;
+    using Vector3 = cip::VectorN<T, 3>;
+public:
+    explicit LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
+    : LinearInterpND<T, 3>(f, x, y, z)
+    {}
+
+    ~LinearInterp3D() { }
+};
+```
+
+Note the counter-intuitive order of the constructor argument in
+`LinearInterpND`, due to the requirement that a parameter pack always needs come
+last. This can be corrected in the inheriting classes constructor. Here, it's
+also possible to use different input types, which might differ per application.
+
 ## License
 
-An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file for
-more details.
+An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file
+for more details.
