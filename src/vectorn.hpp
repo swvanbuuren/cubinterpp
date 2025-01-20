@@ -115,20 +115,6 @@ public:
         return mdspan(std::forward<IndexArray>(indices));
     }
 
-    void push_back(const T& value) {
-        if (current_index >= data_.capacity()) {
-            throw std::out_of_range("Exceeded allocated size for VectorN");
-        }
-        data_[current_index++] = value;
-    }
-
-    void push_back(T&& value) {
-        if (current_index >= data_.capacity()) {
-            throw std::out_of_range("Exceeded allocated size for VectorN");
-        }
-        data_[current_index++] = std::move(value);
-    }
-
     template <typename... Args>
     void emplace_back(Args... args) {
         if (current_index >= data_.capacity()) {

@@ -143,26 +143,6 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
 }
 
 
-TEST(TestVectorPushBack, test_vector_push_back)
-{
-    cip::VectorN<int, 3> vec({2, 3, 4}); // A 3D array with dimensions 2x3x4
-    int counter = 0;
-
-    // Fill the vector
-    for (size_t i = 0; i < 2; ++i) {
-        for (size_t j = 0; j < 3; ++j) {
-            for (size_t k = 0; k < 4; ++k) {
-                vec.push_back(counter++);
-            }
-        }
-    }
-    ASSERT_EQ(vec(1, 2, 3), 23);
-
-    // Create a submdspan
-    auto sub = vec.submdspan(std::pair{0, 1}, std::pair{1, 3}, std::pair{0, 2});
-    ASSERT_EQ(sub(0, 0, 0), 4);
-}
-
 TEST(TestVectorEmplaceBack, test_vector_emplace_back)
 {
     
