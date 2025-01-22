@@ -104,36 +104,38 @@ private:
 template <typename T>
 class BaseSpline
 {
+    using Vector = std::vector<T>;
+    using Cell = CubicCell1D<T>;
 public:
-    BaseSpline(const T &_x, const T &_y)
+    BaseSpline(const Vector &_x, const Vector &_y)
       : x(_x),
-        indexer{_x}
+        indexer(_x)
     {
         assert(_x.size() == _y.size());
     }
     virtual ~BaseSpline() { }
 
-    virtual const T calc_slopes(const T &x, const T &y) const = 0;
+    virtual const Vector calc_slopes(const Vector &x, const Vector &y) const = 0;
 
-    void build(const T &x, const T &y)
+    void build(const Vector &x, const Vector &y)
     {
-        const T slopes = calc_slopes(x, y);
+        const Vector slopes = calc_slopes(x, y);
         splines.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            splines.push_back(CubicCell1D<double>(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
+            splines.push_back(Cell(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
         }
     }
 
-    double eval(const double xi) const
+    T eval(const T xi) const
     {
         return splines[indexer.sort_index(xi)].eval(xi);
     };
 
-    T evaln(const T &xi) const
+    Vector evaln(const Vector &xi) const
     {
         auto xi_iter = xi.begin();
-        T yi(xi.size());
+        Vector yi(xi.size());
         for (auto &yi_i : yi)
         {
             yi_i = eval(*xi_iter++);
@@ -142,9 +144,9 @@ public:
     }
 
 private:
-    const T x;
-    const cip::Indexer<double> indexer;
-    std::vector<CubicCell1D<double>> splines;
+    const Vector x;
+    const cip::Indexer<T> indexer;
+    std::vector<Cell> splines;
 
 };
 
@@ -152,21 +154,22 @@ private:
 template <typename T>
 class MonotonicSpline1D : public BaseSpline<T>
 {
+    using Vector = std::vector<T>;
 public:
-    MonotonicSpline1D(const T &x, const T &y)
+    MonotonicSpline1D(const Vector &x, const Vector &y)
       : BaseSpline<T>(x, y)
 
     {
         this->build(x, y);
     }
     ~MonotonicSpline1D() { }
-    const T calc_slopes(const T &x, const T &y) const override
+    const Vector calc_slopes(const Vector &x, const Vector &y) const override
     {
         // See https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
         auto N = x.size();
 
-        T secants(N-1);
-        T tangents(N);
+        Vector secants(N-1);
+        Vector tangents(N);
 
         for (auto k = 0; k < N-1; ++k)
         {
@@ -187,9 +190,9 @@ public:
                 tangents[k] = 0.0;
                 tangents[k+1] = 0.0;
             } else {
-                double alpha = tangents[k] / secants[k];
-                double beta = tangents[k + 1] / secants[k];
-                double h = std::hypot(alpha, beta);
+                T alpha = tangents[k] / secants[k];
+                T beta = tangents[k + 1] / secants[k];
+                T h = std::hypot(alpha, beta);
                 if (h > 3.0)
                 {
                     tangents[k] = 3.0/h*alpha*secants[k];
@@ -205,15 +208,16 @@ public:
 template <typename T>
 class AkimaSpline1D : public BaseSpline<T>
 {
+    using Vector = std::vector<T>;
 public:
-    AkimaSpline1D(const T &x, const T &y)
+    AkimaSpline1D(const Vector &x, const Vector &y)
       : BaseSpline<T>(x, y)
 
     {
         this->build(x, y);
     }
     ~AkimaSpline1D() { }
-    const T calc_slopes(const T &x, const T &y) const override
+    const Vector calc_slopes(const Vector &x, const Vector &y) const override
     {
         /*
         Derivative values for Akima cubic Hermite interpolation
@@ -227,19 +231,19 @@ public:
         (section 2.3 in Akima's paper):
         */
 
-        T delta(x.size()-1);
+        Vector delta(x.size()-1);
         for (auto i = 0; i < delta.size(); ++i)
         {
             delta[i] = (y[i+1] - y[i])/(x[i+1] - x[i]);
         }
 
         auto n = x.size();
-        double delta_0 = 2.0*delta[0] - delta[1];
-        double delta_m1 = 2.0*delta_0 - delta[0];
-        double delta_n  = 2.0*delta[n-2] - delta[n-3];
-        double delta_n1 = 2.0*delta_n - delta[n-2];
+        T delta_0 = 2.0*delta[0] - delta[1];
+        T delta_m1 = 2.0*delta_0 - delta[0];
+        T delta_n  = 2.0*delta[n-2] - delta[n-3];
+        T delta_n1 = 2.0*delta_n - delta[n-2];
 
-        T delta_new(delta.size() + 4);
+        Vector delta_new(delta.size() + 4);
         delta_new[0] = delta_m1;
         delta_new[1] = delta_0;
         delta_new[delta_new.size()-2] = delta_n;
@@ -259,22 +263,22 @@ public:
                 / (|d(i+1)-d(i)|          + |d(i-1)-d(i-2)|)
         */
 
-        T weights(delta_new.size() - 1);
+        Vector weights(delta_new.size() - 1);
         for (auto i = 0; i < weights.size(); ++i)
         {
             weights[i] = std::abs(delta_new[i+1] - delta_new[i]) + std::abs(delta_new[i] + delta_new[i+1])/2.0;
             //weights(i) = std::abs(delta_new(i+1) - delta_new(i));
         }
 
-        T s(n);
+        Vector s(n);
 
         for (auto i = 0; i < n; ++i)
         {
-            double weights1 = weights[i];   // |d(i-1)-d(i-2)|
-            double weights2 = weights[i+2]; // |d(i+1)-d(i)|
-            double delta1 = delta_new[i+1];     // d(i-1)
-            double delta2 = delta_new[i+2];     // d(i)
-            double weights12 = weights1 + weights2;
+            T weights1 = weights[i];   // |d(i-1)-d(i-2)|
+            T weights2 = weights[i+2]; // |d(i+1)-d(i)|
+            T delta1 = delta_new[i+1];     // d(i-1)
+            T delta2 = delta_new[i+2];     // d(i)
+            T weights12 = weights1 + weights2;
             if (weights12 == 0.0)
             {
                 // To avoid 0/0, Akima proposed to average the divided differences d(i-1)
@@ -292,8 +296,9 @@ public:
 template <typename T>
 class NaturalSpline1D : public BaseSpline<T>
 {
+    using Vector = std::vector<T>;
 private:
-    void thomas_algorithm(const T& a, const T& b, T& c, T& d) const
+    void thomas_algorithm(const Vector& a, const Vector& b, Vector& c, Vector& d) const
     {
         auto N = d.size();
 
@@ -313,24 +318,24 @@ private:
         }
     }
 public:
-    NaturalSpline1D(const T &x, const T &y)
+    NaturalSpline1D(const Vector &x, const Vector &y)
       : BaseSpline<T>(x, y)
 
     {
         this->build(x, y);
     }
     ~NaturalSpline1D() { }
-    const T calc_slopes(const T &x, const T &y) const override
+    const Vector calc_slopes(const Vector &x, const Vector &y) const override
     {
         assert(x.size() == y.size());
         auto N = x.size();
 
         // vectors that fill up the tridiagonal matrix
-        T a(N); // first value of a is not used
-        T b(N);
-        T c(N); // last value of c is not used
+        Vector a(N); // first value of a is not used
+        Vector b(N);
+        Vector c(N); // last value of c is not used
         // right hand side
-        T d(N);
+        Vector d(N);
 
         // first row, 0
         double dx1 = x[1] - x[0];
