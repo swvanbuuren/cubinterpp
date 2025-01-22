@@ -1,10 +1,10 @@
 #pragma once
 
-#include <algorithm>
 #include <array>
 #include <cassert>
 #include <cmath>
 #include <vector>
+#include "utils.hpp"
 
 
 namespace cip {
@@ -104,52 +104,17 @@ private:
 template <typename T>
 class BaseSpline
 {
-private:
-    const T x;
-    const size_t index_front = 0;
-    const size_t index_back;
-    const double x_front;
-    const double x_back;
-    const double x_delta;
-    std::vector<CubicCell1D<double>> splines;
-    const size_t cell_index(const double xi) const
-    {
-        return
-        (xi < x_back) ?
-            ((xi < x_front) ?
-                index_front :
-                (size_t)((xi-x_front)/x_delta)) :
-            index_back;
-    }
-    const size_t sort_index(const double xi) const
-    {
-        if (xi < x_front)
-        {
-            return index_front;
-        }
-        if (xi >= x_back)
-        {
-            return index_back;
-        }
-        return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
-    }
-    const size_t get_index(const double xi) const
-    {
-        return sort_index(xi);
-    }
-
 public:
     BaseSpline(const T &_x, const T &_y)
       : x(_x),
-        index_back(x.size()-2),
-        x_front(x[index_front]),
-        x_back(x[x.size()-1]),
-        x_delta((x_back-x_front)/(x.size()-1))
+        indexer{_x}
     {
         assert(_x.size() == _y.size());
     }
     virtual ~BaseSpline() { }
+
     virtual const T calc_slopes(const T &x, const T &y) const = 0;
+
     void build(const T &x, const T &y)
     {
         const T slopes = calc_slopes(x, y);
@@ -159,10 +124,12 @@ public:
             splines.push_back(CubicCell1D<double>(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
         }
     }
+
     double eval(const double xi) const
     {
-        return splines[get_index(xi)].eval(xi);
+        return splines[indexer.sort_index(xi)].eval(xi);
     };
+
     T evaln(const T &xi) const
     {
         auto xi_iter = xi.begin();
@@ -173,6 +140,12 @@ public:
         }
         return yi;
     }
+
+private:
+    const T x;
+    const cip::Indexer<double> indexer;
+    std::vector<CubicCell1D<double>> splines;
+
 };
 
 
