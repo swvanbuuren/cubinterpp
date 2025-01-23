@@ -16,7 +16,7 @@ constexpr inline int factorial(int n)
 }
 
 
-constexpr inline size_t binomial(size_t n, size_t k) noexcept
+constexpr inline std::size_t binomial(std::size_t n, std::size_t k) noexcept
 {
     return
       (        k> n  )? 0 :          // out of range
@@ -57,9 +57,8 @@ private:
         return binomial(n, k)*std::pow(y, n-k);
     }
 
-    void scale_coefficients(std::array<T, 4> &a, const T x0, const T h) const
+    void scale_coefficients(Array &a, const T x0, const T h) const
     {
-        using Array = std::array<T, 4>;
         Array dummy {0.0, 0.0, 0.0, 0.0};
 
         auto i = 0;
@@ -120,16 +119,16 @@ public:
     void build(const Vector &x, const Vector &y)
     {
         const Vector slopes = calc_slopes(x, y);
-        splines.reserve(x.size()-1);
+        cells.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            splines.push_back(Cell(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
+            cells.push_back(Cell(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
         }
     }
 
     T eval(const T xi) const
     {
-        return splines[indexer.sort_index(xi)].eval(xi);
+        return cells[indexer.sort_index(xi)].eval(xi);
     };
 
     Vector evaln(const Vector &xi) const
@@ -146,7 +145,7 @@ public:
 private:
     const Vector x;
     const cip::Indexer<T> indexer;
-    std::vector<Cell> splines;
+    std::vector<Cell> cells;
 
 };
 
