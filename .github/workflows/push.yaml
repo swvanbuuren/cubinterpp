@@ -1,0 +1,24 @@
+
+name: Push
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build-and-test:
+    uses: ./.github/workflows/build-test.yaml
+
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    concurrency: push
+    needs: [build-and-test]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Semantic Release
+      uses: cycjimmy/semantic-release-action@v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
