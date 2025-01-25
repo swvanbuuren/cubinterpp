@@ -86,7 +86,7 @@ TEST(TestInterp2D, test_linear_interp_2d_normalized) {
                     { 2.5, 2.75, 3.0, 3.25, 3.5 }, 
                     { 3.0, 3.0, 3.0, 3.5, 4.0 }
                     };
-    ASSERT_TRUE(tcip::Interp2DEvalAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(tcip::Interp2DAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
 }
 
 
@@ -107,7 +107,7 @@ TEST(TestInterp2D, test_linear_interp_2d_standard) {
                     { 2.5, 2.75, 3.0, 3.25, 3.5 }, 
                     { 3.0, 3.0, 3.0, 3.5, 4.0 }
                     };
-    ASSERT_TRUE(tcip::Interp2DEvalAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(tcip::Interp2DAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
 }
 
 
@@ -128,7 +128,7 @@ TEST(TestInterp2D, test_linear_interp_2d_non_monotonic) {
                     { 2.25, 3.025, 3.1, 3.175, 3.25 }, 
                     { 3.0, 3.1, 3.4, 3.7, 4.0 }
                     };
-    ASSERT_TRUE(tcip::Interp2DEvalAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(tcip::Interp2DAssertions<cip::LinearInterp2D<double>>(x, y, f, x_fine, y_fine, f_fine));    
 }
 
 
@@ -194,6 +194,6 @@ TEST(TestInterp3D, test_linear_interp_3d) {
                  }
                 };
 
-ASSERT_TRUE(tcip::Interp3DEvalAssertions<cip::LinearInterp3D<double>>(x, y, z, f, x_fine, y_fine, z_fine, f_fine));    
+ASSERT_TRUE(tcip::Interp3DAssertions<cip::LinearInterp3D<double>>(x, y, z, f, x_fine, y_fine, z_fine, f_fine));    
 
 }
