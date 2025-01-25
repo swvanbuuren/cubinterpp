@@ -25,7 +25,7 @@ testing::AssertionResult Interp1DAssertions(Vector x, Vector f, Vector x_fine, V
 
 
 template <typename T>
-testing::AssertionResult Interp2DEvalAssertions(const tcip::Vector &x, const tcip::Vector &y, const Vector2 &f, const tcip::Vector &x_fine, const tcip::Vector &y_fine, const Vector2 &f_fine) {
+testing::AssertionResult Interp2DAssertions(const tcip::Vector &x, const tcip::Vector &y, const Vector2 &f, const tcip::Vector &x_fine, const tcip::Vector &y_fine, const Vector2 &f_fine) {
     T interp2(x, y, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
@@ -41,7 +41,7 @@ testing::AssertionResult Interp2DEvalAssertions(const tcip::Vector &x, const tci
 
 
 template <typename T>
-testing::AssertionResult Interp3DEvalAssertions(const tcip::Vector &x, const tcip::Vector &y, const tcip::Vector &z, const Vector3 &f, const tcip::Vector &x_fine, const tcip::Vector &y_fine, const tcip::Vector &z_fine, const Vector3 &f_fine) {
+testing::AssertionResult Interp3DAssertions(const tcip::Vector &x, const tcip::Vector &y, const tcip::Vector &z, const Vector3 &f, const tcip::Vector &x_fine, const tcip::Vector &y_fine, const tcip::Vector &z_fine, const Vector3 &f_fine) {
     T interp3(x, y, z, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
