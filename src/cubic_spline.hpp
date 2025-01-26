@@ -105,24 +105,26 @@ class BaseSpline
 {
     using Vector = std::vector<T>;
     using Cell = CubicCell1D<T>;
+    using Cells = std::vector<Cell>;
 public:
-    BaseSpline(const Vector &_x, const Vector &_y)
+    BaseSpline(const Vector &_x, const Vector &_f)
       : x(_x),
+        f(_f),
         indexer(_x)
     {
-        assert(_x.size() == _y.size());
+        assert(_x.size() == _f.size());
     }
     virtual ~BaseSpline() { }
 
     virtual const Vector calc_slopes(const Vector &x, const Vector &y) const = 0;
 
-    void build(const Vector &x, const Vector &y)
+    void build()
     {
-        const Vector slopes = calc_slopes(x, y);
+        slopes = calc_slopes(x, f);
         cells.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            cells.push_back(Cell(x[i], x[i+1], y[i], y[i+1], slopes[i], slopes[i+1]));
+            cells.emplace_back(x[i], x[i+1], f[i], f[i+1], slopes[i], slopes[i+1]);
         }
     }
 
@@ -144,8 +146,10 @@ public:
 
 private:
     const Vector x;
+    const Vector f;
     const cip::Indexer<T> indexer;
-    std::vector<Cell> cells;
+    Cells cells;
+    Vector slopes;
 
 };
 
@@ -156,10 +160,10 @@ class MonotonicSpline1D : public BaseSpline<T>
     using Vector = std::vector<T>;
 public:
     MonotonicSpline1D(const Vector &x, const Vector &y)
-      : BaseSpline<T>(x, y)
+    : BaseSpline<T>(x, y)
 
     {
-        this->build(x, y);
+        this->build();
     }
     ~MonotonicSpline1D() { }
     const Vector calc_slopes(const Vector &x, const Vector &y) const override
@@ -210,10 +214,10 @@ class AkimaSpline1D : public BaseSpline<T>
     using Vector = std::vector<T>;
 public:
     AkimaSpline1D(const Vector &x, const Vector &y)
-      : BaseSpline<T>(x, y)
+    : BaseSpline<T>(x, y)
 
     {
-        this->build(x, y);
+        this->build();
     }
     ~AkimaSpline1D() { }
     const Vector calc_slopes(const Vector &x, const Vector &y) const override
@@ -296,34 +300,15 @@ template <typename T>
 class NaturalSpline1D : public BaseSpline<T>
 {
     using Vector = std::vector<T>;
-private:
-    void thomas_algorithm(const Vector& a, const Vector& b, Vector& c, Vector& d) const
-    {
-        auto N = d.size();
-
-        c[0] /= b[0];
-        d[0] /= b[0];
-
-        N--;
-        for (auto i = 1; i < N; i++) {
-            c[i] /= b[i] - a[i]*c[i-1];
-            d[i] = (d[i] - a[i]*d[i-1]) / (b[i] - a[i]*c[i-1]);
-        }
-
-        d[N] = (d[N] - a[N]*d[N-1]) / (b[N] - a[N]*c[N-1]);
-
-        for (auto i = N; i-- > 0;) {
-            d[i] -= c[i]*d[i+1];
-        }
-    }
 public:
     NaturalSpline1D(const Vector &x, const Vector &y)
-      : BaseSpline<T>(x, y)
+    : BaseSpline<T>(x, y)
 
     {
-        this->build(x, y);
+        this->build();
     }
     ~NaturalSpline1D() { }
+
     const Vector calc_slopes(const Vector &x, const Vector &y) const override
     {
         assert(x.size() == y.size());
@@ -363,6 +348,29 @@ public:
 
         return d;
     }
+
+private:
+
+    void thomas_algorithm(const Vector& a, const Vector& b, Vector& c, Vector& d) const
+    {
+        auto N = d.size();
+
+        c[0] /= b[0];
+        d[0] /= b[0];
+
+        N--;
+        for (auto i = 1; i < N; i++) {
+            c[i] /= b[i] - a[i]*c[i-1];
+            d[i] = (d[i] - a[i]*d[i-1]) / (b[i] - a[i]*c[i-1]);
+        }
+
+        d[N] = (d[N] - a[N]*d[N-1]) / (b[N] - a[N]*c[N-1]);
+
+        for (auto i = N; i-- > 0;) {
+            d[i] -= c[i]*d[i+1];
+        }
+    }
+
 };
 
 
