@@ -2,7 +2,31 @@
   "branches": ["master", "next"],
   "plugins": [
     "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/github"
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "angular",
+        "presetConfig":
+        {
+          "types": [
+            {"type": "feat", "section": "✨ New Features"},
+            {"type": "fix", "section": "🐛 Bug Fixes"},
+            {"type": "chore", "section": "🔧 Chore"},
+            {"type": "ci", "section": "👷 Chore"},
+            {"type": "docs", "section": "📝 Documentation"},
+            {"type": "style", "section": "🎨 Style"},
+            {"type": "refactor", "section": "♻️ Refactors"},
+            {"type": "perf", "section": "⚡ Performance Improvements"},
+            {"type": "test", "section": "✅ Tests"}
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "successComment": false
+      }
+    ]
   ]
 }
