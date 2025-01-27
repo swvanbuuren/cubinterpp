@@ -18,7 +18,7 @@ class CubicCell1D
     using Span = std::span<const T>;
 public:
     explicit CubicCell1D(Span x, Span f, Span df)
-      : a(calculate_coefficients(x[0], x[1]-x[0], f[0], f[1], df[0], df[1]))
+      : a(calculate_coefficients(x, f, df))
     {
     }
     ~CubicCell1D() = default;
@@ -56,24 +56,18 @@ private:
         a.swap(dummy);
     }
 
-    /** Calculates the coefficients for piecewise cubic interpolation cell
-        \param x0 x offset
-        \param h x scaling factor
-        \param f0 value at node 0 (left)
-        \param f1 value at node 1 (right)
-        \param df0 derivative at node 0 (left)
-        \param df1 derivative at node 1 (right
-    */
-    const Array calculate_coefficients(const T x0, const T h, const T f0, const T f1, const T df0, const T df1) const
+    // Calculates the coefficients for piecewise cubic interpolation cell
+    const Array calculate_coefficients(const Span &x, const Span &f, const Span &df) const
     {
+        const T h = x[1] - x[0];
         Array coefficients {0.0, 0.0, 0.0, 0.0};
         for (size_t i = 0; i < alpha_size; ++i)
         {
             // note the scaling of df0 and df1, which arises due to differentiation with
             // respect to x (which is scaled by h)
-            coefficients[i] += f0*alpha_00[i] + f1*alpha_10[i] + h*df0*alpha_01[i] + h*df1*alpha_11[i];
+            coefficients[i] += f[0]*alpha_00[i] + f[1]*alpha_10[i] + h*df[0]*alpha_01[i] + h*df[1]*alpha_11[i];
         }
-        scale_coefficients(coefficients, x0, h);
+        scale_coefficients(coefficients, x[0], h);
         return coefficients;
     }
 };
