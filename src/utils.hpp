@@ -49,9 +49,9 @@ private:
     const Vector x;
     const size_t index_front = 0;
     const size_t index_back;
-    const double x_front;
-    const double x_back;
-    const double x_delta;
+    const T x_front;
+    const T x_back;
+    const T x_delta;
 };
 
 
