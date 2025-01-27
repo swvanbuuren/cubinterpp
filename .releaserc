@@ -1,11 +1,16 @@
 {
   "branches": ["master", "next"],
   "plugins": [
-    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "angular",
+        "preset": "conventionalcommits",
         "presetConfig":
         {
           "types": [
@@ -13,6 +18,7 @@
             {"type": "fix", "section": "🐛 Bug Fixes"},
             {"type": "chore", "section": "🔧 Chore"},
             {"type": "ci", "section": "👷 Chore"},
+            {"type": "build", "section": "👷 Build"},
             {"type": "docs", "section": "📝 Documentation"},
             {"type": "style", "section": "🎨 Style"},
             {"type": "refactor", "section": "♻️ Refactors"},
