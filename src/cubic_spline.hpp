@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <vector>
+#include <mdspan/mdspan.hpp>
 #include "utils.hpp"
 
 
@@ -14,9 +15,10 @@ template<typename T>
 class CubicCell1D
 {
     using Array = std::array<T, 4>;
+    using Span = std::span<const T>;
 public:
-    explicit CubicCell1D(T x0, T x1, T f0, T f1, T df0, T df1)
-      : a(calculate_coefficients(x0, x1-x0, f0, f1, df0, df1))
+    explicit CubicCell1D(Span x, Span f, Span df)
+      : a(calculate_coefficients(x[0], x[1]-x[0], f[0], f[1], df[0], df[1]))
     {
     }
     ~CubicCell1D() = default;
@@ -69,7 +71,7 @@ private:
         {
             // note the scaling of df0 and df1, which arises due to differentiation with
             // respect to x (which is scaled by h)
-            coefficients[i] += f0*alpha_00[i] + f1*alpha_10[i] + df0*h*alpha_01[i] + df1*h*alpha_11[i];
+            coefficients[i] += f0*alpha_00[i] + f1*alpha_10[i] + h*df0*alpha_01[i] + h*df1*alpha_11[i];
         }
         scale_coefficients(coefficients, x0, h);
         return coefficients;
@@ -83,6 +85,7 @@ class BaseSpline
     using Vector = std::vector<T>;
     using Cell = CubicCell1D<T>;
     using Cells = std::vector<Cell>;
+    using Span = std::span<const T>;
 public:
     BaseSpline(const Vector &_x, const Vector &_f)
       : x(_x),
@@ -97,11 +100,11 @@ public:
 
     void build()
     {
-        slopes = calc_slopes(x, f);
+        df = calc_slopes(x, f);
         cells.reserve(x.size()-1);
         for (int i = 0; i < x.size()-1; ++i)
         {
-            cells.emplace_back(x[i], x[i+1], f[i], f[i+1], slopes[i], slopes[i+1]);
+            cells.emplace_back(Span(&x[i], 2), Span(&f[i], 2), Span(&df[i], 2));
         }
     }
 
@@ -126,7 +129,7 @@ private:
     const Vector f;
     const cip::Indexer<T> indexer;
     Cells cells;
-    Vector slopes;
+    Vector df;
 
 };
 
