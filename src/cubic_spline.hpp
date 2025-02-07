@@ -65,7 +65,6 @@ private:
     }
 
     constexpr Array calc_coeffs(const Span &x, const Span &f, const Span &df) noexcept {
-        // Unpack the two x–values.
         const T x0 = x[0];
         const T x1 = x[1];
         const T h  = x1 - x0;
