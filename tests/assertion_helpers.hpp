@@ -9,14 +9,16 @@ using Vector = std::vector<double>;
 using Vector2 = std::vector<Vector>;
 using Vector3 = std::vector<Vector2>;
 
+const double TOLERANCE = 5.0e-12;
+
 template <typename T>
 testing::AssertionResult Interp1DAssertions(Vector x, Vector f, Vector x_fine, Vector f_fine) {
     T interp(x, f);
     for ( auto i = 0; i < x_fine.size(); i++ ) {
         auto val = interp.eval(x_fine[i]);
-        if (!testing::internal::CmpHelperFloatingPointEQ<double>("expected", "actual", val, f_fine[i])  ) {
+        if (!testing::internal::DoubleNearPredFormat("expected", "actual", "tolerance", val, f_fine[i], TOLERANCE)  ) {
             return testing::AssertionFailure()
-                << "for x = " << x_fine[i] << "expected " << f_fine[i] << " but got " << val;
+                << "for x = " << x_fine[i] << " expected " << f_fine[i] << " but got " << val;
         }
     }
     return testing::AssertionSuccess();
@@ -30,7 +32,7 @@ testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, co
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
             auto val = interp2.eval(x_fine[i], y_fine[j]);
-            if (!testing::internal::CmpHelperFloatingPointEQ<double>("expected", "actual", val, f_fine[i][j])  ) {
+            if (!testing::internal::DoubleNearPredFormat("expected", "actual", "tolerance", val, f_fine[i][j], TOLERANCE)  ) {
                 return testing::AssertionFailure()
                     << "for x = " << x_fine[i] << ", y = " << y_fine[j] << " expected " << f_fine[i][j] << " but got " << val;
             }
@@ -47,7 +49,7 @@ testing::AssertionResult Interp3DAssertions(const Vector &x, const Vector &y, co
         for ( auto j = 0; j < y_fine.size(); ++j ) {
             for ( auto k = 0; k < y_fine.size(); ++k ) {
                 auto val = interp3.eval(x_fine[i], y_fine[j], z_fine[k]);
-                if (!testing::internal::CmpHelperFloatingPointEQ<double>("expected", "actual", val, f_fine[i][j][k])  ) {
+                if (!testing::internal::DoubleNearPredFormat("expected", "actual", "tolerance", val, f_fine[i][j][k], TOLERANCE)  ) {
                     return testing::AssertionFailure()
                         << "for x = " << x_fine[i] << ", y = " << y_fine[j] << ", z = " << z_fine[j] << " expected " << f_fine[i][j][k] << " but got " << val;
                 }

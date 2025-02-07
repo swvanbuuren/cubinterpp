@@ -3,6 +3,7 @@
 #include <array>
 #include <cassert>
 #include <cmath>
+#include <cstddef>
 #include <vector>
 #include <mdspan/mdspan.hpp>
 #include "utils.hpp"
@@ -15,61 +16,77 @@ template<typename T>
 class CubicCell1D
 {
     using Array = std::array<T, 4>;
+    using Alpha = std::array<Array, 4>;
     using Span = std::span<const T>;
 public:
     explicit CubicCell1D(Span x, Span f, Span df)
-      : a(calculate_coefficients(x, f, df))
+      : coeffs(calc_coeffs(x, f, df))
     {
     }
     ~CubicCell1D() = default;
 
     const T eval(const T x) const
     {
-        return a[0] + (a[1] + (a[2] + a[3]*x)*x)*x;
+        return coeffs[0] + (coeffs[1] + (coeffs[2] + coeffs[3]*x)*x)*x;
     }
 
 private:
-    const Array alpha_00 {1.0, 0.0, -3.0, +2.0};
-    const Array alpha_01 {0.0, 1.0, -2.0, +1.0};
-    const Array alpha_10 {0.0, 0.0, +3.0, -2.0};
-    const Array alpha_11 {0.0, 0.0, -1.0, +1.0};
-    const size_t alpha_size {4};
-    const Array a;
+    const Array coeffs;
 
-    void scale_coefficients(Array &a, const T x0, const T h) const
+    const Alpha calc_alphas(const Span &x) const 
     {
-        Array dummy {0.0, 0.0, 0.0, 0.0};
-
-        auto i = 0;
-        T h_power_i {1.0};
-        for (auto &a_i : a)
-        {
-            auto j = 0;
-            for (auto &dummy_j : dummy)
-            {
-                dummy_j += binomial_power_coefficient(-x0, i, j++)*a_i/h_power_i;
-            }
-            h_power_i *= h;
-            ++i;
-        }
-
-        a.swap(dummy);
+        const T x0 = x[0];
+        const T x1 = x[1];
+        const T x02 = x0*x0;
+        const T x12 = x1*x1;
+        return {{{x12*(x1 - 3.0*x0), +6.0*x0*x1,           -3.0*(x0 + x1), +2.0},
+                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
+                 {-x0*x12,           x1*(2.0*x0 + x1),     -(x0 + 2.0*x1), +1.0},
+                 {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
     }
 
-    // Calculates the coefficients for piecewise cubic interpolation cell
-    const Array calculate_coefficients(const Span &x, const Span &f, const Span &df) const
+    const Array calc_coeffs_old(const Span &x, const Span &f, const Span &df) const
     {
         const T h = x[1] - x[0];
-        Array coefficients {0.0, 0.0, 0.0, 0.0};
-        for (size_t i = 0; i < alpha_size; ++i)
-        {
-            // note the scaling of df0 and df1, which arises due to differentiation with
-            // respect to x (which is scaled by h)
-            coefficients[i] += f[0]*alpha_00[i] + f[1]*alpha_10[i] + h*df[0]*alpha_01[i] + h*df[1]*alpha_11[i];
+        const T h2 = h*h;
+        const T h3 = h2*h;
+        const Alpha alpha = calc_alphas(x);
+        Array coefficients;
+        std::size_t i = 0;
+        for (auto &coeff : coefficients) {
+            // note the scaling of df, which arises due to differentiation with respect to x
+            // (which is scaled by h)
+            coeff =   (f[0]*alpha[0][i]
+                  +    f[1]*alpha[1][i]
+                  + h*df[0]*alpha[2][i]
+                  + h*df[1]*alpha[3][i++])/h3;
         }
-        scale_coefficients(coefficients, x[0], h);
         return coefficients;
     }
+
+    constexpr Array calc_coeffs(const Span &x, const Span &f, const Span &df) noexcept {
+        // Unpack the two x–values.
+        const T x0 = x[0];
+        const T x1 = x[1];
+        const T h  = x1 - x0;
+        const T h3 = h*h*h;
+        const T x02 = x0*x0;
+        const T x12 = x1*x1;
+        const T diff = f[0] - f[1];
+        return {
+            ( f[0]*x12*(x1 - 3.0*x0)
+            + f[1]*x02*(3.0*x1 - x0)
+            - h*x0*x1*(df[0]*x1 + df[1]* x0))/h3,
+            (6.0*x0*x1*diff
+            + h*( df[0]*x1*(2.0*x0 + x1)
+                + df[1]*x0*(x0 + 2.0*x1)))/h3,
+            (-3.0*(x0 + x1)*diff
+            - h*( df[0]*(x0 + 2.0*x1) + df[1]*(2.0*x0 + x1)))/h3,
+            (2.0*diff
+            + h*(df[0] + df[1]))/h3
+        };
+    }
+
 };
 
 
