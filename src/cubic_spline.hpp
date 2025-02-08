@@ -90,21 +90,21 @@ private:
 
 
 template <typename T>
-class BaseSpline
+class BaseSpline1D
 {
     using Vector = std::vector<T>;
     using Cell = CubicCell1D<T>;
     using Cells = std::vector<Cell>;
     using Span = std::span<const T>;
 public:
-    BaseSpline(const Vector &_x, const Vector &_f)
+    BaseSpline1D(const Vector &_x, const Vector &_f)
       : x(_x),
         f(_f),
         indexer(_x)
     {
         assert(_x.size() == _f.size());
     }
-    virtual ~BaseSpline() { }
+    virtual ~BaseSpline1D() { }
 
     virtual const Vector calc_slopes(const Vector &x, const Vector &y) const = 0;
 
@@ -145,12 +145,12 @@ private:
 
 
 template <typename T>
-class MonotonicSpline1D : public BaseSpline<T>
+class MonotonicSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
     MonotonicSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline<T>(x, y)
+    : BaseSpline1D<T>(x, y)
 
     {
         this->build();
@@ -199,12 +199,12 @@ public:
 
 
 template <typename T>
-class AkimaSpline1D : public BaseSpline<T>
+class AkimaSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
     AkimaSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline<T>(x, y)
+    : BaseSpline1D<T>(x, y)
 
     {
         this->build();
@@ -287,12 +287,12 @@ public:
 
 
 template <typename T>
-class NaturalSpline1D : public BaseSpline<T>
+class NaturalSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
     NaturalSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline<T>(x, y)
+    : BaseSpline1D<T>(x, y)
 
     {
         this->build();
