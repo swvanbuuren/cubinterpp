@@ -93,6 +93,24 @@ public:
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
+    // This method takes an rvalue 1D vector and moves its contents into a subview of the ND
+    // vector. The additional slice specifiers must yield a 1D submdspan.
+    template <typename... SliceSpecs>
+    void move_into_submdspan(std::vector<T>&& source, SliceSpecs&&... specs) {
+        // Obtain the subview using your existing submdspan function.
+        auto subview = submdspan(std::forward<SliceSpecs>(specs)...);
+
+        // Check at runtime that the source vector has the same number of elements
+        // as the extent of the 1D subview.
+        if (subview.extent(0) != source.size()) {
+            throw std::runtime_error("Size mismatch: source vector size does not match subview extent");
+        }
+        // Use std::move to transfer the elements.
+        // Note: std::mdspan (per the C++23 proposal) provides data_handle()
+        // to get the pointer to the underlying data.
+        std::move(source.begin(), source.end(), subview.data_handle());
+    }
+
     const IndexArray& dimensions() const { return dimensions_; }
     const std::vector<T>& data() const { return data_; }
 
