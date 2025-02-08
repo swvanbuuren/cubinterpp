@@ -9,50 +9,6 @@
 namespace cip {
 
 
-// Utility to calculate total size of the N-dimensional array.
-template <std::size_t N>
-constexpr std::size_t calculate_total_size(const std::array<std::size_t, N>& dimensions) {
-    std::size_t total_size = 1;
-    for (std::size_t dim : dimensions) {
-        total_size *= dim;
-    }
-    return total_size;
-}
-
-
-// Recursive template to handle nested std::vector flattening
-template <typename NestedVector, typename T, std::size_t N>
-struct Flatten {
-    static void apply(const NestedVector& nested, std::vector<T>& flat) {
-        for (const auto& inner : nested) {
-            Flatten<typename NestedVector::value_type, T, N - 1>::apply(inner, flat);
-        }
-    }
-};
-
-template <typename NestedVector, typename T>
-struct Flatten<NestedVector, T, 1> {
-    static void apply(const NestedVector& nested, std::vector<T>& flat) {
-        flat.insert(flat.end(), nested.begin(), nested.end());
-    }
-};
-
-// General template to determine dimensions of a nested vector
-template <typename NestedVector, std::size_t N>
-std::array<std::size_t, N> determine_dimensions(const NestedVector& vec) {
-    static_assert(N > 0, "N must be greater than 0");
-    std::array<std::size_t, N> dimensions{};
-    dimensions[0] = vec.size();
-    if constexpr (N > 1) {
-        if (!vec.empty()) {
-            // Recursively call determine_dimensions on the first element of the vector
-            auto sub_dimensions = determine_dimensions<typename NestedVector::value_type, N - 1>(vec[0]);
-            std::copy(sub_dimensions.begin(), sub_dimensions.end(), dimensions.begin() + 1);
-        }
-    }
-    return dimensions;
-}
-
 // VectorN definition template
 template <typename T, std::size_t N>
 class VectorN {
@@ -79,7 +35,7 @@ public:
     VectorN(const NestedVector& nested)
         : dimensions_(determine_dimensions<NestedVector, N>(nested)) {
         data_.reserve(calculate_total_size(dimensions_));
-        Flatten<NestedVector, T, N>::apply(nested, data_);
+        Flatten<NestedVector, N>::apply(nested, data_);
         mdspan = std::mdspan(data_.data(), dimensions_);
     }
 
@@ -144,6 +100,48 @@ private:
     IndexArray dimensions_;
     std::vector<T> data_;
     Mdspan mdspan;
+
+    // Utility to calculate total size of the N-dimensional array.
+    constexpr std::size_t calculate_total_size(const std::array<std::size_t, N>& dimensions) {
+        std::size_t total_size = 1;
+        for (std::size_t dim : dimensions) {
+            total_size *= dim;
+        }
+        return total_size;
+    }
+
+    // Recursive template to handle nested std::vector flattening
+    template <typename NestedVector, std::size_t Rank>
+    struct Flatten {
+        static void apply(const NestedVector& nested, std::vector<T>& flat) {
+            for (const auto& inner : nested) {
+                Flatten<typename NestedVector::value_type, Rank - 1>::apply(inner, flat);
+            }
+        }
+    };
+
+    template <typename NestedVector>
+    struct Flatten<NestedVector, 1> {
+        static void apply(const NestedVector& nested, std::vector<T>& flat) {
+            flat.insert(flat.end(), nested.begin(), nested.end());
+        }
+    };
+
+    // General template to determine dimensions of a nested vector
+    template <typename NestedVector, std::size_t Rank>
+    std::array<std::size_t, Rank> determine_dimensions(const NestedVector& vec) {
+        static_assert(Rank > 0, "Rank must be greater than 0");
+        std::array<std::size_t, Rank> dimensions{};
+        dimensions[0] = vec.size();
+        if constexpr (Rank > 1) {
+            if (!vec.empty()) {
+                // Recursively call determine_dimensions on the first element of the vector
+                auto sub_dimensions = determine_dimensions<typename NestedVector::value_type, Rank - 1>(vec[0]);
+                std::copy(sub_dimensions.begin(), sub_dimensions.end(), dimensions.begin() + 1);
+            }
+        }
+        return dimensions;
+    }
 
 };
 
