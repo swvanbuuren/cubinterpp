@@ -52,7 +52,7 @@ TEST(TestVectorN, test_vectorn)
 using Pair = std::pair<std::size_t, std::size_t>;
 using Mdspan = std::mdspan<const double, std::dextents<std::size_t, 2>, std::layout_stride>;
 
-TEST(TestSubmdspan, test_submdspan)
+TEST(TestVectorN, test_submdspan)
 {
     Vector vec = {1, 2, 2, 2, 3, 3, 3, 3, 4};
 
@@ -75,7 +75,7 @@ TEST(TestSubmdspan, test_submdspan)
 }
 
 
-TEST(TestVectorNMdspan, test_vectorn_mdspan)
+TEST(TestVectorN, test_vectorn_mdspan)
 {
     Vector2 vec2 = {
                    {1, 2, 2},
@@ -143,7 +143,7 @@ TEST(TestVectorNMdspan, test_vectorn_mdspan)
 }
 
 
-TEST(TestVectorEmplaceBack, test_vector_emplace_back)
+TEST(TestVectorN, test_vector_emplace_back)
 {
     
     Vector2 vec2 = {
@@ -184,4 +184,117 @@ TEST(TestVectorEmplaceBack, test_vector_emplace_back)
     // Create a submdspan
     auto sub = vec.submdspan(std::pair{0, 1}, std::pair{1, 3}, std::pair{0, 2});
     ASSERT_EQ(sub(0, 0, 0), 4);
+}
+
+
+// Test that move_into_submdspan correctly moves a 1D vector into a 1D subview.
+// For a 2D VectorN (dimensions: 2 rows x 3 columns), we move new values into row 0.
+TEST(TestVectorN, MoveIntoSubmdspanValid) {
+    // Create a 2D VectorN with 2 rows and 3 columns, all elements initialized to 0.0.
+    std::array<std::size_t, 2> dims = {2, 3};
+    cip::VectorN<double, 2> vec(0.0, dims);
+
+    // Prepare a 1D vector of three elements that we want to move into the first row.
+    std::vector<double> rowData = {10.0, 20.0, 30.0};
+
+    // Use move_into_submdspan to move the elements into row 0.
+    // Here the slice specifiers are: fixed row index 0, and full_extent for the column dimension.
+    EXPECT_NO_THROW({
+        vec.move_into_submdspan(std::move(rowData), 0, std::full_extent);
+    });
+
+    // Verify that the first row now contains the new values.
+    EXPECT_DOUBLE_EQ(vec(0, 0), 10.0);
+    EXPECT_DOUBLE_EQ(vec(0, 1), 20.0);
+    EXPECT_DOUBLE_EQ(vec(0, 2), 30.0);
+}
+
+
+// Test that move_into_submdspan throws an error when the size of the source vector
+// does not match the extent of the subview.
+TEST(TestVectorN, MoveIntoSubmdspanSizeMismatch) {
+    // Create a 2D VectorN with 2 rows x 3 columns.
+    std::array<std::size_t, 2> dims = {2, 3};
+    cip::VectorN<double, 2> vec(0.0, dims);
+
+    // Create a source vector with the wrong number of elements (only 2 instead of 3).
+    std::vector<double> wrongRow = {1.0, 2.0};
+
+    // Expect that calling move_into_submdspan throws a std::runtime_error.
+    EXPECT_THROW({
+        vec.move_into_submdspan(std::move(wrongRow), 1, std::full_extent);
+    }, std::runtime_error);
+}
+
+
+TEST(TestVectorN, InsertRowIn3D_Dim1_Explicit) {
+    std::array<std::size_t, 3> dims = {3, 4, 5};
+    cip::VectorN<double, 3> vec(0.0, dims);
+
+    std::vector<double> rowData = {1.1, 2.2, 3.3, 4.4};
+
+    // Slice: fix dim0 = 1, leave dim1 dynamic, fix dim2 = 3.
+    EXPECT_NO_THROW({
+        vec.move_into_submdspan(std::move(rowData), 1, std::full_extent, 3);
+    });
+
+    // Check each element explicitly.
+    EXPECT_DOUBLE_EQ(vec(1, 0, 3), 1.1);
+    EXPECT_DOUBLE_EQ(vec(1, 1, 3), 2.2);
+    EXPECT_DOUBLE_EQ(vec(1, 2, 3), 3.3);
+    EXPECT_DOUBLE_EQ(vec(1, 3, 3), 4.4);
+}
+
+
+TEST(TestVectorN, InsertRowIn3D_Dim0_Explicit) {
+    std::array<std::size_t, 3> dims = {3, 4, 5};
+    cip::VectorN<double, 3> vec(0.0, dims);
+
+    std::vector<double> rowData = {10.0, 20.0, 30.0};
+
+    // Slice: fix dim1 = 2, fix dim2 = 4, leave dim0 dynamic.
+    EXPECT_NO_THROW({
+        vec.move_into_submdspan(std::move(rowData), std::full_extent, 2, 4);
+    });
+
+    // Explicit checks.
+    EXPECT_DOUBLE_EQ(vec(0, 2, 4), 10.0);
+    EXPECT_DOUBLE_EQ(vec(1, 2, 4), 20.0);
+    EXPECT_DOUBLE_EQ(vec(2, 2, 4), 30.0);
+}
+
+
+TEST(TestVectorN, InsertRowIn4D_Dim2_Explicit) {
+    std::array<std::size_t, 4> dims = {2, 3, 4, 5};
+    cip::VectorN<double, 4> vec(0.0, dims);
+
+    std::vector<double> rowData = {100.0, 200.0, 300.0, 400.0};
+
+    // Slice: fix dim0 = 1, fix dim1 = 2, leave dim2 dynamic, fix dim3 = 4.
+    EXPECT_NO_THROW({
+        vec.move_into_submdspan(std::move(rowData), 1, 2, std::full_extent, 4);
+    });
+
+    // Explicit checks for dimension 2.
+    EXPECT_DOUBLE_EQ(vec(1, 2, 0, 4), 100.0);
+    EXPECT_DOUBLE_EQ(vec(1, 2, 1, 4), 200.0);
+    EXPECT_DOUBLE_EQ(vec(1, 2, 2, 4), 300.0);
+    EXPECT_DOUBLE_EQ(vec(1, 2, 3, 4), 400.0);
+}
+
+
+TEST(TestVectorN, InsertRowIn4D_Dim0_Explicit) {
+    std::array<std::size_t, 4> dims = {2, 3, 4, 5};
+    cip::VectorN<double, 4> vec(0.0, dims);
+
+    std::vector<double> rowData = {55.5, 66.6};
+
+    // Slice: fix dim1 = 1, fix dim2 = 2, fix dim3 = 3, leave dim0 dynamic.
+    EXPECT_NO_THROW({
+        vec.move_into_submdspan(std::move(rowData), std::full_extent, 1, 2, 3);
+    });
+
+    // Explicitly check both entries along dimension 0.
+    EXPECT_DOUBLE_EQ(vec(0, 1, 2, 3), 55.5);
+    EXPECT_DOUBLE_EQ(vec(1, 1, 2, 3), 66.6);
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <array>
 #include <vector>
 #include <utility>
@@ -84,12 +85,12 @@ public:
     }
 
     template <typename... Pairs>
-    Mdspan submdspan(Pairs... pairs) const {
+    Mdspan submdspan(Pairs&&... pairs) const {
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
     template <typename... Pairs>
-    Mdspan submdspan(Pairs... pairs) {
+    Mdspan submdspan(Pairs&&... pairs) {
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
 
@@ -98,7 +99,8 @@ public:
     template <typename... SliceSpecs>
     void move_into_submdspan(std::vector<T>&& source, SliceSpecs&&... specs) {
         // Obtain the subview using your existing submdspan function.
-        auto subview = submdspan(std::forward<SliceSpecs>(specs)...);
+        auto subview = std::submdspan(mdspan, std::forward<SliceSpecs>(specs)...);
+        static_assert(decltype(subview)::rank() == 1, "The submdspan must be 1-dimensional.");
 
         // Check at runtime that the source vector has the same number of elements
         // as the extent of the 1D subview.
@@ -106,9 +108,10 @@ public:
             throw std::runtime_error("Size mismatch: source vector size does not match subview extent");
         }
         // Use std::move to transfer the elements.
-        // Note: std::mdspan (per the C++23 proposal) provides data_handle()
-        // to get the pointer to the underlying data.
-        std::move(source.begin(), source.end(), subview.data_handle());
+        // Due to strided layout, the elements are not contiguous in memory.
+        for (std::size_t i = 0; i < subview.extent(0); ++i) {
+            subview(i) = std::move(source[i]);
+        }
     }
 
     const IndexArray& dimensions() const { return dimensions_; }
