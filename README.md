@@ -126,9 +126,10 @@ public:
 ```
 
 Note the counter-intuitive order of the constructor argument in
-`LinearInterpND`, due to the requirement that a parameter pack always needs come
-last. This can be corrected in the inheriting classes constructor. Here, it's
-also possible to use different input types, which might differ per application.
+`LinearInterpND`, due to the requirement that a parameter pack always needs to
+come last. This can be corrected in the inheriting classes constructor. Here,
+it's also possible to use different input types, which might differ per
+application.
 
 ## License
 
