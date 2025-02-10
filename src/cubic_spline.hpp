@@ -7,6 +7,7 @@
 #include <vector>
 #include <mdspan/mdspan.hpp>
 #include "utils.hpp"
+#include "vectorn.hpp"
 
 
 namespace cip {
@@ -18,9 +19,10 @@ class CubicCell1D
     using Array = std::array<T, 4>;
     using Alpha = std::array<Array, 4>;
     using Span = std::span<const T>;
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
 public:
-    explicit CubicCell1D(Span x, Span f, Span df)
-      : coeffs(calc_coeffs(x, f, df))
+    explicit CubicCell1D(Span x, Mdspan F)
+      : coeffs(calc_coeffs(x, F))
     {
     }
     ~CubicCell1D() = default;
@@ -45,7 +47,7 @@ private:
                  {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
     }
 
-    const Array calc_coeffs_old(const Span &x, const Span &f, const Span &df) const
+    const Array calc_coeffs_old(const Span &x, const Mdspan &F) const
     {
         const T h = x[1] - x[0];
         const T h2 = h*h;
@@ -56,33 +58,31 @@ private:
         for (auto &coeff : coefficients) {
             // note the scaling of df, which arises due to differentiation with respect to x
             // (which is scaled by h)
-            coeff =   (f[0]*alpha[0][i]
-                  +    f[1]*alpha[1][i]
-                  + h*df[0]*alpha[2][i]
-                  + h*df[1]*alpha[3][i++])/h3;
+            coeff =  (F(0,0)*alpha[0][i]
+                  +   F(1,0)*alpha[1][i]
+                  + h*F(0,1)*alpha[2][i]
+                  + h*F(1,1)*alpha[3][i++])/h3;
         }
         return coefficients;
     }
 
-    constexpr Array calc_coeffs(const Span &x, const Span &f, const Span &df) noexcept {
+    constexpr Array calc_coeffs(const Span &x, const Mdspan &F) noexcept {
         const T x0 = x[0];
         const T x1 = x[1];
         const T h  = x1 - x0;
         const T h3 = h*h*h;
         const T x02 = x0*x0;
         const T x12 = x1*x1;
-        const T diff = f[0] - f[1];
+        const T f0 = F(0,0);
+        const T f1 = F(1,0);
+        const T df0 = F(0,1);
+        const T df1 = F(1,1);
+        const T diff = f0 - f1;
         return {
-            ( f[0]*x12*(x1 - 3.0*x0)
-            + f[1]*x02*(3.0*x1 - x0)
-            - h*x0*x1*(df[0]*x1 + df[1]* x0))/h3,
-            (6.0*x0*x1*diff
-            + h*( df[0]*x1*(2.0*x0 + x1)
-                + df[1]*x0*(x0 + 2.0*x1)))/h3,
-            (-3.0*(x0 + x1)*diff
-            - h*( df[0]*(x0 + 2.0*x1) + df[1]*(2.0*x0 + x1)))/h3,
-            (2.0*diff
-            + h*(df[0] + df[1]))/h3
+            (f0*x12*(x1 - 3.0*x0) + f1*x02*(3.0*x1 - x0) - h*x0*x1*(df0*x1 + df1* x0))/h3,
+            (+6.0*x0*x1*diff + h*( df0*x1*(2.0*x0 + x1) + df1*x0*(x0 + 2.0*x1)))/h3,
+            (-3.0*(x0 + x1)*diff - h*( df0*(x0 + 2.0*x1) + df1*(2.0*x0 + x1)))/h3,
+            (+2.0*diff + h*(df0 + df1))/h3
         };
     }
 
@@ -96,25 +96,29 @@ class BaseSpline1D
     using Cell = CubicCell1D<T>;
     using Cells = std::vector<Cell>;
     using Span = std::span<const T>;
+    using VectorN2 = cip::VectorN<T, 2>;
+    using Pr = std::pair<std::size_t, std::size_t>;
 public:
     BaseSpline1D(const Vector &_x, const Vector &_f)
       : x(_x),
-        f(_f),
-        indexer(_x)
+        indexer(_x),
+        F(T{}, {x.size(), 2})
     {
-        assert(_x.size() == _f.size());
+        assert(x.size() == _f.size());
     }
     virtual ~BaseSpline1D() { }
 
-    virtual const Vector calc_slopes(const Vector &x, const Vector &y) const = 0;
+    virtual Vector calc_slopes(const Vector &x, const Vector &f) const = 0;
 
-    void build()
+    void build(Vector f) // don't pass by reference but by value (to create a copy)!
     {
-        df = calc_slopes(x, f);
-        cells.reserve(x.size()-1);
-        for (int i = 0; i < x.size()-1; ++i)
+        const std::size_t n = x.size();
+        F.move_into_submdspan(std::move(f), std::full_extent, 0);
+        F.move_into_submdspan(calc_slopes(x, f), std::full_extent, 1);
+        cells.reserve(n);
+        for (auto i = 0; i < n; ++i)
         {
-            cells.emplace_back(Span(&x[i], 2), Span(&f[i], 2), Span(&df[i], 2));
+            cells.emplace_back(Span(&x[i], 2), F.submdspan(Pr{i, i+1}, std::full_extent));
         }
     }
 
@@ -136,10 +140,9 @@ public:
 
 private:
     const Vector x;
-    const Vector f;
     const cip::Indexer<T> indexer;
     Cells cells;
-    Vector df;
+    VectorN2 F;
 
 };
 
@@ -149,14 +152,14 @@ class MonotonicSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
-    MonotonicSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline1D<T>(x, y)
+    MonotonicSpline1D(const Vector &x, const Vector &f)
+    : BaseSpline1D<T>(x, f)
 
     {
-        this->build();
+        this->build(f);
     }
     ~MonotonicSpline1D() { }
-    const Vector calc_slopes(const Vector &x, const Vector &y) const override
+    Vector calc_slopes(const Vector &x, const Vector &f) const override
     {
         // See https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
         auto N = x.size();
@@ -166,7 +169,7 @@ public:
 
         for (auto k = 0; k < N-1; ++k)
         {
-            secants[k] = (y[k+1] - y[k]) / (x[k+1] - x[k]);
+            secants[k] = (f[k+1] - f[k]) / (x[k+1] - x[k]);
         }
 
         tangents[0] = secants[0];
@@ -203,14 +206,14 @@ class AkimaSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
-    AkimaSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline1D<T>(x, y)
+    AkimaSpline1D(const Vector &x, const Vector &f)
+    : BaseSpline1D<T>(x, f)
 
     {
-        this->build();
+        this->build(f);
     }
     ~AkimaSpline1D() { }
-    const Vector calc_slopes(const Vector &x, const Vector &y) const override
+    Vector calc_slopes(const Vector &x, const Vector &f) const override
     {
         /*
         Derivative values for Akima cubic Hermite interpolation
@@ -227,7 +230,7 @@ public:
         Vector delta(x.size()-1);
         for (auto i = 0; i < delta.size(); ++i)
         {
-            delta[i] = (y[i+1] - y[i])/(x[i+1] - x[i]);
+            delta[i] = (f[i+1] - f[i])/(x[i+1] - x[i]);
         }
 
         auto n = x.size();
@@ -291,17 +294,17 @@ class NaturalSpline1D : public BaseSpline1D<T>
 {
     using Vector = std::vector<T>;
 public:
-    NaturalSpline1D(const Vector &x, const Vector &y)
-    : BaseSpline1D<T>(x, y)
+    NaturalSpline1D(const Vector &x, const Vector &f)
+    : BaseSpline1D<T>(x, f)
 
     {
-        this->build();
+        this->build(f);
     }
     ~NaturalSpline1D() { }
 
-    const Vector calc_slopes(const Vector &x, const Vector &y) const override
+    Vector calc_slopes(const Vector &x, const Vector &f) const override
     {
-        assert(x.size() == y.size());
+        assert(x.size() == f.size());
         auto N = x.size();
 
         // vectors that fill up the tridiagonal matrix
@@ -315,7 +318,7 @@ public:
         double dx1 = x[1] - x[0];
         b[0] = 2.0/dx1;
         c[0] = 1.0/dx1;
-        d[0] = 3.0*(y[1] - y[0])/(dx1*dx1);
+        d[0] = 3.0*(f[1] - f[0])/(dx1*dx1);
 
         // rows i = 1, ..., N-2
         for (auto i = 1; i < N-1; ++i)
@@ -325,14 +328,14 @@ public:
             a[i] = 1.0/dxi;
             b[i] = 2.0*(1.0/dxi + 1.0/dxi1);
             c[i] = 1.0/dxi1;
-            d[i] = 3.0*((y[i] - y[i-1])/(dxi*dxi) + (y[i+1] - y[i])/(dxi1*dxi1));
+            d[i] = 3.0*((f[i] - f[i-1])/(dxi*dxi) + (f[i+1] - f[i])/(dxi1*dxi1));
         }
 
         // last row, N-1
         double dxN = x[N-1] - x[N-2];
         a[N-1] = 1.0/dxN;
         b[N-1] = 2.0/dxN;
-        d[N-1] = 3.0*(y[N-1] - y[N-2])/(dxN*dxN);
+        d[N-1] = 3.0*(f[N-1] - f[N-2])/(dxN*dxN);
 
         thomas_algorithm(a, b, c, d);
 
