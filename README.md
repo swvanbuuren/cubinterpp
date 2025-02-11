@@ -133,5 +133,5 @@ application.
 
 ## License
 
-An MIT style license applies for cubinterpp , see the [LICENSE](LICENSE) file
-for more details.
+An MIT style license applies for cubinterpp, see the [LICENSE](LICENSE) file for
+more details.
