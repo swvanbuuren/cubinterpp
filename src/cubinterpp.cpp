@@ -1,4 +1,4 @@
-#include "cubic_spline.hpp"
+#include "cubic_splines_1d.hpp"
 #include "linear_interp.hpp"
 
 #include <pybind11/pybind11.h>

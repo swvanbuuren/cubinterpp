@@ -23,4 +23,4 @@ FetchContent_MakeAvailable(googletest)
 
 cubinterpp_add_test(test_vectorn)
 cubinterpp_add_test(test_linear_interp)
-cubinterpp_add_test(test_cubic_spline)
+cubinterpp_add_test(test_cubic_splines_1d)

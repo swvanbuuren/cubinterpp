@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <cubic_spline.hpp>
+#include <cubic_splines_1d.hpp>
 #include "assertion_helpers.hpp"
 
 
