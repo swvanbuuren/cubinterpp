@@ -298,3 +298,132 @@ TEST(TestVectorN, InsertRowIn4D_Dim0_Explicit) {
     EXPECT_DOUBLE_EQ(vec(0, 1, 2, 3), 55.5);
     EXPECT_DOUBLE_EQ(vec(1, 1, 2, 3), 66.6);
 }
+
+
+// ----------------------------------------------------------------
+// Test 1: Move a 1D VectorN into a 2D VectorN.
+// Target: 2D with dimensions {5, 3}.
+// Source: 1D with dimensions {5}.
+// We use slice specifiers (full_extent, 0) to select column 0.
+// After the move, target(i, 0) should equal the source element at i.
+// ----------------------------------------------------------------
+TEST(MoveIntoSubmdspanOverloadTest, Move1Dinto2D) {
+    // Create target 2D VectorN with dimensions {5, 3} initialized to 0.
+    cip::VectorN<double, 2> target(0.0, std::array<std::size_t, 2>{5, 3});
+    
+    // Create source 1D VectorN with dimension {5} and fill with 1,2,3,4,5.
+    cip::VectorN<double, 1> source(0.0, std::array<std::size_t, 1>{5});
+    for (std::size_t i = 0; i < 5; ++i) {
+        source(i) = static_cast<double>(i + 1);
+    }
+    
+    // Move source into target column 0: slice specifiers (full_extent, 0).
+    EXPECT_NO_THROW({
+        target.move_into_submdspan(std::move(source), std::full_extent, 0);
+    });
+    
+    // Check each element in column 0.
+    EXPECT_DOUBLE_EQ(target(0, 0), 1.0);
+    EXPECT_DOUBLE_EQ(target(1, 0), 2.0);
+    EXPECT_DOUBLE_EQ(target(2, 0), 3.0);
+    EXPECT_DOUBLE_EQ(target(3, 0), 4.0);
+    EXPECT_DOUBLE_EQ(target(4, 0), 5.0);
+}
+
+// ----------------------------------------------------------------
+// Test 2: Move a 2D VectorN into a 3D VectorN.
+// Target: 3D with dimensions {2, 3, 4}.
+// Source: 2D with dimensions {2, 3}.
+// We choose the subview by fixing the third dimension to 2:
+// slice specifiers: (full_extent, full_extent, 2)
+// Then target(i,j,2) should equal source(i,j).
+// ----------------------------------------------------------------
+TEST(MoveIntoSubmdspanOverloadTest, Move2Dinto3D) {
+    // Create target 3D VectorN with dimensions {2, 3, 4}.
+    cip::VectorN<double, 3> target(0.0, std::array<std::size_t, 3>{2, 3, 4});
+    
+    // Create source 2D VectorN with dimensions {2, 3}.
+    cip::VectorN<double, 2> source(0.0, std::array<std::size_t, 2>{2, 3});
+    // Fill source with distinct values.
+    source(0, 0) = 0.0;
+    source(0, 1) = 1.0;
+    source(0, 2) = 2.0;
+    source(1, 0) = 10.0;
+    source(1, 1) = 11.0;
+    source(1, 2) = 12.0;
+    
+    // Move source into target subview at fixed third index = 2.
+    EXPECT_NO_THROW({
+        target.move_into_submdspan(std::move(source), std::full_extent, std::full_extent, 2);
+    });
+    
+    // Check explicit values.
+    EXPECT_DOUBLE_EQ(target(0, 0, 2), 0.0);
+    EXPECT_DOUBLE_EQ(target(0, 1, 2), 1.0);
+    EXPECT_DOUBLE_EQ(target(0, 2, 2), 2.0);
+    EXPECT_DOUBLE_EQ(target(1, 0, 2), 10.0);
+    EXPECT_DOUBLE_EQ(target(1, 1, 2), 11.0);
+    EXPECT_DOUBLE_EQ(target(1, 2, 2), 12.0);
+}
+
+// ----------------------------------------------------------------
+// Test 3: Move a 2D VectorN into a 4D VectorN.
+// Target: 4D with dimensions {3, 4, 2, 5}.
+// Source: 2D with dimensions {3, 4}.
+// We select a subview by fixing dimensions 3 and 4 to 0 and 2 respectively,
+// i.e. slice specifiers: (full_extent, full_extent, 0, 2).
+// After the move, target(i,j,0,2) should equal source(i,j).
+// ----------------------------------------------------------------
+TEST(MoveIntoSubmdspanOverloadTest, Move2Dinto4D) {
+    // Create target 4D VectorN with dimensions {3, 4, 2, 5}.
+    cip::VectorN<double, 4> target(0.0, std::array<std::size_t, 4>{3, 4, 2, 5});
+    
+    // Create source 2D VectorN with dimensions {3, 4}.
+    cip::VectorN<double, 2> source(0.0, std::array<std::size_t, 2>{3, 4});
+    // Fill source: value = i*100 + j.
+    for (std::size_t i = 0; i < 3; ++i) {
+        for (std::size_t j = 0; j < 4; ++j) {
+            source(i, j) = static_cast<double>(i * 100 + j);
+        }
+    }
+    
+    // Move source into target subview: fix dimensions 3 = 0 and 4 = 2.
+    // Slice specifiers: (full_extent, full_extent, 0, 2).
+    EXPECT_NO_THROW({
+        target.move_into_submdspan(std::move(source), std::full_extent, std::full_extent, 0, 2);
+    });
+    
+    // Check explicit values.
+    EXPECT_DOUBLE_EQ(target(0, 0, 0, 2), 0.0);
+    EXPECT_DOUBLE_EQ(target(0, 1, 0, 2), 1.0);
+    EXPECT_DOUBLE_EQ(target(0, 2, 0, 2), 2.0);
+    EXPECT_DOUBLE_EQ(target(0, 3, 0, 2), 3.0);
+    
+    EXPECT_DOUBLE_EQ(target(1, 0, 0, 2), 100.0);
+    EXPECT_DOUBLE_EQ(target(1, 1, 0, 2), 101.0);
+    EXPECT_DOUBLE_EQ(target(1, 2, 0, 2), 102.0);
+    EXPECT_DOUBLE_EQ(target(1, 3, 0, 2), 103.0);
+    
+    EXPECT_DOUBLE_EQ(target(2, 0, 0, 2), 200.0);
+    EXPECT_DOUBLE_EQ(target(2, 1, 0, 2), 201.0);
+    EXPECT_DOUBLE_EQ(target(2, 2, 0, 2), 202.0);
+    EXPECT_DOUBLE_EQ(target(2, 3, 0, 2), 203.0);
+}
+
+// ----------------------------------------------------------------
+// Test 4: Check that a size mismatch throws an exception.
+// For example, if the source 2D VectorN has fewer elements than the target subview,
+// the move_into_submdspan should throw.
+// ----------------------------------------------------------------
+TEST(MoveIntoSubmdspanOverloadTest, SizeMismatchThrows) {
+    // Create a target 3D VectorN with dimensions {2, 3, 4} (total elements for subview = 2*3 = 6).
+    cip::VectorN<double, 3> target(0.0, std::array<std::size_t, 3>{2, 3, 4});
+    
+    // Create a source 2D VectorN with dimensions {2, 2} (total elements = 4).
+    cip::VectorN<double, 2> source(0.0, std::array<std::size_t, 2>{2, 2});
+    
+    // Attempt to move source into a subview of target that expects 6 elements.
+    EXPECT_THROW({
+        target.move_into_submdspan(std::move(source), std::full_extent, std::full_extent, 1);
+    }, std::runtime_error);
+}

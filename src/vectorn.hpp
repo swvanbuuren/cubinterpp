@@ -61,7 +61,7 @@ public:
     }
 
     // access elements using std::array indices
-    T& operator()(const IndexArray& indices) {
+    T& operator()(IndexArray& indices) {
         return mdspan(std::forward<IndexArray>(indices));
     }
 
@@ -112,6 +112,54 @@ public:
             subview(i) = std::move(source[i]);
         }
     }
+
+    // Move a lower-dimensional VectorN into a submdspan of this VectorN, using the source's
+    // operator()(const IndexArray&) to access its elements.
+    template <std::size_t M, typename... SliceSpecs>
+    void move_into_submdspan(VectorN<T, M>&& source, SliceSpecs&&... specs) {
+        // Obtain the target subview.
+        auto subview = std::submdspan(mdspan, std::forward<SliceSpecs>(specs)...);
+        static_assert(decltype(subview)::rank() == M,
+                    "The submdspan must have rank equal to the source VectorN.");
+
+        constexpr std::size_t rank = decltype(subview)::rank();
+
+        // Get extents from the target subview.
+        std::array<std::size_t, rank> targetExtents;
+        std::size_t targetTotal = 1;
+        for (std::size_t d = 0; d < rank; ++d) {
+            targetExtents[d] = subview.extent(d);
+            targetTotal *= targetExtents[d];
+        }
+
+        // Get extents from the source VectorN.
+        const auto& srcDims = source.dimensions();
+        std::array<std::size_t, M> srcExtents = srcDims; // source.dimensions() returns an std::array<std::size_t, M>
+        std::size_t srcTotal = 1;
+        for (std::size_t d = 0; d < M; ++d) {
+            srcTotal *= srcExtents[d];
+        }
+
+        if (srcTotal != targetTotal) {
+            throw std::runtime_error("Size mismatch: source VectorN size does not match target subview total size");
+        }
+
+        // Use a recursive lambda to iterate over all multi-index combinations.
+        std::array<std::size_t, rank> indexArray{};
+        auto recursiveFill = [&](auto& self, std::size_t dim) -> void {
+            if (dim == rank) {
+                // For each multi-index, use source.operator()(indexArray) to access the element.
+                subview(indexArray) = std::move(source(indexArray));
+            } else {
+                for (std::size_t i = 0; i < targetExtents[dim]; ++i) {
+                    indexArray[dim] = i;
+                    self(self, dim + 1);
+                }
+            }
+        };
+        recursiveFill(recursiveFill, 0);
+    }
+
 
     const IndexArray& dimensions() const { return dimensions_; }
     const std::vector<T>& data() const { return data_; }
