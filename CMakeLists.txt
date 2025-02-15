@@ -6,7 +6,8 @@ project(cubinterpp
 )
 
 option(CUBINTERPP_ENABLE_TESTS "Enable tests." TRUE)
-option(CUBINTERPP_OPTIMIZATIONS "Enable optimizations" FALSE)
+option(CUBINTERPP_ENABLE_COMPILE_OPTIMIZATIONS "Enable all optimizations." FALSE)
+option(CUBINTERPP_ENABLE_CONCEPTS "Enable concepts." FALSE)
 
 set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ version selection")
 
@@ -39,9 +40,11 @@ add_library(${CMAKE_PROJECT_NAME} INTERFACE)
 target_link_libraries(${CMAKE_PROJECT_NAME} INTERFACE std::mdspan)
 target_include_directories(${CMAKE_PROJECT_NAME} INTERFACE src)
 
-if(CUBINTERPP_OPTIMIZATIONS)
-    target_compile_options(cubinterpp_py PRIVATE -O3)
-    target_compile_options(${CMAKE_PROJECT_NAME} INTERFACE -O3)
+if (CUBINTERPP_ENABLE_COMPILE_OPTIMIZATIONS)
+  add_compile_options(-O3)
+endif()
+if (CUBINTERPP_ENABLE_CONCEPTS)
+  add_compile_options(-fconcepts)
 endif()
 
 # sources will be added in the following subdirectories
