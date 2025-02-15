@@ -13,6 +13,7 @@ namespace cip {
 template <typename T, std::size_t N>
 class VectorN {
     using Mdspan = std::mdspan<T, std::dextents<std::size_t, N>, std::layout_stride>;
+    using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using IndexArray = std::array<std::size_t, N>;
 public:
     // Constructor from dimensions and initial value
@@ -92,6 +93,13 @@ public:
     Mdspan submdspan(Pairs&&... pairs) {
         return std::submdspan(mdspan, std::forward<Pairs>(pairs)...);
     }
+
+
+    template <typename... SliceArgs>
+    Mdspan1D submdspan_1d(SliceArgs&&... args) {
+        return std::submdspan(mdspan, std::forward<SliceArgs>(args)...);
+    }
+
 
     // This method takes an rvalue 1D vector and moves its contents into a subview of the ND
     // vector. The additional slice specifiers must yield a 1D submdspan.

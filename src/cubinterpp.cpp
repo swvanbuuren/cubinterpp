@@ -1,4 +1,5 @@
 #include "cubic_splines_1d.hpp"
+#include "cubic_splines_2d.hpp"
 #include "linear_interp.hpp"
 
 #include <pybind11/pybind11.h>
@@ -44,5 +45,17 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def(py::init<DoubleVector, DoubleVector, DoubleVector, DoubleVector3>())
         .def("eval", &cip::LinearInterp3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal)
         .def("evaln", &cip::LinearInterp3D<double>::evaln<DoubleVector, DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
+
+    py::class_<cip::MonotonicSpline2D<double>>(m, "MonotonicSpline2D")
+        .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
+        .def("eval", &cip::MonotonicSpline2D<double>::eval, py::return_value_policy::reference_internal);
+
+    py::class_<cip::AkimaSpline2D<double>>(m, "AkimaSpline2D")
+        .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
+        .def("eval", &cip::AkimaSpline2D<double>::eval, py::return_value_policy::reference_internal);
+
+    py::class_<cip::NaturalSpline2D<double>>(m, "NaturalSpline2D")
+        .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
+        .def("eval", &cip::NaturalSpline2D<double>::eval, py::return_value_policy::reference_internal);
 
 }

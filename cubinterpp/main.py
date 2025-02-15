@@ -105,8 +105,11 @@ def main():
     )
 
     x, y, f = get_test_data_2d(case='akima')
-    interp2 = cubinterpp.LinearInterp2D(x, y, f)
-    x_fine, y_fine = refine_grid(x, 20), refine_grid(y, 20)
+    # interp2 = cubinterpp.LinearInterp2D(x, y, f)
+    # interp2 = cubinterpp.AkimaSpline2D(x, y, f)
+    # interp2 = cubinterpp.MonotonicSpline2D(x, y, f)
+    interp2 = cubinterpp.NaturalSpline2D(x, y, f)
+    x_fine, y_fine = refine_grid(x, 100), refine_grid(y, 100)
     z_fine = np.zeros((len(x_fine), len(y_fine)))
     for xi, xf in enumerate(x_fine):
         for yi, yf in enumerate(y_fine):
