@@ -1,7 +1,7 @@
 """ Generates test data for cubinterpp tests """
 
 import numpy as np
-from scipy.interpolate import RegularGridInterpolator
+from scipy.interpolate import RegularGridInterpolator, CubicSpline
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
@@ -38,6 +38,21 @@ def get_test_data_2d(case='standard'):
             f = np.array([[1.0, 2.0, 2.0],
                           [2.0, 3.0, 3.0],
                           [3.0, 3.0, 4.0]])
+        case 'akima':
+            x = np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10])
+            y = x
+            f = np.array([[0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6],
+                          [0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.3],
+                          [0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.0, 0.0],
+                          [0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.1, 0.1, 0.1],
+                          [0, 0, 0, 0.5, 0.4, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+                          [0, 0, 0, 0.5, 0.4, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+                          [0, 0, 0, 0.5, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+                          [0, 0, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+                          [0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                          [0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                          [0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+            f *= 5 + 1
     return x, y, f
 
 
@@ -75,19 +90,19 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
                        num=size_fine)
 
 
-def scipy_linear_interp_1d(x, f, x_fine):
-    interp2 = RegularGridInterpolator((x, ), f)
+def scipy_interp_1d(x, f, x_fine, method='linear'):
+    interp2 = RegularGridInterpolator((x, ), f, method=method)
     return interp2((x_fine, ))
 
 
-def scipy_linear_interp_2d(x, y, f, x_fine, y_fine):
-    interp2 = RegularGridInterpolator((x, y), f)
+def scipy_interp_2d(x, y, f, x_fine, y_fine, method='linear'):  # noqa: PLR0913, PLR0917
+    interp2 = RegularGridInterpolator((x, y), f, method=method)
     x_grid, y_grid = np.meshgrid(x_fine, y_fine, indexing='ij')
     return interp2((x_grid, y_grid))
 
 
-def scipy_linear_interp_3d(x, y, z, f, x_fine, y_fine, z_fine):  # noqa: PLR0913, PLR0917
-    interp2 = RegularGridInterpolator((x, y, z), f)
+def scipy_interp_3d(x, y, z, f, x_fine, y_fine, z_fine, method='linear'):  # noqa: PLR0913, PLR0917
+    interp2 = RegularGridInterpolator((x, y, z), f, method=method)
     x_grid, y_grid, z_grid = np.meshgrid(x_fine, y_fine, z_fine, indexing='ij')
     return interp2((x_grid, y_grid, z_grid))
 
@@ -127,52 +142,60 @@ def print_cpp_vector(vector_type, name, array):
     print(f'{lhs} = {rhs}')
 
 
-def generate_1d_example(case='akima', size_fine=15):
+def generate_1d_example(case='akima', size_fine=15, method='linear'):
     x, f = get_test_data(case=case)
     x_fine = refine_grid(x, size_fine=size_fine)
-    f_fine = scipy_linear_interp_1d(x, f, x_fine)
+    if method == 'cubic_spline':
+        print('Using CubicSpline')
+        spline = CubicSpline(x, f, bc_type='natural')
+        f_fine = spline(x_fine)
+    else:
+        f_fine = scipy_interp_1d(x, f, x_fine, method=method)
 
-    print_cpp_vector('Vector', 'x', x)
-    print_cpp_vector('Vector', 'f', f)
-    print_cpp_vector('Vector', 'x_fine', x_fine)
-    print_cpp_vector('Vector', 'f_fine', f_fine)
+    print_cpp_vector('cip::Vector', 'x', x)
+    print_cpp_vector('cip::Vector', 'f', f)
+    print_cpp_vector('cip::Vector', 'x_fine', x_fine)
+    print_cpp_vector('cip::Vector', 'f_fine', f_fine)
 
 
-def generate_2d_example(case='normalized', size_fine=5):
+def generate_2d_example(case='normalized', size_fine=5, method='linear'):
     x, y, f = get_test_data_2d(case=case)
     x_fine = refine_grid(x, size_fine=size_fine)
     y_fine = refine_grid(y, size_fine=size_fine)
-    f_fine = scipy_linear_interp_2d(x, y, f, x_fine, y_fine)
+    f_fine = scipy_interp_2d(x, y, f, x_fine, y_fine, method=method)
 
-    print_cpp_vector('Vector', 'x', x)
-    print_cpp_vector('Vector', 'y', y)
-    print_cpp_vector('Vector2', 'f', f)
-    print_cpp_vector('Vector', 'x_fine', x_fine)
-    print_cpp_vector('Vector', 'y_fine', y_fine)
-    print_cpp_vector('Vector2', 'f_fine', f_fine)
+    print_cpp_vector('cip::Vector', 'x', x)
+    print_cpp_vector('cip::Vector', 'y', y)
+    print_cpp_vector('cip::Vector2', 'f', f)
+    print_cpp_vector('cip::Vector', 'x_fine', x_fine)
+    print_cpp_vector('cip::Vector', 'y_fine', y_fine)
+    print_cpp_vector('cip::Vector2', 'f_fine', f_fine)
 
 
-def generate_3d_example(case='normalized', size_fine=5):
+def generate_3d_example(case='normalized', size_fine=5, method='linear'):
     x, y, z, f = get_test_data_3d(case=case)
     x_fine = refine_grid(x, size_fine=size_fine)
     y_fine = refine_grid(y, size_fine=size_fine)
     z_fine = refine_grid(z, size_fine=size_fine)
-    f_fine = scipy_linear_interp_3d(x, y, z, f, x_fine, y_fine, z_fine)
+    f_fine = scipy_interp_3d(x, y, z, f, x_fine, y_fine, z_fine, method=method)
 
-    print_cpp_vector('Vector', 'x', x)
-    print_cpp_vector('Vector', 'y', y)
-    print_cpp_vector('Vector', 'z', z)
-    print_cpp_vector('Vector3', 'f', f)
-    print_cpp_vector('Vector', 'x_fine', x_fine)
-    print_cpp_vector('Vector', 'y_fine', y_fine)
-    print_cpp_vector('Vector', 'z_fine', z_fine)
-    print_cpp_vector('Vector3', 'f_fine', f_fine)
+    print_cpp_vector('cip::Vector', 'x', x)
+    print_cpp_vector('cip::Vector', 'y', y)
+    print_cpp_vector('cip::Vector', 'z', z)
+    print_cpp_vector('cip::Vector3', 'f', f)
+    print_cpp_vector('cip::Vector', 'x_fine', x_fine)
+    print_cpp_vector('cip::Vector', 'y_fine', y_fine)
+    print_cpp_vector('cip::Vector', 'z_fine', z_fine)
+    print_cpp_vector('cip::Vector3', 'f_fine', f_fine)
 
 
 def main():
-    # generate_1d_example(case='random', size_fine=10)
-    # generate_2d_example(case='normalized', size_fine=5)
-    generate_3d_example(case='normalized', size_fine=5)
+    method = 'cubic'
+    data_case = 'akima'
+    # data_case = 'normalized'
+    # generate_1d_example(case=data_case, size_fine=20, method=method)
+    generate_2d_example(case=data_case, size_fine=5, method=method)
+    # generate_3d_example(case=data_case, size_fine=5, method=method)
 
 
 if __name__ == '__main__':
