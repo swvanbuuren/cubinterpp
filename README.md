@@ -26,11 +26,11 @@ interpolation types.
 
 ## Data requirements
 
-`cubinterpp` excepts rectangular grid data, with strictly ascending coordinate
-data. To this end, coordinate data is only required in one dimensional form for
-each coordinate direction. Only the actual data itself needs to be supplied in
-the actual dimensions. The user is responsible to assure that the supplied data
-size of each dimension fits to the coordinate data.
+`cubinterpp` is designed to only handle rectangular grid data with strictly
+ascending coordinates. To this end, coordinate data is only required in one
+dimensional form for each coordinate direction. Only the actual data itself
+needs to be supplied in the actual dimensions. The user is responsible to assure
+that the supplied data size of each dimension fits to the coordinate data.
 
 ## Usage
 
