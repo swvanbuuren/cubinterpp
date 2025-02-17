@@ -2,7 +2,6 @@
 
 #include <cmath>
 #include <vector>
-#include <iostream>
 
 
 namespace cip {
@@ -153,8 +152,6 @@ void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vec
 template <typename T, typename xType, typename fType>
 std::vector<T> natural_spline_slopes(const xType x, const fType f)
 {
-
-    std::cout << "Natural spline slopes" << std::endl;
 
     const auto nx = x.size();
 
