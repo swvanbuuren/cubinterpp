@@ -2,7 +2,7 @@
 
 Cubic and linear interpolation with C++ in Python.
 
-<img src="comparison.svg" alt="Comparison of 1D interpolation types" />
+<img src="docs/images/akima_2D.png" alt="Akima spline interpolation" /><img src="docs/images/comparison_1D.svg" alt="Comparison of 1D interpolation types" />
 
 ## Introduction
 
