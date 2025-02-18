@@ -35,37 +35,6 @@ public:
 private:
     const Array coeffs;
 
-    const Alpha calc_alphas(const Span &x) const 
-    {
-        const T x0 = x[0];
-        const T x1 = x[1];
-        const T x02 = x0*x0;
-        const T x12 = x1*x1;
-        return {{{x12*(x1 - 3.0*x0), +6.0*x0*x1,           -3.0*(x0 + x1), +2.0},
-                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
-                 {-x0*x12,           x1*(2.0*x0 + x1),     -(x0 + 2.0*x1), +1.0},
-                 {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
-    }
-
-    const Array calc_coeffs_old(const Span &x, const Mdspan &F) const
-    {
-        const T h = x[1] - x[0];
-        const T h2 = h*h;
-        const T h3 = h2*h;
-        const Alpha alpha = calc_alphas(x);
-        Array coefficients;
-        std::size_t i = 0;
-        for (auto &coeff : coefficients) {
-            // note the scaling of df, which arises due to differentiation with respect to x
-            // (which is scaled by h)
-            coeff =  (F(0,0)*alpha[0][i]
-                  +   F(1,0)*alpha[1][i]
-                  + h*F(0,1)*alpha[2][i]
-                  + h*F(1,1)*alpha[3][i++])/h3;
-        }
-        return coefficients;
-    }
-
     constexpr Array calc_coeffs(const Span &x, const Mdspan &F) noexcept {
         const T x0 = x[0];
         const T x1 = x[1];
