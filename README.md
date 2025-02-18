@@ -1,6 +1,6 @@
 # cubinterpp
 
-Cubic and linear interpolation with C++ in Python.
+Cubic and linear interpolation in C++ with Python support.
 
 | ![Comparison of 1D interpolation types](docs/images/comparison_1D.svg) |
 |:--:|
