@@ -2,16 +2,17 @@
 
 Cubic and linear interpolation with C++ in Python.
 
-| <img src="docs/images/comparison_1D.svg" alt="Comparison of 1D interpolation types" /> |
+| ![Comparison of 1D interpolation types](docs/images/comparison_1D.svg) |
 |:--:|
+| *1D interpolation* |
 
 | ![Linear interpolation](docs/images/linear_2D.png) |  ![Monotonic spline interpolation](docs/images/monotonic_2D.png) | 
 |:--:|:--:| 
-| *Linear* | *Monotonic cubic spline* |
+| *2D Linear interpolation* | *2D Monotonic cubic spline interpolation* |
 
 | ![2D Akima spline interpolation](docs/images/akima_2D.png) |  ![2D Natural spline interpolation](docs/images/natural_spline_2D.png) | 
 |:--:|:--:| 
-| *Akima spline* | *Natural spline* |
+| *2D Akima spline interpolation* | *2D Natural spline interpolation* |
 
 
 ## Introduction
