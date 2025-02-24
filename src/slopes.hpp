@@ -163,7 +163,7 @@ std::vector<T> natural_spline_slopes(const xType x, const fType f)
     std::vector<T> d(nx);
 
     // first row, 0
-    double dx1 = x[1] - x[0];
+    T dx1 = x[1] - x[0];
     b[0] = 2.0/dx1;
     c[0] = 1.0/dx1;
     d[0] = 3.0*(f[1] - f[0])/(dx1*dx1);
@@ -171,8 +171,8 @@ std::vector<T> natural_spline_slopes(const xType x, const fType f)
     // rows i = 1, ..., N-2
     for (auto i = 1; i < nx-1; ++i)
     {
-        double dxi = x[i] - x[i-1];
-        double dxi1 = x[i+1] - x[i];
+        T dxi = x[i] - x[i-1];
+        T dxi1 = x[i+1] - x[i];
         a[i] = 1.0/dxi;
         b[i] = 2.0*(1.0/dxi + 1.0/dxi1);
         c[i] = 1.0/dxi1;
@@ -180,7 +180,7 @@ std::vector<T> natural_spline_slopes(const xType x, const fType f)
     }
 
     // last row, N-1
-    double dxN = x[nx-1] - x[nx-2];
+    T dxN = x[nx-1] - x[nx-2];
     a[nx-1] = 1.0/dxN;
     b[nx-1] = 2.0/dxN;
     d[nx-1] = 3.0*(f[nx-1] - f[nx-2])/(dxN*dxN);
