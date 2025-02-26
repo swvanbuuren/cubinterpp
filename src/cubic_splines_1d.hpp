@@ -47,7 +47,7 @@ public:
 };
 
 
-template <typename T>
+template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::Natural>
 class NaturalSpline1D : public CubicInterp1D<T>
 {
     using Vector = std::vector<T>;
@@ -61,7 +61,7 @@ public:
     ~NaturalSpline1D() {}
 
     Vector calc_slopes(const Vector &x, const Vector &f) const override {
-        return natural_spline_slopes<T>(x, f);
+        return natural_spline_slopes<T, BC>(x, f);
     }
 
 };

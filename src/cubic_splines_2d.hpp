@@ -50,7 +50,7 @@ public:
 
 
 
-template <typename T, std::size_t N=2>
+template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::NotAKnot, std::size_t N=2>
 class NaturalSpline2D : public CubicInterp2D<T, N>
 {
     using Vector = std::vector<T>;
@@ -66,7 +66,7 @@ public:
 
     Vector calc_slopes(const Vector &x, const Mdspan1D &f) const override
     {
-        return natural_spline_slopes<T>(x, f);
+        return natural_spline_slopes<T, BC>(x, f);
     }
 };
 

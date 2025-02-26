@@ -7,8 +7,8 @@
 namespace cip {
 
 
-template <typename T, typename xType, typename fType>
-std::vector<T> monotonic_slopes(const xType x, const fType f)
+template <typename T, typename Tx, typename Tf>
+std::vector<T> monotonic_slopes(const Tx x, const Tf f)
 {
 
     // See https://en.wikipedia.org/wiki/Monotone_cubic_interpolation
@@ -51,8 +51,8 @@ std::vector<T> monotonic_slopes(const xType x, const fType f)
 }
 
 
-template <typename T, typename xType, typename fType>
-std::vector<T> akima_slopes(const xType x, const fType f)
+template <typename T, typename Tx, typename Tf>
+std::vector<T> akima_slopes(const Tx x, const Tf f)
 {
     /*
     Derivative values for Akima cubic Hermite interpolation
@@ -127,6 +127,77 @@ std::vector<T> akima_slopes(const xType x, const fType f)
 }
 
 
+enum class BoundaryConditionType {
+    Natural,
+    Clamped,
+    NotAKnot
+};
+
+
+template <BoundaryConditionType BC, typename T, typename Tx, typename Tf>
+struct setNaturalSplineBoundaryCondition;
+
+
+template <typename T, typename Tx, typename Tf>
+struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Natural, T, Tx, Tf> {
+    using Vector = std::vector<T>;
+    constexpr void operator()(const Tx& x, const Tf& f, Vector& a, Vector& b, Vector& c, Vector& d) const {
+        T dx1 = x[1] - x[0];
+        b[0] = 2.0/dx1;
+        c[0] = 1.0/dx1;
+        d[0] = 3.0*(f[1] - f[0])/(dx1*dx1);
+
+        const auto nx = x.size();
+        T dxN = x[nx-1] - x[nx-2];
+        a[nx-1] = 1.0/dxN;
+        b[nx-1] = 2.0/dxN;
+        d[nx-1] = 3.0*(f[nx-1] - f[nx-2])/(dxN*dxN);
+    }
+};
+
+
+template <typename T, typename Tx, typename Tf>
+struct setNaturalSplineBoundaryCondition<BoundaryConditionType::NotAKnot, T, Tx, Tf> {
+    using Vector = std::vector<T>;
+    constexpr void operator()(const Tx& x, const Tf& f, Vector& a, Vector& b, Vector& c, Vector& d) const {
+        T dx1 = x[1] - x[0];
+        T dx2 = x[2] - x[1];
+        b[0] = 1.0/(dx1*dx1);
+        c[0] = b[0] - 1.0/(dx2*dx2);
+        d[0] = 2.0*((f[1] - f[0])/(dx1*dx1*dx1) - (f[2] - f[1])/(dx2*dx2*dx2));
+
+        // necessary conversion to maintain a tridiagonal matrix
+        b[0] += a[1]/dx2;
+        c[0] += b[1]/dx2;
+        d[0] += d[1]/dx2;
+
+        const auto nx = x.size();
+        T dxN1 = x[nx-1] - x[nx-2];
+        T dxN2 = x[nx-2] - x[nx-3];
+        a[nx-1] = 1.0/(dxN1*dxN1) - 1.0/(dxN2*dxN2);
+        b[nx-1] = -1.0/(dxN2*dxN2);
+        d[nx-1] = 2.0*((f[nx-2] - f[nx-3])/(dxN2*dxN2*dxN2) - (f[nx-1] - f[nx-2])/(dxN1*dxN1*dxN1));
+
+        // necessary conversion to maintain a tridiagonal matrix
+        a[nx-1] -= b[nx-2]/dxN2;
+        b[nx-1] -= c[nx-2]/dxN2;
+        d[nx-1] -= d[nx-2]/dxN2;
+    }
+};
+
+
+template <typename T, typename Tx, typename Tf>
+struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Clamped, T, Tx, Tf> {
+    using Vector = std::vector<T>;
+    constexpr void operator()(const Tx& x, const Tf& f, Vector& a, Vector& b, Vector& c, Vector& d) const {
+        // Demand the slopes to be zero at the boundaries
+        b[0] = T{1};
+        const auto nx = x.size();
+        b[nx-1] = T{1};
+    }
+};
+
+
 template <typename T>
 void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vector<T> &c, std::vector<T> &d)
 {
@@ -149,26 +220,21 @@ void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vec
 }
 
 
-template <typename T, typename xType, typename fType>
-std::vector<T> natural_spline_slopes(const xType x, const fType f)
+template <typename T, BoundaryConditionType BC=BoundaryConditionType::Natural, typename Tx, typename Tf>
+std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
 {
+    // https://en.wikipedia.org/wiki/Spline_interpolation
 
     const auto nx = x.size();
 
     // vectors that fill up the tridiagonal matrix
-    std::vector<T> a(nx); // first value of a is not used
-    std::vector<T> b(nx);
-    std::vector<T> c(nx); // last value of c is not used
+    std::vector<T> a(nx, T{0}); // first value of a is not used
+    std::vector<T> b(nx, T{0});
+    std::vector<T> c(nx, T{0}); // last value of c is not used
     // right hand side
-    std::vector<T> d(nx);
+    std::vector<T> d(nx, T{0});
 
-    // first row, 0
-    T dx1 = x[1] - x[0];
-    b[0] = 2.0/dx1;
-    c[0] = 1.0/dx1;
-    d[0] = 3.0*(f[1] - f[0])/(dx1*dx1);
-
-    // rows i = 1, ..., N-2
+    // rows i = 1, ..., nx-2
     for (auto i = 1; i < nx-1; ++i)
     {
         T dxi = x[i] - x[i-1];
@@ -179,11 +245,7 @@ std::vector<T> natural_spline_slopes(const xType x, const fType f)
         d[i] = 3.0*((f[i] - f[i-1])/(dxi*dxi) + (f[i+1] - f[i])/(dxi1*dxi1));
     }
 
-    // last row, N-1
-    T dxN = x[nx-1] - x[nx-2];
-    a[nx-1] = 1.0/dxN;
-    b[nx-1] = 2.0/dxN;
-    d[nx-1] = 3.0*(f[nx-1] - f[nx-2])/(dxN*dxN);
+    setNaturalSplineBoundaryCondition<BC, T, Tx, Tf>{}(x, f, a, b, c, d);
 
     thomas_algorithm<T>(a, b, c, d);
 
