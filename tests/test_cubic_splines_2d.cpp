@@ -1,14 +1,15 @@
 #include <gtest/gtest.h>
 #include <cubic_splines_2d.hpp>
 #include "assertion_helpers.hpp"
+#include "slopes.hpp"
 
 
 using Vector = std::vector<double>;
-using NaturalSpline = cip::NaturalSpline2D<double>;
+using NaturalSpline = cip::NaturalSpline2D<double, cip::BoundaryConditionType::NotAKnot>;
 
-// Note: this test is disabled because the expected values were genereated with an algorithm
-// that doesn't match the implemented algorithm's boundary conditions
-TEST(DISABLED_TestCubicSpline2D, test_natural_spline_2d) {
+// Note: this test uses the 2D assertions with significant higher tolerance (presumably due
+// the use of different solvers that generated the comparion data)
+TEST(TestCubicSpline2D, test_natural_spline_2d) {
     cip::Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector y = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector2 f = { 
