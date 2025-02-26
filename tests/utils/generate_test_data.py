@@ -142,12 +142,17 @@ def print_cpp_vector(vector_type, name, array):
     print(f'{lhs} = {rhs}')
 
 
-def generate_1d_example(case='akima', size_fine=15, method='linear'):
+def generate_1d_example(
+        case='akima',
+        size_fine=15,
+        method='linear',
+        bc_type='natural',
+    ):
     x, f = get_test_data(case=case)
     x_fine = refine_grid(x, size_fine=size_fine)
     if method == 'cubic_spline':
         print('Using CubicSpline')
-        spline = CubicSpline(x, f, bc_type='natural')
+        spline = CubicSpline(x, f, bc_type=bc_type)
         f_fine = spline(x_fine)
     else:
         f_fine = scipy_interp_1d(x, f, x_fine, method=method)
@@ -190,11 +195,12 @@ def generate_3d_example(case='normalized', size_fine=5, method='linear'):
 
 
 def main():
-    method = 'cubic'
+    method = 'cubic_spline'
     data_case = 'akima'
     # data_case = 'normalized'
-    # generate_1d_example(case=data_case, size_fine=20, method=method)
-    generate_2d_example(case=data_case, size_fine=5, method=method)
+    generate_1d_example(case=data_case, size_fine=20, method=method,
+                        bc_type='not-a-knot')
+    # generate_2d_example(case=data_case, size_fine=5, method=method)
     # generate_3d_example(case=data_case, size_fine=5, method=method)
 
 
