@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <utility>
-#include "linear_interp.hpp"
+#include <cubinterpp.hpp>
 #include "assertion_helpers.hpp"
 
 

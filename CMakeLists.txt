@@ -33,12 +33,17 @@ set(MDSPAN_CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
 FetchContent_MakeAvailable(pybind11 mdspan)
 
-pybind11_add_module(cubinterpp_py "")
-target_link_libraries(cubinterpp_py PRIVATE std::mdspan)
-
 add_library(${CMAKE_PROJECT_NAME} INTERFACE)
 target_link_libraries(${CMAKE_PROJECT_NAME} INTERFACE std::mdspan)
-target_include_directories(${CMAKE_PROJECT_NAME} INTERFACE src)
+target_include_directories(${CMAKE_PROJECT_NAME} INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
+
+pybind11_add_module(cubinterpp_py "")
+target_link_libraries(cubinterpp_py PRIVATE ${CMAKE_PROJECT_NAME})
+target_include_directories(${CMAKE_PROJECT_NAME} INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+)
 
 if (CUBINTERPP_ENABLE_COMPILE_OPTIMIZATIONS)
   add_compile_options(-O3)

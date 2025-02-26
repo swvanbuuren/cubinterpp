@@ -1,13 +1,10 @@
-#include "cubic_splines_1d.hpp"
-#include "cubic_splines_2d.hpp"
-#include "linear_interp.hpp"
-
+#include <vector>
+#include <pybind11/stl.h>
 #include <pybind11/pybind11.h>
+#include <cubinterpp.hpp>
+
 namespace py = pybind11;
 
-//* with STL vector
-#include <pybind11/stl.h>
-#include <vector>
 using DoubleVector = std::vector<double>;
 using DoubleVector2 = std::vector<DoubleVector>;
 using DoubleVector3 = std::vector<DoubleVector2>;

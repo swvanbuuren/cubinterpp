@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
-#include <cubic_splines_2d.hpp>
+#include <cubinterpp.hpp>
 #include "assertion_helpers.hpp"
-#include "slopes.hpp"
 
 
 using Vector = std::vector<double>;

@@ -1,7 +1,7 @@
 #include <vector>
 #include <gtest/gtest.h>
 #include <utility>
-#include "vectorn.hpp"
+#include <cubinterpp.hpp>
 
 using Vector = std::vector<double>;
 using Vector2 = std::vector<std::vector<double>>;
