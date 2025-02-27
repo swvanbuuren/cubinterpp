@@ -21,7 +21,6 @@ class LinearCellND {
     using Spans = std::array<Span, N>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
 public:
-    template <typename... Args>
     explicit LinearCellND(const Mdspan &_f, const Spans &_x)
     : x(_x),
       f(_f),
