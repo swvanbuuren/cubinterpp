@@ -1,0 +1,48 @@
+site_name: cubinterpp Documentation
+site_url: https://swvanbuuren.github.io/cubinterpp/
+repo_url: https://github.com/swvanbuuren/cubinterpp
+repo_name: swvanbuuren/cubinterpp
+
+theme:
+  name: material
+  features:
+  - navigation.sections
+  - navigation.tabs
+  - navigation.indexes
+  - content.code.annotate
+  - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_root_toc_entry: false
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      url_download: true
+  - pymdownx.superfences
+
+nav:
+  - Cubinterpp:
+    - index.md
+    - Introduction: introduction.md
+    - Usage: usage.md
+  - Math. Background:
+    - theory/index.md
+  - Code Reference:
+    - reference/index.md
