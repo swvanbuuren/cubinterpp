@@ -41,8 +41,8 @@ nav:
   - Cubinterpp:
     - index.md
     - Introduction: introduction.md
-    - Usage: usage.md
-  - Math. Background:
+    - Usage instructions: usage.md
+  - Mathematical Background:
     - theory/index.md
   - Code Reference:
     - reference/index.md
