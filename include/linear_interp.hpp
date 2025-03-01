@@ -153,14 +153,16 @@ class LinearCellND<T, 1> {
     using Span = std::span<const T>;
 public:
     explicit LinearCellND(Span x, Span f)
-    : x0(x[0]), b0(f[0]), a0((f[1]-f[0])/(x[1]-x[0]))
+    : x0(x[0]),
+      b0((x[1]*f[0]-x[0]*f[1])/(x[1]-x[0])),
+      a0((f[1]-f[0])/(x[1]-x[0]))
     {
     }
     ~LinearCellND() { }
 
     T eval(const T &xi) const
     {
-        return b0 + a0 * (xi - x0);
+        return b0 + a0*xi;
     }
 
 private:
