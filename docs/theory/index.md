@@ -55,22 +55,39 @@ $$
 \end{align}
 $$
 
+Using this, it's possible to determine the values of $a_k$.
+
 ## `N` dimensions
 
-The `1D` spline definition can be directly be generalized to a scalar function $N$ variables $\bar x_i$ for $i=1,\dots,N$ defined for the interval $[0, 1]^N$:
+For the `ND` case, the polynomial to describe the interpolation with $N$
+variables $\bar x_i$ for $i=1,\dots,N$ defined for the interval $[0, 1]^N$
+reads
+
+$$
+s^{(n)}(\bar x_1,\bar x_2,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^n a_{i_1,\dots,i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
+$$
+
+The `1D` spline definition, now depending on the input values of
+$f^{(l_1,\dots,l_N)}(\bar x_1,\dots,\bar x_N)$ can be directly be generalized to
+the following:
 
 $$
 s^{(n)}(\bar x_1,\bar x_2,\dots,\bar x_N) = \sum_{l_1,\dots,l_N=0}^m \sum_{i_1,\dots,i_N=0,1} f^{(l_1,\dots,l_N)}(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(n,l_k)}_{i_k} (\bar x_k)
 $$
 
-For multiple dimensions, we're now also dealing with (combined) derivatives in multiple directions. That is, $f^{(l_1,\dots,l_N)}$ is now defined as:
+For multiple dimensions, we're now also dealing with (combined) derivatives in
+multiple directions. That is, $f^{(l_1,\dots,l_N)}$, which is defined as:
 
 $$
 f^{(l_1,\dots,l_N)}(\bar x_1,\dots,\bar x_N) = \left( \prod_{j=1}^{N} \left(\frac{\partial}{\partial \bar x_j}\right)^{l_j} \right)f(\bar x_1,\dots,\bar x_N)
 $$
 
+Using this, it's possible to determine the values of $a_{i_1,\dots,i_N}$.
+
 ## Specific implementations
 
 Specific derivations for linear ($n=1$) and cubic splines ($n=3$) can be found
 in the sections [linear interpolation](linear.md) and [cubic
-interpolation](cubic.md).
+interpolation](cubic.md). These sections will show how to determine the values
+of $a_k$ and $a_{i_1,\dots,i_N}$ for the `1D`, `2D` and `ND` cases, and will
+also present the non-normalized formulations.
