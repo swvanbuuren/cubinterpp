@@ -25,23 +25,27 @@ x \in [0, 1]$.
 
     The sections for the [linear](linear.md) and [cubic interpolation](cubic.md) also give unnormalized derivations.
 
-For the `1`-Dimensional case, the goal is to obtain a polynomial 
+For the `1`-Dimensional case, the goal is to obtain a polynomial
+
 $$
 s^{(n)}(\bar x) = \sum_{k=0}^n a^{(n)}_k \bar x^k,
 $$
+
 that approximates $f(x)$ in the interpolation interval. Here, $n$ is the order
 of the spline, $\bar x$ the variable coordinate and $a_k$ are the
 to-be-determined coefficients.
 
-The (derivate) values $f^{l}(\bar x)$, where $f^{l}(\bar x) \equiv
+The (derivate) values $f^{(l)}(\bar x)$, where $f^{(l)}(\bar x) \equiv
 \frac{\textrm{d}^lf(\bar x)}{\textrm{d}\bar x^l}$, are assumed to coincide with those of
 $s^{(n)}(\bar x)$ on the boundaries of the interval.
 
 Given this, according to Lalescu, 2009[^1], $s^{(n)}(\bar x)$ can be written as follows:
+
 $$
 s^{(n)}(\bar x) = \sum_{l=0}^{} \sum_{i=0,1} f^{(l)}(i) \alpha^{(n,l)}_i (\bar
 x),
 $$
+
 where $m \equiv (n-1)/2$ and $\alpha^{(n,l)}_i$ becomes
 
 $$
@@ -54,6 +58,7 @@ $$
 ## `N` dimensions
 
 The `1D` spline definition can be directly be generalized to a scalar function $N$ variables $\bar x_i$ for $i=1,\dots,N$ defined for the interval $[0, 1]^N$:
+
 $$
 s^{(n)}(\bar x_1,\bar x_2,\dots,\bar x_N) = \sum_{l_1,\dots,l_N=0}^m \sum_{i_1,\dots,i_N=0,1} f^{(l_1,\dots,l_N)}(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(n,l_k)}_{i_k} (\bar x_k)
 $$
