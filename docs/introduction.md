@@ -15,7 +15,8 @@ piecewise interpolation for `N`-dimensional data is planned.
 
 All classes are templatized and support the STL's vector types.
 
-The accompanying python script in [cubinterpp ](cubinterpp ) compares the
+The accompanying python script `main.py` in [cubinterpp
+](https://github.com/swvanbuuren/cubinterpp/tree/master/cubinterpp) compares the
 interpolation types.
 
 ## Data requirements

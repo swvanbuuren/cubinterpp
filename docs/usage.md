@@ -16,11 +16,13 @@ library in a python environment.
 
 To build the header library for usage in Python, it's recommended to use
 [cmake](https://cmake.org/). An appropriate cmake configuration is provided in
-the main [`CMakeLists.txt`](CMakeLists.txt). Prior to compilation, the required
-external libraries are downloaded automatically using the cmake FetchContent
-module. Prior to building, make sure `cmake` is installed and configured with a
-C++ compiler like e.g. [gcc](https://gcc.gnu.org/). In order to create the
-python module, the development python library is also required.
+the main
+[`CMakeLists.txt`](https://github.com/swvanbuuren/cubinterpp/blob/master/CMakeLists.txt).
+Prior to compilation, the required external libraries are downloaded
+automatically using the cmake FetchContent module. Prior to building, make sure
+`cmake` is installed and configured with a C++ compiler like e.g.
+[gcc](https://gcc.gnu.org/). In order to create the python module, the
+development python library is also required.
 
 In order to do so on a Debian based system, install `cmake`, `gcc`, `g++` and
 `python3.11-dev` (change the python version depending on your configuration):
@@ -50,8 +52,9 @@ into the `cubinterpp` directory.
 
 ## Testing
 
-This library comes with severals [tests](tests). To run all tests, first build
-and then run (while remaining in the `build` directory):
+This library comes with severals
+[tests](https://github.com/swvanbuuren/cubinterpp/tree/master/tests). To run all
+tests, first build and then run (while remaining in the `build` directory):
 
 ```bash
 ctest -V
@@ -59,8 +62,10 @@ ctest -V
 
 ## Interpolating and plotting the results
 
-A [python program](cubinterpp/main.py) is provided to compare the three
-interpolation types. Data preparation and visualization is done in python with
+A [python
+program](https://github.com/swvanbuuren/cubinterpp/blob/master/cubinterpp/main.py)
+is provided to compare the three interpolation types. Data preparation and
+visualization is done in python with
 [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph).
 
 In order to run the python program, it's recommended to [install

@@ -11,7 +11,7 @@ interpolation by leveraging
 find instructions how to use the library in your own C++ program.
 
 A theoretical foundation on the interpolation algorithms is found in
-[mathematical background](theory).
+[mathematical background](theory/index.md).
 
-The [code reference section](reference) features the actual C++ code
+The [code reference section](reference/index.md) features the actual C++ code
 documentation.
