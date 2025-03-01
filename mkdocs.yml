@@ -1,4 +1,4 @@
-site_name: cubinterpp Documentation
+site_name: Cubinterpp Documentation
 site_url: https://swvanbuuren.github.io/cubinterpp/
 repo_url: https://github.com/swvanbuuren/cubinterpp
 repo_name: swvanbuuren/cubinterpp
@@ -36,6 +36,13 @@ markdown_extensions:
   - pymdownx.snippets:
       url_download: true
   - pymdownx.superfences
+  - footnotes
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
   - Cubinterpp:
@@ -44,5 +51,7 @@ nav:
     - Usage instructions: usage.md
   - Mathematical Background:
     - theory/index.md
+    - Linear interpolation: theory/linear.md
+    - Cubic interpolation: theory/cubic.md
   - Code Reference:
     - reference/index.md
