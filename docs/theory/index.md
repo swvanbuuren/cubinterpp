@@ -23,7 +23,7 @@ x \in [0, 1]$.
 
 !!! tip
 
-    The sections for the [linear](linear.md) and [cubic interpolation](cubic.md) also give unnormalized derivations.
+    The sections for the [linear](linear.md) and [cubic interpolation](cubic.md) will give the non-normalized formulations.
 
 For the `1`-Dimensional case, the goal is to obtain a polynomial
 
@@ -49,10 +49,10 @@ $$
 where $m \equiv (n-1)/2$ and $\alpha^{(n,l)}_i$ becomes
 
 $$
-\begin{align}
+\begin{align*}
 \alpha^{(n,l)}_0 (x) &= \frac{x^l}{l!}(1-x)^{m+1} \sum_{k=0}^{m-l} \frac{(m+k)!}{m! k!}x^k \\
 \alpha^{(n,l)}_1 (x) &= \frac{(x-1)^l}{l!}x^{m+1} \sum_{k=0}^{m-l} \frac{(m+k)!}{m! k!}(1-x)^k
-\end{align}
+\end{align*}
 $$
 
 Using this, it's possible to determine the values of $a_k$.
