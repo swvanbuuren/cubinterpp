@@ -12,7 +12,7 @@ As stated [here](index.md), $s(\bar x_1,\dots,\bar x_N)$ can also be expressed i
 
 $$
 \begin{equation}
-s^{(n)}(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0,1} f(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (\bar x_k), \label{eq:s_normalized}
+s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0,1} f(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (\bar x_k), \label{eq:s_normalized}
 \end{equation}
 $$
 
@@ -42,7 +42,7 @@ $h={}^1x-{}^0x$) into $\eqref{eq:s_normalized}$. This leads to
 
 $$
 \begin{equation}
-s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=^0x,^1x} f(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (x_k), \label{eq:s_non_normalized}
+s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (x_k), \label{eq:s_non_normalized}
 \end{equation}
 $$
 
@@ -50,10 +50,10 @@ where
 
 $$
 \begin{align}
-\alpha_0^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma_{(0,i)} x_k^i,~~~\textrm{where}~~~ \gamma_{(0,0)} = +\tfrac{1}{h_k}{}^{1}x_k~~~\textrm{and}~~~\gamma_{(0,1)} = - \tfrac{1}{h_k}
+\alpha_0^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma^{(0,i)}_k x_k^i,~~~\textrm{where}~~~ \gamma^{(0,0)}_k = +\tfrac{1}{h_k}{}^{1}x_k,~~~\gamma^{(0,1)}_k = - \tfrac{1}{h_k}
 \label{eq:alpha0_non_normalized}\\
-\alpha_1^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma_{(1,i)} x_k^i,~~~\textrm{where}~~~
-\gamma_{(1,0)} = -\tfrac{1}{h_k}{}^{0}x_k~~~\textrm{and}~~~\gamma_{(1,1)} = +
+\alpha_1^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma^{(1,i)}_k x_k^i,~~~\textrm{where}~~~
+\gamma^{(1,0)}_k = -\tfrac{1}{h_k}{}^{0}x_k,~~~\gamma^{(1,1)}_k = +
 \tfrac{1}{h_k} \label{eq:alpha1_non_normalized} \end{align}
 $$
 
@@ -90,12 +90,84 @@ With this:
 
 $$
 \begin{equation}
-s(x_1, x_2) = \sum_{k,l=0}^1 a_{kl} x_1^k x_2^l = a_{00} + a_{10}x_1 + a_{01}x_2 + a_{11}x_1x_2
+s(x_1, x_2) = \sum_{k,l=0}^1 a_{kl} x_1^k x_2^l = a_{00} + a_{10}x_1 + a_{01}x_2 + a_{11}x_1x_2,
 \end{equation}
+$$
+
+in which we're looking the coefficients $a_{ij}$ for $i,j=0,1$.  
+This can be accomplished by rewriting $\eqref{eq:s_non_normalized}$ for $N=2$
+using $\eqref{eq:alpha0_non_normalized}$ and $\eqref{eq:alpha1_non_normalized}$.
+To simplify the expressions we shall abbreviate $f_{ij} \equiv f({}^ix_1,{}^jx_2)$. With this $s(x_1,x_2)$ reads
+
+$$
+\begin{align*}
+s(x_1,x_2) =& \sum_{i_1,i_2=0,1} f_{i_1i_2} \alpha^{(1,0)}_{i_1} (x_1)
+\alpha^{(1,0)}_{i_2} (x_2)\\
+ = &~ \underbrace{f_{00}\gamma^{(0,0)}_1 \gamma^{(0,0)}_2 + 
+      f_{01}\gamma^{(0,0)}_1 \gamma^{(1,0)}_2 + 
+      f_{10}\gamma^{(1,0)}_1 \gamma^{(0,0)}_2 + 
+      f_{11}\gamma^{(1,0)}_1 \gamma^{(1,0)}_2}_{a_{00}} + \\
+   &~ \underbrace{\left( f_{00}\gamma^{(0,1)}_1 \gamma^{(0,0)}_2 + 
+             f_{01}\gamma^{(0,1)}_1 \gamma^{(1,0)}_2 + 
+             f_{10}\gamma^{(1,1)}_1 \gamma^{(0,0)}_2 + 
+             f_{11}\gamma^{(1,1)}_1 \gamma^{(1,0)}_2 \right)}_{a_{10}} x_1 +  \\
+   &~ \underbrace{\left( f_{00}\gamma^{(0,0)}_1 \gamma^{(0,1)}_2 + 
+             f_{01}\gamma^{(0,0)}_1 \gamma^{(1,1)}_2 + 
+             f_{10}\gamma^{(1,0)}_1 \gamma^{(0,1)}_2 + 
+             f_{11}\gamma^{(1,0)}_1 \gamma^{(1,1)}_2 \right)}_{a_{01}} x_2 +  \\
+   &~ \underbrace{\left( f_{00}\gamma^{(0,1)}_1 \gamma^{(0,1)}_2 + 
+             f_{01}\gamma^{(0,1)}_1 \gamma^{(1,1)}_2 + 
+             f_{10}\gamma^{(1,1)}_1 \gamma^{(0,1)}_2 + 
+             f_{11}\gamma^{(1,1)}_1 \gamma^{(1,1)}_2 \right)}_{a_{11}} x_1x_2\\
+\end{align*}
+$$
+
+This eventually leads to the following coefficients:
+
+$$
+\begin{align*}
+a_{00} &= \left(f_{00}{}^1x_1 {}^1x_2 - 
+                f_{01}{}^1x_1 {}^0x_2 - 
+                f_{10}{}^0x_1 {}^1x_2 + 
+                f_{11}{}^0x_1 {}^0x_2 \right)/h_1h_2\\
+a_{10} &= \left(-f_{00}{}^1x_2 + 
+                 f_{01}{}^0x_2 + 
+                 f_{10}{}^1x_2 -
+                 f_{11}{}^0x_2 \right)/h_1h_2\\
+a_{01} &= \left(-f_{00}{}^1x_1 + 
+                 f_{01}{}^1x_1 + 
+                 f_{10}{}^0x_1 -
+                 f_{11}{}^0x_1 \right)/h_1h_2\\
+a_{11} &= \left( f_{00} - 
+                 f_{01} - 
+                 f_{10} +
+                 f_{11} \right)/h_1h_2
+\end{align*}
 $$
 
 ## `N` dimensions
 
-!!! info
+For `N` dimensions, again the $\alpha$-terms in equation
+$\eqref{eq:s_non_normalized}$ are now replaced with the expressions from
+$\eqref{eq:alpha0_non_normalized}$ and $\eqref{eq:alpha1_non_normalized}$:
 
-    Still under construction! Sorry!!
+$$
+s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \left( \gamma^{(i_k,0)}_k + \gamma^{(i_k,1)}_k x_k  \right)
+$$
+
+Analogue to `2` dimensions, this expression needs to be reordered to terms with
+common combinations of $x_k$​. One term for $x_1$​, one for $x_2$​, and so on,
+also terms combining multiple $x_k$'s. Then, each term will correspond to one
+the coefficients in $a_{i_1,\dots,i_N}$.  
+Doing so leads to
+
+$$
+s^{(n)}(x_1,\dots,x_N) = \sum_{J\subseteq \{1,\dots,N\}} c_J \prod_{k\in J} x_k,
+$$
+
+where
+
+$$
+c_J = \sum_{i_1,\dots,i_N=0,1} f\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
+\prod_{k\notin J} \gamma^{(i_k,0)}_k \prod_{k\in J} \gamma^{(i_k,1)}_k.
+$$
