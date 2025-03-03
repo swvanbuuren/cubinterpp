@@ -50,11 +50,10 @@ where
 
 $$
 \begin{align}
-\alpha_0^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma^{(0,i)}_k x_k^i,~~~\textrm{where}~~~ \gamma^{(0,0)}_k = +\tfrac{1}{h_k}{}^{1}x_k,~~~\gamma^{(0,1)}_k = - \tfrac{1}{h_k}
+\alpha_0^{(1,0)}(x_k) &= \frac{1}{h_k} \sum^1_{i=0} \gamma^{(0,i)}_k x_k^i,~~~\textrm{where}~~~ \gamma^{(0,0)}_k = +{}^{1}x_k,~~~\gamma^{(0,1)}_k = - 1
 \label{eq:alpha0_non_normalized}\\
-\alpha_1^{(1,0)}(x_k) &= \sum^1_{i=0} \gamma^{(1,i)}_k x_k^i,~~~\textrm{where}~~~
-\gamma^{(1,0)}_k = -\tfrac{1}{h_k}{}^{0}x_k,~~~\gamma^{(1,1)}_k = +
-\tfrac{1}{h_k} \label{eq:alpha1_non_normalized} \end{align}
+\alpha_1^{(1,0)}(x_k) &= \frac{1}{h_k} \sum^1_{i=0} \gamma^{(1,i)}_k x_k^i,~~~\textrm{where}~~~
+\gamma^{(1,0)}_k = -{}^{0}x_k,~~~\gamma^{(1,1)}_k = +1 \label{eq:alpha1_non_normalized} \end{align}
 $$
 
 The following sections show how to employ $\eqref{eq:s_non_normalized}$ to
@@ -103,7 +102,7 @@ $$
 \begin{align*}
 s(x_1,x_2) =& \sum_{i_1,i_2=0,1} f_{i_1i_2} \alpha^{(1,0)}_{i_1} (x_1)
 \alpha^{(1,0)}_{i_2} (x_2)\\
- = &~ \underbrace{f_{00}\gamma^{(0,0)}_1 \gamma^{(0,0)}_2 + 
+ =&~ \frac{1}{h_1h_2}\Bigl(\underbrace{f_{00}\gamma^{(0,0)}_1 \gamma^{(0,0)}_2+ 
       f_{01}\gamma^{(0,0)}_1 \gamma^{(1,0)}_2 + 
       f_{10}\gamma^{(1,0)}_1 \gamma^{(0,0)}_2 + 
       f_{11}\gamma^{(1,0)}_1 \gamma^{(1,0)}_2}_{a_{00}} + \\
@@ -118,7 +117,7 @@ s(x_1,x_2) =& \sum_{i_1,i_2=0,1} f_{i_1i_2} \alpha^{(1,0)}_{i_1} (x_1)
    &~ \underbrace{\left( f_{00}\gamma^{(0,1)}_1 \gamma^{(0,1)}_2 + 
              f_{01}\gamma^{(0,1)}_1 \gamma^{(1,1)}_2 + 
              f_{10}\gamma^{(1,1)}_1 \gamma^{(0,1)}_2 + 
-             f_{11}\gamma^{(1,1)}_1 \gamma^{(1,1)}_2 \right)}_{a_{11}} x_1x_2\\
+             f_{11}\gamma^{(1,1)}_1 \gamma^{(1,1)}_2 \right)}_{a_{11}} x_1x_2\Bigr)\\
 \end{align*}
 $$
 
@@ -152,7 +151,7 @@ $\eqref{eq:s_non_normalized}$ are now replaced with the expressions from
 $\eqref{eq:alpha0_non_normalized}$ and $\eqref{eq:alpha1_non_normalized}$:
 
 $$
-s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \left( \gamma^{(i_k,0)}_k + \gamma^{(i_k,1)}_k x_k  \right)
+s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \frac{1}{h_k}\left( \gamma^{(i_k,0)}_k + \gamma^{(i_k,1)}_k x_k  \right)
 $$
 
 Analogue to `2` dimensions, this expression needs to be reordered to terms with
@@ -162,7 +161,7 @@ the coefficients in $a_{i_1,\dots,i_N}$.
 Doing so leads to
 
 $$
-s^{(n)}(x_1,\dots,x_N) = \sum_{J\subseteq \{1,\dots,N\}} c_J \prod_{k\in J} x_k,
+s^{(n)}(x_1,\dots,x_N) = \sum_{J\subseteq \{1,\dots,N\}} c_J \prod_{k=1}^N \frac{1}{h_k}\prod_{k\in J} x_k,
 $$
 
 where
