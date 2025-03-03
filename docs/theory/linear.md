@@ -171,3 +171,11 @@ $$
 c_J = \sum_{i_1,\dots,i_N=0,1} f\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
 \prod_{k\notin J} \gamma^{(i_k,0)}_k \prod_{k\in J} \gamma^{(i_k,1)}_k.
 $$
+
+Here, the symbol $J\subseteq \{1,\dots,N\}$ means that $J$ is any subset of
+$\{1,\dots,N\}$, including:
+
+- The **empty subset** $J = \emptyset$.
+- All **singleton subsets** like $J = \{1\}, J = \{2\},$ etc.
+- All **pairs** like $J = \{1,2\}, J = \{1,3\}, J = \{2,3\}$, etc.
+- And so on, up to the **full set** $J = \{1,\dots,N\}$.

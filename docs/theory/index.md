@@ -28,11 +28,11 @@ x \in [0, 1]$.
 For the `1`-Dimensional case, the goal is to obtain a polynomial
 
 $$
-s^{(n)}(\bar x) = \sum_{k=0}^n a^{(n)}_k \bar x^k,
+s^{(n)}(\bar x) = \sum_{k=0}^n \bar a^{(n)}_k \bar x^k,
 $$
 
 that approximates $f(x)$ in the interpolation interval. Here, $n$ is the order
-of the spline, $\bar x$ the variable coordinate and $a_k$ are the
+of the spline, $\bar x$ the variable coordinate and $\bar a_k$ are the
 to-be-determined coefficients.
 
 The (derivate) values $f^{(l)}(\bar x)$, where $f^{(l)}(\bar x) \equiv
@@ -64,7 +64,7 @@ variables $\bar x_i$ for $i=1,\dots,N$ defined for the interval $[0, 1]^N$
 reads
 
 $$
-s^{(n)}(\bar x_1,\bar x_2,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^n a_{i_1,\dots,i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
+s^{(n)}(\bar x_1,\bar x_2,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^n \bar a_{i_1,\dots,i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
 $$
 
 The `1D` spline definition, now depending on the input values of
@@ -82,7 +82,7 @@ $$
 f^{(l_1,\dots,l_N)}(\bar x_1,\dots,\bar x_N) = \left( \prod_{j=1}^{N} \left(\frac{\partial}{\partial \bar x_j}\right)^{l_j} \right)f(\bar x_1,\dots,\bar x_N)
 $$
 
-Using this, it's possible to determine the values of $a_{i_1,\dots,i_N}$.
+Using this, it's possible to determine the values of $\bar a_{i_1,\dots,i_N}$.
 
 ## Specific implementations
 
