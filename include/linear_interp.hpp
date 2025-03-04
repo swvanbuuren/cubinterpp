@@ -20,40 +20,83 @@ class LinearCellND {
     using Span = std::span<const T>;
     using Spans = std::array<Span, N>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, N>, std::layout_stride>;
+    using NomArray = std::array<T, (1 << N)>;
+    static constexpr std::size_t numCorners = 1 << N;
 public:
     explicit LinearCellND(const Mdspan &_f, const Spans &_x)
     : x(_x),
       f(_f),
       H(std::transform_reduce(x.begin(), x.end(), T{1}, std::multiplies<>{},
-        [](const Span& xi) { return xi[1] - xi[0]; }))
+        [](const Span& xi) { return xi[1] - xi[0]; })),
+      c(compute_coefficients())
     {
     }
 
     template <typename... Args>
-    T eval(Args && ... xi) const {
-        std::array<T, N> xi_array{std::forward<Args>(xi) ...};
-        T result = 0.0;
-        for (std::size_t corner = 0; corner < (1 << N); ++corner) {
-            result += eval_corner(corner, xi_array);
+    requires (sizeof...(Args) == N)
+    T eval_orig(Args&&... x) const {
+        std::array<T, N> xs{std::forward<Args>(x)...};
+        T result = T{0};
+        for (std::size_t J = 0; J < numCorners; ++J) {
+            T monomial = T{1};
+            for (std::size_t k = 0; k < N; ++k) {
+                if (J & (1 << k))
+                    monomial *= xs[k];
+            }
+            result += c[J] * monomial;
         }
         return result/H;
     }
+
+    template <typename... Args>
+    requires (sizeof...(Args) == N)
+    T eval(Args&&... args) const {
+        return eval_impl({std::forward<Args>(args)...}, std::make_index_sequence<numCorners>{});
+    }
+
 
 private:
     const Spans x;
     const Mdspan f;
     const T H;
+    const NomArray c;
 
-
-    const T eval_corner(const std::size_t corner, const std::array<T, N> &xi) const {
-        T weight = 1.0;
-        std::array<std::size_t, N> indices;
-        for (std::size_t dim = 0; dim < N; ++dim) {
-            const bool is_upper = corner & (1 << dim);
-            weight *= is_upper ? xi[dim] - x[dim][0] : x[dim][1] - xi[dim];
-            indices[dim] = is_upper ? 1 : 0;
+    NomArray compute_coefficients() const {
+        NomArray c;
+        for (std::size_t J = 0; J < numCorners; ++J) {
+            c[J] = compute_cJ(J);
         }
-        return weight*f(indices);
+        return c;
+    }
+
+    T compute_cJ(std::size_t J) const {
+        T coeffJ = T{0};
+        for (std::size_t mask = 0; mask < numCorners; ++mask) {
+            T prod = T{1};
+            std::array<std::size_t, N> indices{};
+            for (std::size_t k = 0; k < N; ++k) {
+                indices[k] = (mask & (1u << k)) ? 1 : 0;
+                prod *= gamma(J, indices[k], k);
+            }
+            coeffJ += f(indices) * prod;
+        }
+        return coeffJ;
+    }
+
+    T gamma(std::size_t J, std::size_t i, std::size_t k) const {
+        return (J & (1u << k))
+            ? (i == 0 ? -T{1} : T{1})
+            : (i == 0 ? x[k][1] : -x[k][0]);
+    }
+
+    template <std::size_t... Js>
+    T eval_impl(const std::array<T, N>& xs, std::index_sequence<Js...>) const {
+        return ( ... + compute_term_impl<Js>(xs, std::make_index_sequence<N>{}) ) / H;
+    }
+
+    template <std::size_t J, std::size_t... I>
+    T compute_term_impl(const std::array<T, N>& xs, std::index_sequence<I...>) const {
+        return c[J] * (T{1} * ... * ((J & (1u << I)) ? xs[I] : T{1}));
     }
 
 }; // class LinearCellND
