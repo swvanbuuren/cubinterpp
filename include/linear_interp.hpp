@@ -34,24 +34,12 @@ public:
 
     template <typename... Args>
     requires (sizeof...(Args) == N)
-    T eval_orig(Args&&... x) const {
-        std::array<T, N> xs{std::forward<Args>(x)...};
-        T result = T{0};
-        for (std::size_t J = 0; J < numCorners; ++J) {
-            T monomial = T{1};
-            for (std::size_t k = 0; k < N; ++k) {
-                if (J & (1 << k))
-                    monomial *= xs[k];
-            }
-            result += c[J] * monomial;
-        }
-        return result;
-    }
-
-    template <typename... Args>
-    requires (sizeof...(Args) == N)
-    T eval(Args&&... args) const {
-        return gather_corners({std::forward<Args>(args)...}, std::make_index_sequence<numCorners>{});
+    T eval(Args&&... args) const
+    {
+        return gather_corners(
+            {std::forward<Args>(args)...},
+            std::make_index_sequence<numCorners>{}
+        );
     }
 
 
