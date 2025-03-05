@@ -9,10 +9,15 @@ type of splines.
 
 First, the general definition of `1`-Dimensional (`1D`) splines and the
 generalization to `N`-Dimensional (`ND`) Hermite splines for $n^\textrm{th}$
-order splines shall be introduced here. Spline definitions are only given for a
-specific interval (a.k.a. cell): e.g. $x \in [x_0, x_0 + h]$ for the
-`1`-Dimensional case. The extension to piecewise interpolation with a series
-neighboring cells is not treated here.
+order splines shall be introduced here.
+
+Spline definitions are only given for a specific interval (a.k.a. cell). E.g.
+for the `1`-Dimensional case this would be $x \in [x_0, x_0 + h]$ for which the
+values of $f(x)$ are provided on the interval edges, i.e. $x_0$ and $x_0 + h$.  
+
+!!! note
+
+    The extension to piecewise interpolation with a series neighboring cells is not treated here.
 
 ## `1` dimension
 
