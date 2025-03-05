@@ -45,13 +45,13 @@ public:
             }
             result += c[J] * monomial;
         }
-        return result/H;
+        return result;
     }
 
     template <typename... Args>
     requires (sizeof...(Args) == N)
     T eval(Args&&... args) const {
-        return eval_impl({std::forward<Args>(args)...}, std::make_index_sequence<numCorners>{});
+        return gather_corners({std::forward<Args>(args)...}, std::make_index_sequence<numCorners>{});
     }
 
 
@@ -64,13 +64,13 @@ private:
     NomArray compute_coefficients() const {
         NomArray c;
         for (std::size_t J = 0; J < numCorners; ++J) {
-            c[J] = compute_cJ(J);
+            c[J] = compute_c_J(J);
         }
         return c;
     }
 
-    T compute_cJ(std::size_t J) const {
-        T coeffJ = T{0};
+    T compute_c_J(std::size_t J) const {
+        T c_J = T{0};
         for (std::size_t mask = 0; mask < numCorners; ++mask) {
             T prod = T{1};
             std::array<std::size_t, N> indices{};
@@ -78,9 +78,9 @@ private:
                 indices[k] = (mask & (1u << k)) ? 1 : 0;
                 prod *= gamma(J, indices[k], k);
             }
-            coeffJ += f(indices) * prod;
+            c_J += f(indices) * prod;
         }
-        return coeffJ;
+        return c_J / H;
     }
 
     T gamma(std::size_t J, std::size_t i, std::size_t k) const {
@@ -90,12 +90,12 @@ private:
     }
 
     template <std::size_t... Js>
-    T eval_impl(const std::array<T, N>& xs, std::index_sequence<Js...>) const {
-        return ( ... + compute_term_impl<Js>(xs, std::make_index_sequence<N>{}) ) / H;
+    T gather_corners(const std::array<T, N>& xs, std::index_sequence<Js...>) const {
+        return ( ... + compute_corner<Js>(xs, std::make_index_sequence<N>{}) );
     }
 
     template <std::size_t J, std::size_t... I>
-    T compute_term_impl(const std::array<T, N>& xs, std::index_sequence<I...>) const {
+    T compute_corner(const std::array<T, N>& xs, std::index_sequence<I...>) const {
         return c[J] * (T{1} * ... * ((J & (1u << I)) ? xs[I] : T{1}));
     }
 
