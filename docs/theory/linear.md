@@ -161,13 +161,13 @@ the coefficients in $a_{i_1,\dots,i_N}$.
 Doing so leads to
 
 $$
-s^{(n)}(x_1,\dots,x_N) = \sum_{J\subseteq \{1,\dots,N\}} c_J \prod_{k=1}^N \frac{1}{h_k}\prod_{k\in J} x_k,
+s^{(n)}(x_1,\dots,x_N) = \sum_{J\subseteq \{1,\dots,N\}} c_J \prod_{k\in J} x_k,
 $$
 
 where
 
 $$
-c_J = \sum_{i_1,\dots,i_N=0,1} f\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
+c_J = \prod_{k=1}^N \frac{1}{h_k} \sum_{i_1,\dots,i_N=0,1} f\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
 \prod_{k\notin J} \gamma^{(i_k,0)}_k \prod_{k\in J} \gamma^{(i_k,1)}_k.
 $$
 
