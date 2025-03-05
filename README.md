@@ -82,16 +82,17 @@ export CC=/usr/bin/gcc
 export CXX=/usr/bin/g++
 ```
 
-Then create the build directory, configure and build using:
+Then create and move into the build directory, configure cmake and build using:
 
 ```bash
 mkdir build
+cd build
 cmake ..
 make
 ```
 
-This should build and automatically copy the library file `cubic_spline.*.so`
-into the `cubinterpp` directory.
+This should build `cubinterpp` and automatically copy the library file
+`cubic_spline.*.so` into the `cubinterpp` directory.
 
 ### Testing
 
