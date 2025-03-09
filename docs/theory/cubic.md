@@ -29,8 +29,9 @@ $$
 $$
 
 The reader is reminded that, as stated [here](index.md), $f^{(l)}(\bar x) \equiv
-\frac{\textrm{d}^lf(\bar x)}{\textrm{d}\bar x^l}$.
-
+\frac{\textrm{d}^lf(\bar x)}{\textrm{d}\bar x^l}$. For cubic interpolation only
+zeroth and first order differentation occurs, which occasionaly might be denoted
+using $f(\bar x)$ and $f'(\bar x)$ respectively.  
 Analogue to linear interpolation, $\eqref{eq:s_normalized}$ is also rewritten to its non-normalized version:
 
 $$
@@ -51,9 +52,9 @@ s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
 \end{equation}
 $$
 
-Note the additional term $\prod_{k=1}^N h_k^{l_k}$, which arises due to substition of $\bar x = (x - {}^0x)/h$ into $f^{(l)}(\bar x)$
-
-where
+Note the additional term $\prod_{k=1}^N h_k^{l_k}$, which arises due to
+substition of $\bar x_k = (x_k - {}^0x_k)/h_k$ into $f^{(l)}(\bar x_k)$.  
+In $\eqref{eq:s_non_normalized}$ $\alpha_{i_k}^{(3,l_k)}$ can be expressed as:
 
 $$
 \begin{align*}
@@ -100,3 +101,25 @@ a_3 &= (+2 (f_0-f_1) + h (f'(x_0) + f'(x_1)))/h^3
 $$
 
 where $h = x_1 - x_0$.
+
+## `2` dimensions
+
+For `2` dimensions the interval definition now reads $x \in [{}^0x, {}^1x]^2$.
+With this:
+
+$$
+\begin{align*}
+s(x_1,x_2) = & \sum_{k,l=0}^3 a_{kl} x_1^k x_2^l
+\end{align*}
+$$
+
+Now, we're looking for the coefficients $a_{kl}$ for $k,l=0,1,2,3$.  
+Analogue to linear interpolationt this is accomplished by rewriting
+$\eqref{eq:s_non_normalized}$ for $N=2$. To simplify the expressions, we shall
+rewrite $f_{ij}^{(k,l)} = f^{(k,l)}({}^{i}x_1{}^{j}x_2)$. This leads
+to
+
+$$
+s(x_1,x_2) = \sum_{l_1,l_2=0}^1 \sum_{i_1,i_2=0}^1 
+ h_1^{l_1}h_2^{l_2} f_{i_1i_2}^{(l_1,l_2)} \alpha^{(3,l_1)}_{i_1} (x_1) \alpha^{(3,l_2)}_{i_2} (x_2)
+$$

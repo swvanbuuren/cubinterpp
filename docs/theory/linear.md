@@ -93,7 +93,7 @@ s(x_1, x_2) = \sum_{k,l=0}^1 a_{kl} x_1^k x_2^l = a_{00} + a_{10}x_1 + a_{01}x_2
 \end{equation}
 $$
 
-in which we're looking the coefficients $a_{ij}$ for $i,j=0,1$.  
+in which we're looking for the coefficients $a_{ij}$ for $i,j=0,1$.  
 This can be accomplished by rewriting $\eqref{eq:s_non_normalized}$ for $N=2$
 using $\eqref{eq:alpha0_non_normalized}$ and $\eqref{eq:alpha1_non_normalized}$.
 To simplify the expressions we shall abbreviate $f_{ij} \equiv f({}^ix_1,{}^jx_2)$. With this $s(x_1,x_2)$ reads
