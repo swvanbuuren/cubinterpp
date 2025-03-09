@@ -38,14 +38,20 @@ s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^3 a_{i_1,\dots,i_N}\prod_{k=0}^N x_{k}
 $$
 
 in which we're looking for expressions for the coefficients $a_{i_1,\dots,i_N}$.
-By substututing $\bar x = (x - {}^0x)/h$ (where $h={}^1x-{}^0x$) into
-$\eqref{eq:s_normalized}$ we obtain
+By substututing $\bar x_k = (x_k - {}^0x_k)/h_k$ (where $h_k={}^1x_k-{}^0x_k$)
+into $\eqref{eq:s_normalized}$ we obtain
 
 $$
 \begin{equation}
-s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 f^{(l_1,\dots,l_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \alpha^{(3,l_k)}_{i_k} (x_k), \label{eq:s_non_normalized}
+\begin{split}
+s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
+\left( \prod_{k=1}^N h_k^{l_k} \right) f^{(l_1,\dots,l_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
+& \dots \prod_{k=1}^N \alpha^{(3,l_k)}_{i_k} (x_k)
+\end{split} \label{eq:s_non_normalized}
 \end{equation}
 $$
+
+Note the additional term $\prod_{k=1}^N h_k^{l_k}$, which arises due to substition of $\bar x = (x - {}^0x)/h$ into $f^{(l)}(\bar x)$
 
 where
 
@@ -70,3 +76,27 @@ in which the expressions $\delta^{(j,i)}_k$ read
 The following sections show how to employ $\eqref{eq:s_non_normalized}$ to
 obtain expressions for the coefficients $a_{i_1,\dots,i_N}$ for `1`, `2` and `N`
 dimensions.
+
+## `1` dimension
+
+For `1` dimension the interval definition simplifies to $x \in [x_0, x_1]$. With
+this:
+
+$$
+\begin{equation}
+s(x) = \sum_{k=0}^3 a_k x^k =  a_0 + a_1 x + a_2 x^2 + a_3 x^3
+\end{equation}
+$$
+
+in which the coefficients can be written as
+
+$$
+\begin{align*}
+a_0 &= (f(x_ 0)x_1^2(x_1 - 3 x_0) + f(x_1)x_0^2(3x_1 - x_0) - h x_0 x_1(x_1f'(x_0) +  x_0f'(x_1)))/h^3\\
+a_1 &= (+6 x_0 x_1 (f_0-f_1) + h ( x_1 (2 x_0 + x_1)f'(x_0) + x_0 (x_0 + 2 x_1)f'(x_1)))/h^3\\
+a_2 &= (-3 (x_0 + x_1)(f_0-f_1) - h( (x_0 + 2 x_1)f'(x_0) + (2 x_0 + x_1)f'(x_1)))/h^3\\
+a_3 &= (+2 (f_0-f_1) + h (f'(x_0) + f'(x_1)))/h^3
+\end{align*}
+$$
+
+where $h = x_1 - x_0$.
