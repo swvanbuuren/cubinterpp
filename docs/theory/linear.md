@@ -42,7 +42,7 @@ $h={}^1x-{}^0x$) into $\eqref{eq:s_normalized}$. This leads to
 
 $$
 \begin{equation}
-s^{(n)}(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (x_k), \label{eq:s_non_normalized}
+s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0,1} f({}^{i_1}x_1,\dots,{}^{i_N}x_N) \prod_{k=1}^N \alpha^{(1,0)}_{i_k} (x_k), \label{eq:s_non_normalized}
 \end{equation}
 $$
 
