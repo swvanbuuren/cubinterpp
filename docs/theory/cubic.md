@@ -74,6 +74,14 @@ in which the expressions $\delta^{(j,i)}_k$ read
 | $j=2$ | $-{}^0x_k{}^1x_k^2$ | ${}^1x_k(2{}^0x_k+{}^1x_k)$ | $-({}^0x_k+2{}^1x_k)$ | $+1$ |
 | $j=3$ | $-{}^1x_k{}^0x_k^2$ | ${}^0x_k({}^0x_k+2{}^1x_k)$ | $-(2{}^0x_k+{}^1x_k)$ | $+1$ |
 
+Note that expression for $\alpha_i^{3,j}$ can be written even shorter by introducing a binary number $ij$, i.e. $00, 01, 10, 11 = 0, 1, 2, 3$:
+
+$$
+\begin{equation}
+\alpha_i^{3,j}(x_k) = \frac{1}{h_k^3} \sum_{l=0}^3 \delta_k^{(ij,l)}x_k^i \label{eq:unified_alpha}
+\end{equation}
+$$
+
 The following sections show how to employ $\eqref{eq:s_non_normalized}$ to
 obtain expressions for the coefficients $a_{i_1,\dots,i_N}$ for `1`, `2` and `N`
 dimensions.
@@ -166,4 +174,20 @@ a_{kl} = &
                f_{10}^{(1,1)} \delta^{(3,k)}_1 \delta^{(2,l)}_2 +
                f_{11}^{(1,1)} \delta^{(3,k)}_1 \delta^{(3,l)}_2 \right)\Biggr)\\
 \end{align*}
+$$
+
+## `N` dimensions
+
+For `N` dimensions, replacing the $\alpha$-terms in
+$\eqref{eq:s_non_normalized}$ with the simplified $\alpha$-terms from
+$\eqref{eq:unified_alpha}$:
+
+$$
+\begin{equation}
+\begin{split}
+s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
+\left( \prod_{k=1}^N h_k^{l_k} \right) f^{(l_1,\dots,l_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
+& \dots \prod_{k=1}^N \frac{1}{h_k^3} \sum_{l=0}^3 \delta_k^{(i_kl_k,l)}x_k^i
+\end{split}
+\end{equation}
 $$
