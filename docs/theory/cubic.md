@@ -5,7 +5,7 @@ given interal $\bar x \in [0, 1]^N$ we're looking for the values
 $a_{i_1,\dots,i_N}$ in the following function
 
 $$
-s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^3 \bar a_{i_1,\dots,i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
+s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^3 \bar a_{i_1 \dots i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
 $$
 
 Expressing $s(\bar x_1,\dots,\bar x_N)$ in terms of $f(\bar x_1,\dots,\bar x_N)$
@@ -35,10 +35,10 @@ using $f(\bar x)$ and $f'(\bar x)$ respectively.
 Analogue to linear interpolation, $\eqref{eq:s_normalized}$ is also rewritten to its non-normalized version:
 
 $$
-s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^3 a_{i_1,\dots,i_N}\prod_{k=0}^N x_{k}^{i_k}
+s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^3 a_{i_1 \dots i_N}\prod_{k=0}^N x_{k}^{i_k}
 $$
 
-in which we're looking for expressions for the coefficients $a_{i_1,\dots,i_N}$.
+in which we're looking for expressions for the coefficients $a_{i_1 \dots i_N}$.
 By substututing $\bar x_k = (x_k - {}^0x_k)/h_k$ (where $h_k={}^1x_k-{}^0x_k$)
 into $\eqref{eq:s_normalized}$ we obtain
 
@@ -83,7 +83,7 @@ $$
 $$
 
 The following sections show how to employ $\eqref{eq:s_non_normalized}$ to
-obtain expressions for the coefficients $a_{i_1,\dots,i_N}$ for `1`, `2` and `N`
+obtain expressions for the coefficients $a_{i_1 \dots i_N}$ for `1`, `2` and `N`
 dimensions.
 
 ## `1` dimension
@@ -191,3 +191,27 @@ s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
 \end{split}
 \end{equation}
 $$
+
+This can be reordered to
+
+$$
+s(x_1,\dots,x_N) = \sum_{\mathbf{m}\in\{0,1,2,3\}^N} A_{\textbf{m}}\prod_{k=1}^N
+x_k^{m_k},
+$$
+
+where
+
+$$
+A_{\textbf{m}} = \sum_{l_1,\dots,l_N=0}^1\sum_{i_1,\dots,i_N=0}^1
+\prod_{k=1}^N \frac{h_k^{\,l_k}}{h_k^3}\,\delta_k^{(i_kl_k,m_k)}
+f^{(l_1,\dots,l_N)}\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
+$$
+
+In here, $\textbf{m}$ is defined as
+
+$$
+\mathbf{m}=(m_1,\dots,m_N) \quad \text{with} \quad m_k\in\{0,1,2,3\}.
+$$
+
+$A_\textbf{m}$ can be rewritten to the original coefficients: $A_\textbf{m} =
+A_{(m_1,\dots,m_N)} = a_{m_1 \dots m_N}$.

@@ -5,7 +5,7 @@ interval $\bar x \in [0, 1]^N$ now we're looking for the values
 $a_{i_1,\dots,i_N}$ in the following function
 
 $$
-s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^1 \bar a_{i_1,\dots,i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
+s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^1 \bar a_{i_1 \dots i_N}\prod_{k=0}^N\bar x_{k}^{i_k}
 $$
 
 As stated [here](index.md), $s(\bar x_1,\dots,\bar x_N)$ can also be expressed in terms of $f(\bar x_1, \dots, \bar x_n)$. For linear interpolation ($n=1$), this boils down to:
@@ -32,11 +32,11 @@ version. The interval is now defined by $x \in [{}^0x, {}^1x]^N$.
 We're now looking for $s(x_1,\dots,x_N)$:
 
 $$
-s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^1 a_{i_1,\dots,i_N}\prod_{k=0}^N
+s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^1 a_{i_1 \dots i_N}\prod_{k=0}^N
 x_{k}^{i_k},
 $$
 
-in which the coefficients $a_{i_1,\dots,i_N}$ need to be determined.  
+in which the coefficients $a_{i_1 \dots i_N}$ need to be determined.  
 The transformation is achieved by substituting $\bar x = (x - {}^0x)/h$ (where
 $h={}^1x-{}^0x$) into $\eqref{eq:s_normalized}$. This leads to
 
@@ -57,7 +57,7 @@ $$
 $$
 
 The following sections show how to employ $\eqref{eq:s_non_normalized}$ to
-obtain expressions for the coefficients $a_{i_1,\dots,i_N}$ for `1`, `2` and `N`
+obtain expressions for the coefficients $a_{i_1 \dots i_N}$ for `1`, `2` and `N`
 dimensions.
 
 ## `1` dimension
