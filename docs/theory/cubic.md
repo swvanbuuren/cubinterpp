@@ -131,6 +131,8 @@ $$
 \begin{align*}
 s(x_1,x_2) = & \sum_{l_1,l_2=0}^1 \sum_{i_1,i_2=0}^1 
  h_1^{l_1}h_2^{l_2} f_{i_1i_2}^{(l_1,l_2)} \alpha^{(3,l_1)}_{i_1} (x_1) \alpha^{(3,l_2)}_{i_2} (x_2)\\
+=& \frac{1}{h_1^3 h_2^3} \sum_{l_1,l_2=0}^1 \sum_{i_1,i_2=0}^1 
+   h_1^{l_1}h_2^{l_2} f_{i_1i_2}^{(l_1,l_2)} \sum_{k,l=0}^3\delta_1^{(i_1l_1,k)} \delta_2^{(i_2l_2,l)} \\
 =& \frac{1}{h_1^3 h_2^3} \sum^3_{k,l=0} \Bigl( \\ 
  & f_{00}^{(0,0)} \delta^{(0,k)}_1 \delta^{(0,l)}_2  + 
    f_{01}^{(0,0)} \delta^{(0,k)}_1 \delta^{(1,l)}_2  + 
@@ -156,7 +158,7 @@ From this it becomes clear that
 
 $$
 \begin{align*}
-a_{kl} = &
+a_{kl} = & \frac{1}{h_1^3 h_2^3} 
  \Biggl( f_{00}^{(0,0)} \delta^{(0,k)}_1 \delta^{(0,l)}_2  + 
    f_{01}^{(0,0)} \delta^{(0,k)}_1 \delta^{(1,l)}_2  + 
    f_{10}^{(0,0)} \delta^{(1,k)}_1 \delta^{(0,l)}_2  + 
@@ -203,8 +205,8 @@ where
 
 $$
 A_{\textbf{m}} = \sum_{l_1,\dots,l_N=0}^1\sum_{i_1,\dots,i_N=0}^1
-\prod_{k=1}^N \frac{h_k^{\,l_k}}{h_k^3}\,\delta_k^{(i_kl_k,m_k)}
 f^{(l_1,\dots,l_N)}\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
+\prod_{k=1}^N \frac{h_k^{\,l_k}}{h_k^3}\,\delta_k^{(i_kl_k,m_k)}
 $$
 
 In here, $\textbf{m}$ is defined as
