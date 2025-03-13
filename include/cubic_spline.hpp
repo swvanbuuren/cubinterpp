@@ -165,30 +165,28 @@ private:
         const T h1 = x1[1] - x1[0];
         const T h3 = h0*h0*h0*h1*h1*h1;
         const Alphas alphas = {calc_alphas(x0), calc_alphas(x1)};
+        constexpr std::size_t total = 1 << N;
         Array2 coeffs;
-        for (auto i = 0; i < order; ++i)
+        for (std::size_t k = 0; k < order; ++k)
         {
-            for (auto j = 0; j < order; ++j)
+            for (std::size_t l = 0; l < order; ++l)
             {
-                coeffs[i][j] = (F(0,0,0,0)*alphas[0][0][i]*alphas[1][0][j]
-                             +  F(0,1,0,0)*alphas[0][0][i]*alphas[1][1][j]
-                             +  F(1,0,0,0)*alphas[0][1][i]*alphas[1][0][j]
-                             +  F(1,1,0,0)*alphas[0][1][i]*alphas[1][1][j]
-                             
-                             +  F(0,0,0,1)*alphas[0][0][i]*alphas[1][2][j]*h1
-                             +  F(0,1,0,1)*alphas[0][0][i]*alphas[1][3][j]*h1
-                             +  F(1,0,0,1)*alphas[0][1][i]*alphas[1][2][j]*h1
-                             +  F(1,1,0,1)*alphas[0][1][i]*alphas[1][3][j]*h1
- 
-                             +  F(0,0,1,0)*alphas[0][2][i]*alphas[1][0][j]*h0
-                             +  F(0,1,1,0)*alphas[0][2][i]*alphas[1][1][j]*h0
-                             +  F(1,0,1,0)*alphas[0][3][i]*alphas[1][0][j]*h0
-                             +  F(1,1,1,0)*alphas[0][3][i]*alphas[1][1][j]*h0
- 
-                             +  F(0,0,1,1)*alphas[0][2][i]*alphas[1][2][j]*h0*h1
-                             +  F(0,1,1,1)*alphas[0][2][i]*alphas[1][3][j]*h0*h1
-                             +  F(1,0,1,1)*alphas[0][3][i]*alphas[1][2][j]*h0*h1
-                             +  F(1,1,1,1)*alphas[0][3][i]*alphas[1][3][j]*h0*h1)/h3;
+                coeffs[k][l] = 0.0;
+                for (std::size_t i = 0; i < total; ++i)
+                {
+                    std::size_t i1 = (i >> 0) & 1;
+                    std::size_t i2 = (i >> 1) & 1;
+                    for (std::size_t j = 0; j < total; ++j)
+                    {
+                        std::size_t j1 = (j >> 0) & 1;
+                        std::size_t j2 = (j >> 1) & 1;
+                        std::size_t alpha_index1 = (j1 << 1) | i1;
+                        std::size_t alpha_index2 = (j2 << 1) | i2;
+                        double prod_h = (j1 ? h0 : 1.0)*(j2 ? h1 : 1.0);
+                        coeffs[k][l] += prod_h*F(i1,i2,j1,j2)*alphas[0][alpha_index1][k]*alphas[1][alpha_index2][l];
+                    }
+                }
+                coeffs[k][l] /= h3;
             }
         }
         return coeffs;
