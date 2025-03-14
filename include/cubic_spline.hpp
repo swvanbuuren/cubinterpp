@@ -154,8 +154,8 @@ private:
         const T x02 = x0*x0;
         const T x12 = x1*x1;
         return {{{x12*(x1 - 3.0*x0), +6.0*x0*x1,           -3.0*(x0 + x1), +2.0},
-                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
                  {-x0*x12,           x1*(2.0*x0 + x1),     -(x0 + 2.0*x1), +1.0},
+                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
                  {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
     }
 
@@ -180,8 +180,8 @@ private:
                     {
                         std::size_t j1 = (j >> 0) & 1;
                         std::size_t j2 = (j >> 1) & 1;
-                        std::size_t alpha_index1 = (j1 << 1) | i1;
-                        std::size_t alpha_index2 = (j2 << 1) | i2;
+                        std::size_t alpha_index1 = (i1 << 1) | j1;
+                        std::size_t alpha_index2 = (i2 << 1) | j2;
                         double prod_h = (j1 ? h0 : 1.0)*(j2 ? h1 : 1.0);
                         coeffs[k][l] += prod_h*F(i1,i2,j1,j2)*alphas[0][alpha_index1][k]*alphas[1][alpha_index2][l];
                     }
