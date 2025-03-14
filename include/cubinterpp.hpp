@@ -3,6 +3,7 @@
 #include "utils.hpp"
 #include "slopes.hpp"
 #include "vectorn.hpp"
+#include "arrayn.hpp"
 #include "linear_interp.hpp"
 #include "cubic_spline.hpp"
 #include "cubic_splines_1d.hpp"
