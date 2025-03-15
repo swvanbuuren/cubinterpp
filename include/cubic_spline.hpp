@@ -150,7 +150,7 @@ public:
 private:
     const Array2 coeffs;
 
-    const Array2 calc_delta(const Span &xi) const 
+    const Array2 calc_delta_ij(const Span &xi) const 
     {
         const T x0 = xi[0];
         const T x1 = xi[1];
@@ -167,7 +167,7 @@ private:
         const T h0 = x0[1] - x0[0];
         const T h1 = x1[1] - x1[0];
         const T h3 = h0*h0*h0*h1*h1*h1;
-        const Delta delta = {calc_delta(x0), calc_delta(x1)};
+        const Delta delta = {calc_delta_ij(x0), calc_delta_ij(x1)};
         Array2 coeffs = {};
         for (std::size_t k = 0; k < order; ++k)
         {
@@ -181,10 +181,10 @@ private:
                     {
                         std::size_t j1 = (j >> 0) & 1;
                         std::size_t j2 = (j >> 1) & 1;
-                        std::size_t delta_i1j1 = (i1 << 1) | j1;
-                        std::size_t delta_i2j2 = (i2 << 1) | j2;
+                        std::size_t i1j1 = (i1 << 1) | j1;
+                        std::size_t i2j2 = (i2 << 1) | j2;
                         const T prod_h = (j1 ? h0 : 1.0)*(j2 ? h1 : 1.0);
-                        coeffs[k][l] += prod_h*F(i1,i2,j1,j2)*delta[0][delta_i1j1][k]*delta[1][delta_i2j2][l];
+                        coeffs[k][l] += prod_h*F(i1,i2,j1,j2)*delta[0][i1j1][k]*delta[1][i2j2][l];
                     }
                 }
                 coeffs[k][l] /= h3;
