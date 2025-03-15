@@ -121,6 +121,7 @@ template<typename T, std::size_t N=2>
 class CubicCell2D
 {
     static constexpr std::size_t order = 4;
+    static constexpr std::size_t numCorners = 1 << N;
     using Array = std::array<T, order>;
     using Array2 = std::array<Array, order>;
     using Alphas = std::array<Array2, N>;
@@ -167,18 +168,17 @@ private:
         const T h1 = x1[1] - x1[0];
         const T h3 = h0*h0*h0*h1*h1*h1;
         const Alphas alphas = {calc_alphas(x0), calc_alphas(x1)};
-        constexpr std::size_t total = 1 << N;
         Array2 coeffs;
         for (std::size_t k = 0; k < order; ++k)
         {
             for (std::size_t l = 0; l < order; ++l)
             {
                 coeffs[k][l] = 0.0;
-                for (std::size_t i = 0; i < total; ++i)
+                for (std::size_t i = 0; i < numCorners; ++i)
                 {
                     std::size_t i1 = (i >> 0) & 1;
                     std::size_t i2 = (i >> 1) & 1;
-                    for (std::size_t j = 0; j < total; ++j)
+                    for (std::size_t j = 0; j < numCorners; ++j)
                     {
                         std::size_t j1 = (j >> 0) & 1;
                         std::size_t j2 = (j >> 1) & 1;
