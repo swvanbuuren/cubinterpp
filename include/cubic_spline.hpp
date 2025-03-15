@@ -168,12 +168,11 @@ private:
         const T h1 = x1[1] - x1[0];
         const T h3 = h0*h0*h0*h1*h1*h1;
         const Alphas alphas = {calc_alphas(x0), calc_alphas(x1)};
-        Array2 coeffs;
+        Array2 coeffs = {};
         for (std::size_t k = 0; k < order; ++k)
         {
             for (std::size_t l = 0; l < order; ++l)
             {
-                coeffs[k][l] = 0.0;
                 for (std::size_t i = 0; i < numCorners; ++i)
                 {
                     std::size_t i1 = (i >> 0) & 1;
