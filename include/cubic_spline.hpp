@@ -16,8 +16,9 @@ namespace cip {
 template<typename T>
 class CubicCell1D
 {
-    using Array = std::array<T, 4>;
-    using Alpha = std::array<Array, 4>;
+    static constexpr std::size_t order = 4;
+    using Array = std::array<T, order>;
+    using Alpha = std::array<Array, order>;
     using Span = std::span<const T>;
     using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2>, std::layout_stride>;
 public:
@@ -116,9 +117,10 @@ private:
 };
 
 
-template<typename T, std::size_t N=2, std::size_t order=4>
+template<typename T, std::size_t N=2>
 class CubicCell2D
 {
+    static constexpr std::size_t order = 4;
     using Array = std::array<T, order>;
     using Array2 = std::array<Array, order>;
     using Alphas = std::array<Array2, N>;
