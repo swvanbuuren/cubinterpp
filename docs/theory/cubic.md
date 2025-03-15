@@ -13,7 +13,7 @@ leads to:
 
 $$
 \begin{equation}
-s(\bar x_1,\dots,\bar x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0,1} f^{(l_1,\dots,l_N)}(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(3,l_k)}_{i_k} (\bar x_k), \label{eq:s_normalized}
+s(\bar x_1,\dots,\bar x_N) = \sum_{i_1,\dots,i_N=0}^1 \sum_{j_1,\dots,j_N=0}^1  f^{(j_1,\dots,j_N)}(i_1,\dots,i_N) \prod_{k=1}^N \alpha^{(3,j_k)}_{i_k} (\bar x_k), \label{eq:s_normalized}
 \end{equation}
 $$
 
@@ -45,16 +45,16 @@ into $\eqref{eq:s_normalized}$ we obtain
 $$
 \begin{equation}
 \begin{split}
-s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
-\left( \prod_{k=1}^N h_k^{l_k} \right) f^{(l_1,\dots,l_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
-& \dots \prod_{k=1}^N \alpha^{(3,l_k)}_{i_k} (x_k)
+s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^1 \sum_{j_1,\dots,j_N=0}^1 &
+\left( \prod_{k=1}^N h_k^{j_k} \right) f^{(j_1,\dots,j_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
+& \dots \prod_{k=1}^N \alpha^{(3,j_k)}_{i_k} (x_k)
 \end{split} \label{eq:s_non_normalized}
 \end{equation}
 $$
 
-Note the additional term $\prod_{k=1}^N h_k^{l_k}$, which arises due to
+Note the additional term $\prod_{k=1}^N h_k^{j_k}$, which arises due to
 substition of $\bar x_k = (x_k - {}^0x_k)/h_k$ into $f^{(l)}(\bar x_k)$.  
-In $\eqref{eq:s_non_normalized}$ $\alpha_{i_k}^{(3,l_k)}$ can be expressed as:
+In $\eqref{eq:s_non_normalized}$ $\alpha_{i_k}^{(3,j_k)}$ can be expressed as:
 
 $$
 \begin{align*}
@@ -129,10 +129,10 @@ to
 
 $$
 \begin{align*}
-s(x_1,x_2) = & \sum_{l_1,l_2=0}^1 \sum_{i_1,i_2=0}^1 
- h_1^{l_1}h_2^{l_2} f_{i_1i_2}^{(l_1,l_2)} \alpha^{(3,l_1)}_{i_1} (x_1) \alpha^{(3,l_2)}_{i_2} (x_2)\\
-=& \frac{1}{h_1^3 h_2^3} \sum_{l_1,l_2=0}^1 \sum_{i_1,i_2=0}^1 
-   h_1^{l_1}h_2^{l_2} f_{i_1i_2}^{(l_1,l_2)} \sum_{k,l=0}^3\delta_1^{(i_1l_1,k)} \delta_2^{(i_2l_2,l)} \\
+s(x_1,x_2) = & \sum_{i_1,i_2=0}^1 \sum_{j_1,j_2=0}^1
+ h_1^{j_1}h_2^{j_2} f_{i_1i_2}^{(j_1,j_2)} \alpha^{(3,j_1)}_{i_1} (x_1) \alpha^{(3,j_2)}_{i_2} (x_2)\\
+=& \frac{1}{h_1^3 h_2^3} \sum_{i_1,i_2=0}^1 \sum_{j_1,j_2=0}^1
+   h_1^{j_1}h_2^{j_2} f_{i_1i_2}^{(j_1,j_2)} \sum_{k,l=0}^3\delta_1^{(i_1j_1,k)} \delta_2^{(i_2j_2,l)} \\
 =& \frac{1}{h_1^3 h_2^3} \sum^3_{k,l=0} \Bigl( \\ 
  & f_{00}^{(0,0)} \delta^{(0,k)}_1 \delta^{(0,l)}_2  + 
    f_{01}^{(0,0)} \delta^{(0,k)}_1 \delta^{(1,l)}_2  + 
@@ -187,9 +187,9 @@ $\eqref{eq:unified_alpha}$:
 $$
 \begin{equation}
 \begin{split}
-s(x_1,\dots,x_N) = \sum_{l_1,\dots,l_N=0}^1 \sum_{i_1,\dots,i_N=0}^1 &
-\left( \prod_{k=1}^N h_k^{l_k} \right) f^{(l_1,\dots,l_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
-& \dots \prod_{k=1}^N \frac{1}{h_k^3} \sum_{l=0}^3 \delta_k^{(i_kl_k,l)}x_k^i
+s(x_1,\dots,x_N) = \sum_{i_1,\dots,i_N=0}^1 \sum_{j_1,\dots,j_N=0}^1 &
+\left( \prod_{k=1}^N h_k^{j_k} \right) f^{(j_1,\dots,j_N)}({}^{i_1}x_1,\dots,{}^{i_N}x_N) \dots \\
+& \dots \prod_{k=1}^N \frac{1}{h_k^3} \sum_{l=0}^3 \delta_k^{(i_kj_k,l)}x_k^i
 \end{split}
 \end{equation}
 $$
@@ -204,9 +204,9 @@ $$
 where
 
 $$
-A_{\textbf{m}} = \sum_{l_1,\dots,l_N=0}^1\sum_{i_1,\dots,i_N=0}^1
-f^{(l_1,\dots,l_N)}\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
-\prod_{k=1}^N \frac{h_k^{\,l_k}}{h_k^3}\,\delta_k^{(i_kl_k,m_k)}
+A_{\textbf{m}} =\sum_{i_1,\dots,i_N=0}^1 \sum_{j_1,\dots,j_N=0}^1
+f^{(j_1,\dots,j_N)}\Bigl({}^{i_1}x_1,\dots,{}^{i_N}x_N\Bigr)
+\prod_{k=1}^N \frac{h_k^{\,j_k}}{h_k^3}\,\delta_k^{(i_kj_k,m_k)}
 $$
 
 In here, $\textbf{m}$ is defined as
