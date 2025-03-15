@@ -28,7 +28,7 @@ class NDHyperArray {
     using Mdspan  = std::mdspan<T, ExtentsType>;
 public:
     NDHyperArray()
-      : mdspan(data.data())
+      : data{}, mdspan(data.data())
     {}
 
     ~NDHyperArray() = default;
