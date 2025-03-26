@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstddef>
+#include <tuple>
 #include <vector>
 #include <mdspan/mdspan.hpp>
 #include "utils.hpp"
@@ -198,7 +199,6 @@ private:
         return c[0] + xi*(c[1] + xi*(c[2] + xi*c[3]));
     }
 
-
 };
 
 
@@ -216,7 +216,7 @@ class CubicInterp2D
     using VectorN2 = cip::VectorN<T, 2*N>;
     using Pr = std::pair<std::size_t, std::size_t>;
 public:
-CubicInterp2D(const Vector &_x, const Vector &_y, const VectorN &_f)
+    CubicInterp2D(const Vector &_x, const Vector &_y, const VectorN &_f)
       : x(_x),
         y(_y),
         x_indexer(_x),
@@ -285,6 +285,216 @@ private:
         {
             auto dfdx = F.submdspan_1d(i, std::full_extent, 1, 0);
             F.move_into_submdspan(calc_slopes(y, dfdx), i, std::full_extent, 1, 1);
+        }
+    }
+
+};
+
+
+template<typename T, std::size_t N>
+class CubicCellND
+{
+    static constexpr std::size_t order = 4;
+    static constexpr std::size_t numCorners = 1 << N;
+    static constexpr std::size_t numCoeffs = 1 << (2 * N);
+    using CoeffsArray = std::array<T, numCoeffs>;
+    using ArrayN = std::array<T, N>;
+    using Array = std::array<T, order>;
+    using Array2 = std::array<Array, order>;
+    using Delta = std::array<Array2, N>;
+    using IndexArray = std::array<std::size_t, N>;
+    using Span = std::span<const T>;
+    using Spans = std::array<Span, N>;
+    using Mdspan = std::mdspan<const T, std::dextents<std::size_t, 2*N>, std::layout_stride>;
+public:
+    explicit CubicCellND(const Mdspan &F, const Spans &x)
+      : coeffs(calc_coeffs(x, F))
+    {
+    }
+    ~CubicCellND() = default;
+
+    template <typename... Args>
+    requires (sizeof...(Args) == N)
+    T eval(Args&&... args) const
+    {
+        return eval_poly<0>(0, {std::forward<Args>(args)...});
+    }
+
+private:
+    const CoeffsArray coeffs;
+
+    const CoeffsArray calc_coeffs(const Spans &x, const Mdspan &F) const {
+        const ArrayN h = calc_h(x);
+        const T h3 = calc_h3(h);
+        const Delta delta = calc_delta(x);
+        CoeffsArray _coeffs = {};
+        std::array<std::size_t, 2*N> indices = {};
+        for (std::size_t m_idx = 0; m_idx < numCoeffs; ++m_idx) {
+            for (std::size_t i = 0; i < numCorners; ++i) {
+                for (std::size_t j = 0; j < numCorners; ++j) {
+                    T product = T{1.0};
+                    for (std::size_t k = 0; k < N; ++k) {
+                        std::size_t i_k = (i >> k) & 1;
+                        std::size_t j_k = (j >> k) & 1;
+                        std::size_t ij_k = (i_k << 1) | j_k;
+                        std::size_t m_k = (m_idx >> (k * 2)) & 3;
+                        indices[k]   = i_k;
+                        indices[k+N] = j_k;
+                        T h_factor = (j_k == 0) ? 1.0 : h[k];
+                        product *= h_factor * delta[k][ij_k][m_k];
+                    }
+                    _coeffs[m_idx] += F(indices)*product;
+                }
+            }
+            _coeffs[m_idx] /= h3;
+        }
+        return _coeffs;
+    }
+
+    const Array2 calc_delta_ij(const Span &xi) const 
+    {
+        const T x0 = xi[0];
+        const T x1 = xi[1];
+        const T x02 = x0*x0;
+        const T x12 = x1*x1;
+        return {{{x12*(x1 - 3.0*x0), +6.0*x0*x1,           -3.0*(x0 + x1), +2.0},
+                 {-x0*x12,           x1*(2.0*x0 + x1),     -(x0 + 2.0*x1), +1.0},
+                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
+                 {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
+    }
+
+    const Delta calc_delta(const Spans &x) const 
+    {
+        return std::apply(
+            [this](const auto&... xi) { return Delta{calc_delta_ij(xi)...}; },
+            x
+        );
+    }
+
+    const ArrayN calc_h(const Spans &x) const
+    {
+        return std::apply(
+            [](const auto&... xi) { return ArrayN{(xi[1] - xi[0])...}; },
+            x
+        );
+    }
+
+    const T calc_h3(const ArrayN &h) const
+    {
+        T h3 = std::apply(
+            [](const auto&... hi) { return T{(hi * ...)}; },
+            h
+        );
+        return h3*h3*h3;
+    }
+
+    template <std::size_t Base, std::size_t Exp>
+    constexpr std::size_t power() {
+        if constexpr (Exp == 0)
+        {
+            return T{1.0};
+        }
+        return Base*power<Base, Exp-1>();
+    }
+
+    template <std::size_t d>
+    constexpr T eval_poly(std::size_t offset, const std::array<T, N>& x)
+    {
+        if constexpr (d == N)
+        {
+            return coeffs[offset];
+        }
+
+        constexpr std::size_t stride = power<order, N-d-1>();
+        T c0 = eval_poly<d+1>(offset, x);
+        T c1 = eval_poly<d+1>(offset + stride, x);
+        T c2 = eval_poly<d+1>(offset + 2*stride, x);
+        T c3 = eval_poly<d+1>(offset + 3*stride, x);
+        return c0 + x[d]*(c1 + x[d]*(c2 + x[d]*c3));
+    }
+
+};
+
+
+
+template <typename T, std::size_t N>
+class CubicInterpND
+{
+    using Vector = std::vector<T>;
+    using Array = std::array<Vector, N>;
+    using Cell = CubicCell2D<T>;
+    using Cells = cip::VectorN<Cell, N>;
+    using Span = std::span<const T>;
+    using Mdspan = std::mdspan<T, std::dextents<std::size_t, N>, std::layout_stride>;
+    using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
+    using VectorN = cip::VectorN<T, N>;
+    using VectorN2 = cip::VectorN<T, 2*N>;
+    using Pr = std::pair<std::size_t, std::size_t>;
+    using Indexers = std::array<cip::Indexer<T>, N>;
+public:
+    template <typename... Args>    
+    CubicInterpND(const VectorN &_f, const Args & ... _xi)
+      : xi{_xi...}, 
+        indexers{cip::Indexer<T>(_xi)...}, 
+        F(T{}, {_xi.size()..., ((void)_xi, 2)...}),
+        cells({(_xi.size()-1)...})
+    {
+    }
+    virtual ~CubicInterpND() { }
+
+    virtual Vector calc_slopes(const Vector &x, const Mdspan1D &f) const = 0;
+
+    template <typename... Args>
+    void build(const VectorN &f, const Args & ... _xi) const
+    {
+        populate_F(f, _xi...);
+        build_cell(cells);
+    }
+
+    template <typename... Args>
+    T eval(const Args&... args) const
+    {
+        std::size_t dim = 0;
+        std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
+        return cells(indices).eval(args...);
+    }
+
+
+private:
+    const Array xi;
+    const Indexers indexers;
+    Cells cells;
+    VectorN2 F;
+
+    template <typename... Args>
+    void populate_F(VectorN f, const Args & ... _xi) { // pass by value, to create a copy, which will be moved into F
+        // First fill in the normal values of f
+        F.move_into_submdspan(std::move(f), ((void)_xi, std::full_extent)..., ((void)_xi, 0)...);
+        // Now fill in the slopes
+        
+        std::array<std::size_t, N> indices = { _xi.size()... };
+        
+    }
+
+    template <typename... Indices>
+    typename std::enable_if<(sizeof...(Indices) == N), void>::type
+    build_cell(Cells & _cells, Indices... indices) const
+    {
+        std::size_t index = 0;
+        std::array<Span, N> spans = {Span(&xi[index++][indices], 2)...};
+        _cells.emplace_back(
+            F.submdspan(Pr{indices, indices+1}..., ((void)indices, std::full_extent)...),
+            spans
+        );
+    }
+
+    template <typename... Indices>
+    typename std::enable_if<(sizeof...(Indices) < N), void>::type
+    build_cell(Cells &_cells, Indices... indices) const
+    {
+        for (std::size_t i = 0; i < xi[sizeof...(indices)].size()-1; ++i)
+        {
+            build_cell(_cells, indices..., i);
         }
     }
 
