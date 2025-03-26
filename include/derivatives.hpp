@@ -68,11 +68,6 @@ void call_move_into_submdspan(FType& F, SlopeType&& slopes, const CoordTuple& co
     }, std::tuple_cat(coord, deriv));
 }
 
-//────────────────────────────────────────────────────────────────────────────
-// New helpers for mixed derivatives
-//────────────────────────────────────────────────────────────────────────────
-
-// Helper: create a tuple of N zeros (of type std::size_t).
 template <std::size_t N>
 constexpr auto make_zero_tuple() {
     return []<std::size_t... I>(std::index_sequence<I...>) {
@@ -80,7 +75,6 @@ constexpr auto make_zero_tuple() {
     }(std::make_index_sequence<N>{});
 }
 
-// Helper: update element D in a tuple with new_value.
 template <std::size_t D, typename Tuple, typename T>
 constexpr auto update_tuple_element(const Tuple& tup, T new_value) {
     constexpr std::size_t N = std::tuple_size_v<Tuple>;
@@ -89,7 +83,6 @@ constexpr auto update_tuple_element(const Tuple& tup, T new_value) {
     }(tup, new_value, std::make_index_sequence<N>{});
 }
 
-// Helper: iterate over each dimension in the tuple whose value is 0.
 template <std::size_t N, typename Tuple, typename Func, std::size_t... Is>
 constexpr void for_each_dimension_impl(const Tuple& tup, Func&& func, std::index_sequence<Is...>) {
     // For each index, if std::get<Is>(tup)==0, call func with that index (wrapped in an integral_constant)
@@ -101,37 +94,27 @@ constexpr void for_each_dimension(const Tuple& tup, Func&& func) {
     for_each_dimension_impl<N>(tup, std::forward<Func>(func), std::make_index_sequence<N>{});
 }
 
-//────────────────────────────────────────────────────────────────────────────
-// Mixed derivative computation.
-//────────────────────────────────────────────────────────────────────────────
-
-// Recursively compute mixed derivatives using the current derivative pattern.
 template <std::size_t N, typename FType, typename XiArray, typename DerivTuple>
 void compute_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTuple& currentDeriv, std::size_t start = 0) {
-    // For every dimension D where the current derivative flag is 0:
     for_each_dimension<N>(currentDeriv, [&](auto d_const) {
         constexpr std::size_t D = d_const.value;
         if (D < start) {
-            return; // Skip dimensions lower than the current start.
+            return;
         }
         iterate_over_indices<N, D>([&](auto... loopIndices) {
             auto indicesTuple = std::make_tuple(loopIndices...);
             auto coord = build_coordinate_indices<N, D>(indicesTuple);
-            // For extraction, force derivative 0 in dimension D.
             auto extractionPattern = update_tuple_element<D>(currentDeriv, 0);
             auto f_slice = call_submdspan_1d(F, coord, extractionPattern);
             auto slopes = calc_slopes(xi[D], f_slice);
-            // For writing, update derivative pattern: set derivative flag 1 in dimension D.
             auto newDeriv = update_tuple_element<D>(currentDeriv, 1);
             call_move_into_submdspan(F, slopes, coord, newDeriv);
         }, xi);
-        // Recurse with the updated derivative pattern.
         auto newDeriv = update_tuple_element<D>(currentDeriv, 1);
         compute_mixed_derivatives_impl<N>(F, xi, newDeriv, D+1);
     });
 }
 
-// Public interface for mixed derivatives.
 template <std::size_t N, typename FType, typename XiArray>
 void compute_mixed_derivatives(FType& F, XiArray const& xi) {
     auto basePattern = make_zero_tuple<N>(); // all derivative flags are 0.
