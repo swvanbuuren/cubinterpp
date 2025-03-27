@@ -28,43 +28,43 @@ void iterate_over_indices(Func&& func, XiArray const& xi, Indices... indices) {
     }
 }
 
-template <std::size_t N, std::size_t D, typename Tuple>
-constexpr auto build_coordinate_indices(const Tuple& tuple) {
-    return [tuple]<std::size_t... Is>(std::index_sequence<Is...>) {
-        return std::make_tuple(
-            ([&]() constexpr {
-                if constexpr (Is == D) {
-                    return FULL_EXTENT_SENTINEL;
-                } else if constexpr (Is < D) {
-                    return std::get<Is>(tuple);
-                } else {
-                    return std::get<Is - 1>(tuple);
-                }
-            }())...
-        );
-    }(std::make_index_sequence<N>{});
+template <std::size_t I, std::size_t N, std::size_t D, typename Tuple, typename Accum>
+constexpr auto build_coordinate_indices_impl(const Tuple& t, Accum acc) {
+    if constexpr (I == N) {
+        return acc;
+    } else {
+        if constexpr (I == D) {
+            return build_coordinate_indices_impl<I + 1, N, D>(
+                t, std::tuple_cat(acc, std::make_tuple(std::full_extent))
+            );
+        } else if constexpr (I < D) {
+            return build_coordinate_indices_impl<I + 1, N, D>(
+                t, std::tuple_cat(acc, std::make_tuple(std::get<I>(t)))
+            );
+        } else {
+            return build_coordinate_indices_impl<I + 1, N, D>(
+                t, std::tuple_cat(acc, std::make_tuple(std::get<I - 1>(t)))
+            );
+        }
+    }
 }
 
-template<typename T>
-constexpr auto convert_index(T idx) {
-    if constexpr (std::is_same_v<T, std::size_t>) {
-        return idx == FULL_EXTENT_SENTINEL ? std::full_extent : idx;
-    } else {
-        return idx;
-    }
+template <std::size_t N, std::size_t D, typename Tuple>
+constexpr auto build_coordinate_indices(const Tuple& t) {
+    return build_coordinate_indices_impl<0, N, D>(t, std::tuple<>());
 }
 
 template <typename FType, typename CoordTuple, typename DerivTuple>
 auto call_submdspan_1d(FType& F, const CoordTuple& coord, const DerivTuple& deriv) {
     return std::apply([&F](const auto&... args) {
-        return F.submdspan_1d(convert_index(args)...);
+        return F.submdspan_1d(args...);
     }, std::tuple_cat(coord, deriv));
 }
 
 template <typename FType, typename SlopeType, typename CoordTuple, typename DerivTuple>
 void call_move_into_submdspan(FType& F, SlopeType&& slopes, const CoordTuple& coord, const DerivTuple& deriv) {
     std::apply([&F, &slopes](const auto&... args) {
-        F.move_into_submdspan(std::forward<SlopeType>(slopes), convert_index(args)...);
+        F.move_into_submdspan(std::forward<SlopeType>(slopes),args...);
     }, std::tuple_cat(coord, deriv));
 }
 
@@ -85,7 +85,6 @@ constexpr auto update_tuple_element(const Tuple& tup, T new_value) {
 
 template <std::size_t N, typename Tuple, typename Func, std::size_t... Is>
 constexpr void for_each_dimension_impl(const Tuple& tup, Func&& func, std::index_sequence<Is...>) {
-    // For each index, if std::get<Is>(tup)==0, call func with that index (wrapped in an integral_constant)
     ((std::get<Is>(tup) == 0 ? (func(std::integral_constant<std::size_t, Is>{}), 0) : 0), ...);
 }
 
@@ -117,7 +116,7 @@ void compute_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTupl
 
 template <std::size_t N, typename FType, typename XiArray>
 void compute_mixed_derivatives(FType& F, XiArray const& xi) {
-    auto basePattern = make_zero_tuple<N>(); // all derivative flags are 0.
+    auto basePattern = make_zero_tuple<N>();
     compute_mixed_derivatives_impl<N>(F, xi, basePattern, 0);
 }
 
