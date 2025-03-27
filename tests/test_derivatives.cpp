@@ -2,18 +2,37 @@
 #include <cubinterpp.hpp>
 
 
+// template <typename Tuple>
+// void print_tuple(const Tuple& tup) {
+//     bool first = true;
+//     std::apply([&first](const auto&... elems) {
+//         ((std::cout << (first ? "" : ", ")
+//                      << (elems == cip::FULL_EXTENT_SENTINEL
+//                              ? "std::full_extent"
+//                              : std::to_string(elems)),
+//           first = false), ...);
+//     }, tup);
+// }
+
+std::string to_string_helper(decltype(std::full_extent)) {
+    return "std::full_extent";
+}
+
+// Overload for numeric types (or any type that std::to_string supports).
+template <typename T>
+std::enable_if_t<!std::is_same_v<std::remove_cv_t<T>, std::remove_cv_t<decltype(std::full_extent)>>, std::string>
+to_string_helper(const T& value) {
+    return std::to_string(value);
+}
+
 template <typename Tuple>
 void print_tuple(const Tuple& tup) {
     bool first = true;
     std::apply([&first](const auto&... elems) {
-        ((std::cout << (first ? "" : ", ")
-                     << (elems == cip::FULL_EXTENT_SENTINEL
-                             ? "std::full_extent"
-                             : std::to_string(elems)),
+        ((std::cout << (first ? "" : ", ") << to_string_helper(elems),
           first = false), ...);
     }, tup);
 }
-
 template <std::size_t N, typename FType, typename XiArray, typename DerivTuple>
 void print_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTuple& currentDeriv, std::size_t start = 0) {
     cip::for_each_dimension<N>(currentDeriv, [&](auto d_const) {
