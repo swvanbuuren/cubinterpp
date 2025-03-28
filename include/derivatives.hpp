@@ -9,9 +9,6 @@
 namespace cip {
 
 
-constexpr std::size_t FULL_EXTENT_SENTINEL = std::numeric_limits<std::size_t>::max();
-
-
 template <std::size_t N, std::size_t D, std::size_t current = 0, typename Func, typename XiArray, typename... Indices>
 void iterate_over_indices(Func&& func, XiArray const& xi, Indices... indices) {
     if constexpr (current == N) {
