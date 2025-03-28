@@ -2,18 +2,6 @@
 #include <cubinterpp.hpp>
 
 
-// template <typename Tuple>
-// void print_tuple(const Tuple& tup) {
-//     bool first = true;
-//     std::apply([&first](const auto&... elems) {
-//         ((std::cout << (first ? "" : ", ")
-//                      << (elems == cip::FULL_EXTENT_SENTINEL
-//                              ? "std::full_extent"
-//                              : std::to_string(elems)),
-//           first = false), ...);
-//     }, tup);
-// }
-
 std::string to_string_helper(decltype(std::full_extent)) {
     return "std::full_extent";
 }
