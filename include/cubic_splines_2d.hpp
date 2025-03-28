@@ -15,9 +15,9 @@ class MonotonicSpline2D : public CubicInterp2D<T, N>
     using VectorN = cip::VectorN<T, N>;
 public:
 MonotonicSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_x, _y, _f)
+    : CubicInterp2D<T>(_f, _x, _y)
     {
-        this->build(_f);
+        this->build(_f, _x, _y);
     }
     ~MonotonicSpline2D() {}
 
@@ -36,9 +36,9 @@ class AkimaSpline2D : public CubicInterp2D<T, N>
     using VectorN = cip::VectorN<T, N>;
 public:
     AkimaSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_x, _y, _f)
+    : CubicInterp2D<T>(_f, _x, _y)
     {
-        this->build(_f);
+        this->build(_f, _x, _y);
     }
     ~AkimaSpline2D() {}
 
@@ -58,9 +58,9 @@ class NaturalSpline2D : public CubicInterp2D<T, N>
     using VectorN = cip::VectorN<T, N>;
 public:
     NaturalSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_x, _y, _f)
+    : CubicInterp2D<T>(_f, _x, _y)
     {
-        this->build(_f);
+        this->build(_f, _x, _y);
     }
     ~NaturalSpline2D() {}
 

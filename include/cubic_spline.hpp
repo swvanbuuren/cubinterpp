@@ -9,6 +9,7 @@
 #include <mdspan/mdspan.hpp>
 #include "utils.hpp"
 #include "vectorn.hpp"
+#include "derivatives.hpp"
 
 
 namespace cip {
@@ -207,6 +208,7 @@ template <typename T, std::size_t N=2>
 class CubicInterp2D
 {
     using Vector = std::vector<T>;
+    using Array = std::array<Vector, N>;
     using Cell = CubicCell2D<T>;
     using Cells = cip::VectorN<Cell, N>;
     using Span = std::span<const T>;
@@ -215,77 +217,61 @@ class CubicInterp2D
     using VectorN = cip::VectorN<T, N>;
     using VectorN2 = cip::VectorN<T, 2*N>;
     using Pr = std::pair<std::size_t, std::size_t>;
+    using Indexers = std::array<cip::Indexer<T>, N>;
 public:
-    CubicInterp2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-      : x(_x),
-        y(_y),
-        x_indexer(_x),
-        y_indexer(_y),
-        F(T{}, {x.size(), y.size(), 2, 2}),
-        cells({x.size()-1, y.size()-1})
+    template <typename... Args>    
+    CubicInterp2D(const VectorN &_f, const Args & ... _xi)
+      : xi{_xi...},
+        indexers{cip::Indexer<T>(_xi)...},
+        F(T{}, {_xi.size()..., ((void)_xi, 2)...}),
+        cells({(_xi.size()-1)...})
     {
     }
     virtual ~CubicInterp2D() { }
 
     virtual Vector calc_slopes(const Vector &x, const Mdspan1D &f) const = 0;
 
-    void build(const VectorN &f)
+    template <typename... Args>
+    void build(const VectorN &f, const Args & ... _xi)
     {
-        populate_F(f);
-        const std::size_t nx = x.size();
-        const std::size_t ny = y.size();
+        populate_F(f, _xi...);
+        const std::size_t nx = xi[0].size();
+        const std::size_t ny = xi[1].size();
         for (auto i = 0; i < nx-1; ++i)
         {
             for (auto j = 0; j < ny-1; ++j)
             {
                 cells.emplace_back(
-                    Span(&x[i], 2), Span(&y[j], 2),
+                    Span(&xi[0][i], 2), Span(&xi[1][j], 2),
                     F.submdspan(Pr{i, i+1}, Pr{j, j+1}, std::full_extent, std::full_extent));
             }
-            
         }
     }
 
-    T eval(const T xi, const T yi) const
+    template <typename... Args>
+    T eval(const Args&... args) const
     {
-        return cells(x_indexer.sort_index(xi), 
-                     y_indexer.sort_index(yi)).eval(xi, yi);
-    };
+        std::size_t dim = 0;
+        std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
+        return cells(indices).eval(args...);
+    }
 
 
 private:
+    const Array xi;
     const Vector x;
     const Vector y;
-    const cip::Indexer<T> x_indexer;
-    const cip::Indexer<T> y_indexer;
+    const Indexers indexers;
     Cells cells;
     VectorN2 F;
 
-    void populate_F(VectorN f) { // pass by value, to create a copy, which will be moved into F
-        const std::size_t nx = x.size();
-        const std::size_t ny = y.size();
-        // First fill in the normal values of f
-        F.move_into_submdspan(std::move(f), std::full_extent, std::full_extent, 0, 0);
-        // Now fill in the slopes
-        // df/dx
-        for (std::size_t i = 0; i < ny; ++i)
-        {
-            auto fx = F.submdspan_1d(std::full_extent, i, 0, 0);
-            F.move_into_submdspan(calc_slopes(x, fx), std::full_extent, i, 1, 0);
-
-        }
-        // df/dy
-        for (std::size_t i = 0; i < nx; ++i)
-        {
-            auto fy = F.submdspan_1d(i, std::full_extent, 0, 0);
-            F.move_into_submdspan(calc_slopes(y, fy), i, std::full_extent, 0, 1);
-        }
-        // d2f/dxdy
-        for (std::size_t i = 0; i < nx; ++i)
-        {
-            auto dfdx = F.submdspan_1d(i, std::full_extent, 1, 0);
-            F.move_into_submdspan(calc_slopes(y, dfdx), i, std::full_extent, 1, 1);
-        }
+    template <typename... Args>
+    void populate_F(VectorN f, const Args & ... _xi) { // NOTE: pass f by value, which will be moved into F
+        F.move_into_submdspan(std::move(f), ((void)_xi, std::full_extent)..., ((void)_xi, 0)...);
+        auto slopesLambda = [this](const Vector &x, const Mdspan1D &f_slice) -> Vector {
+            return this->calc_slopes(x, f_slice);
+        };
+        cip::compute_mixed_derivatives<N>(F, xi, slopesLambda);
     }
 
 };
@@ -471,9 +457,7 @@ private:
         // First fill in the normal values of f
         F.move_into_submdspan(std::move(f), ((void)_xi, std::full_extent)..., ((void)_xi, 0)...);
         // Now fill in the slopes
-        
-        std::array<std::size_t, N> indices = { _xi.size()... };
-        
+        cip::compute_mixed_derivatives<N>(F, xi);
     }
 
     template <typename... Indices>
