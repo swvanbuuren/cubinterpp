@@ -2,18 +2,19 @@
 
 #include "cubic_spline.hpp"
 #include "slopes.hpp"
+#include <cstddef>
 
 
 namespace cip {
 
 
-template <typename T>
-class MonotonicSpline1D : public CubicInterp1D<T>
+template <typename T, std::size_t N=1>
+class MonotonicSpline1D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
 public:
     MonotonicSpline1D(const Vector &x, const Vector &f)
-    : CubicInterp1D<T>(x, f)
+    : CubicInterpND<T, N>(x, f)
     {
         this->build(f);
     }
@@ -27,13 +28,13 @@ public:
 };
 
 
-template <typename T>
-class AkimaSpline1D : public CubicInterp1D<T>
+template <typename T, std::size_t N=1>
+class AkimaSpline1D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
 public:
     AkimaSpline1D(const Vector &x, const Vector &f)
-    : CubicInterp1D<T>(x, f)
+    : CubicInterpND<T, N>(x, f)
     {
         this->build(f);
     }
@@ -47,13 +48,13 @@ public:
 };
 
 
-template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::Natural>
-class NaturalSpline1D : public CubicInterp1D<T>
+template <typename T, std::size_t N=1, cip::BoundaryConditionType BC=cip::BoundaryConditionType::Natural>
+class NaturalSpline1D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
 public:
     NaturalSpline1D(const Vector &x, const Vector &f)
-    : CubicInterp1D<T>(x, f)
+    : CubicInterpND<T, N>(x, f)
     {
         this->build(f);
     }

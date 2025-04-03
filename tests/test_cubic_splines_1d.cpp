@@ -6,9 +6,9 @@
 using Vector = std::vector<double>;
 using MonotonicSpline = cip::MonotonicSpline1D<double>;
 using AkimaSpline = cip::AkimaSpline1D<double>;
-using NaturalSpline = cip::NaturalSpline1D<double, cip::BoundaryConditionType::Natural>;
-using NaturalSplineNotAKnot = cip::NaturalSpline1D<double, cip::BoundaryConditionType::NotAKnot>;
-using NaturalSplineClamped = cip::NaturalSpline1D<double, cip::BoundaryConditionType::Clamped>;
+using NaturalSpline = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Natural>;
+using NaturalSplineNotAKnot = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::NotAKnot>;
+using NaturalSplineClamped = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Clamped>;
 
 
 TEST(TestCubicSpline1D, test_monotonic_spline_1d) {

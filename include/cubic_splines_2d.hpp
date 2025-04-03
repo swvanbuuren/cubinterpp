@@ -8,14 +8,14 @@ namespace cip {
 
 
 template <typename T, std::size_t N=2>
-class MonotonicSpline2D : public CubicInterp2D<T, N>
+class MonotonicSpline2D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
     using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using VectorN = cip::VectorN<T, N>;
 public:
 MonotonicSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_f, _x, _y)
+    : CubicInterpND<T, N>(_f, _x, _y)
     {
         this->build(_f, _x, _y);
     }
@@ -29,14 +29,14 @@ MonotonicSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
 
 
 template <typename T, std::size_t N=2>
-class AkimaSpline2D : public CubicInterp2D<T, N>
+class AkimaSpline2D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
     using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using VectorN = cip::VectorN<T, N>;
 public:
     AkimaSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_f, _x, _y)
+    : CubicInterpND<T, N>(_f, _x, _y)
     {
         this->build(_f, _x, _y);
     }
@@ -51,14 +51,14 @@ public:
 
 
 template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::NotAKnot, std::size_t N=2>
-class NaturalSpline2D : public CubicInterp2D<T, N>
+class NaturalSpline2D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
     using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using VectorN = cip::VectorN<T, N>;
 public:
     NaturalSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
-    : CubicInterp2D<T>(_f, _x, _y)
+    : CubicInterpND<T, N>(_f, _x, _y)
     {
         this->build(_f, _x, _y);
     }

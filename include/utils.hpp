@@ -80,4 +80,17 @@ T binomial_power_coefficient(const T y, const int n, const int k)
     return binomial(n, k)*std::pow(y, n-k);
 }
 
+
+template <std::size_t Base, std::size_t Exp>
+constexpr std::size_t power()
+{
+    if constexpr (Exp <= 0)
+    {
+        return 1;
+    } else {
+        return Base*power<Base, Exp-1>();
+    }
+}
+
+
 } // namespace utils
