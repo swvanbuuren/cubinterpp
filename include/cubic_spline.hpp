@@ -135,6 +135,7 @@ private:
 template <typename T, std::size_t N=2>
 class CubicInterpND
 {
+    static constexpr std::size_t size_t_two = 2;
     using Vector = std::vector<T>;
     using Array = std::array<Vector, N>;
     using Cell = CubicCellND<T, N>;
@@ -151,7 +152,7 @@ public:
     CubicInterpND(const VectorN &_f, const Args & ... _xi)
       : xi{_xi...},
         indexers{cip::Indexer<T>(_xi)...},
-        F(T{}, {_xi.size()..., ((void)_xi, 2)...}),
+        F(T{}, {_xi.size()..., ((void)_xi, size_t_two)...}),
         cells({(_xi.size()-1)...})
     {
     }

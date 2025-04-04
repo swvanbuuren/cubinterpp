@@ -65,10 +65,12 @@ void call_move_into_submdspan(FType& F, SlopeType&& slopes, const CoordTuple& co
     }, std::tuple_cat(coord, deriv));
 }
 
+constexpr std::size_t SIZE_T_ZERO = 0;
+
 template <std::size_t N>
 constexpr auto make_zero_tuple() {
     return []<std::size_t... I>(std::index_sequence<I...>) {
-        return std::make_tuple(((void)I, static_cast<std::size_t>(0))...);
+        return std::make_tuple(((void)I, SIZE_T_ZERO)...);
     }(std::make_index_sequence<N>{});
 }
 
