@@ -94,7 +94,7 @@ constexpr void for_each_dimension(const Tuple& tup, Func&& func) {
 
 template <std::size_t N, typename FType, typename XiArray, typename DerivTuple, typename CalcSlopesFunctor>
 void compute_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTuple& currentDeriv, CalcSlopesFunctor calcSlopes, std::size_t start = 0) {
-    for_each_dimension<N>(currentDeriv, [&](auto d_const) {
+    for_each_dimension<N>(currentDeriv, [&](const auto d_const) {
         constexpr std::size_t D = d_const.value;
         if (D < start) {
             return;
