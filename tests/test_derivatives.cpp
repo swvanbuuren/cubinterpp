@@ -28,7 +28,8 @@ void print_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTuple&
         if (D < start) {
             return;
         }
-        cip::iterate_over_indices<N, D>([&](auto... loopIndices) {
+        cip::iterate_over_indices<N, D>([&, d_const](auto... loopIndices) {
+            constexpr std::size_t D = d_const.value;
             auto indicesTuple = std::make_tuple(loopIndices...);
             auto coord = cip::build_coordinate_indices<N, D>(indicesTuple);
             auto extractionPattern = cip::update_tuple_element<D>(currentDeriv, 0);

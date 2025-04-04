@@ -99,7 +99,8 @@ void compute_mixed_derivatives_impl(FType& F, XiArray const& xi, const DerivTupl
         if (D < start) {
             return;
         }
-        iterate_over_indices<N, D>([&](auto... loopIndices) {
+        iterate_over_indices<N, D>([&, d_const](auto... loopIndices) {
+            constexpr std::size_t D = d_const.value;
             auto indicesTuple = std::make_tuple(loopIndices...);
             auto coord = build_coordinate_indices<N, D>(indicesTuple);
             auto extractionPattern = update_tuple_element<D>(currentDeriv, 0);
