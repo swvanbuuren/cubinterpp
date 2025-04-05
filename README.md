@@ -1,6 +1,7 @@
 # cubinterpp
 
-Cubic and linear interpolation in C++ with Python support.
+`N`-dimensional cubic and linear interpolation in modern C++ with Python
+support.
 
 | ![Comparison of 1D interpolation types](docs/images/comparison_1D.svg) |
 |:--:|
@@ -18,7 +19,7 @@ Cubic and linear interpolation in C++ with Python support.
 ## Introduction
 
 This C++ header library features tools for piecewise linear and cubic
-interpolation.
+interpolation in `N` dimensions.
 
 For cubic piecewise interpolation, the library features three types:
 
