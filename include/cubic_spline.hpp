@@ -132,7 +132,7 @@ private:
 
 
 
-template <typename T, std::size_t N=2>
+template <typename T, std::size_t N>
 class CubicInterpND
 {
     static constexpr std::size_t size_t_two = 2;
