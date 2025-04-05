@@ -11,8 +11,8 @@ using Vector3 = std::vector<Vector2>;
 
 constexpr double TOLERANCE_DEFAULT = 5.0e-12;
 
-template <typename T, double tol=TOLERANCE_DEFAULT>
-testing::AssertionResult Interp1DAssertions(Vector x, Vector f, Vector x_fine, Vector f_fine) {
+template <typename T>
+testing::AssertionResult Interp1DAssertions(Vector x, Vector f, Vector x_fine, Vector f_fine, double tol=TOLERANCE_DEFAULT) {
     T interp(x, f);
     for ( auto i = 0; i < x_fine.size(); i++ ) {
         auto val = interp.eval(x_fine[i]);
@@ -26,8 +26,8 @@ testing::AssertionResult Interp1DAssertions(Vector x, Vector f, Vector x_fine, V
 
 
 
-template <typename T, double tol=5.0e-7>
-testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine) {
+template <typename T>
+testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, const Vector2 &f, const Vector &x_fine, const Vector &y_fine, const Vector2 &f_fine, double tol=TOLERANCE_DEFAULT) {
     T interp2(x, y, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {
@@ -42,8 +42,8 @@ testing::AssertionResult Interp2DAssertions(const Vector &x, const Vector &y, co
 }
 
 
-template <typename T, double tol=TOLERANCE_DEFAULT>
-testing::AssertionResult Interp3DAssertions(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f, const Vector &x_fine, const Vector &y_fine, const Vector &z_fine, const Vector3 &f_fine) {
+template <typename T>
+testing::AssertionResult Interp3DAssertions(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f, const Vector &x_fine, const Vector &y_fine, const Vector &z_fine, const Vector3 &f_fine, double tol=TOLERANCE_DEFAULT) {
     T interp3(x, y, z, f);
     for ( auto i = 0; i < x_fine.size(); ++i ) {
         for ( auto j = 0; j < y_fine.size(); ++j ) {

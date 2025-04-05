@@ -56,29 +56,39 @@ def get_test_data_2d(case='standard'):
     return x, y, f
 
 
-def get_test_data_3d(case='standard'):
-    """ Generate 2D test data """
+def get_test_data_3d(case='normalized'):
+    """ Generate 3D test data """
     match case:
         case 'normalized':
-            x = np.array([0.0, 1.0, 2.0])
-            y = np.array([0.0, 1.0, 2.0])
-            z = np.array([0.0, 1.0, 2.0])
+            x = np.array([0.0, 1.0, 2.0, 3.0])
+            y = np.array([0.0, 1.0, 2.0, 3.0])
+            z = np.array([0.0, 1.0, 2.0, 3.0])
             # generate some similar 3d data for f as for 2d data
             f = np.array([
                           [
-                           [1.0, 2.0, 2.0],
-                           [2.0, 3.0, 3.0],
-                           [3.0, 3.0, 4.0]
+                           [1.0, 2.0, 2.0, 2.0],
+                           [2.0, 3.0, 3.0, 3.0],
+                           [3.0, 3.0, 4.0, 4.0],
+                           [4.0, 4.0, 4.0, 5.0]
                           ],
                           [
-                           [3.0, 4.0, 4.0],
-                           [4.0, 5.0, 5.0],
-                           [5.0, 5.0, 6.0]
+                           [3.0, 4.0, 4.0, 4.0],
+                           [4.0, 5.0, 5.0, 5.0],
+                           [5.0, 5.0, 6.0, 6.0],
+                           [6.0, 6.0, 6.0, 7.0]
+
                           ],
                           [
-                           [2.0, 3.0, 3.0],
-                           [3.0, 4.0, 4.0],
-                           [4.0, 4.0, 5.0]
+                           [2.0, 3.0, 3.0, 3.0],
+                           [3.0, 4.0, 4.0, 4.0],
+                           [4.0, 4.0, 5.0, 5.0],
+                           [5.0, 5.0, 5.0, 6.0]
+                          ],
+                          [
+                           [4.0, 5.0, 5.0, 5.0],
+                           [5.0, 6.0, 6.0, 6.0],
+                           [6.0, 6.0, 7.0, 7.0],
+                           [7.0, 7.0, 7.0, 8.0]
                           ]
                          ])
     return x, y, z, f
@@ -102,9 +112,9 @@ def scipy_interp_2d(x, y, f, x_fine, y_fine, method='linear'):  # noqa: PLR0913,
 
 
 def scipy_interp_3d(x, y, z, f, x_fine, y_fine, z_fine, method='linear'):  # noqa: PLR0913, PLR0917
-    interp2 = RegularGridInterpolator((x, y, z), f, method=method)
+    interp3 = RegularGridInterpolator((x, y, z), f, method=method)
     x_grid, y_grid, z_grid = np.meshgrid(x_fine, y_fine, z_fine, indexing='ij')
-    return interp2((x_grid, y_grid, z_grid))
+    return interp3((x_grid, y_grid, z_grid))
 
 
 def cpp_array(array, indent=0):
@@ -195,13 +205,14 @@ def generate_3d_example(case='normalized', size_fine=5, method='linear'):
 
 
 def main():
-    method = 'cubic_spline'
-    data_case = 'akima'
-    # data_case = 'normalized'
-    generate_1d_example(case=data_case, size_fine=20, method=method,
-                        bc_type='not-a-knot')
+    # method = 'cubic_spline'
+    # data_case = 'akima'
+    method = 'cubic'
+    data_case = 'normalized'
+    # generate_1d_example(case=data_case, size_fine=20, method=method,
+    #                    bc_type='not-a-knot')
     # generate_2d_example(case=data_case, size_fine=5, method=method)
-    # generate_3d_example(case=data_case, size_fine=5, method=method)
+    generate_3d_example(case=data_case, size_fine=5, method=method)
 
 
 if __name__ == '__main__':

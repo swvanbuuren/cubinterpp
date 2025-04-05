@@ -8,3 +8,4 @@
 #include "cubic_spline.hpp"
 #include "cubic_splines_1d.hpp"
 #include "cubic_splines_2d.hpp"
+#include "cubic_splines_3d.hpp"

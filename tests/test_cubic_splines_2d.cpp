@@ -5,6 +5,7 @@
 
 using Vector = std::vector<double>;
 using NaturalSpline = cip::NaturalSpline2D<double, cip::BoundaryConditionType::NotAKnot>;
+constexpr double TOLERANCE = 5.0e-7;
 
 // Note: this test uses the 2D assertions with significant higher tolerance (presumably due
 // the use of different solvers that generated the comparion data)
@@ -33,5 +34,5 @@ TEST(TestCubicSpline2D, test_natural_spline_2d) {
                             { 0.0, 0.7451146968813961, 3.042391346120999, 3.0605103436991183, 3.0620893186554166 }, 
                             { 0.0, 0.0, 0.0, 0.0, 0.0 }
                           };
-    ASSERT_TRUE(cip::Interp2DAssertions<NaturalSpline>(x, y, f, x_fine, y_fine, f_fine));    
+    ASSERT_TRUE(cip::Interp2DAssertions<NaturalSpline>(x, y, f, x_fine, y_fine, f_fine, TOLERANCE));    
 }

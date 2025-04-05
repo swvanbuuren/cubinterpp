@@ -55,4 +55,8 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
         .def("eval", &cip::NaturalSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
+    py::class_<cip::NaturalSpline3D<double>>(m, "NaturalSpline3D")
+        .def(py::init<DoubleVector, DoubleVector, DoubleVector, DoubleVector3>())
+        .def("eval", &cip::NaturalSpline3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal);
+
 }
