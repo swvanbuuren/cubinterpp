@@ -152,26 +152,19 @@ private:
         return _cells;
     }
 
-
     template <typename... Indices>
-    typename std::enable_if<(sizeof...(Indices) == N), void>::type
-    build_cell(Cells & _cells, Indices... indices) const
-    {
-        std::size_t index = 0;
-        std::array<Span, N> spans = {Span(&xi[index++][indices], 2)...};
-        _cells.emplace_back(
-            f.submdspan(Pr{indices, indices+1}...),
-            spans
-        );
-    }
-
-    template <typename... Indices>
-    typename std::enable_if<(sizeof...(Indices) < N), void>::type
-    build_cell(Cells &_cells, Indices... indices) const
-    {
-        for (std::size_t i = 0; i < xi[sizeof...(indices)].size()-1; ++i)
-        {
-            build_cell(_cells, indices..., i);
+    void build_cell(Cells &_cells, Indices... indices) const {
+        if constexpr (sizeof...(Indices) == N) {
+            std::size_t index = 0;
+            std::array<Span, N> spans = {Span(&xi[index++][indices], 2)...};
+            _cells.emplace_back(
+                f.submdspan(Pr{indices, indices+1}...),
+                spans
+            );
+        } else {
+            for (std::size_t i = 0; i < xi[sizeof...(indices)].size()-1; ++i) {
+                build_cell(_cells, indices..., i);
+            }
         }
     }
 
