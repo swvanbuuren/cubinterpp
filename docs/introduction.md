@@ -19,10 +19,6 @@ The accompanying python script `main.py` in [cubinterpp
 ](https://github.com/swvanbuuren/cubinterpp/tree/master/cubinterpp) compares the
 interpolation types.
 
-## Data requirements
+The following figure features a comparison of 1D interpolation types that are supported by cubinterpp.
 
-`cubinterpp` is designed to only handle rectangular grid data with strictly
-ascending coordinates. To this end, coordinate data is only required in one
-dimensional form for each coordinate direction. Only the actual data itself
-needs to be supplied in the actual dimensions. The user is responsible to assure
-that the supplied data size of each dimension fits to the coordinate data.
+![Comparison of 1D interpolation types](images/comparison_1D.svg)

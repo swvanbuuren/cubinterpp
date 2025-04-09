@@ -27,34 +27,17 @@ For cubic piecewise interpolation, the library features three types:
 - Akima spline interpolation 
 - Natural cubic spline interpolation
 
-Linear as well as cubic interpolation is supported for `N`-dimensional data.
-
 All classes are templatized and support the STL's vector types.
 
 The accompanying python script in [cubinterpp ](cubinterpp ) compares the
 interpolation types.
 
-## Data requirements
+Refer to the [documentation](https://swvanbuuren.github.io/cubinterpp/) for:
 
-`cubinterpp` is designed to only handle rectangular grid data with strictly
-ascending coordinates. To this end, coordinate data is only required in one
-dimensional form for each coordinate direction. Only the actual data itself
-needs to be supplied in the actual dimensions. The user is responsible to assure
-that the supplied data size of each dimension fits to the coordinate data.
-
-## Usage
-
-The following instructions show how to build and test the cubinterpp header
-library in a python environment.
-
-### Prerequisites
-
-- C++ compiler, e.g. [gcc](https://gcc.gnu.org/)
-- [cmake](https://cmake.org/): to use the provided cmake configuration
-- [pybind11](https://github.com/pybind/pybind11): to compile the library header
-  into a python module
-- [mlpyqtgraph](https://github.com/swvanbuuren/mlpyqtgraph): to plot the
-  example's results
+- [Requirements](https://swvanbuuren.github.io/cubinterpp/requirements/)
+- [Usage instructions](https://swvanbuuren.github.io/cubinterpp/usage/)
+- [Mathematical background](https://swvanbuuren.github.io/cubinterpp/theory/)
+- [Code reference](https://swvanbuuren.github.io/cubinterpp/reference/)
 
 ### Building
 
@@ -120,35 +103,12 @@ This should install all required python dependencies automatically and run the
 python program that does the interpolation and plotting, resulting in the
 comparison plot shown at the top of this document.
 
-### Higher interpolation dimensions
+### Further reading
 
-By default, the library offers linear interpolation classes up to three
-dimensions with `std::vector` input types. If you'd like to implement higher
-dimensions, it's recommended to inherit from the `N-dimensional` interpolation
-class for a given dimension. For example, for three dimensional linear
-interpolation this could look like:
-
-```cpp
-#include "linear_interp.hpp"
-
-template <typename T>
-class LinearInterp3D : public LinearInterpND<T, 3> {
-    using Vector = std::vector<T>;
-    using Vector3 = cip::VectorN<T, 3>;
-public:
-    explicit LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
-    : LinearInterpND<T, 3>(f, x, y, z)
-    {}
-
-    ~LinearInterp3D() { }
-};
-```
-
-Note the counter-intuitive order of the constructor argument in
-`LinearInterpND`, due to the requirement that a parameter pack always needs to
-come last. This can be corrected in the inheriting classes constructor. Here,
-it's also possible to use different input types, which might differ per
-application.
+Check out the [usage
+instructions](https://swvanbuuren.github.io/cubinterpp/usage/) in the
+[documentation](https://swvanbuuren.github.io/cubinterpp/) for more details and
+examples.
 
 ## License
 
