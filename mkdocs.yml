@@ -19,6 +19,15 @@ plugins:
         python:
           options:
             show_root_toc_entry: false
+  - mkdoxy:
+      projects:
+        reference:
+          src-dirs: include/ src/
+          full-doc: True
+          doxy-cfg:
+            FILE_PATTERNS: "*.cpp *.h*"
+            EXAMPLE_PATH: examples
+            RECURSIVE: True
 
 markdown_extensions:
   - attr_list
@@ -56,3 +65,24 @@ nav:
     - Cubic interpolation: theory/cubic.md
   - Code Reference:
     - reference/index.md
+    - Links: reference/links.md
+    - Classes:
+        - Class List: reference/annotated.md
+        - Class Index: reference/classes.md
+        - Class Hierarchy: reference/hierarchy.md
+        - Class Members: reference/class_members.md
+        - Class Member Functions: reference/class_member_functions.md
+        - Class Member Variables: reference/class_member_variables.md
+        - Class Member Typedefs: reference/class_member_typedefs.md
+        - Class Member Enumerations: reference/class_member_enums.md
+    - Namespaces:
+        - Namespace List: reference/namespaces.md
+        - Namespace Members: reference/namespace_members.md
+        - Namespace Member Functions: reference/namespace_member_functions.md
+        - Namespace Member Variables: reference/namespace_member_variables.md
+        - Namespace Member Typedefs: reference/namespace_member_typedefs.md
+        - Namespace Member Enumerations: reference/namespace_member_enums.md
+    - Functions: reference/functions.md
+    - Variables: reference/variables.md
+    - Macros: reference/macros.md
+    - Files: reference/files.md

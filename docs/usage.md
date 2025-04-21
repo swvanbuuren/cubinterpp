@@ -5,7 +5,7 @@ library in a python environment.
 
 ## Prerequisites
 
-Refer to [installation prerequisites](../requirements/#installation-prerequisites).
+Refer to [installation prerequisites](requirements.md#installation-prerequisites).
 
 ## Building
 

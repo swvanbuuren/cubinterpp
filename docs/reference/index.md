@@ -1,5 +1,3 @@
 # Code reference
 
-!!! info
-
-    Still under construction! Sorry!!
+This section contains generated code documentation for `cubinterpp`.

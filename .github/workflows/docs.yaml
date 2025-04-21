@@ -27,5 +27,6 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material mkdocstrings[python] pymdown-extensions
+      - run: pip install mkdocs-material mkdocstrings[python] pymdown-extensions mkdoxy
+      - run: sudo apt install doxygen
       - run: mkdocs gh-deploy --force
