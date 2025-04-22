@@ -25,6 +25,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Create single header library
+        run: |
+          python3 create_single_header.py \
+          --entry include/cubinterpp.hpp \
+          --output ./build/cubinterpp_header.hpp \
+          --license LICENSE
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

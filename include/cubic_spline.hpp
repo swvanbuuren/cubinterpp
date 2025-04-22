@@ -143,13 +143,13 @@ class CubicInterpND
     using Span = std::span<const T>;
     using Mdspan = std::mdspan<T, std::dextents<std::size_t, N>, std::layout_stride>;
     using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
-    using VectorN = cip::VectorN<T, N>;
-    using VectorN2 = cip::VectorN<T, 2*N>;
+    using Ff = cip::VectorN<T, N>;
+    using Ff2 = cip::VectorN<T, 2*N>;
     using Pr = std::pair<std::size_t, std::size_t>;
     using Indexers = std::array<cip::Indexer<T>, N>;
 public:
     template <typename... Args>    
-    CubicInterpND(const VectorN &_f, const Args & ... _xi)
+    CubicInterpND(const Ff &_f, const Args & ... _xi)
       : xi{_xi...},
         indexers{cip::Indexer<T>(_xi)...},
         F(T{}, {_xi.size()..., ((void)_xi, size_t_two)...}),
@@ -161,7 +161,7 @@ public:
     virtual Vector calc_slopes(const Vector &x, const Mdspan1D &f) const = 0;
 
     template <typename... Args>
-    void build(const VectorN &f, const Args & ... _xi)
+    void build(const Ff &f, const Args & ... _xi)
     {
         populate_F(f, _xi...);
         build_cell(cells);
@@ -182,10 +182,10 @@ private:
     const Vector y;
     const Indexers indexers;
     Cells cells;
-    VectorN2 F;
+    Ff2 F;
 
     template <typename... Args>
-    void populate_F(VectorN f, const Args & ... _xi) { // NOTE: pass f by value, which will be moved into F
+    void populate_F(Ff f, const Args & ... _xi) { // NOTE: pass f by value, which will be moved into F
         F.move_into_submdspan(std::move(f), ((void)_xi, std::full_extent)..., ((void)_xi, 0)...);
         auto slopesLambda = [this](const Vector &x, const Mdspan1D &f_slice) -> Vector {
             return this->calc_slopes(x, f_slice);
