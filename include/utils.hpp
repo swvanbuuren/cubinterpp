@@ -93,4 +93,4 @@ constexpr std::size_t power()
 }
 
 
-} // namespace utils
+} // namespace cip

@@ -94,7 +94,7 @@ template <typename T, std::size_t N>
 class LinearInterpND {
     using Vector = std::vector<T>;
     using Array = std::array<Vector, N>;
-    using VectorN = cip::VectorN<T, N>;
+    using F = cip::VectorN<T, N>;
     using Cell = LinearCellND<T, N>;
     using Cells = cip::VectorN<Cell, N>;
     using Span = std::span<const T>;
@@ -102,7 +102,7 @@ class LinearInterpND {
     using Indexers = std::array<cip::Indexer<T>, N>;
 public:
     template <typename... Args>
-    LinearInterpND(const VectorN &_f, const Args & ... _xi)
+    LinearInterpND(const F &_f, const Args & ... _xi)
     : xi{_xi...}, 
       f(_f), 
       indexers{cip::Indexer<T>(_xi)...}, 
@@ -140,7 +140,7 @@ public:
 
 private:
     const Array xi;
-    const VectorN f;
+    const F f;
     const Indexers indexers;
     const Cells cells;
 
