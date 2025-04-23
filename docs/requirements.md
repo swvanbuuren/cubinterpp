@@ -4,7 +4,8 @@ The following requirements need to be met to build and properly use cubinterpp.
 
 ## Installation prerequisites 
 
-- C++ compiler, e.g. [gcc](https://gcc.gnu.org/)
+- C++ compiler, capable of compiling C++20 or later, e.g.
+  [gcc](https://gcc.gnu.org/)
 - [cmake](https://cmake.org/): to use the provided cmake configuration
 - [pybind11](https://github.com/pybind/pybind11): to compile the library header
   into a python module
