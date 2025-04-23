@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1Indexer" kind="class" language="C++" prot="public">
+    <compoundname>cip::Indexer</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1Indexer_1a29538cc0728b302832ea5a84e42150bd" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::Indexer&lt; T &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::Indexer::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="13" column="5" bodyfile="include/utils.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1Indexer_1adc9fd1f1e6fb76eac642a995e8183395" prot="private" static="no" mutable="no">
+        <type>const Vector</type>
+        <definition>const Vector cip::Indexer&lt; T &gt;::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>cip::Indexer::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="49" column="18" bodyfile="include/utils.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1Indexer_1a77d5fe76a2e9ea15802b5b02d6ef9e4f" prot="private" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t cip::Indexer&lt; T &gt;::index_front</definition>
+        <argsstring></argsstring>
+        <name>index_front</name>
+        <qualifiedname>cip::Indexer::index_front</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="50" column="18" bodyfile="include/utils.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1Indexer_1a3e759a5b9c37e24beb7a58e0407d5f1a" prot="private" static="no" mutable="no">
+        <type>const size_t</type>
+        <definition>const size_t cip::Indexer&lt; T &gt;::index_back</definition>
+        <argsstring></argsstring>
+        <name>index_back</name>
+        <qualifiedname>cip::Indexer::index_back</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="51" column="18" bodyfile="include/utils.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1Indexer_1a0061c0354a09ba6775a22aea1ff0af78" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::Indexer&lt; T &gt;::x_front</definition>
+        <argsstring></argsstring>
+        <name>x_front</name>
+        <qualifiedname>cip::Indexer::x_front</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="52" column="13" bodyfile="include/utils.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1Indexer_1a82d3527c788d7dfd84a99c67fe1acae5" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::Indexer&lt; T &gt;::x_back</definition>
+        <argsstring></argsstring>
+        <name>x_back</name>
+        <qualifiedname>cip::Indexer::x_back</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="53" column="13" bodyfile="include/utils.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1Indexer_1a1330d8e1711427fb345287de8ba39e6d" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::Indexer&lt; T &gt;::x_delta</definition>
+        <argsstring></argsstring>
+        <name>x_delta</name>
+        <qualifiedname>cip::Indexer::x_delta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="54" column="13" bodyfile="include/utils.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1Indexer_1a15dcbe99baa8e1b8d985ee14eef45ebd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::Indexer&lt; T &gt;::Indexer</definition>
+        <argsstring>(const Vector &amp;_x)</argsstring>
+        <name>Indexer</name>
+        <qualifiedname>cip::Indexer::Indexer</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="15" column="5" bodyfile="include/utils.hpp" bodystart="15" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1Indexer_1ae73f12943b42cd1ecd017cdc6d3b3034" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::Indexer&lt; T &gt;::~Indexer</definition>
+        <argsstring>()</argsstring>
+        <name>~Indexer</name>
+        <qualifiedname>cip::Indexer::~Indexer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="23" column="5" bodyfile="include/utils.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1Indexer_1a1d56aa53f9c13f568ab72f98c597a7ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::size_t</type>
+        <definition>const std::size_t cip::Indexer&lt; T &gt;::cell_index</definition>
+        <argsstring>(const T xi) const</argsstring>
+        <name>cell_index</name>
+        <qualifiedname>cip::Indexer::cell_index</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="25" column="23" bodyfile="include/utils.hpp" bodystart="25" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1Indexer_1af08d665528181aad4e980dc694431ed3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::size_t</type>
+        <definition>const std::size_t cip::Indexer&lt; T &gt;::sort_index</definition>
+        <argsstring>(const T xi) const</argsstring>
+        <name>sort_index</name>
+        <qualifiedname>cip::Indexer::sort_index</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="35" column="23" bodyfile="include/utils.hpp" bodystart="35" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/utils.hpp" line="12" column="1" bodyfile="include/utils.hpp" bodystart="12" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classcip_1_1Indexer_1a1d56aa53f9c13f568ab72f98c597a7ee" prot="public" virt="non-virtual"><scope>cip::Indexer</scope><name>cell_index</name></member>
+      <member refid="classcip_1_1Indexer_1a3e759a5b9c37e24beb7a58e0407d5f1a" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>index_back</name></member>
+      <member refid="classcip_1_1Indexer_1a77d5fe76a2e9ea15802b5b02d6ef9e4f" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>index_front</name></member>
+      <member refid="classcip_1_1Indexer_1a15dcbe99baa8e1b8d985ee14eef45ebd" prot="public" virt="non-virtual"><scope>cip::Indexer</scope><name>Indexer</name></member>
+      <member refid="classcip_1_1Indexer_1af08d665528181aad4e980dc694431ed3" prot="public" virt="non-virtual"><scope>cip::Indexer</scope><name>sort_index</name></member>
+      <member refid="classcip_1_1Indexer_1a29538cc0728b302832ea5a84e42150bd" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>Vector</name></member>
+      <member refid="classcip_1_1Indexer_1adc9fd1f1e6fb76eac642a995e8183395" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>x</name></member>
+      <member refid="classcip_1_1Indexer_1a82d3527c788d7dfd84a99c67fe1acae5" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>x_back</name></member>
+      <member refid="classcip_1_1Indexer_1a1330d8e1711427fb345287de8ba39e6d" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>x_delta</name></member>
+      <member refid="classcip_1_1Indexer_1a0061c0354a09ba6775a22aea1ff0af78" prot="private" virt="non-virtual"><scope>cip::Indexer</scope><name>x_front</name></member>
+      <member refid="classcip_1_1Indexer_1ae73f12943b42cd1ecd017cdc6d3b3034" prot="public" virt="non-virtual"><scope>cip::Indexer</scope><name>~Indexer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

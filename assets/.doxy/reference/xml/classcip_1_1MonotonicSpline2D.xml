@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1MonotonicSpline2D" kind="class" language="C++" prot="public">
+    <compoundname>cip::MonotonicSpline2D</compoundname>
+    <basecompoundref refid="classcip_1_1CubicInterpND" prot="public" virt="non-virtual">cip::CubicInterpND&lt; T, 2 &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+        <defval>2</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1MonotonicSpline2D_1a26ae96477abf3105eda067739111d828" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::MonotonicSpline2D&lt; T, N &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::MonotonicSpline2D::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="13" column="5" bodyfile="include/cubic_splines_2d.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1MonotonicSpline2D_1a83239ad603631ad1565f69f6b1e6b062" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, 1 &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::MonotonicSpline2D&lt; T, N &gt;::Mdspan1D =  std::mdspan&lt;T, std::dextents&lt;std::size_t, 1&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan1D</name>
+        <qualifiedname>cip::MonotonicSpline2D::Mdspan1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="14" column="5" bodyfile="include/cubic_splines_2d.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1MonotonicSpline2D_1a9de1a3f1ffa79501e3b658a9c8f3d777" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, N &gt;</type>
+        <definition>using cip::MonotonicSpline2D&lt; T, N &gt;::VectorN =  cip::VectorN&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::MonotonicSpline2D::VectorN</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="15" column="5" bodyfile="include/cubic_splines_2d.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1MonotonicSpline2D_1a22f3cacc263e3598d6ee9ad8d78f3e90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::MonotonicSpline2D&lt; T, N &gt;::MonotonicSpline2D</definition>
+        <argsstring>(const Vector &amp;_x, const Vector &amp;_y, const VectorN &amp;_f)</argsstring>
+        <name>MonotonicSpline2D</name>
+        <qualifiedname>cip::MonotonicSpline2D::MonotonicSpline2D</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref> &amp;</type>
+          <declname>_f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="17" column="1" bodyfile="include/cubic_splines_2d.hpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1MonotonicSpline2D_1ae248a07159c9b92410b53e5b371aff5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::MonotonicSpline2D&lt; T, N &gt;::~MonotonicSpline2D</definition>
+        <argsstring>()</argsstring>
+        <name>~MonotonicSpline2D</name>
+        <qualifiedname>cip::MonotonicSpline2D::~MonotonicSpline2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="22" column="5" bodyfile="include/cubic_splines_2d.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1MonotonicSpline2D_1ab515955d187c18311d5e4477d68aa126" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Vector</type>
+        <definition>Vector cip::MonotonicSpline2D&lt; T, N &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Mdspan1D &amp;f) const override</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::MonotonicSpline2D::calc_slopes</qualifiedname>
+        <reimplements refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49">calc_slopes</reimplements>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Mdspan1D &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_2d.hpp" line="24" column="12" bodyfile="include/cubic_splines_2d.hpp" bodystart="24" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::MonotonicSpline2D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1MonotonicSpline2D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::MonotonicSpline2D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1MonotonicSpline2D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/cubic_splines_2d.hpp" line="11" column="1" bodyfile="include/cubic_splines_2d.hpp" bodystart="12" bodyend="28"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>build</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1ab515955d187c18311d5e4477d68aa126" prot="public" virt="virtual"><scope>cip::MonotonicSpline2D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>eval</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1a83239ad603631ad1565f69f6b1e6b062" prot="private" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>Mdspan1D</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1a22f3cacc263e3598d6ee9ad8d78f3e90" prot="public" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>MonotonicSpline2D</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1a26ae96477abf3105eda067739111d828" prot="private" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>Vector</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1a9de1a3f1ffa79501e3b658a9c8f3d777" prot="private" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" virt="virtual"><scope>cip::MonotonicSpline2D</scope><name>~CubicInterpND</name></member>
+      <member refid="classcip_1_1MonotonicSpline2D_1ae248a07159c9b92410b53e5b371aff5f" prot="public" virt="non-virtual"><scope>cip::MonotonicSpline2D</scope><name>~MonotonicSpline2D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
