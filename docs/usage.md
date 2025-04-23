@@ -7,7 +7,38 @@ library in a python environment.
 
 Refer to [installation prerequisites](requirements.md#installation-prerequisites).
 
-## Building
+## Single header library
+
+The easiest way to use cubinterpp in your project is to use the single header
+library.
+
+Starting with [release
+v0.8.0](https://github.com/swvanbuuren/cubinterpp/releases/tag/v0.8.0) each
+release comes with the single header library as asset. Alternatively, you can
+build the single header library yourself with (assuming `python3` is already
+installed):
+
+```console
+python3 create_single_header.py \
+          --entry include/cubinterpp.hpp \
+          --output ./build/cubinterpp_header.hpp \
+          --license LICENSE
+```
+
+Since [mdspan](https://github.com/kokkos/mdspan) is not yet supported in the
+standard library you also need to get its corresponding single header library
+from [the mdspan
+repository](https://raw.githubusercontent.com/kokkos/mdspan/refs/heads/single-header/mdspan.hpp).
+
+After putting both `cubinterpp_header.hpp` and `mdspan.hpp` into you `include`
+directory, you can use cubinterpp in your project by just adding it to the
+includes in your codebase:
+
+```cpp
+#include "cubinterpp_header.hpp"
+```
+
+## Build from source
 
 To build the header library for usage in Python, it's recommended to use
 [cmake](https://cmake.org/). An appropriate cmake configuration is provided in

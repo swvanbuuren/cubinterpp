@@ -40,6 +40,7 @@ def process_file(path: pathlib.Path,
                 if line.strip().startswith('#include <'):
                     if filename not in seen_std:
                         seen_std.add(filename)
+                        line.replace('<mdspan/mdspan.hpp>', '"mdspan.hpp"')
                         std_lines.append(line)
                     continue
                 # User header include (quotes)
