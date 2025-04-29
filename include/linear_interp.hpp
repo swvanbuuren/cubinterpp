@@ -280,6 +280,16 @@ public:
     ~LinearInterp3D() { }
 };
 
+template <typename T>
+class LinearInterp4D : public LinearInterpND<T, 4> {
+    using Vector = std::vector<T>;
+    using Vector4 = cip::VectorN<T, 4>;
+public:
+    explicit LinearInterp4D(const Vector &x, const Vector &y, const Vector &z, const Vector &w, const Vector4 &f)
+    : LinearInterpND<T, 4>(f, x, y, z, w)
+    {}
 
+    ~LinearInterp4D() { }
+};
 
 } // namespace cip
