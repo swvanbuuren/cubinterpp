@@ -30,6 +30,7 @@ FetchContent_Declare(
 )
 add_definitions(-DMDSPAN_IMPL_STANDARD_NAMESPACE=std)
 set(MDSPAN_CXX_STANDARD ${CMAKE_CXX_STANDARD})
+set(MDSPAN_GENERATE_STD_NAMESPACE_TARGETS On)
 
 FetchContent_MakeAvailable(pybind11 mdspan)
 
