@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 import mlpyqtgraph as mpg
-import cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
+import cubinterpp.cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
 
 
 def get_test_data(case='akima', start=1.0, end=5.0, size=8):
