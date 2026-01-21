@@ -143,6 +143,8 @@ def main():
         mpg.surf(x_fine, y_fine, z_fine)
         ax = mpg.gca()
         ax.azimuth = 225
+        ax.label_fmt = '.0f'
+        ax.zlim = [0, 8]
 
     x, y, f = get_test_data_2d(case='three_bumps')
     x_fine, y_fine = refine_grid(x, 46), refine_grid(y, 46)
@@ -151,6 +153,8 @@ def main():
     mpg.surf(x_fine, y_fine, z_fine_scipy)
     ax = mpg.gca()
     ax.azimuth = 225
+    ax.label_fmt = '.0f'
+    ax.zlim = [0, 8]
 
 
 if __name__ == '__main__':
