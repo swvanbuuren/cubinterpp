@@ -1,4 +1,4 @@
-""" Simple test for Akima Spline Interpolation """
+""" Compare Spline Interpolation types """
 
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator

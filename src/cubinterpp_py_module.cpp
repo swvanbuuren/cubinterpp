@@ -33,6 +33,11 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def("eval", &cip::NaturalSpline1D<double>::eval, py::return_value_policy::reference_internal)
         .def("evaln", &cip::NaturalSpline1D<double>::evaln, py::return_value_policy::reference_internal);
 
+    py::class_<cip::NaturalPeriodicSpline1D<double>>(m, "NaturalPeriodicSpline1D")
+        .def(py::init<DoubleVector, DoubleVector>())
+        .def("eval", &cip::NaturalPeriodicSpline1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalPeriodicSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+
     py::class_<cip::LinearInterp2D<double>>(m, "LinearInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
         .def("eval", &cip::LinearInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)

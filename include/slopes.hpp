@@ -127,10 +127,33 @@ std::vector<T> akima_slopes(const Tx x, const Tf f)
 }
 
 
+template <typename T>
+void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vector<T> &c, std::vector<T> &d)
+{
+    auto nd = d.size();
+
+    c[0] /= b[0];
+    d[0] /= b[0];
+
+    nd--;
+    for (auto i = 1; i < nd; i++) {
+        c[i] /= b[i] - a[i]*c[i-1];
+        d[i] = (d[i] - a[i]*d[i-1]) / (b[i] - a[i]*c[i-1]);
+    }
+
+    d[nd] = (d[nd] - a[nd]*d[nd-1]) / (b[nd] - a[nd]*c[nd-1]);
+
+    for (auto i = nd; i-- > 0;) {
+        d[i] -= c[i]*d[i+1];
+    }
+}
+
+
 enum class BoundaryConditionType {
     Natural,
     Clamped,
-    NotAKnot
+    NotAKnot,
+    Periodic
 };
 
 
@@ -152,6 +175,8 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Natural, T, Tx, 
         a[nx-1] = 1.0/dxN;
         b[nx-1] = 2.0/dxN;
         d[nx-1] = 3.0*(f[nx-1] - f[nx-2])/(dxN*dxN);
+
+        thomas_algorithm<T>(a, b, c, d);
     }
 };
 
@@ -182,6 +207,8 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::NotAKnot, T, Tx,
         a[nx-1] -= b[nx-2]/dxN2;
         b[nx-1] -= c[nx-2]/dxN2;
         d[nx-1] -= d[nx-2]/dxN2;
+
+        thomas_algorithm<T>(a, b, c, d);
     }
 };
 
@@ -194,30 +221,69 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Clamped, T, Tx, 
         b[0] = T{1};
         const auto nx = x.size();
         b[nx-1] = T{1};
+
+        thomas_algorithm<T>(a, b, c, d);
     }
 };
 
 
 template <typename T>
-void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vector<T> &c, std::vector<T> &d)
+void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, const std::vector<T> &c, std::vector<T> &d)
 {
-    auto nd = d.size();
+    const auto nx = d.size();
+    
+    std::vector<T> cmod(nx);
+    std::vector<T> v(nx);
+    
+    cmod[1] = c[1]/b[1];
+    v[1] = -a[1]/b[1];
+    d[1] = d[1]/b[1];
 
-    c[0] /= b[0];
-    d[0] /= b[0];
-
-    nd--;
-    for (auto i = 1; i < nd; i++) {
-        c[i] /= b[i] - a[i]*c[i-1];
-        d[i] = (d[i] - a[i]*d[i-1]) / (b[i] - a[i]*c[i-1]);
+    for (auto ix = 2; ix < nx-1; ++ix) {
+        const T m = T(1.0)/(b[ix] - a[ix]*cmod[ix-1]);
+        cmod[ix] = m*c[ix];
+        v[ix] = (T(0.0) - a[ix]*v[ix-1]) * m;
+        d[ix] = (d[ix] - a[ix]*d[ix-1]) * m;
     }
 
-    d[nd] = (d[nd] - a[nd]*d[nd-1]) / (b[nd] - a[nd]*c[nd-1]);
+    const T m = T(1.0)/(b[nx-1] - a[nx-1]*cmod[nx-2]);
+    cmod[nx - 1] = m*c[nx-1];
+    v[nx - 1] = m*(-c[0] - a[nx-1]*v[nx-2]);
+    d[nx - 1] = m*(d[nx-1] - a[nx-1]*d[nx-2]);
 
-    for (auto i = nd; i-- > 0;) {
-        d[i] -= c[i]*d[i+1];
+    for (auto ix = nx - 2; ix >= 1; --ix) {
+        v[ix] -= cmod[ix]*v[ix+1];
+        d[ix] -= cmod[ix]*d[ix+1];
     }
+
+    d[0] = (d[0] - a[0]*d[nx-1] - c[0]*d[1])/(b[0] + a[0]*v[nx-1] + c[0]*v[1]);
+
+    for (auto ix = 1; ix < nx; ++ix)
+        d[ix] += d[0]*v[ix];
 }
+
+
+template <typename T, typename Tx, typename Tf>
+struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Periodic, T, Tx, Tf> {
+    using Vector = std::vector<T>;
+    constexpr void operator()(const Tx& x, const Tf& f, Vector& a, Vector& b, Vector& c, Vector& d) const {
+        const auto nx = x.size();
+        
+        T dx1 = x[1] - x[0];
+        T dxN = x[nx-1] - x[nx-2];
+
+        b[0] = 1.0;
+        a[0] = -1.0;  // (lower-left corner)
+        d[0] = 0.0;
+
+        a[nx-1] = 1.0/dxN;
+        b[nx-1] = 2.0*(1.0/dxN + 1.0/dx1);
+        c[nx-1] = 1.0/dx1;  // (upper-right corner)
+        d[nx-1] = 3.0*((f[nx-1] - f[nx-2])/(dxN*dxN) + (f[1] - f[0])/(dx1*dx1));
+
+        cyclic_thomas_algorithm<T>(a, b, c, d);
+    }
+};
 
 
 template <typename T, BoundaryConditionType BC=BoundaryConditionType::Natural, typename Tx, typename Tf>
@@ -228,9 +294,9 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
     const auto nx = x.size();
 
     // vectors that fill up the tridiagonal matrix
-    std::vector<T> a(nx, T{0}); // first value of a is not used
+    std::vector<T> a(nx, T{0}); // first value of a is only used for periodic BC
     std::vector<T> b(nx, T{0});
-    std::vector<T> c(nx, T{0}); // last value of c is not used
+    std::vector<T> c(nx, T{0}); // last value of c is only used for periodic BC
     // right hand side
     std::vector<T> d(nx, T{0});
 
@@ -246,8 +312,6 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
     }
 
     setNaturalSplineBoundaryCondition<BC, T, Tx, Tf>{}(x, f, a, b, c, d);
-
-    thomas_algorithm<T>(a, b, c, d);
 
     return d;
 }

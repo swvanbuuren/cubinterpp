@@ -68,4 +68,24 @@ public:
 };
 
 
+template <typename T, std::size_t N=1, cip::BoundaryConditionType BC=cip::BoundaryConditionType::Periodic>
+class NaturalPeriodicSpline1D : public CubicInterpND<T, N>
+{
+    using Vector = std::vector<T>;
+public:
+    NaturalPeriodicSpline1D(const Vector &x, const Vector &f)
+    : CubicInterpND<T, N>(x, f)
+    {
+        this->build(f);
+    }
+    
+    ~NaturalPeriodicSpline1D() {}
+
+    Vector calc_slopes(const Vector &x, const Vector &f) const override {
+        return natural_spline_slopes<T, BC>(x, f);
+    }
+
+};
+
+
 } // namespace cip
