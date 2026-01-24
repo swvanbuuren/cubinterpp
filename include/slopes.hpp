@@ -130,6 +130,8 @@ std::vector<T> akima_slopes(const Tx x, const Tf f)
 template <typename T>
 void thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, std::vector<T> &c, std::vector<T> &d)
 {
+    // See https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm#Method
+    
     auto nd = d.size();
 
     c[0] /= b[0];
@@ -230,6 +232,8 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Clamped, T, Tx, 
 template <typename T>
 void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, const std::vector<T> &c, std::vector<T> &d)
 {
+    // See https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm#Variants
+    
     const auto nx = d.size();
     
     std::vector<T> cmod(nx);
