@@ -115,7 +115,7 @@ def main():
     y_fine_akima = spline.evaln(x_fine)
 
     spline = cubinterpp.MonotonicSpline1D(x, y)
-    y_fine_monotonic = spline.evaln(x_fine, )
+    y_fine_monotonic = spline.evaln(x_fine)
 
     mpg.figure(title='Test figure')
     mpg.plot(x_fine, y_fine_linear)
@@ -144,6 +144,8 @@ def main():
         ax = mpg.gca()
         ax.azimuth = 225
         ax.label_fmt = '.0f'
+        ax.xticks = 8
+        ax.yticks = 8
         ax.zlim = [0, 8]
 
     x, y, f = get_test_data_2d(case='three_bumps')
@@ -154,6 +156,8 @@ def main():
     ax = mpg.gca()
     ax.azimuth = 225
     ax.label_fmt = '.0f'
+    ax.xticks = 8
+    ax.yticks = 8
     ax.zlim = [0, 8]
 
 
