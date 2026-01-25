@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15...4.2)
 
 project(cubinterpp 
-    VERSION 0.1.0 
+    VERSION 0.0.0  # not used, managed in git tags and GitHub releases
     LANGUAGES CXX
 )
 
