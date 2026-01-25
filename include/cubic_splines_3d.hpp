@@ -7,7 +7,7 @@
 namespace cip {
 
 
-template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::NotAKnot, std::size_t N=3>
+template <typename T, cip::BoundaryConditionType BC=cip::BoundaryConditionType::Natural, std::size_t N=3>
 class NaturalSpline3D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
