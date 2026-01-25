@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.29)
+cmake_minimum_required(VERSION 3.15...4.2)
 
 project(cubinterpp 
     VERSION 0.1.0 
@@ -15,7 +15,7 @@ include(FetchContent)
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11.git
-  GIT_TAG        a2e59f0e7065404b44dfe92a28aca47ba1378dc4 # Version v2.13.6
+  GIT_TAG        ed5057ded698e305210269dafa57574ecf964483 # Version v3.0.0
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
 )
@@ -23,8 +23,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   mdspan
   GIT_REPOSITORY https://github.com/kokkos/mdspan.git
-  GIT_TAG stable
-  #GIT_TAG 00448b8b594c40e5c5e576ade28820b2b26fd27c
+  GIT_TAG 5d4eb209c77f4744980c0b0c2af44636cc81b08b # Committed 2026-01-08
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
 )
