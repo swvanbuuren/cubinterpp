@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.8" xml:lang="en-US">
+  <compound refid="classcip_1_1AkimaSpline1D" kind="class"><name>cip::AkimaSpline1D</name>
+    <member refid="classcip_1_1AkimaSpline1D_1a33610695ef42411ae2652ba75d0cd7d5" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1AkimaSpline1D_1a70f7b3f76dd7ac66ec2dfcdfe39a9b6e" kind="function"><name>AkimaSpline1D</name></member>
+    <member refid="classcip_1_1AkimaSpline1D_1af9a876e3204aebd59a9d81952148805e" kind="function"><name>~AkimaSpline1D</name></member>
+    <member refid="classcip_1_1AkimaSpline1D_1a2c8b2c3c78ed012d71b1d4182397b59b" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1AkimaSpline2D" kind="class"><name>cip::AkimaSpline2D</name>
+    <member refid="classcip_1_1AkimaSpline2D_1ad8bdf86b265282882d2aa15ce387fcf0" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1AkimaSpline2D_1a5344ab05d1c39481c31451b7040ac189" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1AkimaSpline2D_1a577df0ba7162dde22739f6e635fea398" kind="typedef"><name>VectorN</name></member>
+    <member refid="classcip_1_1AkimaSpline2D_1aca4bc6ada9f4173dbd451c2770746140" kind="function"><name>AkimaSpline2D</name></member>
+    <member refid="classcip_1_1AkimaSpline2D_1aa2fec650a4a2d591ba8226d676e2e1b8" kind="function"><name>~AkimaSpline2D</name></member>
+    <member refid="classcip_1_1AkimaSpline2D_1a2af76b13857b1076c2c509f7cc262bca" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1CubicCellND" kind="class"><name>cip::CubicCellND</name>
+    <member refid="classcip_1_1CubicCellND_1a75309671abb93ed497c9a03994f91219" kind="typedef"><name>CoeffsArray</name></member>
+    <member refid="classcip_1_1CubicCellND_1acf830957b529df3ffff28dfe5ad1b1df" kind="typedef"><name>Array</name></member>
+    <member refid="classcip_1_1CubicCellND_1a5939966cb03128787923382190a76753" kind="typedef"><name>Array2</name></member>
+    <member refid="classcip_1_1CubicCellND_1a4eee3a21bc1fd92370d2231092af1c1d" kind="typedef"><name>ArrayN</name></member>
+    <member refid="classcip_1_1CubicCellND_1a7c83f1a47f330cc8d882a3339fa3f07b" kind="typedef"><name>Delta</name></member>
+    <member refid="classcip_1_1CubicCellND_1adfc9333f340e0db34370d0e720f8f5e5" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1CubicCellND_1a2105fb4d2e81b21d6387462f0c843f11" kind="typedef"><name>Spans</name></member>
+    <member refid="classcip_1_1CubicCellND_1afd67dd002b346880ecb5039d2c3d5410" kind="typedef"><name>Mdspan</name></member>
+    <member refid="classcip_1_1CubicCellND_1a8de1f56e4358a1376e3b00e8692aef2a" kind="variable"><name>order</name></member>
+    <member refid="classcip_1_1CubicCellND_1aa08542f5d5fd626fb61352279da217a8" kind="variable"><name>numCorners</name></member>
+    <member refid="classcip_1_1CubicCellND_1a9b26c8f1e96068f9a73407ebebe124cc" kind="variable"><name>numCoeffs</name></member>
+    <member refid="classcip_1_1CubicCellND_1a70e179154d8f867ef89395932d5bd62f" kind="variable"><name>coeffs</name></member>
+    <member refid="classcip_1_1CubicCellND_1a7d0efb3622026514558316559e9f15aa" kind="function"><name>CubicCellND</name></member>
+    <member refid="classcip_1_1CubicCellND_1afac3ca81a50ff60b7d6512c5b30299cf" kind="function"><name>~CubicCellND</name></member>
+    <member refid="classcip_1_1CubicCellND_1a44b665d6e0b4865a24dd93027a415013" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1CubicCellND_1ac2b35924b7150aba6a21d541e7736c96" kind="function"><name>calc_h</name></member>
+    <member refid="classcip_1_1CubicCellND_1a057e291ce4451817be79b119076ab5d6" kind="function"><name>calc_h3</name></member>
+    <member refid="classcip_1_1CubicCellND_1a5c7d0f7264e7a1dd1cbf347d6a7b3181" kind="function"><name>calc_delta_ij</name></member>
+    <member refid="classcip_1_1CubicCellND_1aba231b3fd73eb5199384d8c78cf04dbd" kind="function"><name>calc_delta</name></member>
+    <member refid="classcip_1_1CubicCellND_1aeddc8dac2553f6e932675423c1afb3e1" kind="function"><name>calc_coeffs</name></member>
+    <member refid="classcip_1_1CubicCellND_1a7f952906da2dff58a074dc364b8ef374" kind="function"><name>eval_poly</name></member>
+  </compound>
+  <compound refid="classcip_1_1CubicCellND_3_01T_00_011_01_4" kind="class"><name>cip::CubicCellND&lt; T, 1 &gt;</name>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1a87d19d20d6e3498db521765ee419286a" kind="typedef"><name>Array</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1a4cb9526e601f6260c994d96861399ab9" kind="typedef"><name>Alpha</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1aa6f3a4bbd18b2cb6f09a8a561de84514" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1a2388d4470198480b1c522785fd15142e" kind="typedef"><name>Mdspan</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1ae839b4f405a79aba6edde2e331d4daff" kind="variable"><name>order</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1ab5bc910b4d7fbc3368f9f93edf434a5b" kind="variable"><name>coeffs</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1a190c65b7d7cccc0d06a8dc5a12ac53c6" kind="function"><name>CubicCellND</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1ab2c8d6d561058c119ed7401a50487c6a" kind="function"><name>~CubicCellND</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1a451b40b4f34574160710265a17079f57" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1CubicCellND_3_01T_00_011_01_4_1afd2dca62a3645fd631ea21bd89582751" kind="function"><name>calc_coeffs</name></member>
+  </compound>
+  <compound refid="classcip_1_1CubicInterpND" kind="class"><name>cip::CubicInterpND</name>
+    <member refid="classcip_1_1CubicInterpND_1ae003606969d77bb9465a775c4c5e2850" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1CubicInterpND_1abf2d6aa85ff6fdfbe6d322ac58196e01" kind="typedef"><name>Array</name></member>
+    <member refid="classcip_1_1CubicInterpND_1acb843a8f5f1711aa3a970abbb8281e6e" kind="typedef"><name>Cell</name></member>
+    <member refid="classcip_1_1CubicInterpND_1aa4870528e61a225c5c5a196a941c67c4" kind="typedef"><name>Cells</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a2f1be8016a414f298768d4ce6e894ba1" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a320c805e1a0282267f456056267e7602" kind="typedef"><name>Mdspan</name></member>
+    <member refid="classcip_1_1CubicInterpND_1ab7f8bdfb2579af62d781ac027f2edb88" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a618ff05ade2e93ee1cdbf622ab02122f" kind="typedef"><name>Ff</name></member>
+    <member refid="classcip_1_1CubicInterpND_1ae4911190f964dd1dcd3b28b72c77066c" kind="typedef"><name>Ff2</name></member>
+    <member refid="classcip_1_1CubicInterpND_1afe506e64edd71f816759e6f694eed5c0" kind="typedef"><name>Pr</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a1bf9d92fbf32f48a51006a3ac789f249" kind="typedef"><name>Indexers</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a66983e0d7c073534edb2b001dec2af08" kind="variable"><name>size_t_two</name></member>
+    <member refid="classcip_1_1CubicInterpND_1ab3ecdb31f93480b0630c4902db0c48dc" kind="variable"><name>xi</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a22fb474083f5774376cdb4de16b3dbc4" kind="variable"><name>x</name></member>
+    <member refid="classcip_1_1CubicInterpND_1aed3c3d201f4c4008420bba9daf43ce99" kind="variable"><name>y</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a78985cb58721801c746fe417755dc62a" kind="variable"><name>indexers</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a4dfea8e844c6280a3c6eae6724e92db0" kind="variable"><name>cells</name></member>
+    <member refid="classcip_1_1CubicInterpND_1ab88ecae8351a6e0957131acb1e1f8827" kind="variable"><name>F</name></member>
+    <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" kind="function"><name>CubicInterpND</name></member>
+    <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" kind="function"><name>~CubicInterpND</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49" kind="function"><name>calc_slopes</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" kind="function"><name>build</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1CubicInterpND_1af17cb3f3187109ffe46c50088adb0c2a" kind="function"><name>populate_F</name></member>
+    <member refid="classcip_1_1CubicInterpND_1a50a05d09596e56014c09a9c99cc65e00" kind="function"><name>build_cell</name></member>
+  </compound>
+  <compound refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4" kind="class"><name>cip::CubicInterpND&lt; T, 1 &gt;</name>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1acb8f9b16f4b17ff84d963ef8b53b7ea0" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a228f8894f040d5920f79f970c072ce0d" kind="typedef"><name>Cell</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a0dbcd36f1bc8f46394e2081a8472707b" kind="typedef"><name>Cells</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a69673c2b7f2da1004cf1da8659a0bcbe" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a4ca6b71d381db9932d3c8df26a292eae" kind="typedef"><name>VectorN2</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a4a5ff14c9af5d871c1877e81e49d28ac" kind="typedef"><name>Pr</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a248c4ded3513c441f0bf9d6797f13be8" kind="variable"><name>x</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a00ba29c8f41666f1dc7fe73476bd63a3" kind="variable"><name>indexer</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a99f232c56ec6589def06590402edbc22" kind="variable"><name>cells</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a46a5cfda11f4f1d8443a18e2069ac1c7" kind="variable"><name>F</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a54e44bcca66da804f948b23490e79734" kind="function"><name>CubicInterpND</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a68f9d1bec8ce9f4ac31b9628d4e6c19f" kind="function"><name>~CubicInterpND</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a0c4ebacf2d3aa95da64efa058f5e18c6" kind="function"><name>calc_slopes</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a7e1be86f3a9353d9e0d6796712feedb6" kind="function"><name>build</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a826afc26968f3afbfd1d16e0b70e855e" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4_1a5130a70e3c540a71e37658fb368d98b7" kind="function"><name>evaln</name></member>
+  </compound>
+  <compound refid="structcip_1_1VectorN_1_1Flatten" kind="struct"><name>cip::VectorN::Flatten</name>
+    <member refid="structcip_1_1VectorN_1_1Flatten_1a6d2e322221f5ccfafc9aabb3cd4c9764" kind="function"><name>apply</name></member>
+  </compound>
+  <compound refid="structcip_1_1VectorN_1_1Flatten_3_01NestedVector_00_011_01_4" kind="struct"><name>cip::VectorN::Flatten&lt; NestedVector, 1 &gt;</name>
+    <member refid="structcip_1_1VectorN_1_1Flatten_3_01NestedVector_00_011_01_4_1a7ea8809fd061adeba6970d2ab78d8575" kind="function"><name>apply</name></member>
+  </compound>
+  <compound refid="classcip_1_1Indexer" kind="class"><name>cip::Indexer</name>
+    <member refid="classcip_1_1Indexer_1a29538cc0728b302832ea5a84e42150bd" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1Indexer_1adc9fd1f1e6fb76eac642a995e8183395" kind="variable"><name>x</name></member>
+    <member refid="classcip_1_1Indexer_1a77d5fe76a2e9ea15802b5b02d6ef9e4f" kind="variable"><name>index_front</name></member>
+    <member refid="classcip_1_1Indexer_1a3e759a5b9c37e24beb7a58e0407d5f1a" kind="variable"><name>index_back</name></member>
+    <member refid="classcip_1_1Indexer_1a0061c0354a09ba6775a22aea1ff0af78" kind="variable"><name>x_front</name></member>
+    <member refid="classcip_1_1Indexer_1a82d3527c788d7dfd84a99c67fe1acae5" kind="variable"><name>x_back</name></member>
+    <member refid="classcip_1_1Indexer_1a1330d8e1711427fb345287de8ba39e6d" kind="variable"><name>x_delta</name></member>
+    <member refid="classcip_1_1Indexer_1a15dcbe99baa8e1b8d985ee14eef45ebd" kind="function"><name>Indexer</name></member>
+    <member refid="classcip_1_1Indexer_1ae73f12943b42cd1ecd017cdc6d3b3034" kind="function"><name>~Indexer</name></member>
+    <member refid="classcip_1_1Indexer_1a1d56aa53f9c13f568ab72f98c597a7ee" kind="function"><name>cell_index</name></member>
+    <member refid="classcip_1_1Indexer_1af08d665528181aad4e980dc694431ed3" kind="function"><name>sort_index</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearCellND" kind="class"><name>cip::LinearCellND</name>
+    <member refid="classcip_1_1LinearCellND_1a7efcc107f5f3eef51bbef928c34cd605" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1LinearCellND_1a3a06eb9559e52ab1478907af78e26d6f" kind="typedef"><name>Spans</name></member>
+    <member refid="classcip_1_1LinearCellND_1a9feb210815470caa1862124ada562442" kind="typedef"><name>Mdspan</name></member>
+    <member refid="classcip_1_1LinearCellND_1a8bef048e2ac6e4db99c8affcf9936f7c" kind="typedef"><name>NomArray</name></member>
+    <member refid="classcip_1_1LinearCellND_1a7fb8bf01cec2fbf8d0541c71827b62f9" kind="variable"><name>numCorners</name></member>
+    <member refid="classcip_1_1LinearCellND_1a70892890ee32d92b25c1f75c45c71fb3" kind="variable"><name>x</name></member>
+    <member refid="classcip_1_1LinearCellND_1a63c6c602039a40091226cf9646864e77" kind="variable"><name>f</name></member>
+    <member refid="classcip_1_1LinearCellND_1a86310973a93e9fe7cb5e3de85ba9acf1" kind="variable"><name>H</name></member>
+    <member refid="classcip_1_1LinearCellND_1a7d78db38d318ce7d721099b25ddbc01a" kind="variable"><name>c</name></member>
+    <member refid="classcip_1_1LinearCellND_1af907cb89f8ed61299236fb82721ecee7" kind="function"><name>LinearCellND</name></member>
+    <member refid="classcip_1_1LinearCellND_1a46f715eff899aed352797fcc4f92daf2" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1LinearCellND_1ab4baa4408da444a191b38e986594fd43" kind="function"><name>compute_coefficients</name></member>
+    <member refid="classcip_1_1LinearCellND_1afd45f0209d34a88c0b66d1b56a418ae3" kind="function"><name>compute_c_J</name></member>
+    <member refid="classcip_1_1LinearCellND_1a7f0d9253cdacced7be149c76961ceded" kind="function"><name>gamma</name></member>
+    <member refid="classcip_1_1LinearCellND_1a2f324f778f5cb742bae6a6c7378f856d" kind="function"><name>gather_corners</name></member>
+    <member refid="classcip_1_1LinearCellND_1a30c2480e8ed34f4b7f772015727e51e8" kind="function"><name>compute_corner</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearCellND_3_01T_00_011_01_4" kind="class"><name>cip::LinearCellND&lt; T, 1 &gt;</name>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a3b556cb3d9babf8ea9b0a40b979325df" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ac1effdcc5a82b1f5c9f2a776161339f2" kind="variable"><name>x0</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a2b40ea55d4f057553bc42e31a0e77110" kind="variable"><name>a0</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a6b296068e71b023e6e6b4783e4a12dd7" kind="variable"><name>b0</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ad97ca485b099103b32c624d9a8568e3d" kind="function"><name>LinearCellND</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1abe2cdf8e59d9ef73a644043534b14ba3" kind="function"><name>~LinearCellND</name></member>
+    <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a06a373a35ab7b64e63b74064b2d558b8" kind="function"><name>eval</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterp1D" kind="class"><name>cip::LinearInterp1D</name>
+    <member refid="classcip_1_1LinearInterp1D_1a76867748d6179357672fa14d637e2a2e" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterp1D_1ad9ba711cf343fbcc71cecac3a43051fe" kind="typedef"><name>Vector2</name></member>
+    <member refid="classcip_1_1LinearInterp1D_1a33530dfa8b86166f073734e5b81d5c16" kind="function"><name>LinearInterp1D</name></member>
+    <member refid="classcip_1_1LinearInterp1D_1ae7018391baa5a89f0c09096765d1b6bc" kind="function"><name>~LinearInterp1D</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterp2D" kind="class"><name>cip::LinearInterp2D</name>
+    <member refid="classcip_1_1LinearInterp2D_1afdd530d361f4f9491f70171f96ce044d" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterp2D_1a2b961eaed0270e9ebab558ae386cdfb9" kind="typedef"><name>Vector2</name></member>
+    <member refid="classcip_1_1LinearInterp2D_1ab66a4b35af2a6523a00d52f9418b88c2" kind="function"><name>LinearInterp2D</name></member>
+    <member refid="classcip_1_1LinearInterp2D_1a3d196696836c033c45cdaaa6e53f5312" kind="function"><name>~LinearInterp2D</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterp3D" kind="class"><name>cip::LinearInterp3D</name>
+    <member refid="classcip_1_1LinearInterp3D_1ae34430f89ba7c01750659277724c5cab" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterp3D_1a70f1e9d8c559e95e4c9c0cae9c1eebb4" kind="typedef"><name>Vector3</name></member>
+    <member refid="classcip_1_1LinearInterp3D_1a1968f611c8c51b7d98bec99fc7763a34" kind="function"><name>LinearInterp3D</name></member>
+    <member refid="classcip_1_1LinearInterp3D_1a31e758487b93c07bd271be11f5f6a9be" kind="function"><name>~LinearInterp3D</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterp4D" kind="class"><name>cip::LinearInterp4D</name>
+    <member refid="classcip_1_1LinearInterp4D_1a8e389e69f8529f3592e9905010dd4d6f" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterp4D_1ab7574599c300fb6d10dbe13c1cc1fa6e" kind="typedef"><name>Vector4</name></member>
+    <member refid="classcip_1_1LinearInterp4D_1a8a4be65a66b510334d223ed59f5616a5" kind="function"><name>LinearInterp4D</name></member>
+    <member refid="classcip_1_1LinearInterp4D_1a05f9c451cdbf5e46819f86a99b1a64ee" kind="function"><name>~LinearInterp4D</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterpND" kind="class"><name>cip::LinearInterpND</name>
+    <member refid="classcip_1_1LinearInterpND_1a5b17562555529a92a36d5a99889a9b1b" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a28ea114a98924c866d02e14441ceef50" kind="typedef"><name>Array</name></member>
+    <member refid="classcip_1_1LinearInterpND_1acf7b9fcfbab3b5d461496eabbe5160bd" kind="typedef"><name>F</name></member>
+    <member refid="classcip_1_1LinearInterpND_1ab9d714a92744199fc3d615dbef1121ed" kind="typedef"><name>Cell</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a5073be594fbefacd72adcfb8eaeb7609" kind="typedef"><name>Cells</name></member>
+    <member refid="classcip_1_1LinearInterpND_1abdd8391d3c6160b46fdcaf006ec16531" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a206b014a4105b99ca1ccc971d8f1473d" kind="typedef"><name>Pr</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a7f1e4b6842a8a22abc6f1cf7af518681" kind="typedef"><name>Indexers</name></member>
+    <member refid="classcip_1_1LinearInterpND_1aa98d571f05de3fa81c8172744502389e" kind="variable"><name>xi</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a3c3d932b0fb2eac4b672956690215707" kind="variable"><name>f</name></member>
+    <member refid="classcip_1_1LinearInterpND_1ae85e53f2a8f9543241f13a86178c2f00" kind="variable"><name>indexers</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a93476deb9fefdceb82359af094372203" kind="variable"><name>cells</name></member>
+    <member refid="classcip_1_1LinearInterpND_1ac7508f85abd36d244d0001f571a7ebcd" kind="function"><name>LinearInterpND</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a7f5c19619c875e9ef9dc43381d0fa848" kind="function"><name>~LinearInterpND</name></member>
+    <member refid="classcip_1_1LinearInterpND_1ab38aaf4a162673c164d1adebb9886ea1" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1LinearInterpND_1ab88f4a8573f967d21dfc4a8a2ab03480" kind="function"><name>evaln</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a41bf0462af523f7b09b03a2a149c1d8e" kind="function"><name>build</name></member>
+    <member refid="classcip_1_1LinearInterpND_1a69830a113b9a3c250593d4f1d94ab345" kind="function"><name>build_cell</name></member>
+  </compound>
+  <compound refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4" kind="class"><name>cip::LinearInterpND&lt; T, 1 &gt;</name>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1acd87ec3bde30f05c48dbdad214277458" kind="typedef"><name>Cell</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1af9755056376a618a8b79ea0d3e28e433" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1ade31ae5feb3fef0bd87dfea5cb5576b2" kind="typedef"><name>Span</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1ad61755cec8530aced5327d4f58657b31" kind="variable"><name>indexer</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1af903d49d2e70f7c2df7ab1517f061edd" kind="variable"><name>cells</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1af05caad3b1b2065356e19093ee5d838d" kind="function"><name>LinearInterpND</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1a9f920f70d372f8dc7a3d5f75d7b0b0af" kind="function"><name>~LinearInterpND</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1a556aacd1f3155f68b839a50a04c5594e" kind="function"><name>build</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1ad0ad4a4686a35de8816882bf10aca8ec" kind="function"><name>eval</name></member>
+    <member refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4_1a7e3816ff1f182bcf9e287f3d0eb54fb4" kind="function"><name>evaln</name></member>
+  </compound>
+  <compound refid="classcip_1_1MonotonicSpline1D" kind="class"><name>cip::MonotonicSpline1D</name>
+    <member refid="classcip_1_1MonotonicSpline1D_1a7fa899bce637503812281d91ae8083f6" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1MonotonicSpline1D_1a1ad542023afde682bc54115c994e4dec" kind="function"><name>MonotonicSpline1D</name></member>
+    <member refid="classcip_1_1MonotonicSpline1D_1aabdba0ecda159273cd241fec4a68085a" kind="function"><name>~MonotonicSpline1D</name></member>
+    <member refid="classcip_1_1MonotonicSpline1D_1af39f143e19d44508022f8f7ac0a4bdd4" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1MonotonicSpline2D" kind="class"><name>cip::MonotonicSpline2D</name>
+    <member refid="classcip_1_1MonotonicSpline2D_1a26ae96477abf3105eda067739111d828" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1MonotonicSpline2D_1a83239ad603631ad1565f69f6b1e6b062" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1MonotonicSpline2D_1a9de1a3f1ffa79501e3b658a9c8f3d777" kind="typedef"><name>VectorN</name></member>
+    <member refid="classcip_1_1MonotonicSpline2D_1a22f3cacc263e3598d6ee9ad8d78f3e90" kind="function"><name>MonotonicSpline2D</name></member>
+    <member refid="classcip_1_1MonotonicSpline2D_1ae248a07159c9b92410b53e5b371aff5f" kind="function"><name>~MonotonicSpline2D</name></member>
+    <member refid="classcip_1_1MonotonicSpline2D_1ab515955d187c18311d5e4477d68aa126" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1NaturalPeriodicSpline1D" kind="class"><name>cip::NaturalPeriodicSpline1D</name>
+    <member refid="classcip_1_1NaturalPeriodicSpline1D_1a73144e4fc104ae4f36deff30062eed1d" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline1D_1a6b54357cc010173211f0676a1692e44c" kind="function"><name>NaturalPeriodicSpline1D</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline1D_1a832bd3487d333a5a3306e1e0af9d26cf" kind="function"><name>~NaturalPeriodicSpline1D</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline1D_1afbb65cb49a3594f266c3f4489ef3b1c0" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1NaturalPeriodicSpline2D" kind="class"><name>cip::NaturalPeriodicSpline2D</name>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1a1b7a39d15f871f85f4e18fa490ea4674" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1afcc0109236a5b6713815d2d1599fdaf4" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1aaeb9bc1807b71c0544af0359efcbc703" kind="typedef"><name>VectorN</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1a976f97a3bcaa59823ef3298c0062b598" kind="function"><name>NaturalPeriodicSpline2D</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1a40d76997106d348e3e4816a10f119b22" kind="function"><name>~NaturalPeriodicSpline2D</name></member>
+    <member refid="classcip_1_1NaturalPeriodicSpline2D_1a3476dfaa1436e5410d1b3a62be448816" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1NaturalSpline1D" kind="class"><name>cip::NaturalSpline1D</name>
+    <member refid="classcip_1_1NaturalSpline1D_1aa2078f7f8daabaa2569dabb3f3bf3a65" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1NaturalSpline1D_1a0aa081ccb34e07216c8adbd14daf86c3" kind="function"><name>NaturalSpline1D</name></member>
+    <member refid="classcip_1_1NaturalSpline1D_1a0c4dab121194b2bba7820e079f935dd8" kind="function"><name>~NaturalSpline1D</name></member>
+    <member refid="classcip_1_1NaturalSpline1D_1aa73550413614c6b68d054a21955e3705" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1NaturalSpline2D" kind="class"><name>cip::NaturalSpline2D</name>
+    <member refid="classcip_1_1NaturalSpline2D_1ade4393388c373ecf9ae408964a981780" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1NaturalSpline2D_1a19608ed11a2d9e28dfd7688b54e7e429" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1NaturalSpline2D_1a97b9ee48ca54e8be888f47d28d5faaae" kind="typedef"><name>VectorN</name></member>
+    <member refid="classcip_1_1NaturalSpline2D_1a94e210fb55b22ea274ff75f33d80cae0" kind="function"><name>NaturalSpline2D</name></member>
+    <member refid="classcip_1_1NaturalSpline2D_1a305f8a2177b156c61472e513f5ed63ed" kind="function"><name>~NaturalSpline2D</name></member>
+    <member refid="classcip_1_1NaturalSpline2D_1a66cbbaff4c312b5db2b01647fac45730" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="classcip_1_1NaturalSpline3D" kind="class"><name>cip::NaturalSpline3D</name>
+    <member refid="classcip_1_1NaturalSpline3D_1afb647d79bb804ac32d61446238ca8aea" kind="typedef"><name>Vector</name></member>
+    <member refid="classcip_1_1NaturalSpline3D_1a60d4c5aa23b54ee6334f32a5723b2b38" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1NaturalSpline3D_1a9fd54feed0ab44db28fd9cc0ba407b1f" kind="typedef"><name>VectorN</name></member>
+    <member refid="classcip_1_1NaturalSpline3D_1a2c06764b8b54042af87c901ce4fd5876" kind="function"><name>NaturalSpline3D</name></member>
+    <member refid="classcip_1_1NaturalSpline3D_1a8fe037b737dd5f2c06a9141d91d1a551" kind="function"><name>~NaturalSpline3D</name></member>
+    <member refid="classcip_1_1NaturalSpline3D_1af4c6757e6a9fe1540529a1789f573b7e" kind="function"><name>calc_slopes</name></member>
+  </compound>
+  <compound refid="structcip_1_1setNaturalSplineBoundaryCondition" kind="struct"><name>cip::setNaturalSplineBoundaryCondition</name>
+  </compound>
+  <compound refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Clamped_00_01T_00_01Tx_00_01Tf_01_4" kind="struct"><name>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Clamped, T, Tx, Tf &gt;</name>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Clamped_00_01T_00_01Tx_00_01Tf_01_4_1ad709ffd6aa717704052aeb8e90776da1" kind="typedef"><name>Vector</name></member>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Clamped_00_01T_00_01Tx_00_01Tf_01_4_1a82c99c3d615fd16dfec245e2ca8859d5" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Natural_00_01T_00_01Tx_00_01Tf_01_4" kind="struct"><name>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Natural, T, Tx, Tf &gt;</name>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Natural_00_01T_00_01Tx_00_01Tf_01_4_1abf81376232885a55036ab3e685a27cb8" kind="typedef"><name>Vector</name></member>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Natural_00_01T_00_01Tx_00_01Tf_01_4_1ab201b2266b64942709914c3e0ce3b461" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4" kind="struct"><name>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;</name>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aa17c26a3d62c1c5d295d132a027e296a" kind="typedef"><name>Vector</name></member>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aff1b3e41bee9d80eac41135f9ad836eb" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4" kind="struct"><name>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;</name>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a338f069b90882440db4675d06d808d8e" kind="typedef"><name>Vector</name></member>
+    <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a65d99cd8f29868b4bc5ef9cd09963a38" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classcip_1_1VectorN" kind="class"><name>cip::VectorN</name>
+    <member refid="classcip_1_1VectorN_1a58f48d705674395fefa0519603b3c445" kind="typedef"><name>Mdspan</name></member>
+    <member refid="classcip_1_1VectorN_1a72445ef4470cf4b66b8c2be25ffc816c" kind="typedef"><name>Mdspan1D</name></member>
+    <member refid="classcip_1_1VectorN_1a53fc2be5b98a9628ab0f80f0ca863732" kind="typedef"><name>IndexArray</name></member>
+    <member refid="classcip_1_1VectorN_1a533210c6ddac8de7fe5b30bf244087cd" kind="variable"><name>dimensions_</name></member>
+    <member refid="classcip_1_1VectorN_1ab70b96ef5783822edec2d8a0afd6eb89" kind="variable"><name>data_</name></member>
+    <member refid="classcip_1_1VectorN_1a190afadffc71767fab0a9a0d4b3e2142" kind="variable"><name>mdspan</name></member>
+    <member refid="classcip_1_1VectorN_1a8defa74a559951e46b135716e0ef4a95" kind="function"><name>VectorN</name></member>
+    <member refid="classcip_1_1VectorN_1a6a095a167bda8d2670b328502a42f4e4" kind="function"><name>VectorN</name></member>
+    <member refid="classcip_1_1VectorN_1af0ce4fd6b6eb645e63cf62c9d05025a5" kind="function"><name>VectorN</name></member>
+    <member refid="classcip_1_1VectorN_1a802d386c6aed7a15fc74d6c0a3997912" kind="function"><name>VectorN</name></member>
+    <member refid="classcip_1_1VectorN_1ade90f3cee1b5f08cb32c5add2e4b5993" kind="function"><name>operator()</name></member>
+    <member refid="classcip_1_1VectorN_1a7c6eed046eb4c6bebef07ca336be07ea" kind="function"><name>operator()</name></member>
+    <member refid="classcip_1_1VectorN_1aea6629aa8a55f50afcbfbf4d778b79f3" kind="function"><name>operator()</name></member>
+    <member refid="classcip_1_1VectorN_1ab9d5e69fe7d0a171764cd760440f3039" kind="function"><name>operator()</name></member>
+    <member refid="classcip_1_1VectorN_1a5d734a97fd05444508cd9bd6dcc47fac" kind="function"><name>emplace_back</name></member>
+    <member refid="classcip_1_1VectorN_1a5b618f7de758305f3e2b9e164e865c18" kind="function"><name>get_mdspan</name></member>
+    <member refid="classcip_1_1VectorN_1a22103b2229aa8671ae2f07cb7a78be75" kind="function"><name>get_mdspan</name></member>
+    <member refid="classcip_1_1VectorN_1aa56189f78ece359f2f6fe955d6dea815" kind="function"><name>submdspan</name></member>
+    <member refid="classcip_1_1VectorN_1a52d9b0399cf6a3d1834f25d1d8771c86" kind="function"><name>submdspan</name></member>
+    <member refid="classcip_1_1VectorN_1affe9d7d0991d95aeeb01a80612a33c10" kind="function"><name>submdspan_1d</name></member>
+    <member refid="classcip_1_1VectorN_1a3ec1f5628d6e4efa1e5f5a2c6ea85312" kind="function"><name>move_into_submdspan</name></member>
+    <member refid="classcip_1_1VectorN_1a33ab67f3fe900e48eca561cd175a8350" kind="function"><name>move_into_submdspan</name></member>
+    <member refid="classcip_1_1VectorN_1abd8d2c492ed0bd3f235f519d5e54deb7" kind="function"><name>dimensions</name></member>
+    <member refid="classcip_1_1VectorN_1a75381e54a000f4e500772de3af16ef09" kind="function"><name>data</name></member>
+    <member refid="classcip_1_1VectorN_1a77f58a5c29b5cd2e185a3472c5fd84ba" kind="function"><name>calculate_total_size</name></member>
+    <member refid="classcip_1_1VectorN_1ad8584bc8756b9344e5e9bbce966a2656" kind="function"><name>determine_dimensions</name></member>
+  </compound>
+  <compound refid="namespacecip" kind="namespace"><name>cip</name>
+    <member refid="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07" kind="enum"><name>BoundaryConditionType</name></member>
+    <member refid="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07a2bd8ab451a35759c5737128e35c8011a" kind="enumvalue"><name>Natural</name></member>
+    <member refid="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07a6bf0ecf8d3753f95aa8d401bff02d97d" kind="enumvalue"><name>Clamped</name></member>
+    <member refid="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07adba864b6a691903eedf0e7a41f4d0c72" kind="enumvalue"><name>NotAKnot</name></member>
+    <member refid="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07acdcc32a064503184053bd2018d1c0e7e" kind="enumvalue"><name>Periodic</name></member>
+    <member refid="derivatives_8hpp_1ad24a3b697436d2917fe2d79ba40754c2" kind="variable"><name>SIZE_T_ZERO</name></member>
+    <member refid="derivatives_8hpp_1a98e57a2f66a19300d98de7d1e27c3633" kind="function"><name>iterate_over_indices</name></member>
+    <member refid="derivatives_8hpp_1a5c6057a06950a787677c8a05c9518d61" kind="function"><name>build_coordinate_indices_impl</name></member>
+    <member refid="derivatives_8hpp_1aaf627b650813bc2f33d59e1bc43674c8" kind="function"><name>build_coordinate_indices</name></member>
+    <member refid="derivatives_8hpp_1a9f983a0d7ca4eead0675d0236fc5c0b0" kind="function"><name>call_submdspan_1d</name></member>
+    <member refid="derivatives_8hpp_1af3d7b1dc83954fca9bae2014ed14b80c" kind="function"><name>call_move_into_submdspan</name></member>
+    <member refid="derivatives_8hpp_1a0db6f0999638802da20b31ac24c5e505" kind="function"><name>make_zero_tuple</name></member>
+    <member refid="derivatives_8hpp_1a6517c93544d4ca9f0f855850697449f8" kind="function"><name>update_tuple_element</name></member>
+    <member refid="derivatives_8hpp_1ada414ff7a0e8ca6ff28492217ac01a3e" kind="function"><name>for_each_dimension_impl</name></member>
+    <member refid="derivatives_8hpp_1a8ddc2c372a4965ba50a268f0d3c63d1f" kind="function"><name>for_each_dimension</name></member>
+    <member refid="derivatives_8hpp_1a1ecfce024a4f6902af176ddf4a412cfd" kind="function"><name>compute_mixed_derivatives_impl</name></member>
+    <member refid="derivatives_8hpp_1adf11e718ae7681f5f85982f90eabd13c" kind="function"><name>compute_mixed_derivatives</name></member>
+    <member refid="slopes_8hpp_1a2b3711fdc98ab6ab4b72c8136e5a5ddb" kind="function"><name>monotonic_slopes</name></member>
+    <member refid="slopes_8hpp_1a3a609ccafe554b890a13dea9cf4b5ad3" kind="function"><name>akima_slopes</name></member>
+    <member refid="slopes_8hpp_1a58e2c8bf6dc0abc2e7185f1b4e7188fd" kind="function"><name>thomas_algorithm</name></member>
+    <member refid="slopes_8hpp_1a8f148e51bbc36dc18fe50611a22de530" kind="function"><name>cyclic_thomas_algorithm</name></member>
+    <member refid="slopes_8hpp_1a4123ecc53a523a2318acb68b428fc5bd" kind="function"><name>natural_spline_slopes</name></member>
+    <member refid="utils_8hpp_1a0ef9787a6eddec7251c88d49551ab545" kind="function"><name>factorial</name></member>
+    <member refid="utils_8hpp_1a79594813d85f77f0434cd900115e68f7" kind="function"><name>binomial</name></member>
+    <member refid="utils_8hpp_1ae51c0161bb25e231ae4afc1108a5b7e3" kind="function"><name>binomial_power_coefficient</name></member>
+    <member refid="utils_8hpp_1ada6cff67b7e62fea4a1fcf77572c0e5d" kind="function"><name>power</name></member>
+  </compound>
+  <compound refid="cubic__spline_8hpp" kind="file"><name>cubic_spline.hpp</name>
+  </compound>
+  <compound refid="cubic__splines__1d_8hpp" kind="file"><name>cubic_splines_1d.hpp</name>
+  </compound>
+  <compound refid="cubic__splines__2d_8hpp" kind="file"><name>cubic_splines_2d.hpp</name>
+  </compound>
+  <compound refid="cubic__splines__3d_8hpp" kind="file"><name>cubic_splines_3d.hpp</name>
+  </compound>
+  <compound refid="cubinterpp_8hpp" kind="file"><name>cubinterpp.hpp</name>
+  </compound>
+  <compound refid="derivatives_8hpp" kind="file"><name>derivatives.hpp</name>
+  </compound>
+  <compound refid="linear__interp_8hpp" kind="file"><name>linear_interp.hpp</name>
+  </compound>
+  <compound refid="slopes_8hpp" kind="file"><name>slopes.hpp</name>
+  </compound>
+  <compound refid="utils_8hpp" kind="file"><name>utils.hpp</name>
+  </compound>
+  <compound refid="vectorn_8hpp" kind="file"><name>vectorn.hpp</name>
+  </compound>
+  <compound refid="cubinterpp__py__module_8cpp" kind="file"><name>cubinterpp_py_module.cpp</name>
+    <member refid="cubinterpp__py__module_8cpp_1ac2e9353b1885a30e932b1ed4179efccf" kind="typedef"><name>DoubleVector</name></member>
+    <member refid="cubinterpp__py__module_8cpp_1af759c0ecfa9dedf919279918e3eeaab2" kind="typedef"><name>DoubleVector2</name></member>
+    <member refid="cubinterpp__py__module_8cpp_1a267f9a92d79e8e23bc5ec1a2e940940b" kind="typedef"><name>DoubleVector3</name></member>
+    <member refid="cubinterpp__py__module_8cpp_1aad41ba869a9333f5cd086c183ba3f06f" kind="function"><name>PYBIND11_MODULE</name></member>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
+  </compound>
+</doxygenindex>

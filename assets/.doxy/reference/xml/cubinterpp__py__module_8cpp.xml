@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="cubinterpp__py__module_8cpp" kind="file" language="C++">
+    <compoundname>cubinterpp_py_module.cpp</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">pybind11/stl.h</includes>
+    <includes local="no">pybind11/pybind11.h</includes>
+    <includes refid="cubinterpp_8hpp" local="no">cubinterpp.hpp</includes>
+    <incdepgraph>
+      <node id="20">
+        <label>cubic_spline.hpp</label>
+        <link refid="cubic__spline_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>cubic_splines_1d.hpp</label>
+        <link refid="cubic__splines__1d_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>cubic_splines_2d.hpp</label>
+        <link refid="cubic__splines__2d_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>cubic_splines_3d.hpp</label>
+        <link refid="cubic__splines__3d_8hpp_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cubinterpp.hpp</label>
+        <link refid="cubinterpp_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>derivatives.hpp</label>
+        <link refid="derivatives_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>linear_interp.hpp</label>
+        <link refid="linear__interp_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>slopes.hpp</label>
+        <link refid="slopes_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>utils.hpp</label>
+        <link refid="utils_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>vectorn.hpp</label>
+        <link refid="vectorn_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/cubinterpp_py_module.cpp</label>
+        <link refid="cubinterpp__py__module_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>algorithm</label>
+      </node>
+      <node id="11">
+        <label>array</label>
+      </node>
+      <node id="18">
+        <label>cassert</label>
+      </node>
+      <node id="7">
+        <label>cmath</label>
+      </node>
+      <node id="15">
+        <label>cstddef</label>
+      </node>
+      <node id="13">
+        <label>mdspan/mdspan.hpp</label>
+      </node>
+      <node id="19">
+        <label>numeric</label>
+      </node>
+      <node id="4">
+        <label>pybind11/pybind11.h</label>
+      </node>
+      <node id="3">
+        <label>pybind11/stl.h</label>
+      </node>
+      <node id="16">
+        <label>tuple</label>
+      </node>
+      <node id="12">
+        <label>utility</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="cubinterpp__py__module_8cpp_1ac2e9353b1885a30e932b1ed4179efccf" prot="public" static="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>using DoubleVector =  std::vector&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DoubleVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/cubinterpp_py_module.cpp" line="8" column="1" bodyfile="src/cubinterpp_py_module.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="cubinterpp__py__module_8cpp_1af759c0ecfa9dedf919279918e3eeaab2" prot="public" static="no">
+        <type>std::vector&lt; DoubleVector &gt;</type>
+        <definition>using DoubleVector2 =  std::vector&lt;DoubleVector&gt;</definition>
+        <argsstring></argsstring>
+        <name>DoubleVector2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/cubinterpp_py_module.cpp" line="9" column="1" bodyfile="src/cubinterpp_py_module.cpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="cubinterpp__py__module_8cpp_1a267f9a92d79e8e23bc5ec1a2e940940b" prot="public" static="no">
+        <type>std::vector&lt; DoubleVector2 &gt;</type>
+        <definition>using DoubleVector3 =  std::vector&lt;DoubleVector2&gt;</definition>
+        <argsstring></argsstring>
+        <name>DoubleVector3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/cubinterpp_py_module.cpp" line="10" column="1" bodyfile="src/cubinterpp_py_module.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="cubinterpp__py__module_8cpp_1aad41ba869a9333f5cd086c183ba3f06f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PYBIND11_MODULE</definition>
+        <argsstring>(cubinterpp_py, m)</argsstring>
+        <name>PYBIND11_MODULE</name>
+        <param>
+          <type>cubinterpp_py</type>
+        </param>
+        <param>
+          <type>m</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/cubinterpp_py_module.cpp" line="13" column="1" bodyfile="src/cubinterpp_py_module.cpp" bodystart="13" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pybind11/stl.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pybind11/pybind11.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cubinterpp.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">py<sp/>=<sp/>pybind11;</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DoubleVector<sp/>=<sp/>std::vector&lt;double&gt;;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DoubleVector2<sp/>=<sp/>std::vector&lt;DoubleVector&gt;;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DoubleVector3<sp/>=<sp/>std::vector&lt;DoubleVector2&gt;;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">PYBIND11_MODULE(cubinterpp_py,<sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>m.doc()<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;pybind11<sp/>1D<sp/>cubic<sp/>and<sp/>linear<sp/>interpolation&quot;</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>optional<sp/>module<sp/>docstring</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::LinearInterp1D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;LinearInterp1D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector&gt;())</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp1D" kindref="compound">cip::LinearInterp1D&lt;double&gt;::eval</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp1D" kindref="compound">cip::LinearInterp1D&lt;double&gt;::evaln</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::MonotonicSpline1D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;MonotonicSpline1D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector&gt;())</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1MonotonicSpline1D" kindref="compound">cip::MonotonicSpline1D&lt;double&gt;::eval</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1MonotonicSpline1D" kindref="compound">cip::MonotonicSpline1D&lt;double&gt;::evaln</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::AkimaSpline1D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;AkimaSpline1D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector&gt;())</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1AkimaSpline1D" kindref="compound">cip::AkimaSpline1D&lt;double&gt;::eval</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1AkimaSpline1D" kindref="compound">cip::AkimaSpline1D&lt;double&gt;::evaln</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::NaturalSpline1D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;NaturalSpline1D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector&gt;())</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalSpline1D" kindref="compound">cip::NaturalSpline1D&lt;double&gt;::eval</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalSpline1D" kindref="compound">cip::NaturalSpline1D&lt;double&gt;::evaln</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::NaturalPeriodicSpline1D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;NaturalPeriodicSpline1D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector&gt;())</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalPeriodicSpline1D" kindref="compound">cip::NaturalPeriodicSpline1D&lt;double&gt;::eval</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalPeriodicSpline1D" kindref="compound">cip::NaturalPeriodicSpline1D&lt;double&gt;::evaln</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::LinearInterp2D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;LinearInterp2D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector2&gt;())</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp2D" kindref="compound">cip::LinearInterp2D&lt;double&gt;::eval&lt;double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp2D" kindref="compound">cip::LinearInterp2D&lt;double&gt;::evaln&lt;DoubleVector, DoubleVector&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::LinearInterp3D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;LinearInterp3D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector3&gt;())</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp3D" kindref="compound">cip::LinearInterp3D&lt;double&gt;::eval&lt;double, double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal)</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;evaln&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1LinearInterp3D" kindref="compound">cip::LinearInterp3D&lt;double&gt;::evaln&lt;DoubleVector, DoubleVector, DoubleVector&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::MonotonicSpline2D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;MonotonicSpline2D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector2&gt;())</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1MonotonicSpline2D" kindref="compound">cip::MonotonicSpline2D&lt;double&gt;::eval&lt;double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::AkimaSpline2D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;AkimaSpline2D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector2&gt;())</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1AkimaSpline2D" kindref="compound">cip::AkimaSpline2D&lt;double&gt;::eval&lt;double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::NaturalSpline2D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;NaturalSpline2D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector2&gt;())</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalSpline2D" kindref="compound">cip::NaturalSpline2D&lt;double&gt;::eval&lt;double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::NaturalPeriodicSpline2D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;NaturalPeriodicSpline2D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector2&gt;())</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalPeriodicSpline2D" kindref="compound">cip::NaturalPeriodicSpline2D&lt;double&gt;::eval&lt;double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>py::class_&lt;cip::NaturalSpline3D&lt;double&gt;&gt;(m,<sp/></highlight><highlight class="stringliteral">&quot;NaturalSpline3D&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(py::init&lt;DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector,<sp/>DoubleVector3&gt;())</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.def(</highlight><highlight class="stringliteral">&quot;eval&quot;</highlight><highlight class="normal">,<sp/>&amp;<ref refid="classcip_1_1NaturalSpline3D" kindref="compound">cip::NaturalSpline3D&lt;double&gt;::eval&lt;double, double, double&gt;</ref>,<sp/>py::return_value_policy::reference_internal);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/cubinterpp_py_module.cpp"/>
+  </compounddef>
+</doxygen>

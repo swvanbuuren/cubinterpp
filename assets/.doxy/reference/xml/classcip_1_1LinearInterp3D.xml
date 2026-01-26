@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1LinearInterp3D" kind="class" language="C++" prot="public">
+    <compoundname>cip::LinearInterp3D</compoundname>
+    <basecompoundref refid="classcip_1_1LinearInterpND" prot="public" virt="non-virtual">cip::LinearInterpND&lt; T, 3 &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1LinearInterp3D_1ae34430f89ba7c01750659277724c5cab" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::LinearInterp3D&lt; T &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::LinearInterp3D::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="273" column="5" bodyfile="include/linear_interp.hpp" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterp3D_1a70f1e9d8c559e95e4c9c0cae9c1eebb4" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, 3 &gt;</type>
+        <definition>using cip::LinearInterp3D&lt; T &gt;::Vector3 =  cip::VectorN&lt;T, 3&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector3</name>
+        <qualifiedname>cip::LinearInterp3D::Vector3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="274" column="5" bodyfile="include/linear_interp.hpp" bodystart="274" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1LinearInterp3D_1a1968f611c8c51b7d98bec99fc7763a34" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearInterp3D&lt; T &gt;::LinearInterp3D</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;y, const Vector &amp;z, const Vector3 &amp;f)</argsstring>
+        <name>LinearInterp3D</name>
+        <qualifiedname>cip::LinearInterp3D::LinearInterp3D</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="276" column="14" bodyfile="include/linear_interp.hpp" bodystart="276" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterp3D_1a31e758487b93c07bd271be11f5f6a9be" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearInterp3D&lt; T &gt;::~LinearInterp3D</definition>
+        <argsstring>()</argsstring>
+        <name>~LinearInterp3D</name>
+        <qualifiedname>cip::LinearInterp3D::~LinearInterp3D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="280" column="5" bodyfile="include/linear_interp.hpp" bodystart="280" bodyend="280"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::LinearInterpND&lt; T, 3 &gt;</label>
+        <link refid="classcip_1_1LinearInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::LinearInterp3D&lt; T &gt;</label>
+        <link refid="classcip_1_1LinearInterp3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>cip::LinearInterpND&lt; T, 3 &gt;</label>
+        <link refid="classcip_1_1LinearInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::LinearInterp3D&lt; T &gt;</label>
+        <link refid="classcip_1_1LinearInterp3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/linear_interp.hpp" line="272" column="1" bodyfile="include/linear_interp.hpp" bodystart="272" bodyend="281"/>
+    <listofallmembers>
+      <member refid="classcip_1_1LinearInterpND_1ab38aaf4a162673c164d1adebb9886ea1" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>eval</name></member>
+      <member refid="classcip_1_1LinearInterpND_1ab88f4a8573f967d21dfc4a8a2ab03480" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>evaln</name></member>
+      <member refid="classcip_1_1LinearInterp3D_1a1968f611c8c51b7d98bec99fc7763a34" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>LinearInterp3D</name></member>
+      <member refid="classcip_1_1LinearInterpND_1ac7508f85abd36d244d0001f571a7ebcd" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>LinearInterpND</name></member>
+      <member refid="classcip_1_1LinearInterp3D_1ae34430f89ba7c01750659277724c5cab" prot="private" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>Vector</name></member>
+      <member refid="classcip_1_1LinearInterp3D_1a70f1e9d8c559e95e4c9c0cae9c1eebb4" prot="private" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>Vector3</name></member>
+      <member refid="classcip_1_1LinearInterp3D_1a31e758487b93c07bd271be11f5f6a9be" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>~LinearInterp3D</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a7f5c19619c875e9ef9dc43381d0fa848" prot="public" virt="non-virtual"><scope>cip::LinearInterp3D</scope><name>~LinearInterpND</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

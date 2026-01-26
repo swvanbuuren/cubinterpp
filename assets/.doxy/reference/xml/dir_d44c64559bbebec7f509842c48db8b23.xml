@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_d44c64559bbebec7f509842c48db8b23" kind="dir">
+    <compoundname>include</compoundname>
+    <innerfile refid="cubic__spline_8hpp">cubic_spline.hpp</innerfile>
+    <innerfile refid="cubic__splines__1d_8hpp">cubic_splines_1d.hpp</innerfile>
+    <innerfile refid="cubic__splines__2d_8hpp">cubic_splines_2d.hpp</innerfile>
+    <innerfile refid="cubic__splines__3d_8hpp">cubic_splines_3d.hpp</innerfile>
+    <innerfile refid="cubinterpp_8hpp">cubinterpp.hpp</innerfile>
+    <innerfile refid="derivatives_8hpp">derivatives.hpp</innerfile>
+    <innerfile refid="linear__interp_8hpp">linear_interp.hpp</innerfile>
+    <innerfile refid="slopes_8hpp">slopes.hpp</innerfile>
+    <innerfile refid="utils_8hpp">utils.hpp</innerfile>
+    <innerfile refid="vectorn_8hpp">vectorn.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/"/>
+  </compounddef>
+</doxygen>

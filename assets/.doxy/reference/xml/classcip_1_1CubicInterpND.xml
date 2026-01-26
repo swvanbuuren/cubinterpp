@@ -1,0 +1,562 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1CubicInterpND" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>cip::CubicInterpND</compoundname>
+    <derivedcompoundref refid="classcip_1_1AkimaSpline1D" prot="public" virt="non-virtual">cip::AkimaSpline1D&lt; T, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1AkimaSpline2D" prot="public" virt="non-virtual">cip::AkimaSpline2D&lt; T, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1MonotonicSpline1D" prot="public" virt="non-virtual">cip::MonotonicSpline1D&lt; T, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1MonotonicSpline2D" prot="public" virt="non-virtual">cip::MonotonicSpline2D&lt; T, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1NaturalPeriodicSpline1D" prot="public" virt="non-virtual">cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1NaturalPeriodicSpline2D" prot="public" virt="non-virtual">cip::NaturalPeriodicSpline2D&lt; T, BC, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1NaturalSpline1D" prot="public" virt="non-virtual">cip::NaturalSpline1D&lt; T, N, BC &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1NaturalSpline2D" prot="public" virt="non-virtual">cip::NaturalSpline2D&lt; T, BC, N &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classcip_1_1NaturalSpline3D" prot="public" virt="non-virtual">cip::NaturalSpline3D&lt; T, BC, N &gt;</derivedcompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1ae003606969d77bb9465a775c4c5e2850" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::CubicInterpND::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="139" column="5" bodyfile="include/cubic_spline.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1abf2d6aa85ff6fdfbe6d322ac58196e01" prot="private" static="no">
+        <type>std::array&lt; Vector, N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Array =  std::array&lt;Vector, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Array</name>
+        <qualifiedname>cip::CubicInterpND::Array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="140" column="5" bodyfile="include/cubic_spline.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1acb843a8f5f1711aa3a970abbb8281e6e" prot="private" static="no">
+        <type><ref refid="classcip_1_1CubicCellND" kindref="compound">CubicCellND</ref>&lt; T, N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Cell =  CubicCellND&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Cell</name>
+        <qualifiedname>cip::CubicInterpND::Cell</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="141" column="5" bodyfile="include/cubic_spline.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1aa4870528e61a225c5c5a196a941c67c4" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; <ref refid="classcip_1_1CubicCellND" kindref="compound">Cell</ref>, N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Cells =  cip::VectorN&lt;Cell, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Cells</name>
+        <qualifiedname>cip::CubicInterpND::Cells</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="142" column="5" bodyfile="include/cubic_spline.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1a2f1be8016a414f298768d4ce6e894ba1" prot="private" static="no">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Span =  std::span&lt;const T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span</name>
+        <qualifiedname>cip::CubicInterpND::Span</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="143" column="5" bodyfile="include/cubic_spline.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1a320c805e1a0282267f456056267e7602" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, N &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Mdspan =  std::mdspan&lt;T, std::dextents&lt;std::size_t, N&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan</name>
+        <qualifiedname>cip::CubicInterpND::Mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="144" column="5" bodyfile="include/cubic_spline.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1ab7f8bdfb2579af62d781ac027f2edb88" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, 1 &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Mdspan1D =  std::mdspan&lt;T, std::dextents&lt;std::size_t, 1&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan1D</name>
+        <qualifiedname>cip::CubicInterpND::Mdspan1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="145" column="5" bodyfile="include/cubic_spline.hpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1a618ff05ade2e93ee1cdbf622ab02122f" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Ff =  cip::VectorN&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ff</name>
+        <qualifiedname>cip::CubicInterpND::Ff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="146" column="5" bodyfile="include/cubic_spline.hpp" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1ae4911190f964dd1dcd3b28b72c77066c" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, 2 *N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Ff2 =  cip::VectorN&lt;T, 2*N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Ff2</name>
+        <qualifiedname>cip::CubicInterpND::Ff2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="147" column="5" bodyfile="include/cubic_spline.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1afe506e64edd71f816759e6f694eed5c0" prot="private" static="no">
+        <type>std::pair&lt; std::size_t, std::size_t &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Pr =  std::pair&lt;std::size_t, std::size_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>Pr</name>
+        <qualifiedname>cip::CubicInterpND::Pr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="148" column="5" bodyfile="include/cubic_spline.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterpND_1a1bf9d92fbf32f48a51006a3ac789f249" prot="private" static="no">
+        <type>std::array&lt; <ref refid="classcip_1_1Indexer" kindref="compound">cip::Indexer</ref>&lt; T &gt;, N &gt;</type>
+        <definition>using cip::CubicInterpND&lt; T, N &gt;::Indexers =  std::array&lt;cip::Indexer&lt;T&gt;, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Indexers</name>
+        <qualifiedname>cip::CubicInterpND::Indexers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="149" column="5" bodyfile="include/cubic_spline.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1a66983e0d7c073534edb2b001dec2af08" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::CubicInterpND&lt; T, N &gt;::size_t_two</definition>
+        <argsstring></argsstring>
+        <name>size_t_two</name>
+        <qualifiedname>cip::CubicInterpND::size_t_two</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="138" column="34" bodyfile="include/cubic_spline.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1ab3ecdb31f93480b0630c4902db0c48dc" prot="private" static="no" mutable="no">
+        <type>const Array</type>
+        <definition>const Array cip::CubicInterpND&lt; T, N &gt;::xi</definition>
+        <argsstring></argsstring>
+        <name>xi</name>
+        <qualifiedname>cip::CubicInterpND::xi</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="180" column="17" bodyfile="include/cubic_spline.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1a22fb474083f5774376cdb4de16b3dbc4" prot="private" static="no" mutable="no">
+        <type>const Vector</type>
+        <definition>const Vector cip::CubicInterpND&lt; T, N &gt;::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>cip::CubicInterpND::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="181" column="18" bodyfile="include/cubic_spline.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1aed3c3d201f4c4008420bba9daf43ce99" prot="private" static="no" mutable="no">
+        <type>const Vector</type>
+        <definition>const Vector cip::CubicInterpND&lt; T, N &gt;::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>cip::CubicInterpND::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="182" column="18" bodyfile="include/cubic_spline.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1a78985cb58721801c746fe417755dc62a" prot="private" static="no" mutable="no">
+        <type>const Indexers</type>
+        <definition>const Indexers cip::CubicInterpND&lt; T, N &gt;::indexers</definition>
+        <argsstring></argsstring>
+        <name>indexers</name>
+        <qualifiedname>cip::CubicInterpND::indexers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="183" column="20" bodyfile="include/cubic_spline.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1a4dfea8e844c6280a3c6eae6724e92db0" prot="private" static="no" mutable="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">Cells</ref></type>
+        <definition>Cells cip::CubicInterpND&lt; T, N &gt;::cells</definition>
+        <argsstring></argsstring>
+        <name>cells</name>
+        <qualifiedname>cip::CubicInterpND::cells</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="184" column="11" bodyfile="include/cubic_spline.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1CubicInterpND_1ab88ecae8351a6e0957131acb1e1f8827" prot="private" static="no" mutable="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">Ff2</ref></type>
+        <definition>Ff2 cip::CubicInterpND&lt; T, N &gt;::F</definition>
+        <argsstring></argsstring>
+        <name>F</name>
+        <qualifiedname>cip::CubicInterpND::F</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="185" column="9" bodyfile="include/cubic_spline.hpp" bodystart="185" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>cip::CubicInterpND&lt; T, N &gt;::CubicInterpND</definition>
+        <argsstring>(const Ff &amp;_f, const Args &amp;... _xi)</argsstring>
+        <name>CubicInterpND</name>
+        <qualifiedname>cip::CubicInterpND::CubicInterpND</qualifiedname>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">Ff</ref> &amp;</type>
+          <declname>_f</declname>
+        </param>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>_xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="152" column="5" bodyfile="include/cubic_spline.hpp" bodystart="152" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual cip::CubicInterpND&lt; T, N &gt;::~CubicInterpND</definition>
+        <argsstring>()</argsstring>
+        <name>~CubicInterpND</name>
+        <qualifiedname>cip::CubicInterpND::~CubicInterpND</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="159" column="13" bodyfile="include/cubic_spline.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Vector</type>
+        <definition>virtual Vector cip::CubicInterpND&lt; T, N &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Mdspan1D &amp;f) const =0</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::CubicInterpND::calc_slopes</qualifiedname>
+        <reimplementedby refid="classcip_1_1MonotonicSpline2D_1ab515955d187c18311d5e4477d68aa126">calc_slopes</reimplementedby>
+        <reimplementedby refid="classcip_1_1AkimaSpline2D_1a2af76b13857b1076c2c509f7cc262bca">calc_slopes</reimplementedby>
+        <reimplementedby refid="classcip_1_1NaturalSpline2D_1a66cbbaff4c312b5db2b01647fac45730">calc_slopes</reimplementedby>
+        <reimplementedby refid="classcip_1_1NaturalPeriodicSpline2D_1a3476dfaa1436e5410d1b3a62be448816">calc_slopes</reimplementedby>
+        <reimplementedby refid="classcip_1_1NaturalSpline3D_1af4c6757e6a9fe1540529a1789f573b7e">calc_slopes</reimplementedby>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Mdspan1D &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="161" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::CubicInterpND&lt; T, N &gt;::build</definition>
+        <argsstring>(const Ff &amp;f, const Args &amp;... _xi)</argsstring>
+        <name>build</name>
+        <qualifiedname>cip::CubicInterpND::build</qualifiedname>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">Ff</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>_xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="164" column="10" bodyfile="include/cubic_spline.hpp" bodystart="164" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::CubicInterpND&lt; T, N &gt;::eval</definition>
+        <argsstring>(const Args &amp;... args) const</argsstring>
+        <name>eval</name>
+        <qualifiedname>cip::CubicInterpND::eval</qualifiedname>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="171" column="7" bodyfile="include/cubic_spline.hpp" bodystart="171" bodyend="176"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1af17cb3f3187109ffe46c50088adb0c2a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::CubicInterpND&lt; T, N &gt;::populate_F</definition>
+        <argsstring>(Ff f, const Args &amp;... _xi)</argsstring>
+        <name>populate_F</name>
+        <qualifiedname>cip::CubicInterpND::populate_F</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1VectorN" kindref="compound">Ff</ref></type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>_xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="188" column="10" bodyfile="include/cubic_spline.hpp" bodystart="188" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterpND_1a50a05d09596e56014c09a9c99cc65e00" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::CubicInterpND&lt; T, N &gt;::build_cell</definition>
+        <argsstring>(Cells &amp;_cells, Indices... indices) const</argsstring>
+        <name>build_cell</name>
+        <qualifiedname>cip::CubicInterpND::build_cell</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1VectorN" kindref="compound">Cells</ref> &amp;</type>
+          <declname>_cells</declname>
+        </param>
+        <param>
+          <type>Indices...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_spline.hpp" line="197" column="10" bodyfile="include/cubic_spline.hpp" bodystart="197" bodyend="210"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::AkimaSpline1D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1AkimaSpline1D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cip::AkimaSpline2D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1AkimaSpline2D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="4">
+        <label>cip::MonotonicSpline1D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1MonotonicSpline1D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cip::MonotonicSpline2D&lt; T, N &gt;</label>
+        <link refid="classcip_1_1MonotonicSpline2D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicSpline1D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>cip::NaturalPeriodicSpline2D&lt; T, BC, N &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicSpline2D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>cip::NaturalSpline1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalSpline1D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cip::NaturalSpline2D&lt; T, BC, N &gt;</label>
+        <link refid="classcip_1_1NaturalSpline2D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>cip::NaturalSpline3D&lt; T, BC, N &gt;</label>
+        <link refid="classcip_1_1NaturalSpline3D"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="include/cubic_spline.hpp" line="136" column="1" bodyfile="include/cubic_spline.hpp" bodystart="137" bodyend="212"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1abf2d6aa85ff6fdfbe6d322ac58196e01" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Array</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>build</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a50a05d09596e56014c09a9c99cc65e00" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>build_cell</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49" prot="public" virt="pure-virtual"><scope>cip::CubicInterpND</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1acb843a8f5f1711aa3a970abbb8281e6e" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Cell</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aa4870528e61a225c5c5a196a941c67c4" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Cells</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a4dfea8e844c6280a3c6eae6724e92db0" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>cells</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>eval</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ab88ecae8351a6e0957131acb1e1f8827" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>F</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a618ff05ade2e93ee1cdbf622ab02122f" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Ff</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ae4911190f964dd1dcd3b28b72c77066c" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Ff2</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a1bf9d92fbf32f48a51006a3ac789f249" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Indexers</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a78985cb58721801c746fe417755dc62a" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>indexers</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a320c805e1a0282267f456056267e7602" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Mdspan</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ab7f8bdfb2579af62d781ac027f2edb88" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Mdspan1D</name></member>
+      <member refid="classcip_1_1CubicInterpND_1af17cb3f3187109ffe46c50088adb0c2a" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>populate_F</name></member>
+      <member refid="classcip_1_1CubicInterpND_1afe506e64edd71f816759e6f694eed5c0" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Pr</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a66983e0d7c073534edb2b001dec2af08" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>size_t_two</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a2f1be8016a414f298768d4ce6e894ba1" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Span</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ae003606969d77bb9465a775c4c5e2850" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>Vector</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a22fb474083f5774376cdb4de16b3dbc4" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>x</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ab3ecdb31f93480b0630c4902db0c48dc" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>xi</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aed3c3d201f4c4008420bba9daf43ce99" prot="private" virt="non-virtual"><scope>cip::CubicInterpND</scope><name>y</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" virt="virtual"><scope>cip::CubicInterpND</scope><name>~CubicInterpND</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

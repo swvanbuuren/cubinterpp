@@ -1,0 +1,821 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacecip" kind="namespace" language="C++">
+    <compoundname>cip</compoundname>
+    <innerclass refid="classcip_1_1AkimaSpline1D" prot="public">cip::AkimaSpline1D</innerclass>
+    <innerclass refid="classcip_1_1AkimaSpline2D" prot="public">cip::AkimaSpline2D</innerclass>
+    <innerclass refid="classcip_1_1CubicCellND" prot="public">cip::CubicCellND</innerclass>
+    <innerclass refid="classcip_1_1CubicCellND_3_01T_00_011_01_4" prot="public">cip::CubicCellND&lt; T, 1 &gt;</innerclass>
+    <innerclass refid="classcip_1_1CubicInterpND" prot="public">cip::CubicInterpND</innerclass>
+    <innerclass refid="classcip_1_1CubicInterpND_3_01T_00_011_01_4" prot="public">cip::CubicInterpND&lt; T, 1 &gt;</innerclass>
+    <innerclass refid="classcip_1_1Indexer" prot="public">cip::Indexer</innerclass>
+    <innerclass refid="classcip_1_1LinearCellND" prot="public">cip::LinearCellND</innerclass>
+    <innerclass refid="classcip_1_1LinearCellND_3_01T_00_011_01_4" prot="public">cip::LinearCellND&lt; T, 1 &gt;</innerclass>
+    <innerclass refid="classcip_1_1LinearInterp1D" prot="public">cip::LinearInterp1D</innerclass>
+    <innerclass refid="classcip_1_1LinearInterp2D" prot="public">cip::LinearInterp2D</innerclass>
+    <innerclass refid="classcip_1_1LinearInterp3D" prot="public">cip::LinearInterp3D</innerclass>
+    <innerclass refid="classcip_1_1LinearInterp4D" prot="public">cip::LinearInterp4D</innerclass>
+    <innerclass refid="classcip_1_1LinearInterpND" prot="public">cip::LinearInterpND</innerclass>
+    <innerclass refid="classcip_1_1LinearInterpND_3_01T_00_011_01_4" prot="public">cip::LinearInterpND&lt; T, 1 &gt;</innerclass>
+    <innerclass refid="classcip_1_1MonotonicSpline1D" prot="public">cip::MonotonicSpline1D</innerclass>
+    <innerclass refid="classcip_1_1MonotonicSpline2D" prot="public">cip::MonotonicSpline2D</innerclass>
+    <innerclass refid="classcip_1_1NaturalPeriodicSpline1D" prot="public">cip::NaturalPeriodicSpline1D</innerclass>
+    <innerclass refid="classcip_1_1NaturalPeriodicSpline2D" prot="public">cip::NaturalPeriodicSpline2D</innerclass>
+    <innerclass refid="classcip_1_1NaturalSpline1D" prot="public">cip::NaturalSpline1D</innerclass>
+    <innerclass refid="classcip_1_1NaturalSpline2D" prot="public">cip::NaturalSpline2D</innerclass>
+    <innerclass refid="classcip_1_1NaturalSpline3D" prot="public">cip::NaturalSpline3D</innerclass>
+    <innerclass refid="structcip_1_1setNaturalSplineBoundaryCondition" prot="public">cip::setNaturalSplineBoundaryCondition</innerclass>
+    <innerclass refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Clamped_00_01T_00_01Tx_00_01Tf_01_4" prot="public">cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Clamped, T, Tx, Tf &gt;</innerclass>
+    <innerclass refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Natural_00_01T_00_01Tx_00_01Tf_01_4" prot="public">cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Natural, T, Tx, Tf &gt;</innerclass>
+    <innerclass refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4" prot="public">cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;</innerclass>
+    <innerclass refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4" prot="public">cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;</innerclass>
+    <innerclass refid="classcip_1_1VectorN" prot="public">cip::VectorN</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>BoundaryConditionType</name>
+        <qualifiedname>cip::BoundaryConditionType</qualifiedname>
+        <enumvalue id="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07a2bd8ab451a35759c5737128e35c8011a" prot="public">
+          <name>Natural</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07a6bf0ecf8d3753f95aa8d401bff02d97d" prot="public">
+          <name>Clamped</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07adba864b6a691903eedf0e7a41f4d0c72" prot="public">
+          <name>NotAKnot</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="slopes_8hpp_1a301dd91c1896cf3ca80d27f914371d07acdcc32a064503184053bd2018d1c0e7e" prot="public">
+          <name>Periodic</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="154" column="1" bodyfile="include/slopes.hpp" bodystart="154" bodyend="159"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="derivatives_8hpp_1ad24a3b697436d2917fe2d79ba40754c2" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::SIZE_T_ZERO</definition>
+        <argsstring></argsstring>
+        <name>SIZE_T_ZERO</name>
+        <qualifiedname>cip::SIZE_T_ZERO</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="68" column="23" bodyfile="include/derivatives.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="derivatives_8hpp_1a98e57a2f66a19300d98de7d1e27c3633" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>current</declname>
+            <defname>current</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename XiArray</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::iterate_over_indices</definition>
+        <argsstring>(Func &amp;&amp;func, XiArray const &amp;xi, Indices... indices)</argsstring>
+        <name>iterate_over_indices</name>
+        <qualifiedname>cip::iterate_over_indices</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>XiArray const &amp;</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>Indices...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="13" column="6" bodyfile="include/derivatives.hpp" bodystart="13" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a5c6057a06950a787677c8a05c9518d61" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+          <param>
+            <type>typename Accum</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cip::build_coordinate_indices_impl</definition>
+        <argsstring>(const Tuple &amp;t, Accum acc)</argsstring>
+        <name>build_coordinate_indices_impl</name>
+        <qualifiedname>cip::build_coordinate_indices_impl</qualifiedname>
+        <param>
+          <type>const Tuple &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>Accum</type>
+          <declname>acc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="29" column="16" bodyfile="include/derivatives.hpp" bodystart="29" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1aaf627b650813bc2f33d59e1bc43674c8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cip::build_coordinate_indices</definition>
+        <argsstring>(const Tuple &amp;t)</argsstring>
+        <name>build_coordinate_indices</name>
+        <qualifiedname>cip::build_coordinate_indices</qualifiedname>
+        <param>
+          <type>const Tuple &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="50" column="16" bodyfile="include/derivatives.hpp" bodystart="50" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a9f983a0d7ca4eead0675d0236fc5c0b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FType</type>
+          </param>
+          <param>
+            <type>typename CoordTuple</type>
+          </param>
+          <param>
+            <type>typename DerivTuple</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto cip::call_submdspan_1d</definition>
+        <argsstring>(FType &amp;F, const CoordTuple &amp;coord, const DerivTuple &amp;deriv)</argsstring>
+        <name>call_submdspan_1d</name>
+        <qualifiedname>cip::call_submdspan_1d</qualifiedname>
+        <param>
+          <type>FType &amp;</type>
+          <declname>F</declname>
+        </param>
+        <param>
+          <type>const CoordTuple &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>const DerivTuple &amp;</type>
+          <declname>deriv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="55" column="6" bodyfile="include/derivatives.hpp" bodystart="55" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1af3d7b1dc83954fca9bae2014ed14b80c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FType</type>
+          </param>
+          <param>
+            <type>typename SlopeType</type>
+          </param>
+          <param>
+            <type>typename CoordTuple</type>
+          </param>
+          <param>
+            <type>typename DerivTuple</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::call_move_into_submdspan</definition>
+        <argsstring>(FType &amp;F, SlopeType &amp;&amp;slopes, const CoordTuple &amp;coord, const DerivTuple &amp;deriv)</argsstring>
+        <name>call_move_into_submdspan</name>
+        <qualifiedname>cip::call_move_into_submdspan</qualifiedname>
+        <param>
+          <type>FType &amp;</type>
+          <declname>F</declname>
+        </param>
+        <param>
+          <type>SlopeType &amp;&amp;</type>
+          <declname>slopes</declname>
+        </param>
+        <param>
+          <type>const CoordTuple &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>const DerivTuple &amp;</type>
+          <declname>deriv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="62" column="6" bodyfile="include/derivatives.hpp" bodystart="62" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a0db6f0999638802da20b31ac24c5e505" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cip::make_zero_tuple</definition>
+        <argsstring>()</argsstring>
+        <name>make_zero_tuple</name>
+        <qualifiedname>cip::make_zero_tuple</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="71" column="16" bodyfile="include/derivatives.hpp" bodystart="71" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a6517c93544d4ca9f0f855850697449f8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto cip::update_tuple_element</definition>
+        <argsstring>(const Tuple &amp;tup, T new_value)</argsstring>
+        <name>update_tuple_element</name>
+        <qualifiedname>cip::update_tuple_element</qualifiedname>
+        <param>
+          <type>const Tuple &amp;</type>
+          <declname>tup</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="78" column="16" bodyfile="include/derivatives.hpp" bodystart="78" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1ada414ff7a0e8ca6ff28492217ac01a3e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr void</type>
+        <definition>constexpr void cip::for_each_dimension_impl</definition>
+        <argsstring>(const Tuple &amp;tup, Func &amp;&amp;func, std::index_sequence&lt; Is... &gt;)</argsstring>
+        <name>for_each_dimension_impl</name>
+        <qualifiedname>cip::for_each_dimension_impl</qualifiedname>
+        <param>
+          <type>const Tuple &amp;</type>
+          <declname>tup</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="86" column="16" bodyfile="include/derivatives.hpp" bodystart="86" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a8ddc2c372a4965ba50a268f0d3c63d1f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr void</type>
+        <definition>constexpr void cip::for_each_dimension</definition>
+        <argsstring>(const Tuple &amp;tup, Func &amp;&amp;func)</argsstring>
+        <name>for_each_dimension</name>
+        <qualifiedname>cip::for_each_dimension</qualifiedname>
+        <param>
+          <type>const Tuple &amp;</type>
+          <declname>tup</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="91" column="16" bodyfile="include/derivatives.hpp" bodystart="91" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1a1ecfce024a4f6902af176ddf4a412cfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>typename FType</type>
+          </param>
+          <param>
+            <type>typename XiArray</type>
+          </param>
+          <param>
+            <type>typename DerivTuple</type>
+          </param>
+          <param>
+            <type>typename CalcSlopesFunctor</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::compute_mixed_derivatives_impl</definition>
+        <argsstring>(FType &amp;F, XiArray const &amp;xi, const DerivTuple &amp;currentDeriv, CalcSlopesFunctor calcSlopes, std::size_t start=0)</argsstring>
+        <name>compute_mixed_derivatives_impl</name>
+        <qualifiedname>cip::compute_mixed_derivatives_impl</qualifiedname>
+        <param>
+          <type>FType &amp;</type>
+          <declname>F</declname>
+        </param>
+        <param>
+          <type>XiArray const &amp;</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>const DerivTuple &amp;</type>
+          <declname>currentDeriv</declname>
+        </param>
+        <param>
+          <type>CalcSlopesFunctor</type>
+          <declname>calcSlopes</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>start</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="96" column="6" bodyfile="include/derivatives.hpp" bodystart="96" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="derivatives_8hpp_1adf11e718ae7681f5f85982f90eabd13c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>typename FType</type>
+          </param>
+          <param>
+            <type>typename XiArray</type>
+          </param>
+          <param>
+            <type>typename CalcSlopesFunctor</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::compute_mixed_derivatives</definition>
+        <argsstring>(FType &amp;F, XiArray const &amp;xi, CalcSlopesFunctor calcSlopes)</argsstring>
+        <name>compute_mixed_derivatives</name>
+        <qualifiedname>cip::compute_mixed_derivatives</qualifiedname>
+        <param>
+          <type>FType &amp;</type>
+          <declname>F</declname>
+        </param>
+        <param>
+          <type>XiArray const &amp;</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>CalcSlopesFunctor</type>
+          <declname>calcSlopes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/derivatives.hpp" line="117" column="6" bodyfile="include/derivatives.hpp" bodystart="117" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="slopes_8hpp_1a2b3711fdc98ab6ab4b72c8136e5a5ddb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tx</type>
+          </param>
+          <param>
+            <type>typename Tf</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt; T &gt; cip::monotonic_slopes</definition>
+        <argsstring>(const Tx x, const Tf f)</argsstring>
+        <name>monotonic_slopes</name>
+        <qualifiedname>cip::monotonic_slopes</qualifiedname>
+        <param>
+          <type>const Tx</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="11" column="13" bodyfile="include/slopes.hpp" bodystart="11" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="slopes_8hpp_1a3a609ccafe554b890a13dea9cf4b5ad3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tx</type>
+          </param>
+          <param>
+            <type>typename Tf</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt; T &gt; cip::akima_slopes</definition>
+        <argsstring>(const Tx x, const Tf f)</argsstring>
+        <name>akima_slopes</name>
+        <qualifiedname>cip::akima_slopes</qualifiedname>
+        <param>
+          <type>const Tx</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="55" column="13" bodyfile="include/slopes.hpp" bodystart="55" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="slopes_8hpp_1a58e2c8bf6dc0abc2e7185f1b4e7188fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::thomas_algorithm</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;a, const std::vector&lt; T &gt; &amp;b, std::vector&lt; T &gt; &amp;c, std::vector&lt; T &gt; &amp;d)</argsstring>
+        <name>thomas_algorithm</name>
+        <qualifiedname>cip::thomas_algorithm</qualifiedname>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T &gt; &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="131" column="6" bodyfile="include/slopes.hpp" bodystart="131" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="slopes_8hpp_1a8f148e51bbc36dc18fe50611a22de530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::cyclic_thomas_algorithm</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;a, const std::vector&lt; T &gt; &amp;b, const std::vector&lt; T &gt; &amp;c, std::vector&lt; T &gt; &amp;d, const std::size_t exclude_rows=0)</argsstring>
+        <name>cyclic_thomas_algorithm</name>
+        <qualifiedname>cip::cyclic_thomas_algorithm</qualifiedname>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; T &gt; &amp;</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>exclude_rows</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="233" column="6" bodyfile="include/slopes.hpp" bodystart="233" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="slopes_8hpp_1a4123ecc53a523a2318acb68b428fc5bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>BoundaryConditionType</type>
+            <declname>BC</declname>
+            <defname>BC</defname>
+            <defval>BoundaryConditionType::Natural</defval>
+          </param>
+          <param>
+            <type>typename Tx</type>
+          </param>
+          <param>
+            <type>typename Tf</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt; T &gt; cip::natural_spline_slopes</definition>
+        <argsstring>(const Tx x, const Tf f)</argsstring>
+        <name>natural_spline_slopes</name>
+        <qualifiedname>cip::natural_spline_slopes</qualifiedname>
+        <param>
+          <type>const Tx</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="314" column="13" bodyfile="include/slopes.hpp" bodystart="314" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_8hpp_1a0ef9787a6eddec7251c88d49551ab545" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>constexpr int cip::factorial</definition>
+        <argsstring>(int n)</argsstring>
+        <name>factorial</name>
+        <qualifiedname>cip::factorial</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="59" column="22" bodyfile="include/utils.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_8hpp_1a79594813d85f77f0434cd900115e68f7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::binomial</definition>
+        <argsstring>(std::size_t n, std::size_t k) noexcept</argsstring>
+        <name>binomial</name>
+        <qualifiedname>cip::binomial</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="65" column="30" bodyfile="include/utils.hpp" bodystart="65" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_8hpp_1ae51c0161bb25e231ae4afc1108a5b7e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::binomial_power_coefficient</definition>
+        <argsstring>(const T y, const int n, const int k)</argsstring>
+        <name>binomial_power_coefficient</name>
+        <qualifiedname>cip::binomial_power_coefficient</qualifiedname>
+        <param>
+          <type>const T</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="78" column="3" bodyfile="include/utils.hpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="utils_8hpp_1ada6cff67b7e62fea4a1fcf77572c0e5d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>Base</declname>
+            <defname>Base</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>Exp</declname>
+            <defname>Exp</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::power</definition>
+        <argsstring>()</argsstring>
+        <name>power</name>
+        <qualifiedname>cip::power</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/utils.hpp" line="85" column="23" bodyfile="include/utils.hpp" bodystart="85" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/cubic_spline.hpp" line="15" column="1"/>
+  </compounddef>
+</doxygen>
