@@ -230,11 +230,11 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Clamped, T, Tx, 
 
 
 template <typename T>
-void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, const std::vector<T> &c, std::vector<T> &d)
+void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, const std::vector<T> &c, std::vector<T> &d, const std::size_t exclude_rows=0)
 {
     // See https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm#Variants
     
-    const auto nx = d.size();
+    const auto nx = d.size() - exclude_rows; // last exclude_rows rows are not used
     
     std::vector<T> cmod(nx);
     std::vector<T> v(nx);
@@ -243,7 +243,8 @@ void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, c
     v[1] = -a[1]/b[1];
     d[1] = d[1]/b[1];
 
-    for (auto ix = 2; ix < nx-1; ++ix) {
+    for (auto ix = 2; ix < nx-1; ++ix)
+    {
         const T m = T(1.0)/(b[ix] - a[ix]*cmod[ix-1]);
         cmod[ix] = m*c[ix];
         v[ix] = (T(0.0) - a[ix]*v[ix-1]) * m;
@@ -251,11 +252,12 @@ void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, c
     }
 
     const T m = T(1.0)/(b[nx-1] - a[nx-1]*cmod[nx-2]);
-    cmod[nx - 1] = m*c[nx-1];
-    v[nx - 1] = m*(-c[0] - a[nx-1]*v[nx-2]);
-    d[nx - 1] = m*(d[nx-1] - a[nx-1]*d[nx-2]);
+    cmod[nx-1] = m*c[nx-1];
+    v[nx-1] = m*(-c[0] - a[nx-1]*v[nx-2]);
+    d[nx-1] = m*(d[nx-1] - a[nx-1]*d[nx-2]);
 
-    for (auto ix = nx - 2; ix >= 1; --ix) {
+    for (auto ix = nx - 2; ix >= 1; --ix)
+    {
         v[ix] -= cmod[ix]*v[ix+1];
         d[ix] -= cmod[ix]*d[ix+1];
     }
@@ -263,7 +265,9 @@ void cyclic_thomas_algorithm(const std::vector<T> &a, const std::vector<T> &b, c
     d[0] = (d[0] - a[0]*d[nx-1] - c[0]*d[1])/(b[0] + a[0]*v[nx-1] + c[0]*v[1]);
 
     for (auto ix = 1; ix < nx; ++ix)
+    {
         d[ix] += d[0]*v[ix];
+    }
 }
 
 
@@ -274,7 +278,8 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Periodic, T, Tx,
 
         // Periodic boundary conditions, it is assumed that f[0] == f[nx-1] !
 
-        const auto nsys = a.size();
+        // last equation is for periodicity and not used in cyclic thomas algorithm
+        const auto nsys = d.size() - 1;
 
         // Row 0
         {
@@ -298,7 +303,9 @@ struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Periodic, T, Tx,
             d[nsys-1] = 3.0*((f[nsys-1] - f[nsys-2])/(dxL*dxL) + (f[0] - f[nsys-1])/(dxR*dxR));
         }
 
-        cyclic_thomas_algorithm<T>(a, b, c, d);
+        cyclic_thomas_algorithm<T>(a, b, c, d, 1); // exclude last row
+
+        d.back() = d.front(); // duplicate endpoint slope for periodic BC
     }
 };
 
@@ -310,18 +317,17 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
 
     const auto nx = x.size();
 
-    // Periodic with duplicated endpoint → reduce system
-    constexpr bool is_periodic = (BC == BoundaryConditionType::Periodic);
-    const auto nsys = is_periodic ? nx - 1 : nx;
-
     // vectors that fill up the tridiagonal matrix
-    std::vector<T> a(nsys, T{0}); // first value of a is only used for periodic BC
-    std::vector<T> b(nsys, T{0});
-    std::vector<T> c(nsys, T{0}); // last value of c is only used for periodic BC
+    std::vector<T> a(nx, T{0}); // first value of a is only used for periodic BC
+    std::vector<T> b(nx, T{0});
+    std::vector<T> c(nx, T{0}); // last value of c is only used for periodic BC
     // right hand side
-    std::vector<T> d(nsys, T{0});
+    std::vector<T> d(nx, T{0});
 
-    for (auto i = 1; i < nsys-1; ++i)
+    // For Periodic BD the last row is not used
+    constexpr bool is_periodic = (BC == BoundaryConditionType::Periodic);
+
+    for (auto i = 1; i < (is_periodic ? nx-2 : nx-1); ++i)
     {
         T dxL = x[i] - x[i-1];
         T dxR = x[i+1] - x[i];
@@ -332,17 +338,6 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
     }
 
     setNaturalSplineBoundaryCondition<BC, T, Tx, Tf>{}(x, f, a, b, c, d);
-
-    if constexpr (is_periodic)
-    {
-        std::vector<T> full(nx);
-        for (auto i = 0; i < nsys; ++i)
-        {
-            full[i] = d[i];
-        }
-        full[nx-1] = full[0];  // duplicate endpoint slope
-        return full;
-    }
 
     return d;
 }
