@@ -271,19 +271,32 @@ template <typename T, typename Tx, typename Tf>
 struct setNaturalSplineBoundaryCondition<BoundaryConditionType::Periodic, T, Tx, Tf> {
     using Vector = std::vector<T>;
     constexpr void operator()(const Tx& x, const Tf& f, Vector& a, Vector& b, Vector& c, Vector& d) const {
-        const auto nx = x.size();
-        
-        T dx1 = x[1] - x[0];
-        T dxN = x[nx-1] - x[nx-2];
 
-        b[0] = 1.0;
-        a[0] = -1.0;  // (lower-left corner)
-        d[0] = 0.0;
+        // Periodic boundary conditions, it is assumed that f[0] == f[nx-1] !
 
-        a[nx-1] = 1.0/dxN;
-        b[nx-1] = 2.0*(1.0/dxN + 1.0/dx1);
-        c[nx-1] = 1.0/dx1;  // (upper-right corner)
-        d[nx-1] = 3.0*((f[nx-1] - f[nx-2])/(dxN*dxN) + (f[1] - f[0])/(dx1*dx1));
+        const auto nsys = a.size();
+
+        // Row 0
+        {
+            T dxL = x.back() - x[nsys-1];
+            T dxR = x[1] - x[0];
+
+            a[0] = 1.0/dxL;   // lower-left corner
+            b[0] = 2.0*(1.0/dxL + 1.0/dxR);
+            c[0] = 1.0/dxR;
+            d[0] = 3.0*((f[0] - f[nsys-1])/(dxL*dxL) + (f[1] - f[0])/(dxR*dxR));
+        }
+
+        // Last row (nsys-1)
+        {
+            T dxL = x[nsys-1] - x[nsys-2];
+            T dxR = x.back() - x[nsys-1];
+
+            a[nsys-1] = 1.0/dxL;
+            b[nsys-1] = 2.0*(1.0/dxL + 1.0/dxR);
+            c[nsys-1] = 1.0/dxR;  // upper-right corner
+            d[nsys-1] = 3.0*((f[nsys-1] - f[nsys-2])/(dxL*dxL) + (f[0] - f[nsys-1])/(dxR*dxR));
+        }
 
         cyclic_thomas_algorithm<T>(a, b, c, d);
     }
@@ -297,25 +310,39 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
 
     const auto nx = x.size();
 
-    // vectors that fill up the tridiagonal matrix
-    std::vector<T> a(nx, T{0}); // first value of a is only used for periodic BC
-    std::vector<T> b(nx, T{0});
-    std::vector<T> c(nx, T{0}); // last value of c is only used for periodic BC
-    // right hand side
-    std::vector<T> d(nx, T{0});
+    // Periodic with duplicated endpoint → reduce system
+    constexpr bool is_periodic = (BC == BoundaryConditionType::Periodic);
+    const auto nsys = is_periodic ? nx - 1 : nx;
 
-    // rows i = 1, ..., nx-2
-    for (auto i = 1; i < nx-1; ++i)
+    // vectors that fill up the tridiagonal matrix
+    std::vector<T> a(nsys, T{0}); // first value of a is only used for periodic BC
+    std::vector<T> b(nsys, T{0});
+    std::vector<T> c(nsys, T{0}); // last value of c is only used for periodic BC
+    // right hand side
+    std::vector<T> d(nsys, T{0});
+
+    for (auto i = 1; i < nsys-1; ++i)
     {
-        T dxi = x[i] - x[i-1];
-        T dxi1 = x[i+1] - x[i];
-        a[i] = 1.0/dxi;
-        b[i] = 2.0*(1.0/dxi + 1.0/dxi1);
-        c[i] = 1.0/dxi1;
-        d[i] = 3.0*((f[i] - f[i-1])/(dxi*dxi) + (f[i+1] - f[i])/(dxi1*dxi1));
+        T dxL = x[i] - x[i-1];
+        T dxR = x[i+1] - x[i];
+        a[i] = 1.0/dxL;
+        b[i] = 2.0*(1.0/dxL + 1.0/dxR);
+        c[i] = 1.0/dxR;
+        d[i] = 3.0*((f[i] - f[i-1])/(dxL*dxL) + (f[i+1] - f[i])/(dxR*dxR));
     }
 
     setNaturalSplineBoundaryCondition<BC, T, Tx, Tf>{}(x, f, a, b, c, d);
+
+    if constexpr (is_periodic)
+    {
+        std::vector<T> full(nx);
+        for (auto i = 0; i < nsys; ++i)
+        {
+            full[i] = d[i];
+        }
+        full[nx-1] = full[0];  // duplicate endpoint slope
+        return full;
+    }
 
     return d;
 }
