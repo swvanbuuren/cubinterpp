@@ -41,6 +41,14 @@ Refer to the [documentation](https://swvanbuuren.github.io/cubinterpp/) for:
 - [Mathematical background](https://swvanbuuren.github.io/cubinterpp/theory/)
 - [Code reference](https://swvanbuuren.github.io/cubinterpp/reference/)
 
+## Pre-commit hooks
+
+This repository comes with pre-commit hooks. To enable the hooks issue:
+
+```bash
+uv run pre-commit install --install-hooks
+```
+
 ## License
 
 An MIT style license applies for cubinterpp, see the [LICENSE](LICENSE) file for
