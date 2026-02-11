@@ -23,7 +23,8 @@ FetchContent_Declare(
 FetchContent_Declare(
   mdspan
   GIT_REPOSITORY https://github.com/kokkos/mdspan.git
-  GIT_TAG 5d4eb209c77f4744980c0b0c2af44636cc81b08b # Committed 2026-01-08
+  #GIT_TAG 5d4eb209c77f4744980c0b0c2af44636cc81b08b # Committed 2026-01-08
+  GIT_TAG stable
   GIT_SHALLOW TRUE
   GIT_PROGRESS TRUE
 )
