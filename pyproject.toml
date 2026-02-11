@@ -20,7 +20,8 @@ classifiers = [
 ]
 urls = { Homepage = "https://github.com/swvanbuuren/cubinterpp" }
 dependencies = [
-    "mlpyqtgraph==0.9.1",
+    "matplotlib>=3.10.8",
+    "mlpyqtgraph==0.11.1",
     "scipy==1.17.0",
 ]
 

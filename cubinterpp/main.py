@@ -63,7 +63,7 @@ def get_test_data_2d(case='standard'):
             f[5:7, 5:7] = np.array([[0.25, 0.2], [0.2, 0.25]])
             f[7:9, 7:9] = 0.5
             f = 10 * np.flip(f, axis=0) + 1
-    return x, y, f
+    return np.array(x), np.array(y), np.array(f)
 
 
 def refine_grid(x_coord, size_fine=1000, extension=0):
@@ -139,14 +139,18 @@ def main():
             refinement=46
         )
         title = interp_type.capitalize().replace('_', ' ')
-        mpg.figure(title=f'{title} interpolation', layout_type='Qt')
+        mpg.figure(title=f'{title} interpolation')
         mpg.surf(x_fine, y_fine, z_fine)
         ax = mpg.gca()
         ax.azimuth = 225
-        ax.label_fmt = '.0f'
         ax.xticks = 8
         ax.yticks = 8
         ax.zlim = [0, 8]
+        x, y, f = get_test_data_2d(case='three_bumps')
+        xp = np.repeat(x, y.size)
+        yp = np.tile(y, x.size)
+        zp = f.flatten()
+        mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=3)
 
     x, y, f = get_test_data_2d(case='three_bumps')
     x_fine, y_fine = refine_grid(x, 46), refine_grid(y, 46)
@@ -155,10 +159,10 @@ def main():
     mpg.surf(x_fine, y_fine, z_fine_scipy)
     ax = mpg.gca()
     ax.azimuth = 225
-    ax.label_fmt = '.0f'
     ax.xticks = 8
     ax.yticks = 8
     ax.zlim = [0, 8]
+    mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=3)
 
 
 if __name__ == '__main__':
