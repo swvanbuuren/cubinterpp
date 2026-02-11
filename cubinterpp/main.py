@@ -132,6 +132,11 @@ def main():
         'data points'
     )
 
+    x, y, f = get_test_data_2d(case='three_bumps')
+    xp = np.repeat(x, y.size)
+    yp = np.tile(y, x.size)
+    zp = f.flatten()
+
     for interp_type in ('linear', 'monotonic', 'akima', 'natural_spline'):
         x_fine, y_fine, z_fine = cubinterpp_interp2(
             interp_type=interp_type,
@@ -146,10 +151,6 @@ def main():
         ax.xticks = 8
         ax.yticks = 8
         ax.zlim = [0, 8]
-        x, y, f = get_test_data_2d(case='three_bumps')
-        xp = np.repeat(x, y.size)
-        yp = np.tile(y, x.size)
-        zp = f.flatten()
         mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=3)
 
     x, y, f = get_test_data_2d(case='three_bumps')

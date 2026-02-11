@@ -31,7 +31,7 @@ def main():
     spline_y = cubinterpp.NaturalPeriodicSpline2D(tx, ty, y)
     spline_z = cubinterpp.NaturalPeriodicSpline2D(tx, ty, z)
     # evaluate on finer grid
-    nxi, nyi = 30, 30
+    nxi, nyi = 33, 33
     txi = np.linspace(0.0, 1.0, nxi)
     tyi = np.linspace(0.0, 1.0, nyi)
     x_fine = np.zeros((nxi, nyi))
@@ -50,7 +50,7 @@ def main():
     ax.azimuth = 225
     ax.xlim = [-4, 4]
     ax.ylim = [-4, 4]
-    ax.zlim = [-1.5, 1.5]
+    ax.zlim = [-2.5, 2.5]
     xp = x.flatten()
     yp = y.flatten()
     zp = z.flatten()
