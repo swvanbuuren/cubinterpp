@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Tx</type>
+      </param>
+      <param>
+        <type>typename Tf</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aa17c26a3d62c1c5d295d132a027e296a" prot="public" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="188" column="5" bodyfile="include/slopes.hpp" bodystart="188" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aff1b3e41bee9d80eac41135f9ad836eb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr void</type>
+        <definition>constexpr void cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;::operator()</definition>
+        <argsstring>(const Tx &amp;x, const Tf &amp;f, Vector &amp;a, Vector &amp;b, Vector &amp;c, Vector &amp;d) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;::operator()</qualifiedname>
+        <param>
+          <type>const Tx &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="189" column="20" bodyfile="include/slopes.hpp" bodystart="189" bodyend="214"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/slopes.hpp" line="187" column="1" bodyfile="include/slopes.hpp" bodystart="187" bodyend="215"/>
+    <listofallmembers>
+      <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aff1b3e41bee9d80eac41135f9ad836eb" prot="public" virt="non-virtual"><scope>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;</scope><name>operator()</name></member>
+      <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1NotAKnot_00_01T_00_01Tx_00_01Tf_01_4_1aa17c26a3d62c1c5d295d132a027e296a" prot="public" virt="non-virtual"><scope>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::NotAKnot, T, Tx, Tf &gt;</scope><name>Vector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

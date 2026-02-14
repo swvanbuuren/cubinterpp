@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1NaturalSpline3D" kind="class" language="C++" prot="public">
+    <compoundname>cip::NaturalSpline3D</compoundname>
+    <basecompoundref refid="classcip_1_1CubicInterpND" prot="public" virt="non-virtual">cip::CubicInterpND&lt; T, 3 &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>cip::BoundaryConditionType</type>
+        <declname>BC</declname>
+        <defname>BC</defname>
+        <defval>cip::BoundaryConditionType::Natural</defval>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+        <defval>3</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1NaturalSpline3D_1afb647d79bb804ac32d61446238ca8aea" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::NaturalSpline3D&lt; T, BC, N &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::NaturalSpline3D::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="13" column="5" bodyfile="include/cubic_splines_3d.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1NaturalSpline3D_1a60d4c5aa23b54ee6334f32a5723b2b38" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, 1 &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::NaturalSpline3D&lt; T, BC, N &gt;::Mdspan1D =  std::mdspan&lt;T, std::dextents&lt;std::size_t, 1&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan1D</name>
+        <qualifiedname>cip::NaturalSpline3D::Mdspan1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="14" column="5" bodyfile="include/cubic_splines_3d.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1NaturalSpline3D_1a9fd54feed0ab44db28fd9cc0ba407b1f" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, N &gt;</type>
+        <definition>using cip::NaturalSpline3D&lt; T, BC, N &gt;::VectorN =  cip::VectorN&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::NaturalSpline3D::VectorN</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="15" column="5" bodyfile="include/cubic_splines_3d.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1NaturalSpline3D_1a2c06764b8b54042af87c901ce4fd5876" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalSpline3D&lt; T, BC, N &gt;::NaturalSpline3D</definition>
+        <argsstring>(const Vector &amp;_x, const Vector &amp;_y, const Vector &amp;_z, const VectorN &amp;_f)</argsstring>
+        <name>NaturalSpline3D</name>
+        <qualifiedname>cip::NaturalSpline3D::NaturalSpline3D</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_y</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>_z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref> &amp;</type>
+          <declname>_f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="17" column="5" bodyfile="include/cubic_splines_3d.hpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalSpline3D_1a8fe037b737dd5f2c06a9141d91d1a551" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalSpline3D&lt; T, BC, N &gt;::~NaturalSpline3D</definition>
+        <argsstring>()</argsstring>
+        <name>~NaturalSpline3D</name>
+        <qualifiedname>cip::NaturalSpline3D::~NaturalSpline3D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="22" column="5" bodyfile="include/cubic_splines_3d.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalSpline3D_1af4c6757e6a9fe1540529a1789f573b7e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Vector</type>
+        <definition>Vector cip::NaturalSpline3D&lt; T, BC, N &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Mdspan1D &amp;f) const override</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::NaturalSpline3D::calc_slopes</qualifiedname>
+        <reimplements refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49">calc_slopes</reimplements>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Mdspan1D &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_3d.hpp" line="24" column="12" bodyfile="include/cubic_splines_3d.hpp" bodystart="24" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalSpline3D&lt; T, BC, N &gt;</label>
+        <link refid="classcip_1_1NaturalSpline3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalSpline3D&lt; T, BC, N &gt;</label>
+        <link refid="classcip_1_1NaturalSpline3D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/cubic_splines_3d.hpp" line="11" column="1" bodyfile="include/cubic_splines_3d.hpp" bodystart="12" bodyend="28"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>build</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1af4c6757e6a9fe1540529a1789f573b7e" prot="public" virt="virtual"><scope>cip::NaturalSpline3D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>eval</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1a60d4c5aa23b54ee6334f32a5723b2b38" prot="private" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>Mdspan1D</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1a2c06764b8b54042af87c901ce4fd5876" prot="public" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>NaturalSpline3D</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1afb647d79bb804ac32d61446238ca8aea" prot="private" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>Vector</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1a9fd54feed0ab44db28fd9cc0ba407b1f" prot="private" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" virt="virtual"><scope>cip::NaturalSpline3D</scope><name>~CubicInterpND</name></member>
+      <member refid="classcip_1_1NaturalSpline3D_1a8fe037b737dd5f2c06a9141d91d1a551" prot="public" virt="non-virtual"><scope>cip::NaturalSpline3D</scope><name>~NaturalSpline3D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

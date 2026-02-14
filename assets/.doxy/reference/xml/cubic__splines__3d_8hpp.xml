@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="cubic__splines__3d_8hpp" kind="file" language="C++">
+    <compoundname>cubic_splines_3d.hpp</compoundname>
+    <includes refid="cubic__spline_8hpp" local="yes">cubic_spline.hpp</includes>
+    <includes refid="slopes_8hpp" local="yes">slopes.hpp</includes>
+    <includedby refid="cubinterpp_8hpp" local="yes">include/cubinterpp.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>cubic_spline.hpp</label>
+        <link refid="cubic__spline_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>include/cubic_splines_3d.hpp</label>
+        <link refid="cubic__splines__3d_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>derivatives.hpp</label>
+        <link refid="derivatives_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>slopes.hpp</label>
+        <link refid="slopes_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>utils.hpp</label>
+        <link refid="utils_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>vectorn.hpp</label>
+        <link refid="vectorn_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>algorithm</label>
+      </node>
+      <node id="3">
+        <label>array</label>
+      </node>
+      <node id="4">
+        <label>cassert</label>
+      </node>
+      <node id="5">
+        <label>cmath</label>
+      </node>
+      <node id="6">
+        <label>cstddef</label>
+      </node>
+      <node id="9">
+        <label>mdspan/mdspan.hpp</label>
+      </node>
+      <node id="7">
+        <label>tuple</label>
+      </node>
+      <node id="13">
+        <label>utility</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>include/cubic_splines_3d.hpp</label>
+        <link refid="cubic__splines__3d_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>include/cubinterpp.hpp</label>
+        <link refid="cubinterpp_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classcip_1_1NaturalSpline3D" prot="public">cip::NaturalSpline3D</innerclass>
+    <innernamespace refid="namespacecip">cip</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;cubic_spline.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;slopes.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">cip<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/>cip::BoundaryConditionType<sp/>BC=cip::BoundaryConditionType::Natural,<sp/>std::</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>N=3&gt;</highlight></codeline>
+<codeline lineno="11" refid="classcip_1_1NaturalSpline3D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classcip_1_1NaturalSpline3D" kindref="compound">NaturalSpline3D</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classcip_1_1CubicInterpND" kindref="compound">CubicInterpND</ref>&lt;T,<sp/>N&gt;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Vector<sp/>=<sp/>std::vector&lt;T&gt;;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Mdspan1D<sp/>=<sp/>std::mdspan&lt;T,<sp/>std::dextents&lt;std::size_t,<sp/>1&gt;,<sp/>std::layout_stride&gt;;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref><sp/>=<sp/><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN&lt;T, N&gt;</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classcip_1_1NaturalSpline3D" kindref="compound">NaturalSpline3D</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector<sp/>&amp;_x,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector<sp/>&amp;_y,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector<sp/>&amp;_z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref><sp/>&amp;_f)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="classcip_1_1CubicInterpND" kindref="compound">CubicInterpND&lt;T, N&gt;</ref>(_f,<sp/>_x,<sp/>_y,<sp/>_z)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;build(_f,<sp/>_x,<sp/>_y,<sp/>_z);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classcip_1_1NaturalSpline3D" kindref="compound">~NaturalSpline3D</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>Vector<sp/>calc_slopes(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Vector<sp/>&amp;x,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Mdspan1D<sp/>&amp;f)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="25"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>natural_spline_slopes&lt;T,<sp/>BC&gt;(x,<sp/>f);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>cip</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="include/cubic_splines_3d.hpp"/>
+  </compounddef>
+</doxygen>

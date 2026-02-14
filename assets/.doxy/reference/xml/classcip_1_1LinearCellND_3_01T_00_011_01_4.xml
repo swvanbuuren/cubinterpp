@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1LinearCellND_3_01T_00_011_01_4" kind="class" language="C++" prot="public">
+    <compoundname>cip::LinearCellND&lt; T, 1 &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a3b556cb3d9babf8ea9b0a40b979325df" prot="private" static="no">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>using cip::LinearCellND&lt; T, 1 &gt;::Span =  std::span&lt;const T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::Span</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="177" column="5" bodyfile="include/linear_interp.hpp" bodystart="177" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ac1effdcc5a82b1f5c9f2a776161339f2" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::LinearCellND&lt; T, 1 &gt;::x0</definition>
+        <argsstring></argsstring>
+        <name>x0</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::x0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="193" column="13" bodyfile="include/linear_interp.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a2b40ea55d4f057553bc42e31a0e77110" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::LinearCellND&lt; T, 1 &gt;::a0</definition>
+        <argsstring></argsstring>
+        <name>a0</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::a0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="194" column="13" bodyfile="include/linear_interp.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a6b296068e71b023e6e6b4783e4a12dd7" prot="private" static="no" mutable="no">
+        <type>const T</type>
+        <definition>const T cip::LinearCellND&lt; T, 1 &gt;::b0</definition>
+        <argsstring></argsstring>
+        <name>b0</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::b0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="195" column="13" bodyfile="include/linear_interp.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ad97ca485b099103b32c624d9a8568e3d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearCellND&lt; T, 1 &gt;::LinearCellND</definition>
+        <argsstring>(Span x, Span f)</argsstring>
+        <name>LinearCellND</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::LinearCellND</qualifiedname>
+        <param>
+          <type>Span</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>Span</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="179" column="14" bodyfile="include/linear_interp.hpp" bodystart="179" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1abe2cdf8e59d9ef73a644043534b14ba3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearCellND&lt; T, 1 &gt;::~LinearCellND</definition>
+        <argsstring>()</argsstring>
+        <name>~LinearCellND</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::~LinearCellND</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="185" column="5" bodyfile="include/linear_interp.hpp" bodystart="185" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a06a373a35ab7b64e63b74064b2d558b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T cip::LinearCellND&lt; T, 1 &gt;::eval</definition>
+        <argsstring>(const T &amp;xi) const</argsstring>
+        <name>eval</name>
+        <qualifiedname>cip::LinearCellND&lt; T, 1 &gt;::eval</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="187" column="7" bodyfile="include/linear_interp.hpp" bodystart="187" bodyend="190"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/linear_interp.hpp" line="176" column="1" bodyfile="include/linear_interp.hpp" bodystart="176" bodyend="196"/>
+    <listofallmembers>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a2b40ea55d4f057553bc42e31a0e77110" prot="private" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>a0</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a6b296068e71b023e6e6b4783e4a12dd7" prot="private" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>b0</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a06a373a35ab7b64e63b74064b2d558b8" prot="public" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>eval</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ad97ca485b099103b32c624d9a8568e3d" prot="public" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>LinearCellND</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1a3b556cb3d9babf8ea9b0a40b979325df" prot="private" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>Span</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1ac1effdcc5a82b1f5c9f2a776161339f2" prot="private" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>x0</name></member>
+      <member refid="classcip_1_1LinearCellND_3_01T_00_011_01_4_1abe2cdf8e59d9ef73a644043534b14ba3" prot="public" virt="non-virtual"><scope>cip::LinearCellND&lt; T, 1 &gt;</scope><name>~LinearCellND</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

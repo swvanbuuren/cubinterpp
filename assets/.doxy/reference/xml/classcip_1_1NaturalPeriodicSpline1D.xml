@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1NaturalPeriodicSpline1D" kind="class" language="C++" prot="public">
+    <compoundname>cip::NaturalPeriodicSpline1D</compoundname>
+    <basecompoundref refid="classcip_1_1CubicInterpND" prot="public" virt="non-virtual">cip::CubicInterpND&lt; T, 1 &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+        <defval>1</defval>
+      </param>
+      <param>
+        <type>cip::BoundaryConditionType</type>
+        <declname>BC</declname>
+        <defname>BC</defname>
+        <defval>cip::BoundaryConditionType::Periodic</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1NaturalPeriodicSpline1D_1a73144e4fc104ae4f36deff30062eed1d" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::NaturalPeriodicSpline1D::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_1d.hpp" line="74" column="5" bodyfile="include/cubic_splines_1d.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicSpline1D_1a6b54357cc010173211f0676a1692e44c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;::NaturalPeriodicSpline1D</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;f)</argsstring>
+        <name>NaturalPeriodicSpline1D</name>
+        <qualifiedname>cip::NaturalPeriodicSpline1D::NaturalPeriodicSpline1D</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_1d.hpp" line="76" column="5" bodyfile="include/cubic_splines_1d.hpp" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicSpline1D_1a832bd3487d333a5a3306e1e0af9d26cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;::~NaturalPeriodicSpline1D</definition>
+        <argsstring>()</argsstring>
+        <name>~NaturalPeriodicSpline1D</name>
+        <qualifiedname>cip::NaturalPeriodicSpline1D::~NaturalPeriodicSpline1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_1d.hpp" line="82" column="5" bodyfile="include/cubic_splines_1d.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicSpline1D_1afbb65cb49a3594f266c3f4489ef3b1c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Vector</type>
+        <definition>Vector cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;f) const override</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::NaturalPeriodicSpline1D::calc_slopes</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_splines_1d.hpp" line="84" column="12" bodyfile="include/cubic_splines_1d.hpp" bodystart="84" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicSpline1D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalPeriodicSpline1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicSpline1D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/cubic_splines_1d.hpp" line="72" column="1" bodyfile="include/cubic_splines_1d.hpp" bodystart="73" bodyend="88"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>build</name></member>
+      <member refid="classcip_1_1NaturalPeriodicSpline1D_1afbb65cb49a3594f266c3f4489ef3b1c0" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49" prot="public" virt="pure-virtual" ambiguityscope="cip::CubicInterpND::"><scope>cip::NaturalPeriodicSpline1D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>eval</name></member>
+      <member refid="classcip_1_1NaturalPeriodicSpline1D_1a6b54357cc010173211f0676a1692e44c" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>NaturalPeriodicSpline1D</name></member>
+      <member refid="classcip_1_1NaturalPeriodicSpline1D_1a73144e4fc104ae4f36deff30062eed1d" prot="private" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>Vector</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" virt="virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>~CubicInterpND</name></member>
+      <member refid="classcip_1_1NaturalPeriodicSpline1D_1a832bd3487d333a5a3306e1e0af9d26cf" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicSpline1D</scope><name>~NaturalPeriodicSpline1D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
