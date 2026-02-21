@@ -1,5 +1,6 @@
 """ Periodic spline example in 3D """
 
+from pathlib import Path
 import random
 import numpy as np
 import cubinterpp.cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
@@ -60,7 +61,9 @@ def main():
     yp = y.flatten()
     zp = z.flatten()
     mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=5)
-    ax.export('periodic_spline_2d.png')
+    ax.distance = 115
+    filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
+    ax.export(str(filepath))
 
 
 if __name__ == '__main__':

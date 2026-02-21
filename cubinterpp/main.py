@@ -1,5 +1,6 @@
 """ Compare Spline Interpolation types """
 
+from pathlib import Path
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 import mlpyqtgraph as mpg
@@ -152,6 +153,9 @@ def main():
         ax.yticks = 8
         ax.zlim = [0, 8]
         mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=3)
+        ax.distance = 115
+        filepath = Path(__file__).parents[1] / 'docs' / 'images' / f'{interp_type}_2D.png'
+        ax.export(str(filepath))
 
     x, y, f = get_test_data_2d(case='three_bumps')
     x_fine, y_fine = refine_grid(x, 46), refine_grid(y, 46)

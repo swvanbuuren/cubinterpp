@@ -1,5 +1,6 @@
 """ Simple test for Periodic Spline Interpolation """
 
+from pathlib import Path
 import numpy as np
 import mlpyqtgraph as mpg
 import cubinterpp.cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
@@ -25,7 +26,6 @@ def test_data(case='circle'):
 
 @mpg.plotter
 def main():
-
     t, x, y = test_data('arbitrary')
 
     spline_x = cubinterpp.NaturalPeriodicSpline1D(t, x)
@@ -42,7 +42,8 @@ def main():
     mpg.plot(x_interp_scipy, y_interp_scipy, style='--')
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.legend('cubinterpp', 'scipy', 'data points')
-    mpg.gca().grid = True
+    ax = mpg.gca()
+    ax.grid = True
 
 
 if __name__ == '__main__':
