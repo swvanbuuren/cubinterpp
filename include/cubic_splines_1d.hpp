@@ -29,20 +29,20 @@ public:
 
 
 template <typename T, std::size_t N=1>
-class AkimaSpline1D : public CubicInterpND<T, N>
+class MakimaSpline1D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
 public:
-    AkimaSpline1D(const Vector &x, const Vector &f)
+    MakimaSpline1D(const Vector &x, const Vector &f)
     : CubicInterpND<T, N>(x, f)
     {
         this->build(f);
     }
 
-    ~AkimaSpline1D() {}
+    ~MakimaSpline1D() {}
     
     Vector calc_slopes(const Vector &x, const Vector &f) const override {
-        return akima_slopes<T>(x, f);
+        return makima_slopes<T>(x, f);
     }
     
 };

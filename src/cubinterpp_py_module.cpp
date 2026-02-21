@@ -23,10 +23,10 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def("eval", &cip::MonotonicSpline1D<double>::eval, py::return_value_policy::reference_internal)
         .def("evaln", &cip::MonotonicSpline1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cip::AkimaSpline1D<double>>(m, "AkimaSpline1D")
+    py::class_<cip::MakimaSpline1D<double>>(m, "MakimaSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cip::AkimaSpline1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::AkimaSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MakimaSpline1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MakimaSpline1D<double>::evaln, py::return_value_policy::reference_internal);
 
     py::class_<cip::NaturalSpline1D<double>>(m, "NaturalSpline1D")
         .def(py::init<DoubleVector, DoubleVector>())
@@ -52,9 +52,9 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
         .def("eval", &cip::MonotonicSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::AkimaSpline2D<double>>(m, "AkimaSpline2D")
+    py::class_<cip::MakimaSpline2D<double>>(m, "MakimaSpline2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::AkimaSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MakimaSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
     py::class_<cip::NaturalSpline2D<double>>(m, "NaturalSpline2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())

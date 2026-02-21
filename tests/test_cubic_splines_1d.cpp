@@ -5,7 +5,7 @@
 
 using Vector = std::vector<double>;
 using MonotonicSpline = cip::MonotonicSpline1D<double>;
-using AkimaSpline = cip::AkimaSpline1D<double>;
+using MakimaSpline = cip::MakimaSpline1D<double>;
 using NaturalSpline = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Natural>;
 using NaturalSplineNotAKnot = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::NotAKnot>;
 using NaturalSplineClamped = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Clamped>;
@@ -20,12 +20,12 @@ TEST(TestCubicSpline1D, test_monotonic_spline_1d) {
 }
 
 
-TEST(TestCubicSpline1D, test_akima_spline_1d) {
+TEST(TestCubicSpline1D, test_makima_spline_1d) {
     cip::Vector x = { 1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10 };
     cip::Vector f = { 0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.375, 1.75, 2.125, 2.5, 2.875, 3.25, 3.625, 4.0, 4.375, 4.75, 5.125, 5.5, 5.875, 6.25, 6.625, 7.0, 7.375, 7.75, 8.125, 8.5, 8.875, 9.25, 9.625, 10.0 };
     cip::Vector f_fine = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.061279296875, 0.289154052734375, 0.5, 0.4924377441406449, 0.38676757812498863, 0.532760099085408, 1.1999999999999993, 1.3822294207317043, 1.4444817073170721, 1.3844931402439027, 1.2000000000000455, 0.7961763822113426, 0.30638221153833456, 0.04557132320800861, -0.05930944055945275, -0.0412170836975676, 0.1380681818177436, 0.3749999999999991, 0.5999999999999988 };
-    ASSERT_TRUE(cip::Interp1DAssertions<AkimaSpline>(x, f, x_fine, f_fine));
+    ASSERT_TRUE(cip::Interp1DAssertions<MakimaSpline>(x, f, x_fine, f_fine));
 }
 
 

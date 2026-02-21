@@ -4,9 +4,9 @@ import numpy as np
 from scipy.interpolate import RegularGridInterpolator, CubicSpline
 
 
-def get_test_data(case='akima', start=1.0, end=5.0, size=8):
-    """ Generates test input data for Akima Spline tests """
-    if case == 'akima':
+def get_test_data(case='makima', start=1.0, end=5.0, size=8):
+    """ Generates test input data for Modified Akima Spline tests """
+    if case == 'makima':
         return np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10]), \
                np.array([0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6])
 
@@ -38,7 +38,7 @@ def get_test_data_2d(case='standard'):
             f = np.array([[1.0, 2.0, 2.0],
                           [2.0, 3.0, 3.0],
                           [3.0, 3.0, 4.0]])
-        case 'akima':
+        case 'makima':
             x = np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10])
             y = x
             f = np.array([[0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6],
@@ -153,7 +153,7 @@ def print_cpp_vector(vector_type, name, array):
 
 
 def generate_1d_example(
-        case='akima',
+        case='makima',
         size_fine=15,
         method='linear',
         bc_type='natural',
@@ -206,7 +206,7 @@ def generate_3d_example(case='normalized', size_fine=5, method='linear'):
 
 def main():
     # method = 'cubic_spline'
-    # data_case = 'akima'
+    # data_case = 'makima'
     method = 'cubic'
     data_case = 'normalized'
     # generate_1d_example(case=data_case, size_fine=20, method=method,

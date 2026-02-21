@@ -7,9 +7,9 @@ import mlpyqtgraph as mpg
 import cubinterpp.cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
 
 
-def get_test_data(case='akima', start=1.0, end=5.0, size=8):
-    """ Generates test input data for Akima Spline tests """
-    if case == 'akima':
+def get_test_data(case='makima', start=1.0, end=5.0, size=8):
+    """ Generates test input data for Modified Akima Spline tests """
+    if case == 'makima':
         return np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10]), \
                np.array([0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6])
 
@@ -41,7 +41,7 @@ def get_test_data_2d(case='standard'):
             f = np.array([[1.0, 2.0, 2.0],
                         [2.0, 3.0, 3.0],
                         [3.0, 3.0, 4.0]])
-        case 'akima':
+        case 'makima':
             x = np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10])
             y = np.array([1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10])
             f = np.array([[0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
@@ -79,7 +79,7 @@ def scipy_linear_interp(x, y, f, x_fine, y_fine):
     return interp2((x_grid, y_grid))
 
 
-def cubinterpp_interp2(interp_type='linear', data_case='akima', refinement=50):
+def cubinterpp_interp2(interp_type='linear', data_case='makima', refinement=50):
     """ Short hand for 2D interpolatino with cubinterpp """
     x, y, f = get_test_data_2d(case=data_case)
     match interp_type:
@@ -87,8 +87,8 @@ def cubinterpp_interp2(interp_type='linear', data_case='akima', refinement=50):
             interp2 = cubinterpp.LinearInterp2D(x, y, f)
         case 'monotonic':
             interp2 = cubinterpp.MonotonicSpline2D(x, y, f)
-        case 'akima':
-            interp2 = cubinterpp.AkimaSpline2D(x, y, f)
+        case 'makima':
+            interp2 = cubinterpp.MakimaSpline2D(x, y, f)
         case 'natural_spline':
             interp2 = cubinterpp.NaturalSpline2D(x, y, f)
     x_fine, y_fine = refine_grid(x, refinement), refine_grid(y, refinement)
@@ -103,7 +103,7 @@ def cubinterpp_interp2(interp_type='linear', data_case='akima', refinement=50):
 def main():
     """ Tets Cubic spline interpolation """
 
-    x, y = get_test_data(case='akima')
+    x, y = get_test_data(case='makima')
     x_fine = refine_grid(x)
 
     spline = cubinterpp.LinearInterp1D(x, y)
@@ -112,8 +112,8 @@ def main():
     spline = cubinterpp.NaturalSpline1D(x, y)
     y_fine_natural = spline.evaln(x_fine)
 
-    spline = cubinterpp.AkimaSpline1D(x, y)
-    y_fine_akima = spline.evaln(x_fine)
+    spline = cubinterpp.MakimaSpline1D(x, y)
+    y_fine_makima = spline.evaln(x_fine)
 
     spline = cubinterpp.MonotonicSpline1D(x, y)
     y_fine_monotonic = spline.evaln(x_fine)
@@ -121,14 +121,14 @@ def main():
     mpg.figure(title='Test figure')
     mpg.plot(x_fine, y_fine_linear)
     mpg.plot(x_fine, y_fine_monotonic)
-    mpg.plot(x_fine, y_fine_akima)
+    mpg.plot(x_fine, y_fine_makima)
     mpg.plot(x_fine, y_fine_natural)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
     mpg.gca().grid = True
     mpg.legend(
         'Linear interpolation',
         'Monotonic cubic interpolation',
-        'Akima spline',
+        'Modified Akima spline',
         'Natural cubic spline',
         'data points'
     )
@@ -138,7 +138,7 @@ def main():
     yp = np.tile(y, x.size)
     zp = f.flatten()
 
-    for interp_type in ('linear', 'monotonic', 'akima', 'natural_spline'):
+    for interp_type in ('linear', 'monotonic', 'makima', 'natural_spline'):
         x_fine, y_fine, z_fine = cubinterpp_interp2(
             interp_type=interp_type,
             data_case='three_bumps',
