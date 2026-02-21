@@ -29,7 +29,7 @@ TEST(TestLinearCell1D, test_linear_cell_1d) {
 }
 
 
-TEST(TestInterp1D, test_linear_interp_1d_akima) {
+TEST(TestInterp1D, test_linear_interp_1d_makima) {
     cip::Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector f = { 0.0, 0.0, 0.0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };

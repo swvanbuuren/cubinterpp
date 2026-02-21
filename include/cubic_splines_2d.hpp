@@ -29,22 +29,22 @@ MonotonicSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
 
 
 template <typename T, std::size_t N=2>
-class AkimaSpline2D : public CubicInterpND<T, N>
+class MakimaSpline2D : public CubicInterpND<T, N>
 {
     using Vector = std::vector<T>;
     using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using VectorN = cip::VectorN<T, N>;
 public:
-    AkimaSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
+    MakimaSpline2D(const Vector &_x, const Vector &_y, const VectorN &_f)
     : CubicInterpND<T, N>(_f, _x, _y)
     {
         this->build(_f, _x, _y);
     }
-    ~AkimaSpline2D() {}
+    ~MakimaSpline2D() {}
 
     Vector calc_slopes(const Vector &x, const Mdspan1D &f) const override
     {
-        return akima_slopes<T>(x, f);
+        return makima_slopes<T>(x, f);
     }
 };
 

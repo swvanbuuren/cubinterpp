@@ -52,10 +52,10 @@ std::vector<T> monotonic_slopes(const Tx x, const Tf f)
 
 
 template <typename T, typename Tx, typename Tf>
-std::vector<T> akima_slopes(const Tx x, const Tf f)
+std::vector<T> makima_slopes(const Tx x, const Tf f)
 {
     /*
-    Derivative values for Akima cubic Hermite interpolation
+    Derivative values for Modified Akima cubic Hermite interpolation
 
     Akima's derivative estimate at grid node x(i) requires the four finite
     differences corresponding to the five grid nodes x(i-2:i+2).

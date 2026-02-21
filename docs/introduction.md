@@ -6,7 +6,7 @@ interpolation.
 For cubic piecewise interpolation, the library features three types:
 
 - Monotone cubic interpolation
-- Akima spline interpolation 
+- Modified Akima spline interpolation 
 - Natural cubic spline interpolation
 
 Linear interpolation is supported for `N`-dimensional data, whereas cubic
