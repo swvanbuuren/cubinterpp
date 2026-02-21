@@ -25,7 +25,11 @@ For cubic piecewise interpolation, the library features three types:
 
 - Monotone cubic interpolation
 - Modified Akima spline interpolation 
-- Natural cubic spline interpolation
+- Natural cubic spline interpolation, with the following boundary conditions:
+  - Not-A-Knot (first and second cell at ends share same polynomial)
+  - Natural (vanishing second derivative at ends)
+  - Clamped (vanishing first derivative at ends)
+  - Periodic (value, first and second derivative match for ends)
 
 All classes are templatized and support the STL's vector types.
 
