@@ -13,7 +13,7 @@ support.
 
 | ![2D Modfied Akima spline interpolation](docs/images/makima_2D.png) |  ![2D Natural spline interpolation](docs/images/natural_spline_2D.png) | 
 |:--:|:--:| 
-| *2D Akima spline interpolation* | *2D Natural spline interpolation* |
+| *2D Modified Akima spline interpolation* | *2D Natural spline interpolation* |
 
 
 ## Introduction
@@ -24,7 +24,7 @@ interpolation in `N` dimensions.
 For cubic piecewise interpolation, the library features three types:
 
 - Monotone cubic interpolation
-- Mdofied Akima spline interpolation 
+- Modified Akima spline interpolation 
 - Natural cubic spline interpolation
 
 All classes are templatized and support the STL's vector types.
