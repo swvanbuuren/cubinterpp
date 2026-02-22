@@ -1,4 +1,4 @@
-# cubinterpp
+# cubinterpp - ND Cubic interpolation in C++
 
 `N`-dimensional cubic and linear interpolation in modern C++ with Python
 support.
