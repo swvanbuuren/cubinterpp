@@ -26,7 +26,7 @@ For cubic piecewise interpolation, the library features three types:
 
 All classes are templatized and support the STL's vector types.
 
-The accompanying python scripts in [cubinterpp ](cubinterpp) and [example
+The accompanying python scripts in [cubinterpp](cubinterpp) and [example
 page](https://swvanbuuren.github.io/cubinterpp/examples) compare the interpolation types.
 
 Refer to the [documentation](https://swvanbuuren.github.io/cubinterpp/) for:
