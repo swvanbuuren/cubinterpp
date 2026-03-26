@@ -3,6 +3,7 @@
 from pathlib import Path
 import random
 import numpy as np
+from PIL import Image
 import cubinterpp.cubinterpp_py as cubinterpp  # cubinterpp_py is a pybind11 module
 import mlpyqtgraph as mpg
 
@@ -62,8 +63,35 @@ def main():
     zp = z.flatten()
     mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=5)
     ax.distance = 115
+    ax.elevation = 30
     filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
     ax.export(str(filepath))
+
+
+def generate_movie(ax):
+    """ Render a 360° rotation of the current axes as an animated GIF """
+    filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
+    frame_paths = []
+    for i in range(0, 360, 3):
+        ax.azimuth = i
+        frame_path = filepath.parent / f"{filepath.stem}_{i}{filepath.suffix}"
+        ax.export(str(frame_path))
+        frame_paths.append(frame_path)
+
+    # Assemble animated GIF and remove intermediate frames
+    images = [Image.open(p) for p in frame_paths]
+    gif_path = filepath.with_suffix('.gif')
+    images[0].save(
+        gif_path,
+        save_all=True,
+        append_images=images[1:],
+        loop=0,
+        duration=40,  # ms per frame
+    )
+    for img in images:
+        img.close()
+    for p in frame_paths:
+        p.unlink()
 
 
 if __name__ == '__main__':

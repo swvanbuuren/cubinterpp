@@ -3,9 +3,13 @@
 `N`-dimensional cubic and linear interpolation in modern C++ with Python
 support.
 
-![2D parametric periodic spline](docs/images/periodic_spline_2D.png)
+<p align="center">
+  <img src="docs/images/animated_periodic_spline_2D.gif" alt="2D parametric periodic spline"/>
+  <br/>
+  <em>2D parametric periodic cubic spline interpolation of a distorted torus</em>
+</p>
 
-## Introduction
+## Key features
 
 This C++ header library features tools for piecewise linear and cubic
 interpolation in `N` dimensions.
