@@ -3,18 +3,7 @@
 `N`-dimensional cubic and linear interpolation in modern C++ with Python
 support.
 
-| ![Comparison of 1D interpolation types](docs/images/comparison_1D.svg) |
-|:--:|
-| *1D interpolation* |
-
-| ![Linear interpolation](docs/images/linear_2D.png) |  ![Monotonic spline interpolation](docs/images/monotonic_2D.png) | 
-|:--:|:--:| 
-| *2D Linear interpolation* | *2D Monotonic cubic spline interpolation* |
-
-| ![2D Modfied Akima spline interpolation](docs/images/makima_2D.png) |  ![2D Natural spline interpolation](docs/images/natural_spline_2D.png) | 
-|:--:|:--:| 
-| *2D Modified Akima spline interpolation* | *2D Natural spline interpolation* |
-
+![2D parametric periodic spline](docs/images/periodic_spline_2D.png)
 
 ## Introduction
 
@@ -33,8 +22,8 @@ For cubic piecewise interpolation, the library features three types:
 
 All classes are templatized and support the STL's vector types.
 
-The accompanying python script in [cubinterpp ](cubinterpp ) compares the
-interpolation types.
+The accompanying python scripts in [cubinterpp ](cubinterpp) and [example
+page](https://swvanbuuren.github.io/cubinterpp/examples) compare the interpolation types.
 
 Refer to the [documentation](https://swvanbuuren.github.io/cubinterpp/) for:
 
@@ -42,6 +31,7 @@ Refer to the [documentation](https://swvanbuuren.github.io/cubinterpp/) for:
 - [Usage instructions](https://swvanbuuren.github.io/cubinterpp/usage/)
   - [Single header file](https://swvanbuuren.github.io/cubinterpp/usage#single-header-library)
   - [Build from source](https://swvanbuuren.github.io/cubinterpp/usage#build-from-source)
+  - [Examples](https://swvanbuuren.github.io/cubinterpp/examples)
 - [Mathematical background](https://swvanbuuren.github.io/cubinterpp/theory/)
 - [Code reference](https://swvanbuuren.github.io/cubinterpp/reference/)
 

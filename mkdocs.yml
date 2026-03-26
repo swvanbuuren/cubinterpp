@@ -48,6 +48,7 @@ markdown_extensions:
   - footnotes
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.blocks.caption
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -59,6 +60,7 @@ nav:
     - Introduction: introduction.md
     - Requirements: requirements.md
     - Usage instructions: usage.md
+    - Examples: examples.md
   - Mathematical Background:
     - theory/index.md
     - Linear interpolation: theory/linear.md
