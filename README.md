@@ -5,9 +5,9 @@ support.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/animated_periodic_spline_2D_wb.gif">
-    <source media="(prefers-color-scheme: light)" srcset="docs/images/animated_periodic_spline_2D.gif">
-    <img src="docs/images/animated_periodic_spline_2D.gif" alt="2D parametric periodic spline"/>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/animated_periodic_spline_2D_dark_transparent.gif">
+    <source media="(prefers-color-scheme: light)" srcset="docs/images/animated_periodic_spline_2D_both_transparent.gif">
+    <img src="docs/images/animated_periodic_spline_2D_both_transparent.gif" alt="2D parametric periodic spline"/>
   </picture>
   <br/>
   <em>2D parametric periodic cubic spline interpolation of a distorted torus</em>
