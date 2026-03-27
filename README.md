@@ -10,7 +10,7 @@ support.
     <img src="docs/images/animated_periodic_spline_2D_light_transparent.gif" alt="2D parametric periodic spline"/>
   </picture>
   <br/>
-  <em>2D parametric periodic cubic spline interpolation of a distorted torus</em>
+  <em>2D parametric periodic cubic interpolation using the red points resulting in a distorted torus</em>
 </p>
 
 ## Key features
