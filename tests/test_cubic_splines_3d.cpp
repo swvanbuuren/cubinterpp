@@ -3,7 +3,7 @@
 #include "assertion_helpers.hpp"
 
 using Vector = std::vector<double>;
-using NaturalSpline = cip::NaturalSpline3D<double, cip::BoundaryConditionType::NotAKnot>;
+using NaturalSpline = cip::NaturalCubicInterp3D<double, cip::BoundaryConditionType::NotAKnot>;
 constexpr double TOLERANCE = 5.0e-7;
 
 TEST(TestCubicSpline3D, test_natural_spline_3d) {

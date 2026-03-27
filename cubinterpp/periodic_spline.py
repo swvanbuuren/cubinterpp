@@ -28,8 +28,8 @@ def test_data(case='circle'):
 def main():
     t, x, y = test_data('arbitrary')
 
-    spline_x = cubinterpp.NaturalPeriodicSpline1D(t, x)
-    spline_y = cubinterpp.NaturalPeriodicSpline1D(t, y)
+    spline_x = cubinterpp.NaturalPeriodicCubicInterp1D(t, x)
+    spline_y = cubinterpp.NaturalPeriodicCubicInterp1D(t, y)
     t_interp = np.linspace(0.0, 1.0, 500)
     x_interp = spline_x.evaln(t_interp)
     y_interp = spline_y.evaln(t_interp)

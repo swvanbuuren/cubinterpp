@@ -4,11 +4,11 @@
 
 
 using Vector = std::vector<double>;
-using MonotonicSpline = cip::MonotonicSpline1D<double>;
-using MakimaSpline = cip::MakimaSpline1D<double>;
-using NaturalSpline = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Natural>;
-using NaturalSplineNotAKnot = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::NotAKnot>;
-using NaturalSplineClamped = cip::NaturalSpline1D<double, 1, cip::BoundaryConditionType::Clamped>;
+using MonotonicSpline = cip::MonotonicCubicInterp1D<double>;
+using MakimaSpline = cip::MakimaCubicInterp1D<double>;
+using NaturalSpline = cip::NaturalCubicInterp1D<double, 1, cip::BoundaryConditionType::Natural>;
+using NaturalSplineNotAKnot = cip::NaturalCubicInterp1D<double, 1, cip::BoundaryConditionType::NotAKnot>;
+using NaturalSplineClamped = cip::NaturalCubicInterp1D<double, 1, cip::BoundaryConditionType::Clamped>;
 
 
 TEST(TestCubicSpline1D, test_monotonic_spline_1d) {

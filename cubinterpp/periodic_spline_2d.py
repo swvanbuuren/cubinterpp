@@ -34,9 +34,9 @@ def main(gen_movie: bool = False):
                 z[i, j] = (1.0 + random.randint(-2, +2)/8.0) * r_minor * np.sin(v)
 
     # create periodic splines in 2D
-    spline_x = cubinterpp.NaturalPeriodicSpline2D(tx, ty, x)
-    spline_y = cubinterpp.NaturalPeriodicSpline2D(tx, ty, y)
-    spline_z = cubinterpp.NaturalPeriodicSpline2D(tx, ty, z)
+    spline_x = cubinterpp.NaturalPeriodicCubicInterp2D(tx, ty, x)
+    spline_y = cubinterpp.NaturalPeriodicCubicInterp2D(tx, ty, y)
+    spline_z = cubinterpp.NaturalPeriodicCubicInterp2D(tx, ty, z)
     # evaluate on finer grid
     nxi, nyi = 33, 33
     txi = np.linspace(0.0, 1.0, nxi)

@@ -18,25 +18,25 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def("eval", &cip::LinearInterp1D<double>::eval, py::return_value_policy::reference_internal)
         .def("evaln", &cip::LinearInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cip::MonotonicSpline1D<double>>(m, "MonotonicSpline1D")
+    py::class_<cip::MonotonicCubicInterp1D<double>>(m, "MonotonicCubicInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cip::MonotonicSpline1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::MonotonicSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MonotonicCubicInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MonotonicCubicInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cip::MakimaSpline1D<double>>(m, "MakimaSpline1D")
+    py::class_<cip::MakimaCubicInterp1D<double>>(m, "MakimaCubicInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cip::MakimaSpline1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::MakimaSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MakimaCubicInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MakimaCubicInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cip::NaturalSpline1D<double>>(m, "NaturalSpline1D")
+    py::class_<cip::NaturalCubicInterp1D<double>>(m, "NaturalCubicInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cip::NaturalSpline1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::NaturalSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalCubicInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalCubicInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
-    py::class_<cip::NaturalPeriodicSpline1D<double>>(m, "NaturalPeriodicSpline1D")
+    py::class_<cip::NaturalPeriodicCubicInterp1D<double>>(m, "NaturalPeriodicCubicInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
-        .def("eval", &cip::NaturalPeriodicSpline1D<double>::eval, py::return_value_policy::reference_internal)
-        .def("evaln", &cip::NaturalPeriodicSpline1D<double>::evaln, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalPeriodicCubicInterp1D<double>::eval, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalPeriodicCubicInterp1D<double>::evaln, py::return_value_policy::reference_internal);
 
     py::class_<cip::LinearInterp2D<double>>(m, "LinearInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
@@ -48,24 +48,24 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def("eval", &cip::LinearInterp3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal)
         .def("evaln", &cip::LinearInterp3D<double>::evaln<DoubleVector, DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::MonotonicSpline2D<double>>(m, "MonotonicSpline2D")
+    py::class_<cip::MonotonicCubicInterp2D<double>>(m, "MonotonicCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::MonotonicSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MonotonicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::MakimaSpline2D<double>>(m, "MakimaSpline2D")
+    py::class_<cip::MakimaCubicInterp2D<double>>(m, "MakimaCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::MakimaSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MakimaCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::NaturalSpline2D<double>>(m, "NaturalSpline2D")
+    py::class_<cip::NaturalCubicInterp2D<double>>(m, "NaturalCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::NaturalSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::NaturalPeriodicSpline2D<double>>(m, "NaturalPeriodicSpline2D")
+    py::class_<cip::NaturalPeriodicCubicInterp2D<double>>(m, "NaturalPeriodicCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::NaturalPeriodicSpline2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalPeriodicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
 
-    py::class_<cip::NaturalSpline3D<double>>(m, "NaturalSpline3D")
+    py::class_<cip::NaturalCubicInterp3D<double>>(m, "NaturalCubicInterp3D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector, DoubleVector3>())
-        .def("eval", &cip::NaturalSpline3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalCubicInterp3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal);
 
 }
