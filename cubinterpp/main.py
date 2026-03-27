@@ -34,13 +34,13 @@ def main():
     spline = cubinterpp.LinearInterp1D(x, y)
     y_fine_linear = spline.evaln(x_fine)
 
-    spline = cubinterpp.NaturalSpline1D(x, y)
+    spline = cubinterpp.NaturalCubicInterp1D(x, y)
     y_fine_natural = spline.evaln(x_fine)
 
-    spline = cubinterpp.MakimaSpline1D(x, y)
+    spline = cubinterpp.MakimaCubicInterp1D(x, y)
     y_fine_makima = spline.evaln(x_fine)
 
-    spline = cubinterpp.MonotonicSpline1D(x, y)
+    spline = cubinterpp.MonotonicCubicInterp1D(x, y)
     y_fine_monotonic = spline.evaln(x_fine)
 
     mpg.figure(title='Test figure')

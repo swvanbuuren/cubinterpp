@@ -4,7 +4,7 @@
 
 
 using Vector = std::vector<double>;
-using NaturalSpline = cip::NaturalSpline2D<double, cip::BoundaryConditionType::NotAKnot>;
+using NaturalSpline = cip::NaturalCubicInterp2D<double, cip::BoundaryConditionType::NotAKnot>;
 constexpr double TOLERANCE = 5.0e-7;
 
 // Note: this test uses the 2D assertions with significant higher tolerance (presumably due

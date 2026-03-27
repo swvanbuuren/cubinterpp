@@ -66,11 +66,11 @@ def cubinterpp_interp2(interp_type='linear', data_case='makima', refinement=50):
         case 'linear':
             interp2 = cubinterpp.LinearInterp2D(x, y, f)
         case 'monotonic':
-            interp2 = cubinterpp.MonotonicSpline2D(x, y, f)
+            interp2 = cubinterpp.MonotonicCubicInterp2D(x, y, f)
         case 'makima':
-            interp2 = cubinterpp.MakimaSpline2D(x, y, f)
+            interp2 = cubinterpp.MakimaCubicInterp2D(x, y, f)
         case 'natural_spline':
-            interp2 = cubinterpp.NaturalSpline2D(x, y, f)
+            interp2 = cubinterpp.NaturalCubicInterp2D(x, y, f)
     x_fine, y_fine = refine_grid(x, refinement), refine_grid(y, refinement)
     z_fine = np.zeros((len(x_fine), len(y_fine)))
     for xi, xf in enumerate(x_fine):
