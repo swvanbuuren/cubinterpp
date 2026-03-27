@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Tx</type>
+      </param>
+      <param>
+        <type>typename Tf</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a338f069b90882440db4675d06d808d8e" prot="public" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="276" column="5" bodyfile="include/slopes.hpp" bodystart="276" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a65d99cd8f29868b4bc5ef9cd09963a38" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr void</type>
+        <definition>constexpr void cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;::operator()</definition>
+        <argsstring>(const Tx &amp;x, const Tf &amp;f, Vector &amp;a, Vector &amp;b, Vector &amp;c, Vector &amp;d) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;::operator()</qualifiedname>
+        <param>
+          <type>const Tx &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>Vector &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="277" column="20" bodyfile="include/slopes.hpp" bodystart="277" bodyend="309"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/slopes.hpp" line="275" column="1" bodyfile="include/slopes.hpp" bodystart="275" bodyend="310"/>
+    <listofallmembers>
+      <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a65d99cd8f29868b4bc5ef9cd09963a38" prot="public" virt="non-virtual"><scope>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;</scope><name>operator()</name></member>
+      <member refid="structcip_1_1setNaturalSplineBoundaryCondition_3_01BoundaryConditionType_1_1Periodic_00_01T_00_01Tx_00_01Tf_01_4_1a338f069b90882440db4675d06d808d8e" prot="public" virt="non-virtual"><scope>cip::setNaturalSplineBoundaryCondition&lt; BoundaryConditionType::Periodic, T, Tx, Tf &gt;</scope><name>Vector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

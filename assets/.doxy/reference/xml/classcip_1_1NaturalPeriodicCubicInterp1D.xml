@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1NaturalPeriodicCubicInterp1D" kind="class" language="C++" prot="public">
+    <compoundname>cip::NaturalPeriodicCubicInterp1D</compoundname>
+    <basecompoundref refid="classcip_1_1CubicInterpND" prot="public" virt="non-virtual">cip::CubicInterpND&lt; T, 1 &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+        <defval>1</defval>
+      </param>
+      <param>
+        <type>cip::BoundaryConditionType</type>
+        <declname>BC</declname>
+        <defname>BC</defname>
+        <defval>cip::BoundaryConditionType::Periodic</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1NaturalPeriodicCubicInterp1D_1a46bfa10756008430aaf82099cc988aa2" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::NaturalPeriodicCubicInterp1D::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_1d.hpp" line="74" column="5" bodyfile="include/cubic_interp_1d.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicCubicInterp1D_1a8c3efa2a93a8dbd1fee2014889f94d09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;::NaturalPeriodicCubicInterp1D</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;f)</argsstring>
+        <name>NaturalPeriodicCubicInterp1D</name>
+        <qualifiedname>cip::NaturalPeriodicCubicInterp1D::NaturalPeriodicCubicInterp1D</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_1d.hpp" line="76" column="5" bodyfile="include/cubic_interp_1d.hpp" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicCubicInterp1D_1af20d8d4f351266884c04833e57499aaa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;::~NaturalPeriodicCubicInterp1D</definition>
+        <argsstring>()</argsstring>
+        <name>~NaturalPeriodicCubicInterp1D</name>
+        <qualifiedname>cip::NaturalPeriodicCubicInterp1D::~NaturalPeriodicCubicInterp1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_1d.hpp" line="82" column="5" bodyfile="include/cubic_interp_1d.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1NaturalPeriodicCubicInterp1D_1adad51721bbaceb63725363f22629e990" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Vector</type>
+        <definition>Vector cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;f) const override</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::NaturalPeriodicCubicInterp1D::calc_slopes</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_1d.hpp" line="84" column="12" bodyfile="include/cubic_interp_1d.hpp" bodystart="84" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicCubicInterp1D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+      <node id="1">
+        <label>cip::NaturalPeriodicCubicInterp1D&lt; T, N, BC &gt;</label>
+        <link refid="classcip_1_1NaturalPeriodicCubicInterp1D"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/cubic_interp_1d.hpp" line="72" column="1" bodyfile="include/cubic_interp_1d.hpp" bodystart="73" bodyend="88"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1a2b0e06adc067b0963d135b28eec07d48" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>build</name></member>
+      <member refid="classcip_1_1NaturalPeriodicCubicInterp1D_1adad51721bbaceb63725363f22629e990" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a47b5250258f9017a46c87e514adabc49" prot="public" virt="pure-virtual" ambiguityscope="cip::CubicInterpND::"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterpND_1aeb5f2abc0f88d50cc7b24b9914155a2c" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a9a51aed8b81047f30acfe0882ab3a567" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>eval</name></member>
+      <member refid="classcip_1_1NaturalPeriodicCubicInterp1D_1a8c3efa2a93a8dbd1fee2014889f94d09" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>NaturalPeriodicCubicInterp1D</name></member>
+      <member refid="classcip_1_1NaturalPeriodicCubicInterp1D_1a46bfa10756008430aaf82099cc988aa2" prot="private" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>Vector</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ad90a6fd798c16790051618edeac81612" prot="public" virt="virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>~CubicInterpND</name></member>
+      <member refid="classcip_1_1NaturalPeriodicCubicInterp1D_1af20d8d4f351266884c04833e57499aaa" prot="public" virt="non-virtual"><scope>cip::NaturalPeriodicCubicInterp1D</scope><name>~NaturalPeriodicCubicInterp1D</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
