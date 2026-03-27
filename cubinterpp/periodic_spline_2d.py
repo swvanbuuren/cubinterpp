@@ -9,7 +9,7 @@ import mlpyqtgraph as mpg
 
 
 @mpg.plotter(projection='orthographic')
-def main():
+def main(gen_movie: bool = False):
     """ Interpolation of a torus to demonstrate periodic splines in 2D """
     nx, ny = 9, 9
     tx = np.linspace(0.0, 1.0, nx)
@@ -51,7 +51,7 @@ def main():
             z_fine[i, j] = spline_z.eval(txi[i], tyi[j])
 
 
-    mpg.figure(title='Periodic Spline Interpolation of a distorted Torus')
+    fig = mpg.figure(title='Periodic Spline Interpolation of a distorted Torus')
     mpg.surf(x_fine, y_fine, z_fine)
     ax = mpg.gca()
     ax.azimuth = 225
@@ -68,11 +68,17 @@ def main():
     filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
     ax.export(str(filepath))
 
+    if gen_movie:
+        generate_movie(filepath, fig, ax)
 
-def generate_movie(ax):
+
+def generate_movie(filepath, fig, ax):
     """ Render a 360° rotation of the current axes as an animated GIF """
-    filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
+    filepath = filepath.parent / f"animated_{filepath.name}"
     frame_paths = []
+    fig.height = 400
+    ax.distance = 70
+    ax.hide()
     for i in range(0, 360, 3):
         ax.azimuth = i
         ax.update()

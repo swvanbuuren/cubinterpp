@@ -4,7 +4,11 @@
 support.
 
 <p align="center">
-  <img src="docs/images/animated_periodic_spline_2D.gif" alt="2D parametric periodic spline"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/animated_periodic_spline_2D_wb.gif">
+    <source media="(prefers-color-scheme: light)" srcset="docs/images/animated_periodic_spline_2D.gif">
+    <img src="docs/images/animated_periodic_spline_2D.gif" alt="2D parametric periodic spline"/>
+  </picture>
   <br/>
   <em>2D parametric periodic cubic spline interpolation of a distorted torus</em>
 </p>
