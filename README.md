@@ -16,7 +16,7 @@ support.
 ## Key features
 
 This C++ header library features tools for piecewise linear and cubic
-interpolation in `N` dimensions.
+interpolation of rectangular grid data in `N` dimensions.
 
 For cubic piecewise interpolation, the library features three types:
 
