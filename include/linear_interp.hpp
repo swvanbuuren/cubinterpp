@@ -24,11 +24,7 @@ class LinearCellND {
     static constexpr std::size_t numCorners = 1 << N;
 public:
     explicit LinearCellND(const Mdspan &_f, const Spans &_x)
-    : x(_x),
-      f(_f),
-      H(std::transform_reduce(x.begin(), x.end(), T{1}, std::multiplies<>{},
-        [](const Span& xi) { return xi[1] - xi[0]; })),
-      c(compute_coefficients())
+    : c(compute_coefficients(_f, _x))
     {
     }
 
@@ -44,34 +40,33 @@ public:
 
 
 private:
-    const Spans x;
-    const Mdspan f;
-    const T H;
     const NomArray c;
 
-    NomArray compute_coefficients() const {
+    static NomArray compute_coefficients(const Mdspan &f, const Spans &x) {
+        const T H = std::transform_reduce(x.begin(), x.end(), T{1}, std::multiplies<>{},
+            [](const Span& xi) { return xi[1] - xi[0]; });
         NomArray c;
         for (std::size_t J = 0; J < numCorners; ++J) {
-            c[J] = compute_c_J(J);
+            c[J] = compute_c_J(f, x, H, J);
         }
         return c;
     }
 
-    T compute_c_J(std::size_t J) const {
+    static T compute_c_J(const Mdspan &f, const Spans &x, const T H, std::size_t J) {
         T c_J = T{0};
         for (std::size_t mask = 0; mask < numCorners; ++mask) {
             T prod = T{1};
             std::array<std::size_t, N> indices{};
             for (std::size_t k = 0; k < N; ++k) {
                 indices[k] = (mask & (1u << k)) ? 1 : 0;
-                prod *= gamma(J, indices[k], k);
+                prod *= gamma(x, J, indices[k], k);
             }
             c_J += f(indices) * prod;
         }
         return c_J / H;
     }
 
-    T gamma(std::size_t J, std::size_t i, std::size_t k) const {
+    static T gamma(const Spans &x, std::size_t J, std::size_t i, std::size_t k) {
         return (J & (1u << k))
             ? (i == 0 ? -T{1} : T{1})
             : (i == 0 ? x[k][1] : -x[k][0]);
