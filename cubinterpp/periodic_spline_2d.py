@@ -64,6 +64,7 @@ def main():
     mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=5)
     ax.distance = 115
     ax.elevation = 30
+    ax.update()
     filepath = Path(__file__).parents[1] / 'docs' / 'images' / 'periodic_spline_2D.png'
     ax.export(str(filepath))
 
@@ -74,6 +75,7 @@ def generate_movie(ax):
     frame_paths = []
     for i in range(0, 360, 3):
         ax.azimuth = i
+        ax.update()
         frame_path = filepath.parent / f"{filepath.stem}_{i}{filepath.suffix}"
         ax.export(str(frame_path))
         frame_paths.append(frame_path)

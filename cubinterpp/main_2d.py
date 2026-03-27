@@ -104,6 +104,7 @@ def main():
         ax.zlim = [0, 8]
         mpg.points3(xp, yp, zp, color=(0.8, 0.1, 0.1, 1), size=3)
         ax.distance = 115
+        ax.update()
         filepath = Path(__file__).parents[1] / 'docs' / 'images' / f'{interp_type}_2D.png'
         ax.export(str(filepath))
 
