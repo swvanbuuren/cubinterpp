@@ -108,30 +108,71 @@ comparison plot shown at the top of this document.
 
 ## Higher interpolation dimensions
 
-By default, the library offers linear interpolation classes up to three
-dimensions with `std::vector` input types. If you'd like to implement higher
-dimensions, it's recommended to inherit from the `N-dimensional` interpolation
-class for a given dimension. For example, for three dimensional linear
-interpolation this could look like:
+By default, the library offers both linear and cubic spline interpolation classes
+up to three dimensions with `std::vector` input types. If you'd like to implement
+higher dimensions, it is recommended to inherit from the respective
+`N`-dimensional base class.
+
+### Linear interpolation
+
+For linear interpolation beyond three dimensions, inherit from
+`LinearInterpND<T, N>`. For example, for four-dimensional linear interpolation:
 
 ```cpp
 #include "linear_interp.hpp"
 
 template <typename T>
-class LinearInterp3D : public LinearInterpND<T, 3> {
+class LinearInterp4D : public LinearInterpND<T, 4> {
     using Vector = std::vector<T>;
-    using Vector3 = cip::VectorN<T, 3>;
+    using Vector4 = cip::VectorN<T, 4>;
 public:
-    explicit LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
-    : LinearInterpND<T, 3>(f, x, y, z)
+    explicit LinearInterp4D(const Vector &x, const Vector &y,
+                             const Vector &z, const Vector &w, const Vector4 &f)
+    : LinearInterpND<T, 4>(f, x, y, z, w)
     {}
 
-    ~LinearInterp3D() { }
+    ~LinearInterp4D() { }
 };
 ```
 
-Note the counter-intuitive order of the constructor argument in
-`LinearInterpND`, due to the requirement that a parameter pack always needs to
-come last. This can be corrected in the inheriting classes constructor. Here,
-it's also possible to use different input types, which might differ per
-application.
+### Cubic spline interpolation
+
+For cubic spline interpolation in 1, 2, or 3 dimensions, the `CubicInterp` class
+template in `cubic_interp_impl.hpp` can be used directly via type aliases such as
+`MonotonicCubicInterp1D`, `NaturalCubicInterp2D`, `NaturalCubicInterp3D`, etc.
+
+For higher dimensions, inherit from `CubicInterpND<T, N>` and implement the pure
+virtual `calc_slopes` method. `SlopePolicy` from `cubic_interp_impl.hpp` can be
+used to reuse the built-in slope algorithms. For example, for four-dimensional
+monotone cubic interpolation:
+
+```cpp
+#include "cubic_interp.hpp"
+#include "cubic_interp_impl.hpp"
+
+template <typename T>
+class MonotonicCubicInterp4D : public cip::CubicInterpND<T, 4> {
+    using Vector = std::vector<T>;
+    using Vector4 = cip::VectorN<T, 4>;
+    using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
+public:
+    explicit MonotonicCubicInterp4D(const Vector &x0, const Vector &x1,
+                                     const Vector &x2, const Vector &x3,
+                                     const Vector4 &f)
+    : cip::CubicInterpND<T, 4>(f, x0, x1, x2, x3)
+    {
+        this->build(f, x0, x1, x2, x3);
+    }
+
+    ~MonotonicCubicInterp4D() { }
+
+    Vector calc_slopes(const Vector& x, const Mdspan1D& f) const override {
+        return cip::SlopePolicy<cip::SlopeMethod::Monotonic>::template calc<T>(x, f);
+    }
+};
+```
+
+Note the counter-intuitive order of the constructor arguments in `LinearInterpND`
+and `CubicInterpND`, due to the requirement that a parameter pack always needs to
+come last. This can be corrected in the inheriting class's constructor. It is also
+possible to use different input types, which might differ per application.

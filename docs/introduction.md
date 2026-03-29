@@ -9,9 +9,9 @@ For cubic piecewise interpolation, the library features three types:
 - Modified Akima spline interpolation 
 - Natural cubic spline interpolation
 
-Linear interpolation is supported for `N`-dimensional data, whereas cubic
-interpolation currently only supports `1`- and `2`-dimensional data. Cubic
-piecewise interpolation for `N`-dimensional data is planned.
+Linear interpolation is supported for `N`-dimensional data. Cubic interpolation
+supports `1`-, `2`- and `3`-dimensional data out of the box, and can be extended
+to higher dimensions by inheriting from the `N`-dimensional base class.
 
 All classes are templatized and support the STL's vector types.
 
