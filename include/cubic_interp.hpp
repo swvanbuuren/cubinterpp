@@ -265,6 +265,7 @@ class CubicInterpND<T, 1>
     using Cell = CubicCellND<T, 1>;
     using Cells = std::vector<Cell>;
     using Span = std::span<const T>;
+    using Mdspan1D = std::mdspan<T, std::dextents<std::size_t, 1>, std::layout_stride>;
     using VectorN2 = cip::VectorN<T, 2>;
     using Pr = std::pair<std::size_t, std::size_t>;
 public:
@@ -277,13 +278,13 @@ public:
     }
     virtual ~CubicInterpND() { }
 
-    virtual Vector calc_slopes(const Vector &x, const Vector &f) const = 0;
+    virtual Vector calc_slopes(const Vector &x, const Mdspan1D &f) const = 0;
 
     void build(Vector f) // don't pass by reference but by value (to create a copy)!
     {
         const std::size_t n = x.size() - 1;
         F.move_into_submdspan(std::move(f), std::full_extent, 0);
-        F.move_into_submdspan(calc_slopes(x, f), std::full_extent, 1);
+        F.move_into_submdspan(calc_slopes(x, F.submdspan_1d(std::full_extent, 0)), std::full_extent, 1);
         cells.reserve(n);
         for (auto i = 0; i < n; ++i)
         {
