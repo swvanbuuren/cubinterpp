@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master 
+  pull_request:
+    branches: 
+      - master
 
 permissions:
   contents: write
@@ -14,6 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Configure Git Credentials
+        if: github.event_name == 'push'
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -27,6 +31,11 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material mkdocstrings[python] pymdown-extensions mkdoxy
+      - run: pip install mkdocs-material mkdocstrings[python] pymdown-extensions==10.20 "pygments==2.19.2" mkdoxy
       - run: sudo apt install doxygen
-      - run: mkdocs gh-deploy --force
+      - name: Build docs (PR check)
+        if: github.event_name == 'pull_request'
+        run: mkdocs build --strict
+      - name: Deploy docs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: mkdocs gh-deploy --force
