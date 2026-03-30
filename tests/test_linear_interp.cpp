@@ -19,12 +19,12 @@ TEST(TestLinearCell1D, test_linear_cell_1d) {
     VectorN1 fvec(f);
     size_t i = 1;
     cip::LinearCellND<double, 1> cell(
-        Span(&x[i], 2),
-        Span(&f[i], 2)
+        fvec.submdspan(Pr{i, i+1}),
+        {Span(&x[i], 2)}
     );
-    ASSERT_EQ(cell.eval(1), 3.0);
-    ASSERT_EQ(cell.eval(1), 3.0);
-    ASSERT_EQ(cell.eval(2), 4.0);
+    ASSERT_EQ(cell.eval(1.0), 3.0);
+    ASSERT_EQ(cell.eval(1.0), 3.0);
+    ASSERT_EQ(cell.eval(2.0), 4.0);
     ASSERT_EQ(cell.eval(1.5), 3.5);
 }
 

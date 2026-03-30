@@ -18,9 +18,9 @@ public:
     // 1-D constructor: (x, f)
     CubicInterp(const Vector& x, const Vector& f)
         requires (N == 1)
-        : CubicInterpND<T, 1, IM>(x, f)
+        : CubicInterpND<T, 1, IM>(f, x)  // general base: _f unused in ctor; _xi = x
     {
-        this->build(f);
+        this->build(f, x);
     }
 
     // 2-D constructor: (x, y, f)
