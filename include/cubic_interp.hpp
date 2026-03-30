@@ -132,7 +132,7 @@ private:
 
 
 
-template <typename T, std::size_t N>
+template <typename T, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
 class CubicInterpND
 {
     static constexpr std::size_t size_t_two = 2;
@@ -146,12 +146,12 @@ class CubicInterpND
     using Ff = cip::VectorN<T, N>;
     using Ff2 = cip::VectorN<T, 2*N>;
     using Pr = std::pair<std::size_t, std::size_t>;
-    using Indexers = std::array<cip::Indexer<T>, N>;
+    using Indexers = std::array<cip::Indexer<T, IM>, N>;
 public:
     template <typename... Args>    
     CubicInterpND(const Ff &_f, const Args & ... _xi)
       : xi{_xi...},
-        indexers{cip::Indexer<T>(_xi)...},
+        indexers{cip::Indexer<T, IM>(_xi)...},
         F(T{}, {_xi.size()..., ((void)_xi, size_t_two)...}),
         cells({(_xi.size()-1)...})
     {
@@ -171,7 +171,7 @@ public:
     T eval(const Args&... args) const
     {
         std::size_t dim = 0;
-        std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
+        std::array<size_t, N> indices = { indexers[dim++].index(args)... };
         return cells(indices).eval(args...);
     }
 
@@ -258,8 +258,8 @@ private:
 };
 
 
-template <typename T>
-class CubicInterpND<T, 1>
+template <typename T, IndexMethod IM>
+class CubicInterpND<T, 1, IM>
 {
     using Vector = std::vector<T>;
     using Cell = CubicCellND<T, 1>;
@@ -294,7 +294,7 @@ public:
 
     T eval(const T xi) const
     {
-        return cells[indexer.sort_index(xi)].eval(xi);
+        return cells[indexer.index(xi)].eval(xi);
     };
 
     Vector evaln(const Vector &xi) const
@@ -310,7 +310,7 @@ public:
 
 private:
     const Vector x;
-    const cip::Indexer<T> indexer;
+    const cip::Indexer<T, IM> indexer;
     Cells cells;
     VectorN2 F;
 

@@ -85,7 +85,7 @@ private:
 }; // class LinearCellND
 
 
-template <typename T, std::size_t N>
+template <typename T, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
 class LinearInterpND {
     using Vector = std::vector<T>;
     using Array = std::array<Vector, N>;
@@ -94,13 +94,13 @@ class LinearInterpND {
     using Cells = cip::VectorN<Cell, N>;
     using Span = std::span<const T>;
     using Pr = std::pair<std::size_t, std::size_t>;
-    using Indexers = std::array<cip::Indexer<T>, N>;
+    using Indexers = std::array<cip::Indexer<T, IM>, N>;
 public:
     template <typename... Args>
     LinearInterpND(const F &_f, const Args & ... _xi)
     : xi{_xi...}, 
       f(_f), 
-      indexers{cip::Indexer<T>(_xi)...}, 
+      indexers{cip::Indexer<T, IM>(_xi)...}, 
       cells(build(_xi...))
     {
     }
@@ -111,7 +111,7 @@ public:
     T eval(const Args&... args) const
     {
         std::size_t dim = 0;
-        std::array<size_t, N> indices = { indexers[dim++].sort_index(args)... };
+        std::array<size_t, N> indices = { indexers[dim++].index(args)... };
         return cells(indices).eval(args...);
     }
 
@@ -191,8 +191,8 @@ private:
 };
 
 
-template <typename T>
-class LinearInterpND<T, 1> {
+template <typename T, IndexMethod IM>
+class LinearInterpND<T, 1, IM> {
     using Cell = LinearCellND<T, 1>;
     using Vector = std::vector<T>;
     using Span = std::span<const T>;
@@ -216,7 +216,7 @@ public:
 
     T eval(const T xi) const
     {
-        return cells[indexer.sort_index(xi)].eval(xi);
+        return cells[indexer.index(xi)].eval(xi);
     }
 
     Vector evaln(const Vector &xi) const
@@ -231,18 +231,18 @@ public:
     }
 
 private:
-    const cip::Indexer<T> indexer;
+    const cip::Indexer<T, IM> indexer;
     std::vector<Cell> cells;
 }; // class LinearInterpND case N=1
 
 
-template <typename T>
-class LinearInterp1D : public LinearInterpND<T, 1> {
+template <typename T, IndexMethod IM = IndexMethod::Sorted>
+class LinearInterp1D : public LinearInterpND<T, 1, IM> {
     using Vector = std::vector<T>;
     using Vector2 = cip::VectorN<T, 1>;
 public:
     explicit LinearInterp1D(const Vector &x, const Vector &f)
-    : LinearInterpND<T, 1>(f, x)
+    : LinearInterpND<T, 1, IM>(f, x)
     {}
 
     ~LinearInterp1D() { }
@@ -250,38 +250,38 @@ public:
 
 
 
-template <typename T>
-class LinearInterp2D : public LinearInterpND<T, 2> {
+template <typename T, IndexMethod IM = IndexMethod::Sorted>
+class LinearInterp2D : public LinearInterpND<T, 2, IM> {
     using Vector = std::vector<T>;
     using Vector2 = cip::VectorN<T, 2>;
 public:
     explicit LinearInterp2D(const Vector &x, const Vector &y, const Vector2 &f)
-    : LinearInterpND<T, 2>(f, x, y)
+    : LinearInterpND<T, 2, IM>(f, x, y)
     {}
 
     ~LinearInterp2D() { }
 };
 
 
-template <typename T>
-class LinearInterp3D : public LinearInterpND<T, 3> {
+template <typename T, IndexMethod IM = IndexMethod::Sorted>
+class LinearInterp3D : public LinearInterpND<T, 3, IM> {
     using Vector = std::vector<T>;
     using Vector3 = cip::VectorN<T, 3>;
 public:
     explicit LinearInterp3D(const Vector &x, const Vector &y, const Vector &z, const Vector3 &f)
-    : LinearInterpND<T, 3>(f, x, y, z)
+    : LinearInterpND<T, 3, IM>(f, x, y, z)
     {}
 
     ~LinearInterp3D() { }
 };
 
-template <typename T>
-class LinearInterp4D : public LinearInterpND<T, 4> {
+template <typename T, IndexMethod IM = IndexMethod::Sorted>
+class LinearInterp4D : public LinearInterpND<T, 4, IM> {
     using Vector = std::vector<T>;
     using Vector4 = cip::VectorN<T, 4>;
 public:
     explicit LinearInterp4D(const Vector &x, const Vector &y, const Vector &z, const Vector &w, const Vector4 &f)
-    : LinearInterpND<T, 4>(f, x, y, z, w)
+    : LinearInterpND<T, 4, IM>(f, x, y, z, w)
     {}
 
     ~LinearInterp4D() { }

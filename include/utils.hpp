@@ -8,7 +8,10 @@
 namespace cip {
 
 
-template <typename T>
+enum class IndexMethod { Sorted, Cell };
+
+
+template <typename T, IndexMethod Method = IndexMethod::Sorted>
 class Indexer {
     using Vector = std::vector<T>;
 public:
@@ -22,7 +25,21 @@ public:
     }
     ~Indexer() { }
 
-    const std::size_t cell_index(const T xi) const
+    std::size_t index(const T xi) const
+    {
+        if constexpr (Method == IndexMethod::Sorted) {
+            return sort_index(xi);
+        } else if constexpr (Method == IndexMethod::Cell) {
+            return cell_index(xi);
+        } else {
+            static_assert(sizeof(T) == 0,
+                "Unhandled IndexMethod enumerator in Indexer::index — "
+                "add a corresponding branch.");
+        }
+    }
+
+private:
+    std::size_t cell_index(const T xi) const
     {
         return
         (xi < x_back) ?
@@ -32,7 +49,7 @@ public:
             index_back;
     }
 
-    const std::size_t sort_index(const T xi) const
+    std::size_t sort_index(const T xi) const
     {
         if (xi < x_front)
         {
@@ -45,7 +62,6 @@ public:
         return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
     }
 
-private:
     const Vector x;
     const size_t index_front = 0;
     const size_t index_back;
