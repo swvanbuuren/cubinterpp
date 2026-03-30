@@ -149,13 +149,13 @@ template in `cubic_interp_impl.hpp` can be used directly via type aliases such a
 `MonotonicCubicInterp1D`, `NaturalCubicInterp2D`, `NaturalCubicInterp3D`, etc.
 
 For higher dimensions, inherit from `CubicInterpND<T, N>` and implement the pure
-virtual `calc_slopes` method. `SlopePolicy` from `cubic_interp_impl.hpp` can be
+virtual `calc_slopes` method. `SlopePolicy` from `slopes.hpp` can be
 used to reuse the built-in slope algorithms. For example, for four-dimensional
 monotone cubic interpolation:
 
 ```cpp
 #include "cubic_interp.hpp"
-#include "cubic_interp_impl.hpp"
+#include "slopes.hpp"
 
 template <typename T>
 class MonotonicCubicInterp4D : public cip::CubicInterpND<T, 4> {

@@ -343,4 +343,25 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
 }
 
 
+enum class SlopeMethod { Monotonic, Makima, Natural };
+
+template <SlopeMethod Method, BoundaryConditionType BC = BoundaryConditionType::Natural>
+struct SlopePolicy {
+    template <typename T, typename Tx, typename Tf>
+    static std::vector<T> calc(const Tx& x, const Tf& f) {
+        if constexpr (Method == SlopeMethod::Monotonic) {
+            return monotonic_slopes<T>(x, f);
+        } else if constexpr (Method == SlopeMethod::Makima) {
+            return makima_slopes<T>(x, f);
+        } else if constexpr (Method == SlopeMethod::Natural) {
+            return natural_spline_slopes<T, BC>(x, f);
+        } else {
+            static_assert(sizeof(T) == 0,
+                "Unhandled SlopeMethod enumerator in SlopePolicy::calc — "
+                "add a corresponding branch.");
+        }
+    }
+};
+
+
 } // namespace cip
