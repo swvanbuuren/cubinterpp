@@ -8,10 +8,10 @@
 namespace cip {
 
 
-enum class IndexMethod { Sorted, Cell };
+enum class IndexMethod { BinarySearch, Uniform };
 
 
-template <typename T, IndexMethod Method = IndexMethod::Sorted>
+template <typename T, IndexMethod Method = IndexMethod::BinarySearch>
 class Indexer {
     using Vector = std::vector<T>;
 public:
@@ -23,14 +23,13 @@ public:
       x_delta((x_back-x_front)/(x.size()-1))
     {
     }
-    ~Indexer() { }
 
-    std::size_t index(const T xi) const
+    [[nodiscard]] std::size_t index(const T xi) const noexcept
     {
-        if constexpr (Method == IndexMethod::Sorted) {
-            return sort_index(xi);
-        } else if constexpr (Method == IndexMethod::Cell) {
-            return cell_index(xi);
+        if constexpr (Method == IndexMethod::BinarySearch) {
+            return binary_search_index(xi);
+        } else if constexpr (Method == IndexMethod::Uniform) {
+            return uniform_index(xi);
         } else {
             static_assert(sizeof(T) == 0,
                 "Unhandled IndexMethod enumerator in Indexer::index — "
@@ -39,32 +38,30 @@ public:
     }
 
 private:
-    std::size_t cell_index(const T xi) const
+    bool clamp_index(const T xi, std::size_t &idx) const noexcept
     {
-        return
-        (xi < x_back) ?
-            ((xi < x_front) ?
-                index_front :
-                (std::size_t)((xi-x_front)/x_delta)) :
-            index_back;
+        if (xi < x_front) { idx = index_front; return true; }
+        if (xi >= x_back) { idx = index_back;  return true; }
+        return false;
     }
 
-    std::size_t sort_index(const T xi) const
+    std::size_t uniform_index(const T xi) const noexcept
     {
-        if (xi < x_front)
-        {
-            return index_front;
-        }
-        if (xi >= x_back)
-        {
-            return index_back;
-        }
-        return std::distance(x.begin(), std::upper_bound(x.begin(), x.end(), xi)) - 1;
+        std::size_t idx;
+        if (clamp_index(xi, idx)) return idx;
+        return static_cast<std::size_t>((xi - x_front) / x_delta);
+    }
+
+    std::size_t binary_search_index(const T xi) const noexcept
+    {
+        std::size_t idx;
+        if (clamp_index(xi, idx)) return idx;
+        return std::upper_bound(x.begin(), x.end(), xi) - x.begin() - 1;
     }
 
     const Vector x;
-    const size_t index_front = 0;
-    const size_t index_back;
+    static constexpr std::size_t index_front = 0;
+    const std::size_t index_back;
     const T x_front;
     const T x_back;
     const T x_delta;

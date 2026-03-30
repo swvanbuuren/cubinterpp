@@ -7,7 +7,7 @@
 namespace cip {
 
 
-template <typename T, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, std::size_t N, IndexMethod IM = IndexMethod::BinarySearch>
 class LinearInterp : public LinearInterpND<T, N, IM>
 {
     using Vector  = std::vector<T>;
@@ -43,16 +43,16 @@ public:
 
 // ===== Backward-Compatible Type Aliases =====
 
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using LinearInterp1D = LinearInterp<T, 1, IM>;
 
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using LinearInterp2D = LinearInterp<T, 2, IM>;
 
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using LinearInterp3D = LinearInterp<T, 3, IM>;
 
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using LinearInterp4D = LinearInterp<T, 4, IM>;
 
 

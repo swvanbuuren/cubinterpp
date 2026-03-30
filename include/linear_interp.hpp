@@ -85,7 +85,7 @@ private:
 }; // class LinearCellND
 
 
-template <typename T, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, std::size_t N, IndexMethod IM = IndexMethod::BinarySearch>
 class LinearInterpND {
     using Vector = std::vector<T>;
     using Array = std::array<Vector, N>;

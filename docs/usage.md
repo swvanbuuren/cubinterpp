@@ -135,11 +135,11 @@ public:
 };
 ```
 
-To use the direct-formula cell indexer (see [Indexing method](#indexing-method)
-below), pass `cip::IndexMethod::Cell` as the third template argument:
+To use the direct-formula uniform indexer (see [Indexing method](#indexing-method)
+below), pass `cip::IndexMethod::Uniform` as the third template argument:
 
 ```cpp
-class LinearInterp4D : public LinearInterpND<T, 4, cip::IndexMethod::Cell> { ... };
+class LinearInterp4D : public LinearInterpND<T, 4, cip::IndexMethod::Uniform> { ... };
 ```
 
 ### Cubic spline interpolation
@@ -179,11 +179,11 @@ public:
 };
 ```
 
-To use the direct-formula cell indexer, pass `cip::IndexMethod::Cell` as the
+To use the direct-formula uniform indexer, pass `cip::IndexMethod::Uniform` as the
 third template argument of the base class:
 
 ```cpp
-class MonotonicCubicInterp4D : public cip::CubicInterpND<T, 4, cip::IndexMethod::Cell> { ... };
+class MonotonicCubicInterp4D : public cip::CubicInterpND<T, 4, cip::IndexMethod::Uniform> { ... };
 ```
 
 !!! note
@@ -200,31 +200,31 @@ are available:
 
 | Value | Strategy | When to use |
 |---|---|---|
-| `cip::IndexMethod::Sorted` *(default)* | Binary search (`std::upper_bound`) | Non-uniform or arbitrary grid spacing |
-| `cip::IndexMethod::Cell` | Direct formula $\lfloor(x - x_0) / \Delta x\rfloor$ | Uniformly spaced grids only — faster |
+| `cip::IndexMethod::BinarySearch` *(default)* | Binary search (`std::upper_bound`) | Non-uniform or arbitrary grid spacing |
+| `cip::IndexMethod::Uniform` | Direct formula $\lfloor(x - x_0) / \Delta x\rfloor$ | Uniformly spaced grids only — faster |
 
 For the ready-to-use type aliases (`MonotonicCubicInterp1D`,
 `NaturalCubicInterp2D`, `LinearInterp1D`, etc.) the indexing method is the last
-template parameter and defaults to `cip::IndexMethod::Sorted`:
+template parameter and defaults to `cip::IndexMethod::BinarySearch`:
 
 ```cpp
 // default — works with any grid spacing
 cip::NaturalCubicInterp1D<double> spline(x, f);
 
-// explicit sorted indexing
+// explicit binary-search indexing
 cip::NaturalCubicInterp1D<double,
                            cip::BoundaryConditionType::Natural,
-                           cip::IndexMethod::Sorted> spline(x, f);
+                           cip::IndexMethod::BinarySearch> spline(x, f);
 
-// cell indexing — faster, but only valid for uniform grids
+// uniform indexing — faster, but only valid for uniform grids
 cip::NaturalCubicInterp1D<double,
                            cip::BoundaryConditionType::Natural,
-                           cip::IndexMethod::Cell> spline(x, f);
+                           cip::IndexMethod::Uniform> spline(x, f);
 ```
 
-!!! warning "Cell indexing requires evenly spaced data"
-    `cip::IndexMethod::Cell` computes the cell index directly using the formula
+!!! warning "Uniform indexing requires evenly spaced data"
+    `cip::IndexMethod::Uniform` computes the cell index directly using the formula
     $\lfloor(x - x_0) / \Delta x\rfloor$, where $\Delta x = (x_\text{back} - x_\text{front}) / (n - 1)$.  
     This is **only correct when all input coordinate vectors are uniformly
-    spaced**.  Passing non-uniform grids with `IndexMethod::Cell` will silently
+    spaced**.  Passing non-uniform grids with `IndexMethod::Uniform` will silently
     produce wrong results — no runtime check is performed.

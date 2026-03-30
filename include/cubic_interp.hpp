@@ -132,7 +132,7 @@ private:
 
 
 
-template <typename T, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, std::size_t N, IndexMethod IM = IndexMethod::BinarySearch>
 class CubicInterpND
 {
     static constexpr std::size_t size_t_two = 2;

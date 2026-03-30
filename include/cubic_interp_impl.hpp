@@ -8,7 +8,7 @@
 namespace cip {
 
 
-template <typename T, typename SlopePolicy, std::size_t N, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, typename SlopePolicy, std::size_t N, IndexMethod IM = IndexMethod::BinarySearch>
 class CubicInterp : public CubicInterpND<T, N, IM>
 {
     using Vector   = std::vector<T>;
@@ -50,35 +50,35 @@ public:
 // ===== Backward-Compatible Type Aliases =====
 
 // --- 1-D ---
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using MonotonicCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Monotonic>, 1, IM>;
 
-template <typename T, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using MakimaCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Makima>, 1, IM>;
 
-template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, IndexMethod IM = IndexMethod::BinarySearch>
 using NaturalCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Natural, BC>, 1, IM>;
 
-template <typename T, BoundaryConditionType BC = BoundaryConditionType::Periodic, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, BoundaryConditionType BC = BoundaryConditionType::Periodic, IndexMethod IM = IndexMethod::BinarySearch>
 using NaturalPeriodicCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Natural, BC>, 1, IM>;
 
 // --- 2-D ---
 
-template <typename T, std::size_t N = 2, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, std::size_t N = 2, IndexMethod IM = IndexMethod::BinarySearch>
 using MonotonicCubicInterp2D = CubicInterp<T, SlopePolicy<SlopeMethod::Monotonic>, N, IM>;
 
-template <typename T, std::size_t N = 2, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, std::size_t N = 2, IndexMethod IM = IndexMethod::BinarySearch>
 using MakimaCubicInterp2D = CubicInterp<T, SlopePolicy<SlopeMethod::Makima>, N, IM>;
 
-template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, std::size_t N = 2, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, std::size_t N = 2, IndexMethod IM = IndexMethod::BinarySearch>
 using NaturalCubicInterp2D = CubicInterp<T, SlopePolicy<SlopeMethod::Natural, BC>, N, IM>;
 
-template <typename T, BoundaryConditionType BC = BoundaryConditionType::Periodic, std::size_t N = 2, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, BoundaryConditionType BC = BoundaryConditionType::Periodic, std::size_t N = 2, IndexMethod IM = IndexMethod::BinarySearch>
 using NaturalPeriodicCubicInterp2D = CubicInterp<T, SlopePolicy<SlopeMethod::Natural, BC>, N, IM>;
 
 // --- 3-D ---
 
-template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, std::size_t N = 3, IndexMethod IM = IndexMethod::Sorted>
+template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, std::size_t N = 3, IndexMethod IM = IndexMethod::BinarySearch>
 using NaturalCubicInterp3D = CubicInterp<T, SlopePolicy<SlopeMethod::Natural, BC>, N, IM>;
 
 
