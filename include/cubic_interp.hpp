@@ -151,12 +151,17 @@ public:
     template <typename... Args>    
     CubicInterpND(const Ff &_f, const Args & ... _xi)
       : xi{_xi...},
-        indexers{cip::Indexer<T, IM>(_xi)...},
+        indexers(std::apply([](const auto&... v) -> Indexers {
+            return Indexers{ cip::Indexer<T, IM>(std::span<const T>(v))... };
+        }, xi)),
         F(T{}, {_xi.size()..., ((void)_xi, size_t_two)...}),
         cells(std::array<std::size_t, N>{(_xi.size()-1)...})
     {
     }
     virtual ~CubicInterpND() { }
+
+    CubicInterpND(CubicInterpND&&)            = delete;
+    CubicInterpND& operator=(CubicInterpND&&) = delete;
 
     virtual Vector calc_slopes(const Vector &x, const Mdspan1D &f) const = 0;
 

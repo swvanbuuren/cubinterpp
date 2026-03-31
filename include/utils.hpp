@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <span>
 #include <vector>
 #include <algorithm>
 
@@ -11,11 +12,13 @@ namespace cip {
 enum class IndexMethod { BinarySearch, Uniform };
 
 
+// NOTE: Indexer is non-owning — the caller must guarantee the source vector
+// outlives this instance and is never reallocated while it is alive.
 template <typename T, IndexMethod Method = IndexMethod::BinarySearch>
 class Indexer {
-    using Vector = std::vector<T>;
+    using Span = std::span<const T>;
 public:
-    Indexer(const Vector &_x)
+    Indexer(Span _x)
     : x(_x),
       index_back(x.size()-2),
       x_front(x[index_front]),
@@ -59,7 +62,7 @@ private:
         return std::upper_bound(x.begin(), x.end(), xi) - x.begin() - 1;
     }
 
-    const Vector x;
+    const Span x;
     static constexpr std::size_t index_front = 0;
     const std::size_t index_back;
     const T x_front;

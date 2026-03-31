@@ -100,12 +100,17 @@ public:
     LinearInterpND(const F &_f, const Args & ... _xi)
     : xi{_xi...}, 
       f(_f), 
-      indexers{cip::Indexer<T, IM>(_xi)...}, 
+      indexers(std::apply([](const auto&... v) -> Indexers {
+          return Indexers{ cip::Indexer<T, IM>(std::span<const T>(v))... };
+      }, xi)),
       cells(build(_xi...))
     {
     }
 
     ~LinearInterpND() { }
+
+    LinearInterpND(LinearInterpND&&)            = delete;
+    LinearInterpND& operator=(LinearInterpND&&) = delete;
 
     template <typename... Args>
     T eval(const Args&... args) const
