@@ -7,9 +7,10 @@ using Vector = std::vector<double>;
 using NaturalSpline = cip::NaturalCubicInterp2D<double, cip::BoundaryConditionType::NotAKnot>;
 constexpr double TOLERANCE = 5.0e-7;
 
-// Note: this test uses the 2D assertions with significant higher tolerance (presumably due
-// the use of different solvers that generated the comparion data)
+// Note: this test uses a significantly higher tolerance (5.0e-7 vs the usual 5e-12) because the
+// reference data was generated with a different solver, introducing small numerical discrepancies.
 TEST(TestCubicSpline2D, test_natural_spline_2d) {
+    // Cross-validation: 2D Not-a-knot BC output matches an external reference implementation.
     cip::Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector y = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector2 f = { 

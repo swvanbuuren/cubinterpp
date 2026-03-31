@@ -12,6 +12,8 @@ using NaturalSplineClamped = cip::NaturalCubicInterp1D<double, cip::BoundaryCond
 
 
 TEST(TestCubicSpline1D, test_monotonic_spline_1d) {
+    // Regression: Pchip/monotone Hermite slopes on an irregular grid.
+    // Reference data generated from this implementation.
     cip::Vector x = { 1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10 };
     cip::Vector f = { 0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.375, 1.75, 2.125, 2.5, 2.875, 3.25, 3.625, 4.0, 4.375, 4.75, 5.125, 5.5, 5.875, 6.25, 6.625, 7.0, 7.375, 7.75, 8.125, 8.5, 8.875, 9.25, 9.625, 10.0 };
@@ -21,6 +23,8 @@ TEST(TestCubicSpline1D, test_monotonic_spline_1d) {
 
 
 TEST(TestCubicSpline1D, test_makima_spline_1d) {
+    // Regression: Makima slopes on an irregular grid.
+    // Reference data generated from this implementation.
     cip::Vector x = { 1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10 };
     cip::Vector f = { 0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.375, 1.75, 2.125, 2.5, 2.875, 3.25, 3.625, 4.0, 4.375, 4.75, 5.125, 5.5, 5.875, 6.25, 6.625, 7.0, 7.375, 7.75, 8.125, 8.5, 8.875, 9.25, 9.625, 10.0 };
@@ -30,6 +34,9 @@ TEST(TestCubicSpline1D, test_makima_spline_1d) {
 
 
 TEST(TestCubicSpline1D, test_natural_spline_1d_default) {
+    // Regression: Natural BC (f''=0 at boundaries) on an irregular grid.
+    // Reference data generated from this implementation; see test_natural_spline_1d_scipy_natural
+    // for the same BC validated against SciPy on a different query grid.
     cip::Vector x = { 1, 2, 3, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10 };
     cip::Vector f = { 0, 0, 0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.375, 1.75, 2.125, 2.5, 2.875, 3.25, 3.625, 4.0, 4.375, 4.75, 5.125, 5.5, 5.875, 6.25, 6.625, 7.0, 7.375, 7.75, 8.125, 8.5, 8.875, 9.25, 9.625, 10.0 };
@@ -39,7 +46,7 @@ TEST(TestCubicSpline1D, test_natural_spline_1d_default) {
 
 
 TEST(TestCubicSpline1D, test_natural_spline_1d_scipy_natural) {
-    // Note: comparison data has been generated using scipy, with CubicSpline with bc_type='natural'
+    // Cross-validation: Natural BC output matches SciPy CubicSpline(bc_type='natural').
     Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     Vector f = { 0.0, 0.0, 0.0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     Vector x_fine = { 1.0, 1.4736842105263157, 1.9473684210526314, 2.4210526315789473, 2.894736842105263, 3.3684210526315788, 3.8421052631578947, 4.315789473684211, 4.789473684210526, 5.263157894736842, 5.7368421052631575, 6.2105263157894735, 6.684210526315789, 7.157894736842105, 7.63157894736842, 8.105263157894736, 8.578947368421051, 9.052631578947368, 9.526315789473683, 10.0 };
@@ -49,7 +56,7 @@ TEST(TestCubicSpline1D, test_natural_spline_1d_scipy_natural) {
 
 
 TEST(TestCubicSpline1D, test_natural_spline_1d_scipy_notaknot) {
-    // Note: comparison data has been generated using scipy, with CubicSpline with bc_type='not-a-knot'
+    // Cross-validation: Not-a-knot BC output matches SciPy CubicSpline(bc_type='not-a-knot').
     cip::Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector f = { 0.0, 0.0, 0.0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.4736842105263157, 1.9473684210526314, 2.4210526315789473, 2.894736842105263, 3.3684210526315788, 3.8421052631578947, 4.315789473684211, 4.789473684210526, 5.263157894736842, 5.7368421052631575, 6.2105263157894735, 6.684210526315789, 7.157894736842105, 7.63157894736842, 8.105263157894736, 8.578947368421051, 9.052631578947368, 9.526315789473683, 10.0 };
@@ -59,7 +66,7 @@ TEST(TestCubicSpline1D, test_natural_spline_1d_scipy_notaknot) {
 
 
 TEST(TestCubicSpline1D, test_natural_spline_1d_scipy_clamped) {
-    // Note: comparison data has been generated using scipy, with CubicSpline with bc_type='clamped'
+    // Cross-validation: Clamped BC (f'=0 at boundaries) output matches SciPy CubicSpline(bc_type='clamped').
     cip::Vector x = { 1.0, 2.0, 3.0, 4.0, 5.0, 5.5, 7.0, 8.0, 9.0, 9.5, 10.0 };
     cip::Vector f = { 0.0, 0.0, 0.0, 0.5, 0.4, 1.2, 1.2, 0.1, 0.0, 0.3, 0.6 };
     cip::Vector x_fine = { 1.0, 1.4736842105263157, 1.9473684210526314, 2.4210526315789473, 2.894736842105263, 3.3684210526315788, 3.8421052631578947, 4.315789473684211, 4.789473684210526, 5.263157894736842, 5.7368421052631575, 6.2105263157894735, 6.684210526315789, 7.157894736842105, 7.63157894736842, 8.105263157894736, 8.578947368421051, 9.052631578947368, 9.526315789473683, 10.0 };
