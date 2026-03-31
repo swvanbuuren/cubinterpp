@@ -36,8 +36,8 @@ jobs:
         with:
           node-version: "lts/*"
       - name: Install dependencies
-        run: npm i -D conventional-changelog-conventionalcommits
+        run: npm i -D semantic-release@24 conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release@24
+        run: npx semantic-release
