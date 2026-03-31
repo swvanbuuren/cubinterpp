@@ -70,10 +70,14 @@ private:
         const T x1 = xi[1];
         const T x02 = x0*x0;
         const T x12 = x1*x1;
-        return {{{x12*(x1 - 3.0*x0), +6.0*x0*x1,           -3.0*(x0 + x1), +2.0},
-                 {-x0*x12,           x1*(2.0*x0 + x1),     -(x0 + 2.0*x1), +1.0},
-                 {x02*(3.0*x1 - x0), -6.0*x0*x1,           +3.0*(x0 + x1), -2.0},
-                 {-x1*x02,           x0*(x0 + 2.0*x1),     -(2.0*x0 + x1), +1.0}}};
+        const T x0x1 = x0*x1;
+        const T x0_p_x1 = x0 + x1;
+        const T two_x0_p_x1 = 2.0*x0 + x1;
+        const T x0_p_two_x1 = x0 + 2.0*x1;
+        return {{{x12*(x1 - 3.0*x0), +6.0*x0x1,          -3.0*x0_p_x1,  +2.0},
+                 {-x0*x12,           x1*two_x0_p_x1,     -x0_p_two_x1,  +1.0},
+                 {x02*(3.0*x1 - x0), -6.0*x0x1,          +3.0*x0_p_x1,  -2.0},
+                 {-x1*x02,           x0*x0_p_two_x1,     -two_x0_p_x1,  +1.0}}};
     }
 
     const Delta calc_delta(const Spans &x) const 
@@ -86,30 +90,51 @@ private:
 
     const CoeffsArray calc_coeffs(const Spans &x, const Mdspan &F) const {
         const ArrayN h = calc_h(x);
-        const T h3 = calc_h3(h);
+        const T inv_h3 = T{1} / calc_h3(h);
         const Delta delta = calc_delta(x);
-        CoeffsArray _coeffs = {};
-        std::array<std::size_t, 2*N> indices = {};
-        for (std::size_t m_idx = 0; m_idx < numCoeffs; ++m_idx) {
-            for (std::size_t i = 0; i < numCorners; ++i) {
-                for (std::size_t j = 0; j < numCorners; ++j) {
-                    T product = T{1.0};
-                    for (std::size_t k = 0; k < N; ++k) {
-                        std::size_t i_k = (i >> k) & 1;
-                        std::size_t j_k = (j >> k) & 1;
-                        std::size_t ij_k = (i_k << 1) | j_k;
-                        std::size_t m_k = (m_idx >> ((N-1-k)*2)) & 3;
-                        indices[k]   = i_k;
-                        indices[k+N] = j_k;
-                        T h_factor = (j_k == 0) ? 1.0 : h[k];
-                        product *= h_factor * delta[k][ij_k][m_k];
-                    }
-                    _coeffs[m_idx] += F(indices)*product;
+
+        // term[k][m][ij] = h_factor * delta[k][ij][m];  h_factor = (j_k == 0) ? 1 : h[k]
+        std::array<std::array<std::array<T, 4>, 4>, N> term{};
+        for (std::size_t k = 0; k < N; ++k)
+            for (std::size_t ij = 0; ij < 4; ++ij) {
+                const T hf = (ij & 1) ? h[k] : T{1};
+                for (std::size_t m = 0; m < 4; ++m)
+                    term[k][m][ij] = hf * delta[k][ij][m];
+            }
+
+        // Flat buffer with interleaved bit layout: for dim k, i_k at bit 2*(N-1-k)+1, j_k at bit 2*(N-1-k).
+        std::array<std::size_t, 2 * N> idx{};
+        CoeffsArray buf{};
+        for (std::size_t flat = 0; flat < numCoeffs; ++flat) {
+            for (std::size_t k = 0; k < N; ++k) {
+                const std::size_t sh = 2 * (N - 1 - k);
+                idx[k]     = (flat >> (sh + 1)) & 1;   // i_k
+                idx[k + N] = (flat >> sh) & 1;         // j_k
+            }
+            buf[flat] = F(idx);
+        }
+
+        // N sequential 1-D transforms: contract each (i_k, j_k) bit-pair into m_k.
+        for (std::size_t k = 0; k < N; ++k) {
+            const std::size_t shift = 2 * (N - 1 - k);
+            const std::size_t mask_lo = (std::size_t{1} << shift) - 1;
+            const auto &term_k = term[k];
+            CoeffsArray tmp{};
+            for (std::size_t outer = 0; outer < (numCoeffs >> 2); ++outer) {
+                const std::size_t lo = outer & mask_lo;
+                const std::size_t base = ((outer - lo) << 2) | lo;
+                for (std::size_t m = 0; m < 4; ++m) {
+                    T acc{};
+                    for (std::size_t ij = 0; ij < 4; ++ij)
+                        acc += term_k[m][ij] * buf[base | (ij << shift)];
+                    tmp[base | (m << shift)] = acc;
                 }
             }
-            _coeffs[m_idx] /= h3;
+            std::swap(buf, tmp);
         }
-        return _coeffs;
+
+        for (auto &c : buf) c *= inv_h3;
+        return buf;
     }
 
     template <std::size_t D>
@@ -195,8 +220,6 @@ public:
 
 private:
     const Array xi;
-    const Vector x;
-    const Vector y;
     const Indexers indexers;
     Cells cells;
     Ff2 F;
