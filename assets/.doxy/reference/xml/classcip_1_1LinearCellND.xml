@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1LinearCellND" kind="class" language="C++" prot="public">
+    <compoundname>cip::LinearCellND</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1LinearCellND_1a7efcc107f5f3eef51bbef928c34cd605" prot="private" static="no">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>using cip::LinearCellND&lt; T, N &gt;::Span =  std::span&lt;const T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span</name>
+        <qualifiedname>cip::LinearCellND::Span</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="20" column="5" bodyfile="include/linear_interp.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearCellND_1a3a06eb9559e52ab1478907af78e26d6f" prot="private" static="no">
+        <type>std::array&lt; Span, N &gt;</type>
+        <definition>using cip::LinearCellND&lt; T, N &gt;::Spans =  std::array&lt;Span, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Spans</name>
+        <qualifiedname>cip::LinearCellND::Spans</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="21" column="5" bodyfile="include/linear_interp.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearCellND_1a9feb210815470caa1862124ada562442" prot="private" static="no">
+        <type>std::mdspan&lt; const T, std::dextents&lt; std::size_t, N &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::LinearCellND&lt; T, N &gt;::Mdspan =  std::mdspan&lt;const T, std::dextents&lt;std::size_t, N&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan</name>
+        <qualifiedname>cip::LinearCellND::Mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="22" column="5" bodyfile="include/linear_interp.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearCellND_1a8bef048e2ac6e4db99c8affcf9936f7c" prot="private" static="no">
+        <type>std::array&lt; T,(1&lt;&lt; N)&gt;</type>
+        <definition>using cip::LinearCellND&lt; T, N &gt;::NomArray =  std::array&lt;T, (1 &lt;&lt; N)&gt;</definition>
+        <argsstring></argsstring>
+        <name>NomArray</name>
+        <qualifiedname>cip::LinearCellND::NomArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="23" column="5" bodyfile="include/linear_interp.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classcip_1_1LinearCellND_1a7fb8bf01cec2fbf8d0541c71827b62f9" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::LinearCellND&lt; T, N &gt;::numCorners</definition>
+        <argsstring></argsstring>
+        <name>numCorners</name>
+        <qualifiedname>cip::LinearCellND::numCorners</qualifiedname>
+        <initializer>= 1 &lt;&lt; N</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="24" column="34" bodyfile="include/linear_interp.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1LinearCellND_1a7d78db38d318ce7d721099b25ddbc01a" prot="private" static="no" mutable="no">
+        <type>const NomArray</type>
+        <definition>const NomArray cip::LinearCellND&lt; T, N &gt;::c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <qualifiedname>cip::LinearCellND::c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="43" column="20" bodyfile="include/linear_interp.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1af907cb89f8ed61299236fb82721ecee7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearCellND&lt; T, N &gt;::LinearCellND</definition>
+        <argsstring>(const Mdspan &amp;_f, const Spans &amp;_x)</argsstring>
+        <name>LinearCellND</name>
+        <qualifiedname>cip::LinearCellND::LinearCellND</qualifiedname>
+        <param>
+          <type>const Mdspan &amp;</type>
+          <declname>_f</declname>
+        </param>
+        <param>
+          <type>const Spans &amp;</type>
+          <declname>_x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="26" column="14" bodyfile="include/linear_interp.hpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1a46f715eff899aed352797fcc4f92daf2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::LinearCellND&lt; T, N &gt;::eval</definition>
+        <argsstring>(Args &amp;&amp;... args) const</argsstring>
+        <name>eval</name>
+        <qualifiedname>cip::LinearCellND::eval</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>(sizeof...(Args) == N)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="33" column="7" bodyfile="include/linear_interp.hpp" bodystart="33" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1a7f3e049518e565671176b4abed5e5213" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NomArray</type>
+        <definition>static NomArray cip::LinearCellND&lt; T, N &gt;::compute_coefficients</definition>
+        <argsstring>(const Mdspan &amp;f, const Spans &amp;x)</argsstring>
+        <name>compute_coefficients</name>
+        <qualifiedname>cip::LinearCellND::compute_coefficients</qualifiedname>
+        <param>
+          <type>const Mdspan &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Spans &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="45" column="21" bodyfile="include/linear_interp.hpp" bodystart="45" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1a8d0d50200d2782f99cb59ff2d02ba630" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>static T cip::LinearCellND&lt; T, N &gt;::compute_c_J</definition>
+        <argsstring>(const Mdspan &amp;f, const Spans &amp;x, const T H, std::size_t J)</argsstring>
+        <name>compute_c_J</name>
+        <qualifiedname>cip::LinearCellND::compute_c_J</qualifiedname>
+        <param>
+          <type>const Mdspan &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Spans &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>H</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>J</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="55" column="14" bodyfile="include/linear_interp.hpp" bodystart="55" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1af216d56752cb062ca11c98a7df63ca07" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>static T cip::LinearCellND&lt; T, N &gt;::gamma</definition>
+        <argsstring>(const Spans &amp;x, std::size_t J, std::size_t i, std::size_t k)</argsstring>
+        <name>gamma</name>
+        <qualifiedname>cip::LinearCellND::gamma</qualifiedname>
+        <param>
+          <type>const Spans &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>J</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="69" column="14" bodyfile="include/linear_interp.hpp" bodystart="69" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1a2f324f778f5cb742bae6a6c7378f856d" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Js</declname>
+            <defname>Js</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::LinearCellND&lt; T, N &gt;::gather_corners</definition>
+        <argsstring>(const std::array&lt; T, N &gt; &amp;xs, std::index_sequence&lt; Js... &gt;) const</argsstring>
+        <name>gather_corners</name>
+        <qualifiedname>cip::LinearCellND::gather_corners</qualifiedname>
+        <param>
+          <type>const std::array&lt; T, N &gt; &amp;</type>
+          <declname>xs</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; Js... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="76" column="7" bodyfile="include/linear_interp.hpp" bodystart="76" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearCellND_1a30c2480e8ed34f4b7f772015727e51e8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>J</declname>
+            <defname>J</defname>
+          </param>
+          <param>
+            <type>std::size_t...</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::LinearCellND&lt; T, N &gt;::compute_corner</definition>
+        <argsstring>(const std::array&lt; T, N &gt; &amp;xs, std::index_sequence&lt; I... &gt;) const</argsstring>
+        <name>compute_corner</name>
+        <qualifiedname>cip::LinearCellND::compute_corner</qualifiedname>
+        <param>
+          <type>const std::array&lt; T, N &gt; &amp;</type>
+          <declname>xs</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; I... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="81" column="7" bodyfile="include/linear_interp.hpp" bodystart="81" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/linear_interp.hpp" line="19" column="1" bodyfile="include/linear_interp.hpp" bodystart="19" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classcip_1_1LinearCellND_1a7d78db38d318ce7d721099b25ddbc01a" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>c</name></member>
+      <member refid="classcip_1_1LinearCellND_1a8d0d50200d2782f99cb59ff2d02ba630" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>compute_c_J</name></member>
+      <member refid="classcip_1_1LinearCellND_1a7f3e049518e565671176b4abed5e5213" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>compute_coefficients</name></member>
+      <member refid="classcip_1_1LinearCellND_1a30c2480e8ed34f4b7f772015727e51e8" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>compute_corner</name></member>
+      <member refid="classcip_1_1LinearCellND_1a46f715eff899aed352797fcc4f92daf2" prot="public" virt="non-virtual"><scope>cip::LinearCellND</scope><name>eval</name></member>
+      <member refid="classcip_1_1LinearCellND_1af216d56752cb062ca11c98a7df63ca07" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>gamma</name></member>
+      <member refid="classcip_1_1LinearCellND_1a2f324f778f5cb742bae6a6c7378f856d" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>gather_corners</name></member>
+      <member refid="classcip_1_1LinearCellND_1af907cb89f8ed61299236fb82721ecee7" prot="public" virt="non-virtual"><scope>cip::LinearCellND</scope><name>LinearCellND</name></member>
+      <member refid="classcip_1_1LinearCellND_1a9feb210815470caa1862124ada562442" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>Mdspan</name></member>
+      <member refid="classcip_1_1LinearCellND_1a8bef048e2ac6e4db99c8affcf9936f7c" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>NomArray</name></member>
+      <member refid="classcip_1_1LinearCellND_1a7fb8bf01cec2fbf8d0541c71827b62f9" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>numCorners</name></member>
+      <member refid="classcip_1_1LinearCellND_1a7efcc107f5f3eef51bbef928c34cd605" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>Span</name></member>
+      <member refid="classcip_1_1LinearCellND_1a3a06eb9559e52ab1478907af78e26d6f" prot="private" virt="non-virtual"><scope>cip::LinearCellND</scope><name>Spans</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

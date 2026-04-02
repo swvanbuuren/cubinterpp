@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcip_1_1SlopePolicy" kind="struct" language="C++" prot="public">
+    <compoundname>cip::SlopePolicy</compoundname>
+    <templateparamlist>
+      <param>
+        <type>SlopeMethod</type>
+        <declname>Method</declname>
+        <defname>Method</defname>
+      </param>
+      <param>
+        <type>BoundaryConditionType</type>
+        <declname>BC</declname>
+        <defname>BC</defname>
+        <defval>BoundaryConditionType::Natural</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structcip_1_1SlopePolicy_1abd837dee3241d26f7d37278545601cf9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tx</type>
+          </param>
+          <param>
+            <type>typename Tf</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>static std::vector&lt; T &gt; cip::SlopePolicy&lt; Method, BC &gt;::calc</definition>
+        <argsstring>(const Tx &amp;x, const Tf &amp;f)</argsstring>
+        <name>calc</name>
+        <qualifiedname>cip::SlopePolicy::calc</qualifiedname>
+        <param>
+          <type>const Tx &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Tf &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/slopes.hpp" line="351" column="24" bodyfile="include/slopes.hpp" bodystart="351" bodyend="363"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/slopes.hpp" line="349" column="1" bodyfile="include/slopes.hpp" bodystart="349" bodyend="364"/>
+    <listofallmembers>
+      <member refid="structcip_1_1SlopePolicy_1abd837dee3241d26f7d37278545601cf9" prot="public" virt="non-virtual"><scope>cip::SlopePolicy</scope><name>calc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
