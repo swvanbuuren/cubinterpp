@@ -65,6 +65,7 @@ nav:
     - theory/index.md
     - Linear interpolation: theory/linear.md
     - Cubic interpolation: theory/cubic.md
+    - Derivatives: theory/derivatives.md
   - Code Reference:
     - reference/index.md
     - Links: reference/links.md

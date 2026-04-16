@@ -217,3 +217,9 @@ $$
 
 $A_\textbf{m}$ can be rewritten to the original coefficients: $A_\textbf{m} =
 A_{(m_1,\dots,m_N)} = a_{m_1 \dots m_N}$.
+
+## Role of Derivatives in Cubic Interpolation
+
+The formulas in the preceding sections show that cubic polynomial coefficients depend on both **function values** $f({}^{i}x_1,\dots,{}^{i}x_N)$ and **first derivatives** $f'({}^{i}x_1,\dots,{}^{i}x_N)$ at grid points. For example, in the 1D case the coefficients $a_0, a_1, a_2, a_3$ explicitly depend on derivatives $f'(x_0)$ and $f'(x_1)$.
+
+While function values are given from the input data, first derivatives at grid points must be computed. The [Derivatives](derivatives.md) section provides several methods for estimating these derivatives, each with different properties and characteristics.
