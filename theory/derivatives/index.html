@@ -1,0 +1,1990 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://swvanbuuren.github.io/cubinterpp/theory/derivatives/">
+      
+      
+        <link rel="prev" href="../cubic/">
+      
+      
+        <link rel="next" href="../../reference/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Derivatives - Cubinterpp Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#derivatives" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Cubinterpp Documentation" class="md-header__button md-logo" aria-label="Cubinterpp Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cubinterpp Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Derivatives
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/swvanbuuren/cubinterpp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    swvanbuuren/cubinterpp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Cubinterpp
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mathematical Background
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Code Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Cubinterpp Documentation" class="md-nav__button md-logo" aria-label="Cubinterpp Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Cubinterpp Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/swvanbuuren/cubinterpp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    swvanbuuren/cubinterpp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cubinterpp
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cubinterpp
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematical Background
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematical Background
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear interpolation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cubic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cubic interpolation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Derivatives
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#monotone-slope-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotone Slope Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modified-akima-slope-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modified Akima Slope Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-spline-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natural Spline Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural Spline Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary Conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundary Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#natural-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natural Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clamped-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clamped Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-a-knot-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not-a-Knot Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#periodic-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thomas-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thomas Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-thomas-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cyclic Thomas Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reference/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Code Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/annotated/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/hierarchy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/class_members/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Members
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/class_member_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Member Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/class_member_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Member Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/class_member_typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Member Typedefs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/class_member_enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Class Member Enumerations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Namespaces
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace List
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespace_members/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace Members
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespace_member_functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace Member Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespace_member_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace Member Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespace_member_typedefs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace Member Typedefs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/namespace_member_enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace Member Enumerations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/macros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#monotone-slope-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monotone Slope Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modified-akima-slope-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modified Akima Slope Method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-spline-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natural Spline Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural Spline Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boundary-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boundary Conditions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boundary Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#natural-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natural Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clamped-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clamped Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-a-knot-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not-a-Knot Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#periodic-boundary-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Periodic Boundary Condition
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thomas-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thomas Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-thomas-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cyclic Thomas Algorithm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="derivatives">Derivatives</h1>
+<p>The <a href="../cubic/">cubic interpolation</a> method requires first derivatives <span class="arithmatex">\(f'(x_i)\)</span> at each grid point <span class="arithmatex">\(x_i\)</span> to compute the polynomial coefficients, but these derivatives are typically unknown. This section describes three methods to estimate them using slope values <span class="arithmatex">\(m_i \approx f'(x_i)\)</span> computed from the data. Throughout, we use the notation: grid points <span class="arithmatex">\(\{x_i\}\)</span> and function values <span class="arithmatex">\(\{f_i = f(x_i)\}\)</span> for <span class="arithmatex">\(i = 0, 1, \ldots, n-1\)</span>, with grid spacing <span class="arithmatex">\(h_i = x_i - x_{i-1}\)</span>.</p>
+<h2 id="monotone-slope-method">Monotone Slope Method</h2>
+<p>The monotone slope method, based on monotone cubic interpolation<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, computes derivatives at grid points to ensure that the resulting interpolant is monotonic wherever the data is monotonic.</p>
+<p>The method computes divided differences:</p>
+<div class="arithmatex">\[
+\delta_k = \frac{f_{k+1} - f_k}{h_{k+1}}, \quad k = 0, 1, \ldots, n-2
+\]</div>
+<p>Initial slope estimates are obtained by averaging adjacent divided differences:</p>
+<div class="arithmatex">\[
+\begin{align}
+m_0 &amp;= \delta_0 \\
+m_k &amp;= \frac{1}{2}(\delta_{k-1} + \delta_k), \quad k = 1, 2, \ldots, n-2 \\
+m_{n-1} &amp;= \delta_{n-2}
+\end{align}
+\]</div>
+<p>Monotonicity is enforced through constraints:</p>
+<ul>
+<li>If <span class="arithmatex">\(\delta_k = 0\)</span>, set <span class="arithmatex">\(m_k = m_{k+1} = 0\)</span>  </li>
+<li>Otherwise, compute <span class="arithmatex">\(\alpha = m_k/\delta_k\)</span> and <span class="arithmatex">\(\beta = m_{k+1}/\delta_k\)</span>  </li>
+<li>If <span class="arithmatex">\(h = \sqrt{\alpha^2 + \beta^2} &gt; 3\)</span>, rescale: <span class="arithmatex">\(m_k \leftarrow 3\alpha\delta_k/h\)</span> and <span class="arithmatex">\(m_{k+1} \leftarrow 3\beta\delta_k/h\)</span></li>
+</ul>
+<h2 id="modified-akima-slope-method">Modified Akima Slope Method</h2>
+<p>The Modified Akima method estimates slopes as weighted averages of divided differences, providing robustness for non-monotonic data.</p>
+<p>Slopes are computed as:</p>
+<div class="arithmatex">\[
+m_i = \frac{w_{i+1}\delta_{i-1} + w_i\delta_i}{w_{i+1} + w_i}
+\]</div>
+<p>where divided differences are:</p>
+<div class="arithmatex">\[
+\delta_k = \frac{f_{k+1} - f_k}{h_{k+1}}
+\]</div>
+<p>At boundaries, virtual divided differences extend the data via quadratic extrapolation:</p>
+<div class="arithmatex">\[
+\delta_{-1} = 2\delta_0 - \delta_1, \quad \delta_{-2} = 2\delta_{-1} - \delta_0, \quad \delta_n = 2\delta_{n-2} - \delta_{n-3}, \quad \delta_{n+1} = 2\delta_n - \delta_{n-2}
+\]</div>
+<p>The key refinement from Akima's 1970 formula<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is the weight definition:</p>
+<div class="arithmatex">\[
+\begin{align}
+w_i &amp;= |\delta_i - \delta_{i-1}| + \frac{|\delta_i + \delta_{i-1}|}{2} \\
+w_{i+1} &amp;= |\delta_{i+1} - \delta_i| + \frac{|\delta_{i+1} + \delta_i|}{2}
+\end{align}
+\]</div>
+<p>This modification ensures numerical stability (guarantees <span class="arithmatex">\(m_i = 0\)</span> for constant data) and eliminates spurious oscillations while maintaining smoothness.</p>
+<h2 id="natural-spline-method">Natural Spline Method</h2>
+<p>The natural spline method enforces <span class="arithmatex">\(C^2\)</span> continuity by requiring continuous second derivatives at interior points.</p>
+<p>For each interior point <span class="arithmatex">\(x_i\)</span> (where <span class="arithmatex">\(i = 1, 2, \ldots, n-2\)</span>), continuity of the second derivative requires:</p>
+<div class="arithmatex">\[
+\frac{m_i - m_{i-1}}{x_i - x_{i-1}} = \frac{m_{i+1} - m_i}{x_{i+1} - x_i}
+\]</div>
+<p>This yields the tridiagonal system: <span class="arithmatex">\(a_i m_{i-1} + b_i m_i + c_i m_{i+1} = d_i\)</span> with:</p>
+<div class="arithmatex">\[
+h_i m_{i-1} + 2(h_i + h_{i+1})m_i + h_{i+1}m_{i+1} = 3\left(\frac{(f_i - f_{i-1})}{h_i^2} + \frac{(f_{i+1} - f_i)}{h_{i+1}^2}\right) h_i h_{i+1}
+\]</div>
+<p>which is solved using the <a href="#thomas-algorithm">Thomas algorithm</a>.</p>
+<h3 id="boundary-conditions">Boundary Conditions</h3>
+<p>Four boundary condition types complete the system:</p>
+<h4 id="natural-boundary-condition">Natural Boundary Condition</h4>
+<p>The second derivative is zero at both boundaries: <span class="arithmatex">\(f''(x_0) = 0\)</span> and <span class="arithmatex">\(f''(x_{n-1}) = 0\)</span>, giving boundary equations:</p>
+<div class="arithmatex">\[
+\begin{align}
+b_0 m_0 + c_0 m_1 &amp;= d_0 \\
+a_{n-1} m_{n-2} + b_{n-1} m_{n-1} &amp;= d_{n-1}
+\end{align}
+\]</div>
+<p>where:</p>
+<div class="arithmatex">\[
+\begin{align}
+b_0 &amp;= \frac{2}{h_1}, \quad c_0 = \frac{1}{h_1}, \quad d_0 = \frac{3(f_1 - f_0)}{h_1^2} \\
+a_{n-1} &amp;= \frac{1}{h_{n-1}}, \quad b_{n-1} = \frac{2}{h_{n-1}}, \quad d_{n-1} = \frac{3(f_{n-1} - f_{n-2})}{h_{n-1}^2}
+\end{align}
+\]</div>
+<h4 id="clamped-boundary-condition">Clamped Boundary Condition</h4>
+<p>The first derivative is zero at both boundaries: <span class="arithmatex">\(m_0 = m_{n-1} = 0\)</span>, implemented as <span class="arithmatex">\(b_0 = b_{n-1} = 1\)</span> in the tridiagonal system.</p>
+<h4 id="not-a-knot-boundary-condition">Not-a-Knot Boundary Condition</h4>
+<p>The third derivative is continuous at the first and last interior knots: <span class="arithmatex">\(f'''(x_1^-) = f'''(x_1^+)\)</span> and <span class="arithmatex">\(f'''(x_{n-2}^-) = f'''(x_{n-2}^+)\)</span>. This condition eliminates boundary kinks by extending the polynomial smoothness.</p>
+<h4 id="periodic-boundary-condition">Periodic Boundary Condition</h4>
+<p>For periodic data where <span class="arithmatex">\(f_0 = f_{n-1}\)</span>, the slope is also periodic:</p>
+<div class="arithmatex">\[
+m_0 = m_{n-1}
+\]</div>
+<p>The system becomes cyclic, with interior equations:</p>
+<div class="arithmatex">\[
+\frac{m_{n-2}}{h_{n-1}} + 2\left(\frac{1}{h_{n-1}} + \frac{1}{h_1}\right)m_{n-1} + \frac{m_1}{h_1} = 3\left(\frac{f_{n-1} - f_{n-2}}{h_{n-1}^2} + \frac{f_1 - f_0}{h_1^2}\right)h_{n-1}h_1
+\]</div>
+<p>A <a href="#cyclic-thomas-algorithm">cyclic variant</a> of the Thomas algorithm is employed to solve this system.</p>
+<h3 id="thomas-algorithm">Thomas Algorithm</h3>
+<p>The tridiagonal matrix algorithm<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> solves systems of the form:</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+b_0 &amp; c_0 &amp; 0 &amp; \cdots &amp; 0 \\
+a_1 &amp; b_1 &amp; c_1 &amp; \cdots &amp; 0 \\
+0 &amp; a_2 &amp; b_2 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; b_{n-1}
+\end{bmatrix}
+\begin{bmatrix}
+m_0 \\ m_1 \\ m_2 \\ \vdots \\ m_{n-1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+d_0 \\ d_1 \\ d_2 \\ \vdots \\ d_{n-1}
+\end{bmatrix}
+\]</div>
+<p>where coefficients <span class="arithmatex">\(a_i, b_i, c_i, d_i\)</span> are set by the boundary conditions and interior equations above.</p>
+<p>The algorithm proceeds in two passes:</p>
+<p><strong>Forward elimination:</strong> Normalize rows to create an upper triangular system:</p>
+<div class="arithmatex">\[
+\begin{align}
+c_0' &amp;= \frac{c_0}{b_0}, \quad d_0' = \frac{d_0}{b_0}
+\end{align}
+\]</div>
+<p>For <span class="arithmatex">\(i = 1, 2, \ldots, n-1\)</span>:</p>
+<div class="arithmatex">\[
+\begin{align}
+c_i' &amp;= \frac{c_i}{b_i - a_i c_{i-1}'} \\
+d_i' &amp;= \frac{d_i - a_i d_{i-1}'}{b_i - a_i c_{i-1}'}
+\end{align}
+\]</div>
+<p><strong>Back substitution:</strong> Solve the triangular system from the last row backward:</p>
+<div class="arithmatex">\[
+m_{n-1} = d_{n-1}'
+\]</div>
+<p>For <span class="arithmatex">\(i = n-2, n-3, \ldots, 0\)</span>:</p>
+<div class="arithmatex">\[
+m_i = d_i' - c_i' m_{i+1}
+\]</div>
+<p>This <span class="arithmatex">\(O(n)\)</span> algorithm yields the slopes <span class="arithmatex">\(m_i = f'(x_i)\)</span> at each grid point.</p>
+<h3 id="cyclic-thomas-algorithm">Cyclic Thomas Algorithm</h3>
+<p>For periodic boundary conditions (<span class="arithmatex">\(m_0 = m_{n-1}\)</span>), a cyclic variant handles the coupling. The method eliminates the cyclic structure by using the boundary rows to reduce the system size.</p>
+<p><strong>Cyclic reduction:</strong> Extract scaling factors and modify interior rows:</p>
+<div class="arithmatex">\[
+\alpha = \frac{c_0}{b_0}, \quad \gamma = \frac{a_{n-1}}{b_{n-1}}
+\]</div>
+<div class="arithmatex">\[
+b_1' = b_1 - a_1 \alpha, \quad d_1' = d_1 - a_1 \frac{d_0}{b_0}
+\]</div>
+<div class="arithmatex">\[
+b_{n-2}' = b_{n-2} - c_{n-2} \gamma, \quad d_{n-2}' = d_{n-2} - c_{n-2} \frac{d_{n-1}}{b_{n-1}}
+\]</div>
+<p><strong>Solution:</strong> Apply the standard Thomas algorithm to the reduced system of size <span class="arithmatex">\(n-2\)</span>, then recover boundary values:</p>
+<div class="arithmatex">\[
+m_0 = \frac{d_0 - c_0 m_1}{b_0}, \quad m_{n-1} = \frac{d_{n-1} - a_{n-1} m_{n-2}}{b_{n-1}}
+\]</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Akima, H., <strong>1970</strong>, "A new method of interpolation and smooth curve fitting based on local procedures", <a href="https://dx.doi.org/10.1145/321607.321609"><em>J. ACM</em></a>, 17(4):589-602.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Modified Akima implementation details based on Cleve Moler's analysis of <a href="https://blogs.mathworks.com/cleve/2019/04/29/makima-piecewise-cubic-interpolation/">makima piecewise cubic interpolation</a>.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Monotone cubic interpolation method: <a href="https://en.wikipedia.org/wiki/Monotone_cubic_interpolation">Wikipedia - Monotone cubic interpolation</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Thomas algorithm overview: <a href="https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm">Wikipedia - Tridiagonal matrix algorithm</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.indexes", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
