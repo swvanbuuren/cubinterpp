@@ -1,7 +1,7 @@
 """ Generates test data for cubinterpp tests """
 
 import numpy as np
-from scipy.interpolate import RegularGridInterpolator, CubicSpline
+from scipy.interpolate import RegularGridInterpolator, CubicSpline, Akima1DInterpolator
 
 
 def get_test_data(case='makima', start=1.0, end=5.0, size=8):
@@ -13,6 +13,10 @@ def get_test_data(case='makima', start=1.0, end=5.0, size=8):
     if case == 'random':
         return np.linspace(start, end, num=size), \
                np.round(10.0 * np.random.rand(size))
+
+    if case == 'akima_makima':
+        return np.linspace(1, 7, 7), \
+               np.array([-1, -1, -1, 0, 1, 1, 1])
 
     return (start, end), (0, 1)
 
@@ -101,8 +105,10 @@ def refine_grid(x_coord, size_fine=1000, extension=0):
 
 
 def scipy_interp_1d(x, f, x_fine, method='linear'):
-    interp2 = RegularGridInterpolator((x, ), f, method=method)
-    return interp2((x_fine, ))
+    if method in ('makima', 'akima'):
+        return Akima1DInterpolator(x, f, method=method)(x_fine)
+    interp1 = RegularGridInterpolator((x, ), f, method=method)
+    return interp1((x_fine, ))
 
 
 def scipy_interp_2d(x, y, f, x_fine, y_fine, method='linear'):  # noqa: PLR0913, PLR0917
@@ -205,14 +211,15 @@ def generate_3d_example(case='normalized', size_fine=5, method='linear'):
 
 
 def main():
-    # method = 'cubic_spline'
-    # data_case = 'makima'
-    method = 'cubic'
-    data_case = 'normalized'
+    method = 'akima'
+    data_case = 'makima'
+    generate_1d_example(case=data_case, size_fine=25, method=method)
+    # method = 'cubic'
+    # data_case = 'normalized'
     # generate_1d_example(case=data_case, size_fine=20, method=method,
     #                    bc_type='not-a-knot')
     # generate_2d_example(case=data_case, size_fine=5, method=method)
-    generate_3d_example(case=data_case, size_fine=5, method=method)
+    # generate_3d_example(case=data_case, size_fine=5, method=method)
 
 
 if __name__ == '__main__':

@@ -51,11 +51,14 @@ std::vector<T> monotonic_slopes(const Tx x, const Tf f)
 }
 
 
-template <typename T, typename Tx, typename Tf>
-std::vector<T> makima_slopes(const Tx x, const Tf f)
+enum class AkimaWeightMethod { Standard, Modified };
+
+
+template <typename T, AkimaWeightMethod WeightMethod = AkimaWeightMethod::Standard, typename Tx, typename Tf>
+std::vector<T> akima_slopes(const Tx x, const Tf f)
 {
     /*
-    Derivative values for Modified Akima cubic Hermite interpolation
+    Derivative values for (Modified) Akima cubic Hermite interpolation
 
     Akima's derivative estimate at grid node x(i) requires the four finite
     differences corresponding to the five grid nodes x(i-2:i+2).
@@ -102,27 +105,35 @@ std::vector<T> makima_slopes(const Tx x, const Tf f)
     std::vector<T> weights(delta_new.size() - 1);
     for (auto i = 0; i < weights.size(); ++i)
     {
-        weights[i] = std::abs(delta_new[i+1] - delta_new[i]) + std::abs(delta_new[i] + delta_new[i+1])/2.0;
-    }
-
-    std::vector<T> s(nx);
-
-    for (auto i = 0; i < nx; ++i)
-    {
-        T weights1 = weights[i];   // |d(i-1)-d(i-2)|
-        T weights2 = weights[i+2]; // |d(i+1)-d(i)|
-        T delta1 = delta_new[i+1];     // d(i-1)
-        T delta2 = delta_new[i+2];     // d(i)
-        T weights12 = weights1 + weights2;
-        if (weights12 == 0.0)
+        if constexpr (WeightMethod == AkimaWeightMethod::Standard)
         {
-            // To avoid 0/0, Akima proposed to average the divided differences d(i-1)
-            // and d(i) for the edge case of d(i-2) = d(i-1) and d(i) = d(i+1):
-            s[i] = 0.5*(delta1 + delta2);
-        } else {
-            s[i] = (weights2*delta1 + weights1*delta2)/weights12;
+            weights[i] = std::abs(delta_new[i + 1] - delta_new[i]);
+        }
+        else
+        {
+            // Modified Akima weights (see https://doi.org/10.1016/j.cam.2010.12.032)
+            weights[i] = std::abs(delta_new[i+1] - delta_new[i]) + std::abs(delta_new[i] + delta_new[i+1])/2.0;
         }
     }
+
+    // To avoid 0/0, Akima proposed to average the divided differences d(i-1)
+    // and d(i) for the edge case of d(i-2) = d(i-1) and d(i) = d(i+1):
+    std::vector<T> s(nx);
+    for (auto i = 0; i < nx; ++i)
+    {
+        // w1 = |delta(i+1) - delta(i)|
+        // w2 = |delta(i-1) - delta(i-2)|
+        const T w1 = weights[i + 2];
+        const T w2 = weights[i];
+
+        const T delta_im1 = delta_new[i + 1]; // delta(i-1)
+        const T delta_i   = delta_new[i + 2]; // delta(i)
+
+        const T denominator = w1 + w2;
+        s[i] = denominator == T{}
+            ? T{0.5} * (delta_im1 + delta_i)
+            : (w1 * delta_im1 + w2 * delta_i) / denominator;
+            }
     return s;
 }
 
@@ -343,7 +354,7 @@ std::vector<T> natural_spline_slopes(const Tx x, const Tf f)
 }
 
 
-enum class SlopeMethod { Monotonic, Makima, Natural };
+enum class SlopeMethod { Monotonic, Akima, Makima, Natural };
 
 template <SlopeMethod Method, BoundaryConditionType BC = BoundaryConditionType::Natural>
 struct SlopePolicy {
@@ -351,8 +362,10 @@ struct SlopePolicy {
     static std::vector<T> calc(const Tx& x, const Tf& f) {
         if constexpr (Method == SlopeMethod::Monotonic) {
             return monotonic_slopes<T>(x, f);
+        } else if constexpr (Method == SlopeMethod::Akima) {
+            return akima_slopes<T, AkimaWeightMethod::Standard>(x, f);
         } else if constexpr (Method == SlopeMethod::Makima) {
-            return makima_slopes<T>(x, f);
+            return akima_slopes<T, AkimaWeightMethod::Modified>(x, f);
         } else if constexpr (Method == SlopeMethod::Natural) {
             return natural_spline_slopes<T, BC>(x, f);
         } else {

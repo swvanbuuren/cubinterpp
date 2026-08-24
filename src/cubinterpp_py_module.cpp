@@ -23,6 +23,11 @@ PYBIND11_MODULE(cubinterpp_py, m) {
         .def("eval", &cip::MonotonicCubicInterp1D<double>::eval<double>, py::return_value_policy::reference_internal)
         .def("evaln", &cip::MonotonicCubicInterp1D<double>::evaln<DoubleVector>, py::return_value_policy::reference_internal);
 
+    py::class_<cip::AkimaCubicInterp1D<double>>(m, "AkimaCubicInterp1D")
+        .def(py::init<DoubleVector, DoubleVector>())
+        .def("eval", &cip::AkimaCubicInterp1D<double>::eval<double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::AkimaCubicInterp1D<double>::evaln<DoubleVector>, py::return_value_policy::reference_internal);
+
     py::class_<cip::MakimaCubicInterp1D<double>>(m, "MakimaCubicInterp1D")
         .def(py::init<DoubleVector, DoubleVector>())
         .def("eval", &cip::MakimaCubicInterp1D<double>::eval<double>, py::return_value_policy::reference_internal)

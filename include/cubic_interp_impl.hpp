@@ -54,6 +54,9 @@ template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using MonotonicCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Monotonic>, 1, IM>;
 
 template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
+using AkimaCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Akima>, 1, IM>;
+
+template <typename T, IndexMethod IM = IndexMethod::BinarySearch>
 using MakimaCubicInterp1D = CubicInterp<T, SlopePolicy<SlopeMethod::Makima>, 1, IM>;
 
 template <typename T, BoundaryConditionType BC = BoundaryConditionType::Natural, IndexMethod IM = IndexMethod::BinarySearch>

@@ -37,6 +37,9 @@ def main():
     spline = cubinterpp.NaturalCubicInterp1D(x, y)
     y_fine_natural = spline.evaln(x_fine)
 
+    spline = cubinterpp.AkimaCubicInterp1D(x, y)
+    y_fine_akima = spline.evaln(x_fine)
+
     spline = cubinterpp.MakimaCubicInterp1D(x, y)
     y_fine_makima = spline.evaln(x_fine)
 
@@ -46,6 +49,7 @@ def main():
     mpg.figure(title='Test figure')
     mpg.plot(x_fine, y_fine_linear)
     mpg.plot(x_fine, y_fine_monotonic)
+    mpg.plot(x_fine, y_fine_akima)
     mpg.plot(x_fine, y_fine_makima)
     mpg.plot(x_fine, y_fine_natural)
     mpg.plot(x, y, width=0, symbol='o', symbol_color='r', symbol_size=6)
@@ -53,6 +57,7 @@ def main():
     mpg.legend(
         'Linear interpolation',
         'Monotonic cubic interpolation',
+        'Akima cubic spline',
         'Modified Akima spline',
         'Natural cubic spline',
         'data points'
