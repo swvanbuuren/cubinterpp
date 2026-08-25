@@ -21,7 +21,8 @@ interpolation of rectangular grid data in `N` dimensions.
 For cubic piecewise interpolation, the library features three types:
 
 - Monotone cubic interpolation
-- Modified Akima spline interpolation 
+- Akima spline interpolation
+- Modified Akima spline interpolation
 - Natural cubic spline interpolation, with the following boundary conditions:
   - Not-A-Knot (first and second cell at ends share same polynomial)
   - Natural (vanishing second derivative at ends)

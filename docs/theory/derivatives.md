@@ -28,11 +28,9 @@ Monotonicity is enforced through constraints:
 - Otherwise, compute $\alpha = m_k/\delta_k$ and $\beta = m_{k+1}/\delta_k$  
 - If $h = \sqrt{\alpha^2 + \beta^2} > 3$, rescale: $m_k \leftarrow 3\alpha\delta_k/h$ and $m_{k+1} \leftarrow 3\beta\delta_k/h$
 
-## Modified Akima Slope Method
+## Akima Slope Method
 
-The Modified Akima method estimates slopes as weighted averages of divided differences, providing robustness for non-monotonic data.
-
-Slopes are computed as:
+The Akima method[^1] estimates slopes as weighted averages of divided differences, providing robustness for non-monotonic data. Slopes are computed as:
 
 $$
 m_i = \frac{w_{i+1}\delta_{i-1} + w_i\delta_i}{w_{i+1} + w_i}
@@ -50,7 +48,23 @@ $$
 \delta_{-1} = 2\delta_0 - \delta_1, \quad \delta_{-2} = 2\delta_{-1} - \delta_0, \quad \delta_n = 2\delta_{n-2} - \delta_{n-3}, \quad \delta_{n+1} = 2\delta_n - \delta_{n-2}
 $$
 
-The key refinement from Akima's 1970 formula[^1] is the weight definition:
+For the original Akima method, the weight is defined as:
+
+$$
+w_i = |\delta_i - \delta_{i-1}|
+$$
+
+### Modified Akima Slope Method
+
+The Modified Akima method refines Akima's approach with an improved weight definition that ensures better numerical stability. The slope computation remains:
+
+$$
+m_i = \frac{w_{i+1}\delta_{i-1} + w_i\delta_i}{w_{i+1} + w_i}
+$$
+
+with the same divided differences and boundary extrapolation as the standard Akima method.
+
+The key refinement is the weight definition:
 
 $$
 \begin{align}
@@ -59,7 +73,7 @@ w_{i+1} &= |\delta_{i+1} - \delta_i| + \frac{|\delta_{i+1} + \delta_i|}{2}
 \end{align}
 $$
 
-This modification ensures numerical stability (guarantees $m_i = 0$ for constant data) and eliminates spurious oscillations while maintaining smoothness.
+This modification ensures numerical stability (guarantees $m_i = 0$ for constant data) and eliminates spurious oscillations while maintaining smoothness.[^2]
 
 ## Natural Spline Method
 
