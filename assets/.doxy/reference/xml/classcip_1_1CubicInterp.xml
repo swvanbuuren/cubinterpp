@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1CubicInterp" kind="class" language="C++" prot="public">
+    <compoundname>cip::CubicInterp</compoundname>
+    <basecompoundref refid="classcip_1_1CubicInterpND" prot="public" virt="non-virtual">cip::CubicInterpND&lt; T, N, IndexMethod::BinarySearch &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename <ref refid="structcip_1_1SlopePolicy" kindref="compound">SlopePolicy</ref></type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+      <param>
+        <type>IndexMethod</type>
+        <declname>IM</declname>
+        <defname>IM</defname>
+        <defval>IndexMethod::BinarySearch</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1CubicInterp_1a5fe1f5338a72272250147c04d876f47c" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::CubicInterp::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="14" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterp_1a85c6be45de83b29b570aa87f5412e6d7" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, 1 &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::Mdspan1D =  std::mdspan&lt;T, std::dextents&lt;std::size_t, 1&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan1D</name>
+        <qualifiedname>cip::CubicInterp::Mdspan1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="15" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1CubicInterp_1a773b0ae1d14c331d83dbe1a968c5c4fb" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, N &gt;</type>
+        <definition>using cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::VectorN =  cip::VectorN&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::CubicInterp::VectorN</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="16" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1CubicInterp_1a23ae4e8ce33cfe9d7d853b944c5cdcf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::CubicInterp</definition>
+        <argsstring>(const Vector &amp;x, const Vector &amp;f)</argsstring>
+        <name>CubicInterp</name>
+        <qualifiedname>cip::CubicInterp::CubicInterp</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>f</declname>
+        </param>
+    <requiresclause>(N == 1)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="19" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="19" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterp_1a10b1176af7bdfebf5737b1d4efa96f0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::CubicInterp</definition>
+        <argsstring>(const Vector &amp;x0, const Vector &amp;x1, const VectorN &amp;f)</argsstring>
+        <name>CubicInterp</name>
+        <qualifiedname>cip::CubicInterp::CubicInterp</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+    <requiresclause>(N == 2)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="27" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterp_1a82b30789869f4b0c16084807399a49db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::CubicInterp</definition>
+        <argsstring>(const Vector &amp;x0, const Vector &amp;x1, const Vector &amp;x2, const VectorN &amp;f)</argsstring>
+        <name>CubicInterp</name>
+        <qualifiedname>cip::CubicInterp::CubicInterp</qualifiedname>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+    <requiresclause>(N == 3)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="35" column="5" bodyfile="include/cubic_interp_impl.hpp" bodystart="35" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterp_1a13d162facac7ba952d16a900ed1c4a88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::~CubicInterp</definition>
+        <argsstring>()=default</argsstring>
+        <name>~CubicInterp</name>
+        <qualifiedname>cip::CubicInterp::~CubicInterp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1CubicInterp_1a4d77ed05e1a4c44b5fc4103f7d84e093" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>Vector</type>
+        <definition>Vector cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;::calc_slopes</definition>
+        <argsstring>(const Vector &amp;x, const Mdspan1D &amp;f) const override</argsstring>
+        <name>calc_slopes</name>
+        <qualifiedname>cip::CubicInterp::calc_slopes</qualifiedname>
+        <reimplements refid="classcip_1_1CubicInterpND_1acd4b29b1e50451630e77ea0707260970">calc_slopes</reimplements>
+        <param>
+          <type>const Vector &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Mdspan1D &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/cubic_interp_impl.hpp" line="44" column="12" bodyfile="include/cubic_interp_impl.hpp" bodystart="44" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;</label>
+        <link refid="classcip_1_1CubicInterp"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N, IM &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>cip::CubicInterp&lt; T, SlopePolicy, N, IM &gt;</label>
+        <link refid="classcip_1_1CubicInterp"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cip::CubicInterpND&lt; T, N, IM &gt;</label>
+        <link refid="classcip_1_1CubicInterpND"/>
+      </node>
+    </collaborationgraph>
+    <location file="include/cubic_interp_impl.hpp" line="12" column="1" bodyfile="include/cubic_interp_impl.hpp" bodystart="13" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classcip_1_1CubicInterpND_1ad1131e97ed1a94b55abadc7981ae5d5c" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>build</name></member>
+      <member refid="classcip_1_1CubicInterp_1a4d77ed05e1a4c44b5fc4103f7d84e093" prot="public" virt="virtual"><scope>cip::CubicInterp</scope><name>calc_slopes</name></member>
+      <member refid="classcip_1_1CubicInterp_1a23ae4e8ce33cfe9d7d853b944c5cdcf6" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>CubicInterp</name></member>
+      <member refid="classcip_1_1CubicInterp_1a10b1176af7bdfebf5737b1d4efa96f0b" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>CubicInterp</name></member>
+      <member refid="classcip_1_1CubicInterp_1a82b30789869f4b0c16084807399a49db" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>CubicInterp</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a33d9e6b44d0e46d6a6b913c9b30f12e6" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a0e416f7edc65e810c54ab8478d0748bd" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>CubicInterpND</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a4e39edf937d9c24bdfea0b969c77e8b9" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>eval</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a202f99059f12b8d18b470e0a8739e4b0" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>evaln</name></member>
+      <member refid="classcip_1_1CubicInterp_1a85c6be45de83b29b570aa87f5412e6d7" prot="private" virt="non-virtual"><scope>cip::CubicInterp</scope><name>Mdspan1D</name></member>
+      <member refid="classcip_1_1CubicInterpND_1a80fa8097b468555ed9fbe90fe01819d9" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>operator=</name></member>
+      <member refid="classcip_1_1CubicInterp_1a5fe1f5338a72272250147c04d876f47c" prot="private" virt="non-virtual"><scope>cip::CubicInterp</scope><name>Vector</name></member>
+      <member refid="classcip_1_1CubicInterp_1a773b0ae1d14c331d83dbe1a968c5c4fb" prot="private" virt="non-virtual"><scope>cip::CubicInterp</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1CubicInterp_1a13d162facac7ba952d16a900ed1c4a88" prot="public" virt="non-virtual"><scope>cip::CubicInterp</scope><name>~CubicInterp</name></member>
+      <member refid="classcip_1_1CubicInterpND_1ab2bbe40e8a3b42a5b2f0f471a0951158" prot="public" virt="virtual"><scope>cip::CubicInterp</scope><name>~CubicInterpND</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

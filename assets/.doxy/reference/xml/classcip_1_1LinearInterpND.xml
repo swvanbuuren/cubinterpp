@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1LinearInterpND" kind="class" language="C++" prot="public">
+    <compoundname>cip::LinearInterpND</compoundname>
+    <derivedcompoundref refid="classcip_1_1LinearInterp" prot="public" virt="non-virtual">cip::LinearInterp&lt; T, N, IM &gt;</derivedcompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+      <param>
+        <type>IndexMethod</type>
+        <declname>IM</declname>
+        <defname>IM</defname>
+        <defval>IndexMethod::BinarySearch</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1a794bfde09ce95e974cc9ad4d9d462658" prot="private" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Vector =  std::vector&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Vector</name>
+        <qualifiedname>cip::LinearInterpND::Vector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="90" column="5" bodyfile="include/linear_interp.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1ac0384d841c95ce234232bab2de80f2a9" prot="private" static="no">
+        <type>std::array&lt; Vector, N &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Array =  std::array&lt;Vector, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Array</name>
+        <qualifiedname>cip::LinearInterpND::Array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="91" column="5" bodyfile="include/linear_interp.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1af6dfef28c78f3c163bae5ef5d60c6bd0" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; T, N &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::F =  cip::VectorN&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>F</name>
+        <qualifiedname>cip::LinearInterpND::F</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="92" column="5" bodyfile="include/linear_interp.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1a8a6c10a6f5a6621e874f78773a196fff" prot="private" static="no">
+        <type><ref refid="classcip_1_1LinearCellND" kindref="compound">LinearCellND</ref>&lt; T, N &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Cell =  LinearCellND&lt;T, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Cell</name>
+        <qualifiedname>cip::LinearInterpND::Cell</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="93" column="5" bodyfile="include/linear_interp.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1a313c7ad55386a3f3cb962356b8e3838c" prot="private" static="no">
+        <type><ref refid="classcip_1_1VectorN" kindref="compound">cip::VectorN</ref>&lt; <ref refid="classcip_1_1LinearCellND" kindref="compound">Cell</ref>, N &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Cells =  cip::VectorN&lt;Cell, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Cells</name>
+        <qualifiedname>cip::LinearInterpND::Cells</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="94" column="5" bodyfile="include/linear_interp.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1a48989feef4ab6351759e0b59258b178e" prot="private" static="no">
+        <type>std::span&lt; const T &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Span =  std::span&lt;const T&gt;</definition>
+        <argsstring></argsstring>
+        <name>Span</name>
+        <qualifiedname>cip::LinearInterpND::Span</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="95" column="5" bodyfile="include/linear_interp.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1a6e30f2c2dbeb590d747fe5ac990dc1f9" prot="private" static="no">
+        <type>std::pair&lt; std::size_t, std::size_t &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Pr =  std::pair&lt;std::size_t, std::size_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>Pr</name>
+        <qualifiedname>cip::LinearInterpND::Pr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="96" column="5" bodyfile="include/linear_interp.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1LinearInterpND_1aba6f2d8c225004976f80381c271795ca" prot="private" static="no">
+        <type>std::array&lt; <ref refid="classcip_1_1Indexer" kindref="compound">cip::Indexer</ref>&lt; T, IM &gt;, N &gt;</type>
+        <definition>using cip::LinearInterpND&lt; T, N, IM &gt;::Indexers =  std::array&lt;cip::Indexer&lt;T, IM&gt;, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>Indexers</name>
+        <qualifiedname>cip::LinearInterpND::Indexers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="97" column="5" bodyfile="include/linear_interp.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1LinearInterpND_1a72abfdc7b7bbd18681c49c1c6380321c" prot="private" static="no" mutable="no">
+        <type>const Array</type>
+        <definition>const Array cip::LinearInterpND&lt; T, N, IM &gt;::xi</definition>
+        <argsstring></argsstring>
+        <name>xi</name>
+        <qualifiedname>cip::LinearInterpND::xi</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="142" column="17" bodyfile="include/linear_interp.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1LinearInterpND_1a608e92e6c638435d77eda49973784b54" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classcip_1_1VectorN" kindref="compound">F</ref></type>
+        <definition>const F cip::LinearInterpND&lt; T, N, IM &gt;::f</definition>
+        <argsstring></argsstring>
+        <name>f</name>
+        <qualifiedname>cip::LinearInterpND::f</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="143" column="13" bodyfile="include/linear_interp.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1LinearInterpND_1adb41c22aedd842e6dce09cf9b99a2fab" prot="private" static="no" mutable="no">
+        <type>const Indexers</type>
+        <definition>const Indexers cip::LinearInterpND&lt; T, N, IM &gt;::indexers</definition>
+        <argsstring></argsstring>
+        <name>indexers</name>
+        <qualifiedname>cip::LinearInterpND::indexers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="144" column="20" bodyfile="include/linear_interp.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1LinearInterpND_1aeda050a0eef76e716703e03da1792be1" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classcip_1_1VectorN" kindref="compound">Cells</ref></type>
+        <definition>const Cells cip::LinearInterpND&lt; T, N, IM &gt;::cells</definition>
+        <argsstring></argsstring>
+        <name>cells</name>
+        <qualifiedname>cip::LinearInterpND::cells</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="145" column="17" bodyfile="include/linear_interp.hpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1ae77a581429ceea499698c4fa9cc1a9d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>cip::LinearInterpND&lt; T, N, IM &gt;::LinearInterpND</definition>
+        <argsstring>(const F &amp;_f, const Args &amp;... _xi)</argsstring>
+        <name>LinearInterpND</name>
+        <qualifiedname>cip::LinearInterpND::LinearInterpND</qualifiedname>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">F</ref> &amp;</type>
+          <declname>_f</declname>
+        </param>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>_xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="100" column="5" bodyfile="include/linear_interp.hpp" bodystart="100" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1a5ca68726f8ad07ea2419225a8c785748" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearInterpND&lt; T, N, IM &gt;::~LinearInterpND</definition>
+        <argsstring>()</argsstring>
+        <name>~LinearInterpND</name>
+        <qualifiedname>cip::LinearInterpND::~LinearInterpND</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="110" column="5" bodyfile="include/linear_interp.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1a4a97abd4682e23fc128b001ae7e87fb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>cip::LinearInterpND&lt; T, N, IM &gt;::LinearInterpND</definition>
+        <argsstring>(LinearInterpND &amp;&amp;)=delete</argsstring>
+        <name>LinearInterpND</name>
+        <qualifiedname>cip::LinearInterpND::LinearInterpND</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1LinearInterpND" kindref="compound">LinearInterpND</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="112" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1a6aca165412a78990537acef52ddb5a1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classcip_1_1LinearInterpND" kindref="compound">LinearInterpND</ref> &amp;</type>
+        <definition>LinearInterpND &amp; cip::LinearInterpND&lt; T, N, IM &gt;::operator=</definition>
+        <argsstring>(LinearInterpND &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>cip::LinearInterpND::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1LinearInterpND" kindref="compound">LinearInterpND</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="113" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1a3da329f0a3483e668f28d82a7eafb74a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T cip::LinearInterpND&lt; T, N, IM &gt;::eval</definition>
+        <argsstring>(const Args &amp;... args) const</argsstring>
+        <name>eval</name>
+        <qualifiedname>cip::LinearInterpND::eval</qualifiedname>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="116" column="7" bodyfile="include/linear_interp.hpp" bodystart="116" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1abab2085f1378dcb403018242e5aa2099" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Vectors</declname>
+            <defname>Vectors</defname>
+          </param>
+        </templateparamlist>
+        <type>Vector</type>
+        <definition>Vector cip::LinearInterpND&lt; T, N, IM &gt;::evaln</definition>
+        <argsstring>(const Vectors &amp;... inputs) const</argsstring>
+        <name>evaln</name>
+        <qualifiedname>cip::LinearInterpND::evaln</qualifiedname>
+        <param>
+          <type>const Vectors &amp;...</type>
+          <declname>inputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="124" column="12" bodyfile="include/linear_interp.hpp" bodystart="124" bodyend="138"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1aa2553186a497f481b98fa241d4298bca" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>const <ref refid="classcip_1_1VectorN" kindref="compound">Cells</ref></type>
+        <definition>const Cells cip::LinearInterpND&lt; T, N, IM &gt;::build</definition>
+        <argsstring>(const Args &amp;... _xi) const</argsstring>
+        <name>build</name>
+        <qualifiedname>cip::LinearInterpND::build</qualifiedname>
+        <param>
+          <type>const Args &amp;...</type>
+          <declname>_xi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="148" column="17" bodyfile="include/linear_interp.hpp" bodystart="148" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1LinearInterpND_1af044645e7548761389bad21e39eda662" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::LinearInterpND&lt; T, N, IM &gt;::build_cell</definition>
+        <argsstring>(Cells &amp;_cells, Indices... indices) const</argsstring>
+        <name>build_cell</name>
+        <qualifiedname>cip::LinearInterpND::build_cell</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1VectorN" kindref="compound">Cells</ref> &amp;</type>
+          <declname>_cells</declname>
+        </param>
+        <param>
+          <type>Indices...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/linear_interp.hpp" line="157" column="10" bodyfile="include/linear_interp.hpp" bodystart="157" bodyend="170"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>cip::LinearInterp&lt; T, N, IM &gt;</label>
+        <link refid="classcip_1_1LinearInterp"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>cip::LinearInterpND&lt; T, N, IM &gt;</label>
+        <link refid="classcip_1_1LinearInterpND"/>
+      </node>
+    </inheritancegraph>
+    <location file="include/linear_interp.hpp" line="89" column="1" bodyfile="include/linear_interp.hpp" bodystart="89" bodyend="172"/>
+    <listofallmembers>
+      <member refid="classcip_1_1LinearInterpND_1ac0384d841c95ce234232bab2de80f2a9" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Array</name></member>
+      <member refid="classcip_1_1LinearInterpND_1aa2553186a497f481b98fa241d4298bca" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>build</name></member>
+      <member refid="classcip_1_1LinearInterpND_1af044645e7548761389bad21e39eda662" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>build_cell</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a8a6c10a6f5a6621e874f78773a196fff" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Cell</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a313c7ad55386a3f3cb962356b8e3838c" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Cells</name></member>
+      <member refid="classcip_1_1LinearInterpND_1aeda050a0eef76e716703e03da1792be1" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>cells</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a3da329f0a3483e668f28d82a7eafb74a" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>eval</name></member>
+      <member refid="classcip_1_1LinearInterpND_1abab2085f1378dcb403018242e5aa2099" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>evaln</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a608e92e6c638435d77eda49973784b54" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>f</name></member>
+      <member refid="classcip_1_1LinearInterpND_1af6dfef28c78f3c163bae5ef5d60c6bd0" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>F</name></member>
+      <member refid="classcip_1_1LinearInterpND_1aba6f2d8c225004976f80381c271795ca" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Indexers</name></member>
+      <member refid="classcip_1_1LinearInterpND_1adb41c22aedd842e6dce09cf9b99a2fab" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>indexers</name></member>
+      <member refid="classcip_1_1LinearInterpND_1ae77a581429ceea499698c4fa9cc1a9d4" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>LinearInterpND</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a4a97abd4682e23fc128b001ae7e87fb6" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>LinearInterpND</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a6aca165412a78990537acef52ddb5a1a" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>operator=</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a6e30f2c2dbeb590d747fe5ac990dc1f9" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Pr</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a48989feef4ab6351759e0b59258b178e" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Span</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a794bfde09ce95e974cc9ad4d9d462658" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>Vector</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a72abfdc7b7bbd18681c49c1c6380321c" prot="private" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>xi</name></member>
+      <member refid="classcip_1_1LinearInterpND_1a5ca68726f8ad07ea2419225a8c785748" prot="public" virt="non-virtual"><scope>cip::LinearInterpND</scope><name>~LinearInterpND</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
