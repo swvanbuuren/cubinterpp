@@ -55,22 +55,27 @@ PYBIND11_MODULE(cubinterpp_py, m) {
 
     py::class_<cip::MonotonicCubicInterp2D<double>>(m, "MonotonicCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::MonotonicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MonotonicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MonotonicCubicInterp2D<double>::evaln<DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
     py::class_<cip::MakimaCubicInterp2D<double>>(m, "MakimaCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::MakimaCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::MakimaCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::MakimaCubicInterp2D<double>::evaln<DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
     py::class_<cip::NaturalCubicInterp2D<double>>(m, "NaturalCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::NaturalCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalCubicInterp2D<double>::evaln<DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
     py::class_<cip::NaturalPeriodicCubicInterp2D<double>>(m, "NaturalPeriodicCubicInterp2D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector2>())
-        .def("eval", &cip::NaturalPeriodicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalPeriodicCubicInterp2D<double>::eval<double, double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalPeriodicCubicInterp2D<double>::evaln<DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
     py::class_<cip::NaturalCubicInterp3D<double>>(m, "NaturalCubicInterp3D")
         .def(py::init<DoubleVector, DoubleVector, DoubleVector, DoubleVector3>())
-        .def("eval", &cip::NaturalCubicInterp3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal);
+        .def("eval", &cip::NaturalCubicInterp3D<double>::eval<double, double, double>, py::return_value_policy::reference_internal)
+        .def("evaln", &cip::NaturalCubicInterp3D<double>::evaln<DoubleVector, DoubleVector, DoubleVector>, py::return_value_policy::reference_internal);
 
 }
