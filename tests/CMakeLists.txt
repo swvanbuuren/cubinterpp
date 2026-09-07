@@ -10,6 +10,21 @@ function(cubinterpp_add_test name)
     )
 endfunction()
 
+function(cubinterpp_add_test_single_header name)
+    if(NOT DEFINED ARGUMENT_SOURCE)
+        set(ARGUMENT_SOURCE ${name}.cpp)
+    endif()
+    set(single_header_target "${name}_single_header")
+    add_executable(${single_header_target} ${ARGUMENT_SOURCE})
+    target_link_libraries(${single_header_target} cubinterpp_single_header_lib gtest_main)
+    # Ensure single header is generated before compiling this test
+    add_dependencies(${single_header_target} cubinterpp_single_header)
+    add_test(NAME ${single_header_target} COMMAND ${single_header_target})
+    add_custom_command(TARGET ${single_header_target} POST_BUILD
+        COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:${single_header_target}> ${PROJECT_SOURCE_DIR}/bin/$<TARGET_FILE_NAME:${single_header_target}>
+    )
+endfunction()
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -21,12 +36,27 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-cubinterpp_add_test(test_utils)
-cubinterpp_add_test(test_vectorn)
-cubinterpp_add_test(test_linear_interp)
-cubinterpp_add_test(test_cubic_splines_1d)
-cubinterpp_add_test(test_cubic_splines_2d)
-cubinterpp_add_test(test_cubic_splines_3d)
-cubinterpp_add_test(test_derivatives)
-cubinterpp_add_test(test_cubic_cell_nd)
-cubinterpp_add_test(test_cubic_interp_nd)
+# Define the list of tests to avoid duplication
+set(CUBINTERPP_TESTS
+    test_utils
+    test_vectorn
+    test_linear_interp
+    test_cubic_splines_1d
+    test_cubic_splines_2d
+    test_cubic_splines_3d
+    test_derivatives
+    test_cubic_cell_nd
+    test_cubic_interp_nd
+)
+
+# Add regular tests
+foreach(test ${CUBINTERPP_TESTS})
+    cubinterpp_add_test(${test})
+endforeach()
+
+# Add single header tests if enabled
+if(CUBINTERPP_TEST_SINGLE_HEADER)
+    foreach(test ${CUBINTERPP_TESTS})
+        cubinterpp_add_test_single_header(${test})
+    endforeach()
+endif()
