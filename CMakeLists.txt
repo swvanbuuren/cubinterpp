@@ -8,6 +8,7 @@ project(cubinterpp
 option(CUBINTERPP_ENABLE_TESTS "Enable tests." TRUE)
 option(CUBINTERPP_ENABLE_COMPILE_OPTIMIZATIONS "Enable all optimizations." FALSE)
 option(CUBINTERPP_ENABLE_CONCEPTS "Enable concepts." FALSE)
+option(CUBINTERPP_TEST_SINGLE_HEADER "Test with single header library." FALSE)
 
 set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ version selection")
 
@@ -59,6 +60,28 @@ add_subdirectory(src)
 add_custom_command(TARGET cubinterpp_py POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:cubinterpp_py> ${PROJECT_SOURCE_DIR}/cubinterpp/$<TARGET_FILE_NAME:cubinterpp_py>
 )
+
+# Generate single header library
+add_custom_target(cubinterpp_single_header ALL
+  COMMAND ${CMAKE_COMMAND} -E echo "Generating single header library..."
+  COMMAND python3 "${CMAKE_CURRENT_SOURCE_DIR}/create_single_header.py"
+    --entry "${CMAKE_CURRENT_SOURCE_DIR}/include/cubinterpp.hpp"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/cubinterpp.hpp"
+    --license "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
+  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/cubinterpp.hpp"
+          "${CMAKE_CURRENT_SOURCE_DIR}/create_single_header.py"
+          "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE"
+)
+
+# Create single header interface library for testing
+if(CUBINTERPP_TEST_SINGLE_HEADER)
+  add_library(cubinterpp_single_header_lib INTERFACE)
+  add_dependencies(cubinterpp_single_header_lib cubinterpp_single_header)
+  target_link_libraries(cubinterpp_single_header_lib INTERFACE std::mdspan)
+  target_include_directories(cubinterpp_single_header_lib INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+  )
+endif()
 
 if(CUBINTERPP_ENABLE_TESTS)
   enable_testing()
