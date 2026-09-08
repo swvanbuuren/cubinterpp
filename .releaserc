@@ -33,7 +33,7 @@
       {
         "successComment": false,
         "assets": [
-            {"path": "build/cubinterpp_header.hpp", "label": "Single header file"}
+            {"path": "build/cubinterpp.hpp", "label": "Single header file"}
         ]
       }
     ]

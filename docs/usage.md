@@ -21,7 +21,7 @@ installed):
 ```console
 python3 create_single_header.py \
           --entry include/cubinterpp.hpp \
-          --output ./build/cubinterpp_header.hpp \
+          --output ./build/cubinterpp.hpp \
           --license LICENSE
 ```
 
@@ -30,12 +30,12 @@ standard library you also need to get its corresponding single header library
 from [the mdspan
 repository](https://raw.githubusercontent.com/kokkos/mdspan/refs/heads/single-header/mdspan.hpp).
 
-After putting both `cubinterpp_header.hpp` and `mdspan.hpp` into you `include`
+After putting both `cubinterpp.hpp` and `mdspan.hpp` into you `include`
 directory, you can use cubinterpp in your project by just adding it to the
 includes in your codebase:
 
 ```cpp
-#include "cubinterpp_header.hpp"
+#include "cubinterpp.hpp"
 ```
 
 ## Build from source
