@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classcip_1_1VectorN" kind="class" language="C++" prot="public">
+    <compoundname>cip::VectorN</compoundname>
+    <innerclass refid="structcip_1_1VectorN_1_1Flatten" prot="private">cip::VectorN::Flatten</innerclass>
+    <innerclass refid="structcip_1_1VectorN_1_1Flatten_3_01NestedVector_00_011_01_4" prot="private">cip::VectorN::Flatten&lt; NestedVector, 1 &gt;</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classcip_1_1VectorN_1a58f48d705674395fefa0519603b3c445" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, N &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::VectorN&lt; T, N &gt;::Mdspan =  std::mdspan&lt;T, std::dextents&lt;std::size_t, N&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan</name>
+        <qualifiedname>cip::VectorN::Mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="15" column="5" bodyfile="include/vectorn.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1VectorN_1a72445ef4470cf4b66b8c2be25ffc816c" prot="private" static="no">
+        <type>std::mdspan&lt; T, std::dextents&lt; std::size_t, 1 &gt;, std::layout_stride &gt;</type>
+        <definition>using cip::VectorN&lt; T, N &gt;::Mdspan1D =  std::mdspan&lt;T, std::dextents&lt;std::size_t, 1&gt;, std::layout_stride&gt;</definition>
+        <argsstring></argsstring>
+        <name>Mdspan1D</name>
+        <qualifiedname>cip::VectorN::Mdspan1D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="16" column="5" bodyfile="include/vectorn.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcip_1_1VectorN_1a53fc2be5b98a9628ab0f80f0ca863732" prot="private" static="no">
+        <type>std::array&lt; std::size_t, N &gt;</type>
+        <definition>using cip::VectorN&lt; T, N &gt;::IndexArray =  std::array&lt;std::size_t, N&gt;</definition>
+        <argsstring></argsstring>
+        <name>IndexArray</name>
+        <qualifiedname>cip::VectorN::IndexArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="17" column="5" bodyfile="include/vectorn.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcip_1_1VectorN_1a533210c6ddac8de7fe5b30bf244087cd" prot="private" static="no" mutable="no">
+        <type>IndexArray</type>
+        <definition>IndexArray cip::VectorN&lt; T, N &gt;::dimensions_</definition>
+        <argsstring></argsstring>
+        <name>dimensions_</name>
+        <qualifiedname>cip::VectorN::dimensions_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="176" column="16" bodyfile="include/vectorn.hpp" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1VectorN_1ab70b96ef5783822edec2d8a0afd6eb89" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; cip::VectorN&lt; T, N &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>cip::VectorN::data_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="177" column="17" bodyfile="include/vectorn.hpp" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcip_1_1VectorN_1a190afadffc71767fab0a9a0d4b3e2142" prot="private" static="no" mutable="no">
+        <type>Mdspan</type>
+        <definition>Mdspan cip::VectorN&lt; T, N &gt;::mdspan</definition>
+        <argsstring></argsstring>
+        <name>mdspan</name>
+        <qualifiedname>cip::VectorN::mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="178" column="12" bodyfile="include/vectorn.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcip_1_1VectorN_1a8defa74a559951e46b135716e0ef4a95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::VectorN&lt; T, N &gt;::VectorN</definition>
+        <argsstring>(const T &amp;initial_value, const IndexArray &amp;dimensions)</argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::VectorN::VectorN</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>initial_value</declname>
+        </param>
+        <param>
+          <type>const IndexArray &amp;</type>
+          <declname>dimensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="20" column="5" bodyfile="include/vectorn.hpp" bodystart="20" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a6a095a167bda8d2670b328502a42f4e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::VectorN&lt; T, N &gt;::VectorN</definition>
+        <argsstring>(const VectorN &amp;other)</argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::VectorN::VectorN</qualifiedname>
+        <param>
+          <type>const <ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="27" column="5" bodyfile="include/vectorn.hpp" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1af0ce4fd6b6eb645e63cf62c9d05025a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename NestedVector</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>cip::VectorN&lt; T, N &gt;::VectorN</definition>
+        <argsstring>(const NestedVector &amp;nested)</argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::VectorN::VectorN</qualifiedname>
+        <param>
+          <type>const NestedVector &amp;</type>
+          <declname>nested</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="36" column="5" bodyfile="include/vectorn.hpp" bodystart="36" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a802d386c6aed7a15fc74d6c0a3997912" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cip::VectorN&lt; T, N &gt;::VectorN</definition>
+        <argsstring>(const IndexArray &amp;dimensions)</argsstring>
+        <name>VectorN</name>
+        <qualifiedname>cip::VectorN::VectorN</qualifiedname>
+        <param>
+          <type>const IndexArray &amp;</type>
+          <declname>dimensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="44" column="5" bodyfile="include/vectorn.hpp" bodystart="44" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1ade90f3cee1b5f08cb32c5add2e4b5993" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; cip::VectorN&lt; T, N &gt;::operator()</definition>
+        <argsstring>(Indices... indices)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::VectorN::operator()</qualifiedname>
+        <param>
+          <type>Indices...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="53" column="7" bodyfile="include/vectorn.hpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a7c6eed046eb4c6bebef07ca336be07ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;</type>
+        <definition>const T &amp; cip::VectorN&lt; T, N &gt;::operator()</definition>
+        <argsstring>(Indices... indices) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::VectorN::operator()</qualifiedname>
+        <param>
+          <type>Indices...</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="59" column="13" bodyfile="include/vectorn.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1aea6629aa8a55f50afcbfbf4d778b79f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T &amp; cip::VectorN&lt; T, N &gt;::operator()</definition>
+        <argsstring>(IndexArray &amp;indices)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::VectorN::operator()</qualifiedname>
+        <param>
+          <type>IndexArray &amp;</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="65" column="7" bodyfile="include/vectorn.hpp" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1ab9d5e69fe7d0a171764cd760440f3039" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Indices</declname>
+            <defname>Indices</defname>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;</type>
+        <definition>const T &amp; cip::VectorN&lt; T, N &gt;::operator()</definition>
+        <argsstring>(IndexArray &amp;indices) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>cip::VectorN::operator()</qualifiedname>
+        <param>
+          <type>IndexArray &amp;</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="70" column="13" bodyfile="include/vectorn.hpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a5d734a97fd05444508cd9bd6dcc47fac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::VectorN&lt; T, N &gt;::emplace_back</definition>
+        <argsstring>(Args... args)</argsstring>
+        <name>emplace_back</name>
+        <qualifiedname>cip::VectorN::emplace_back</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="75" column="10" bodyfile="include/vectorn.hpp" bodystart="75" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a5b618f7de758305f3e2b9e164e865c18" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Mdspan</type>
+        <definition>Mdspan cip::VectorN&lt; T, N &gt;::get_mdspan</definition>
+        <argsstring>()</argsstring>
+        <name>get_mdspan</name>
+        <qualifiedname>cip::VectorN::get_mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="79" column="12" bodyfile="include/vectorn.hpp" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a22103b2229aa8671ae2f07cb7a78be75" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Mdspan</type>
+        <definition>const Mdspan cip::VectorN&lt; T, N &gt;::get_mdspan</definition>
+        <argsstring>() const</argsstring>
+        <name>get_mdspan</name>
+        <qualifiedname>cip::VectorN::get_mdspan</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="83" column="18" bodyfile="include/vectorn.hpp" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1aa56189f78ece359f2f6fe955d6dea815" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Pairs</declname>
+            <defname>Pairs</defname>
+          </param>
+        </templateparamlist>
+        <type>Mdspan</type>
+        <definition>Mdspan cip::VectorN&lt; T, N &gt;::submdspan</definition>
+        <argsstring>(Pairs &amp;&amp;... pairs) const</argsstring>
+        <name>submdspan</name>
+        <qualifiedname>cip::VectorN::submdspan</qualifiedname>
+        <param>
+          <type>Pairs &amp;&amp;...</type>
+          <declname>pairs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="88" column="12" bodyfile="include/vectorn.hpp" bodystart="88" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a52d9b0399cf6a3d1834f25d1d8771c86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Pairs</declname>
+            <defname>Pairs</defname>
+          </param>
+        </templateparamlist>
+        <type>Mdspan</type>
+        <definition>Mdspan cip::VectorN&lt; T, N &gt;::submdspan</definition>
+        <argsstring>(Pairs &amp;&amp;... pairs)</argsstring>
+        <name>submdspan</name>
+        <qualifiedname>cip::VectorN::submdspan</qualifiedname>
+        <param>
+          <type>Pairs &amp;&amp;...</type>
+          <declname>pairs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="93" column="12" bodyfile="include/vectorn.hpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1affe9d7d0991d95aeeb01a80612a33c10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>SliceArgs</declname>
+            <defname>SliceArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>Mdspan1D</type>
+        <definition>Mdspan1D cip::VectorN&lt; T, N &gt;::submdspan_1d</definition>
+        <argsstring>(SliceArgs &amp;&amp;... args)</argsstring>
+        <name>submdspan_1d</name>
+        <qualifiedname>cip::VectorN::submdspan_1d</qualifiedname>
+        <param>
+          <type>SliceArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="99" column="14" bodyfile="include/vectorn.hpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a3ec1f5628d6e4efa1e5f5a2c6ea85312" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>SliceSpecs</declname>
+            <defname>SliceSpecs</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::VectorN&lt; T, N &gt;::move_into_submdspan</definition>
+        <argsstring>(std::vector&lt; T &gt; &amp;&amp;source, SliceSpecs &amp;&amp;... specs)</argsstring>
+        <name>move_into_submdspan</name>
+        <qualifiedname>cip::VectorN::move_into_submdspan</qualifiedname>
+        <param>
+          <type>std::vector&lt; T &gt; &amp;&amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>SliceSpecs &amp;&amp;...</type>
+          <declname>specs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="107" column="10" bodyfile="include/vectorn.hpp" bodystart="107" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a33ab67f3fe900e48eca561cd175a8350" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>M</declname>
+            <defname>M</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>SliceSpecs</declname>
+            <defname>SliceSpecs</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cip::VectorN&lt; T, N &gt;::move_into_submdspan</definition>
+        <argsstring>(VectorN&lt; T, M &gt; &amp;&amp;source, SliceSpecs &amp;&amp;... specs)</argsstring>
+        <name>move_into_submdspan</name>
+        <qualifiedname>cip::VectorN::move_into_submdspan</qualifiedname>
+        <param>
+          <type><ref refid="classcip_1_1VectorN" kindref="compound">VectorN</ref>&lt; T, M &gt; &amp;&amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>SliceSpecs &amp;&amp;...</type>
+          <declname>specs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="127" column="10" bodyfile="include/vectorn.hpp" bodystart="127" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1abd8d2c492ed0bd3f235f519d5e54deb7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const IndexArray &amp;</type>
+        <definition>const IndexArray &amp; cip::VectorN&lt; T, N &gt;::dimensions</definition>
+        <argsstring>() const</argsstring>
+        <name>dimensions</name>
+        <qualifiedname>cip::VectorN::dimensions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="172" column="22" bodyfile="include/vectorn.hpp" bodystart="172" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1a75381e54a000f4e500772de3af16ef09" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; T &gt; &amp;</type>
+        <definition>const std::vector&lt; T &gt; &amp; cip::VectorN&lt; T, N &gt;::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <qualifiedname>cip::VectorN::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="173" column="23" bodyfile="include/vectorn.hpp" bodystart="173" bodyend="173"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcip_1_1VectorN_1a77f58a5c29b5cd2e185a3472c5fd84ba" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>constexpr std::size_t cip::VectorN&lt; T, N &gt;::calculate_total_size</definition>
+        <argsstring>(const std::array&lt; std::size_t, N &gt; &amp;dimensions)</argsstring>
+        <name>calculate_total_size</name>
+        <qualifiedname>cip::VectorN::calculate_total_size</qualifiedname>
+        <param>
+          <type>const std::array&lt; std::size_t, N &gt; &amp;</type>
+          <declname>dimensions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="181" column="27" bodyfile="include/vectorn.hpp" bodystart="181" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classcip_1_1VectorN_1ad8584bc8756b9344e5e9bbce966a2656" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename NestedVector</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>Rank</declname>
+            <defname>Rank</defname>
+          </param>
+        </templateparamlist>
+        <type>std::array&lt; std::size_t, Rank &gt;</type>
+        <definition>std::array&lt; std::size_t, Rank &gt; cip::VectorN&lt; T, N &gt;::determine_dimensions</definition>
+        <argsstring>(const NestedVector &amp;vec)</argsstring>
+        <name>determine_dimensions</name>
+        <qualifiedname>cip::VectorN::determine_dimensions</qualifiedname>
+        <param>
+          <type>const NestedVector &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/vectorn.hpp" line="208" column="16" bodyfile="include/vectorn.hpp" bodystart="208" bodyend="220"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/vectorn.hpp" line="14" column="1" bodyfile="include/vectorn.hpp" bodystart="14" bodyend="222"/>
+    <listofallmembers>
+      <member refid="classcip_1_1VectorN_1a77f58a5c29b5cd2e185a3472c5fd84ba" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>calculate_total_size</name></member>
+      <member refid="classcip_1_1VectorN_1a75381e54a000f4e500772de3af16ef09" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>data</name></member>
+      <member refid="classcip_1_1VectorN_1ab70b96ef5783822edec2d8a0afd6eb89" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>data_</name></member>
+      <member refid="classcip_1_1VectorN_1ad8584bc8756b9344e5e9bbce966a2656" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>determine_dimensions</name></member>
+      <member refid="classcip_1_1VectorN_1abd8d2c492ed0bd3f235f519d5e54deb7" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>dimensions</name></member>
+      <member refid="classcip_1_1VectorN_1a533210c6ddac8de7fe5b30bf244087cd" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>dimensions_</name></member>
+      <member refid="classcip_1_1VectorN_1a5d734a97fd05444508cd9bd6dcc47fac" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>emplace_back</name></member>
+      <member refid="classcip_1_1VectorN_1a5b618f7de758305f3e2b9e164e865c18" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>get_mdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a22103b2229aa8671ae2f07cb7a78be75" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>get_mdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a53fc2be5b98a9628ab0f80f0ca863732" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>IndexArray</name></member>
+      <member refid="classcip_1_1VectorN_1a58f48d705674395fefa0519603b3c445" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>Mdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a190afadffc71767fab0a9a0d4b3e2142" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>mdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a72445ef4470cf4b66b8c2be25ffc816c" prot="private" virt="non-virtual"><scope>cip::VectorN</scope><name>Mdspan1D</name></member>
+      <member refid="classcip_1_1VectorN_1a3ec1f5628d6e4efa1e5f5a2c6ea85312" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>move_into_submdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a33ab67f3fe900e48eca561cd175a8350" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>move_into_submdspan</name></member>
+      <member refid="classcip_1_1VectorN_1ade90f3cee1b5f08cb32c5add2e4b5993" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>operator()</name></member>
+      <member refid="classcip_1_1VectorN_1a7c6eed046eb4c6bebef07ca336be07ea" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>operator()</name></member>
+      <member refid="classcip_1_1VectorN_1aea6629aa8a55f50afcbfbf4d778b79f3" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>operator()</name></member>
+      <member refid="classcip_1_1VectorN_1ab9d5e69fe7d0a171764cd760440f3039" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>operator()</name></member>
+      <member refid="classcip_1_1VectorN_1aa56189f78ece359f2f6fe955d6dea815" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>submdspan</name></member>
+      <member refid="classcip_1_1VectorN_1a52d9b0399cf6a3d1834f25d1d8771c86" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>submdspan</name></member>
+      <member refid="classcip_1_1VectorN_1affe9d7d0991d95aeeb01a80612a33c10" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>submdspan_1d</name></member>
+      <member refid="classcip_1_1VectorN_1a8defa74a559951e46b135716e0ef4a95" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1VectorN_1a6a095a167bda8d2670b328502a42f4e4" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1VectorN_1af0ce4fd6b6eb645e63cf62c9d05025a5" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>VectorN</name></member>
+      <member refid="classcip_1_1VectorN_1a802d386c6aed7a15fc74d6c0a3997912" prot="public" virt="non-virtual"><scope>cip::VectorN</scope><name>VectorN</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
