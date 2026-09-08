@@ -41,6 +41,7 @@ jobs:
             c_compiler: gcc
             cpp_compiler: g++
             test_single_header: true
+            build_type: Release
         exclude:
           - os: windows-latest
             c_compiler: gcc
